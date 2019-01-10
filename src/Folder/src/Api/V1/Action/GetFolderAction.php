@@ -1,0 +1,118 @@
+<?php
+
+/**
+ * GetFolderAction
+ *
+ * @see https://github.com/password-cockpit/backend for the canonical source repository
+ * @copyright Copyright (c) 2018 Blackpoints AG (https://www.blackpoints.ch)
+ * @license https://github.com/password-cockpit/backend/blob/master/LICENSE.md BSD 3-Clause License
+ * @author Giona Guidotti <giona.guidotti@blackpoints.ch>
+ */
+
+namespace Folder\Api\V1\Action;
+
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+use Folder\Api\V1\Facade\FolderFacade;
+use Folder\Api\V1\Facade\FolderUserFacade;
+use Zend\Expressive\Hal\ResourceGenerator;
+use Zend\Expressive\Hal\HalResponseFactory;
+use Zend\Diactoros\Response\EmptyResponse;
+
+/**
+ * @SWG\Get(
+ *     path="/v1/folders/{folderId}",
+ *     summary="Get a folder",
+ *     description="Returns a folder by its id",
+ *     operationId="getFolder",
+ *     produces={"application/json"},
+ *     tags={"folders"},
+ *     @SWG\Parameter(
+ *         description="Folder id to fetch",
+ *         in="path",
+ *         name="folderId",
+ *         required=true,
+ *         type="integer",
+ *         format="int64"
+ *     ),
+ *     @SWG\Response(
+ *         response=200,
+ *         description="OK"
+ *     ),
+ *     @SWG\Response(
+ *         response=404,
+ *         description="Not Found"
+ *     ),
+ * security={{"bearerAuth": {}}}
+ * )
+ */
+class GetFolderAction implements RequestHandlerInterface
+{
+    /**
+     *
+     * @var FolderUserFacade
+     */
+    protected $folderUserFacade;
+
+    /**
+     *
+     * @var FolderFacade
+     */
+    protected $folderFacade; //oggetto della classe FolderFacade
+
+    /**
+     *
+     * @var ResourceGenerator
+     */
+    protected $halResourceGenerator;
+
+    /**
+     *
+     * @var HalResponseFactory
+     */
+    private $halResponseFactory;
+
+    /**
+     * Constructor
+     *
+     * @param FolderFacade $folderFacade
+     * @param ResourceGenerator $halResourceGenerator
+     */
+    public function __construct(
+        FolderUserFacade $folderUserFacade,
+        FolderFacade $folderFacade,
+        ResourceGenerator $halResourceGenerator,
+        HalResponseFactory $halResponseFactory
+    ) {
+        $this->folderUserFacade = $folderUserFacade;
+        $this->halResourceGenerator = $halResourceGenerator;
+        $this->folderFacade = $folderFacade;
+        $this->halResponseFactory = $halResponseFactory;
+    }
+
+    /**
+     *
+     * @param ServerRequestInterface $request
+     * @return ResponseInterface
+     */
+    public function handle(ServerRequestInterface $request): ResponseInterface
+    {
+        $folder = $this->folderFacade->get($request->getAttribute('id'));
+        if ($folder) {
+            $user = $request->getAttribute('Authentication\User');
+            $folderUser = $this->folderUserFacade->getFolderUsers(
+                $folder,
+                $user
+            );
+            $folderUser
+                ? $folder->setAccess($folderUser->getAccess())
+                : $folder->setAccess(null);
+            return $this->halResponseFactory->createResponse(
+                $request,
+                $this->halResourceGenerator->fromObject($folder, $request)
+            );
+        }
+        return new EmptyResponse();
+    }
+}

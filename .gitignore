@@ -1,0 +1,17 @@
+.idea
+composer.phar
+composer.lock
+clover.xml
+coveralls-upload.json
+phpunit.xml
+vendor/
+nbproject/
+mysql-data/
+docs/swagger/swagger.json
+docs/database/mysql/password-cockpit.mwb.bak
+upload/*
+!upload/.gitkeep
+config/development.config.php
+config/local.php
+config/*.local.php
+data/
