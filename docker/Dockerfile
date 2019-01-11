@@ -57,7 +57,7 @@ RUN set -ex; \
     # install composer
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer; \
     # download source password-cockpit
-    /usr/local/bin/getsource.sh $PASSWORDCOCKPIT_BACKEND_DEVELOPMENTMODE; \
+    /usr/local/bin/getsource.sh $PASSWORDCOCKPIT_BACKEND_DEVELOPMENTMODE PASSWORDCOCKPIT_BACKEND_VERSION; \
     # reset apt-mark's "manual" list so that "purge --auto-remove" will remove all build dependencies
     apt-mark auto '.*' > /dev/null; \
     apt-mark manual $savedAptMark; \
