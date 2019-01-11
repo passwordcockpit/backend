@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @see https://github.com/password-cockpit/backend for the canonical source repository
+ * @see https://github.com/passwordcockpit/backend for the canonical source repository
  * @copyright Copyright (c) 2018 Blackpoints AG (https://www.blackpoints.ch)
- * @license https://github.com/password-cockpit/backend/blob/master/LICENSE.md BSD 3-Clause License
+ * @license https://github.com/passwordcockpit/backend/blob/master/LICENSE.md BSD 3-Clause License
  */
 
 namespace App\Factory;
@@ -26,7 +26,7 @@ use function sprintf;
 
 class DoctrineMetadataMapFactory
 {
-    public function __invoke(ContainerInterface $container): MetadataMap
+    public function __invoke(ContainerInterface $container) : MetadataMap
     {
         $config = $container->has('config') ? $container->get('config') : [];
         $metadataMapConfig = $config[MetadataMap::class] ?? [];
@@ -51,7 +51,7 @@ class DoctrineMetadataMapFactory
         MetadataMap $metadataMap,
         array $metadataMapConfig,
         array $metadataFactories
-    ): MetadataMap {
+    ) : MetadataMap {
         foreach ($metadataMapConfig as $metadata) {
             if (!is_array($metadata)) {
                 throw Exception\InvalidConfigException::dueToNonArrayMetadata(
@@ -91,13 +91,11 @@ class DoctrineMetadataMapFactory
         }
 
         $metadataClass = $metadata['__class__'];
-        if (
-            !in_array(
-                AbstractMetadata::class,
-                class_parents($metadataClass),
-                true
-            )
-        ) {
+        if (!in_array(
+            AbstractMetadata::class,
+            class_parents($metadataClass),
+            true
+        )) {
             throw Exception\InvalidConfigException::dueToNonMetadataClass(
                 $metadataClass
             );
@@ -133,14 +131,12 @@ class DoctrineMetadataMapFactory
         string $metadataClass,
         array $metadata,
         string $factoryClass
-    ): AbstractMetadata {
-        if (
-            !in_array(
-                MetadataFactoryInterface::class,
-                class_implements($factoryClass),
-                true
-            )
-        ) {
+    ) : AbstractMetadata {
+        if (!in_array(
+            MetadataFactoryInterface::class,
+            class_implements($factoryClass),
+            true
+        )) {
             throw Exception\InvalidConfigException::dueToInvalidMetadataFactoryClass(
                 $factoryClass
             );
@@ -163,7 +159,7 @@ class DoctrineMetadataMapFactory
     private function createMetadataViaFactoryMethod(
         string $metadataClass,
         array $metadata
-    ): AbstractMetadata {
+    ) : AbstractMetadata {
         $normalizedClass = $this->stripNamespaceFromClass($metadataClass);
         $method = sprintf('create%s', $normalizedClass);
 
@@ -176,7 +172,7 @@ class DoctrineMetadataMapFactory
         return $this->$method($metadata);
     }
 
-    private function stripNamespaceFromClass(string $class): string
+    private function stripNamespaceFromClass(string $class) : string
     {
         $segments = explode('\\', $class);
         return array_pop($segments);

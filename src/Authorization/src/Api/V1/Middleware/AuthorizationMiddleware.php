@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @see https://github.com/password-cockpit/backend for the canonical source repository
+ * @see https://github.com/passwordcockpit/backend for the canonical source repository
  * @copyright Copyright (c) 2018 Blackpoints AG (https://www.blackpoints.ch)
- * @license https://github.com/password-cockpit/backend/blob/master/LICENSE.md BSD 3-Clause License
+ * @license https://github.com/passwordcockpit/backend/blob/master/LICENSE.md BSD 3-Clause License
  * @author Davide Bucher <davide.bucher@blackpoints.ch>
  */
 
@@ -173,7 +173,7 @@ class AuthorizationMiddleware implements MiddlewareInterface
     public function process(
         ServerRequestInterface $request,
         RequestHandlerInterface $handler
-    ): ResponseInterface {
+    ) : ResponseInterface {
         //check if token exist
         $token = $request->getAttribute("token", false);
         if (!$token) {
@@ -215,16 +215,14 @@ class AuthorizationMiddleware implements MiddlewareInterface
             // user role
             if ($role == 'user' || $role == 'view_logs') {
                 // check if is granted
-                if (
-                    $this->rbac->isGranted($role, $routeName) &&
+                if ($this->rbac->isGranted($role, $routeName) &&
                     $this->assertionPluginManager->assert(
-                        $this->rbac,
-                        $role,
-                        $routeName,
-                        $request,
-                        $user
-                    )
-                ) {
+                    $this->rbac,
+                    $role,
+                    $routeName,
+                    $request,
+                    $user
+                )) {
                     return $handler->handle($request);
                 }
             } else {

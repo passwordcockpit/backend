@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @see https://github.com/password-cockpit/backend for the canonical source repository
+ * @see https://github.com/passwordcockpit/backend for the canonical source repository
  * @copyright Copyright (c) 2018 Blackpoints AG (https://www.blackpoints.ch)
- * @license https://github.com/password-cockpit/backend/blob/master/LICENSE.md BSD 3-Clause License
+ * @license https://github.com/passwordcockpit/backend/blob/master/LICENSE.md BSD 3-Clause License
  */
 
 namespace App\Service;
@@ -23,7 +23,7 @@ class DoctrineMetadataMap extends \Zend\Expressive\Hal\Metadata\MetadataMap
      *
      * @param string $class
      */
-    public function has(string $class): bool
+    public function has(string $class) : bool
     {
         $class = \Doctrine\Common\Util\ClassUtils::getRealClass($class);
         return parent::has($class);
@@ -31,7 +31,7 @@ class DoctrineMetadataMap extends \Zend\Expressive\Hal\Metadata\MetadataMap
 
     public function get(
         string $class
-    ): \Zend\Expressive\Hal\Metadata\AbstractMetadata {
+    ) : \Zend\Expressive\Hal\Metadata\AbstractMetadata {
         $class = \Doctrine\Common\Util\ClassUtils::getRealClass($class);
         return parent::get($class);
     }

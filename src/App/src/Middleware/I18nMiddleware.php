@@ -4,9 +4,9 @@
  * I18nMiddleware
  *
  * @package App\Middleware
- * @see https://github.com/password-cockpit/backend for the canonical source repository
+ * @see https://github.com/passwordcockpit/backend for the canonical source repository
  * @copyright Copyright (c) 2018 Blackpoints AG (https://www.blackpoints.ch)
- * @license https://github.com/password-cockpit/backend/blob/master/LICENSE.md BSD 3-Clause License
+ * @license https://github.com/passwordcockpit/backend/blob/master/LICENSE.md BSD 3-Clause License
  * @author Aron Castellani <aron.castellani@blackpoints.ch>
  */
 
@@ -54,13 +54,11 @@ class I18nMiddleware implements MiddlewareInterface
     public function process(
         ServerRequestInterface $request,
         RequestHandlerInterface $handler
-    ): ResponseInterface {
+    ) : ResponseInterface {
         $user = $request->getAttribute('Authentication\User');
         $serverParams = $request->getServerParams();
-        if (
-            isset($serverParams['HTTP_ACCEPT_LANGUAGE']) &&
-            in_array($serverParams['HTTP_ACCEPT_LANGUAGE'], $this->languages)
-        ) {
+        if (isset($serverParams['HTTP_ACCEPT_LANGUAGE']) &&
+            in_array($serverParams['HTTP_ACCEPT_LANGUAGE'], $this->languages)) {
             // Set locale based on the desired client's language
             $locale = $serverParams['HTTP_ACCEPT_LANGUAGE'];
         } elseif ($user) {

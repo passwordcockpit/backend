@@ -2,7 +2,7 @@
     "name": "password-cockpit/backend",
     "description": "Password-cockpit backend",
     "type": "project",
-    "homepage": "https://github.com/password-cockpit/backend",
+    "homepage": "https://github.com/passwordcockpit/backend",
     "license": "BSD-3-Clause",
     "config": {
         "sort-packages": true

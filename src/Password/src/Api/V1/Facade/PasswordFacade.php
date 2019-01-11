@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @see https://github.com/password-cockpit/backend for the canonical source repository
+ * @see https://github.com/passwordcockpit/backend for the canonical source repository
  * @copyright Copyright (c) 2018 Blackpoints AG (https://www.blackpoints.ch)
- * @license https://github.com/password-cockpit/backend/blob/master/LICENSE.md BSD 3-Clause License
+ * @license https://github.com/passwordcockpit/backend/blob/master/LICENSE.md BSD 3-Clause License
  * @author Giona Guidotti <giona.guidotti@blackpoints.ch>
  */
 
@@ -170,12 +170,10 @@ class PasswordFacade
             if (isset($request->getUploadedFiles()['file'])) {
                 $file = $request->getUploadedFiles()['file'];
                 // Check if Mime Type of file is accepted
-                if (
-                    in_array(
-                        $file->getClientMediaType(),
-                        array_keys($this->uploadConfig['accepted_mime_types'])
-                    )
-                ) {
+                if (in_array(
+                    $file->getClientMediaType(),
+                    array_keys($this->uploadConfig['accepted_mime_types'])
+                )) {
                     $filename = md5(
                         $file->getClientFilename() . time() . rand()
                     );
@@ -192,30 +190,22 @@ class PasswordFacade
                     $file->moveTo(
                         $path .
                             '.' .
-                            $this->uploadConfig['accepted_mime_types'][
-                                $file->getClientMediaType()
-                            ]
+                            $this->uploadConfig['accepted_mime_types'][$file->getClientMediaType()]
                     );
 
                     //encrypt file
                     $this->fileCipher->setKey($this->encriptionKey);
-                    if (
-                        $this->fileCipher->encrypt(
-                            $path .
-                                '.' .
-                                $this->uploadConfig['accepted_mime_types'][
-                                    $file->getClientMediaType()
-                                ],
-                            $path . '.' . 'crypted'
-                        )
-                    ) {
+                    if ($this->fileCipher->encrypt(
+                        $path .
+                            '.' .
+                            $this->uploadConfig['accepted_mime_types'][$file->getClientMediaType()],
+                        $path . '.' . 'crypted'
+                    )) {
                         //remove non crypted file
                         unlink(
                             $path .
                                 '.' .
-                                $this->uploadConfig['accepted_mime_types'][
-                                    $file->getClientMediaType()
-                                ]
+                                $this->uploadConfig['accepted_mime_types'][$file->getClientMediaType()]
                         );
                     }
 

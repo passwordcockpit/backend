@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @see https://github.com/password-cockpit/backend for the canonical source repository
+ * @see https://github.com/passwordcockpit/backend for the canonical source repository
  * @copyright Copyright (c) 2018 Blackpoints AG (https://www.blackpoints.ch)
- * @license https://github.com/password-cockpit/backend/blob/master/LICENSE.md BSD 3-Clause License
+ * @license https://github.com/passwordcockpit/backend/blob/master/LICENSE.md BSD 3-Clause License
  * @author Davide Bucher <davide.bucher@blackpoints.ch>
  */
 
@@ -172,14 +172,12 @@ class LogsAssertion implements AssertionInterface
         \Zend\Permissions\Rbac\Rbac $rbac,
         RoleInterface $role,
         string $permission
-    ): bool {
+    ) : bool {
         // need to check if the user has manage_user or access_all_folders  --> return true
         $roles = $this->permissionFacade->getUserPermissionArray($this->user);
 
-        if (
-            in_array('manage_users', $roles['roles']) ||
-            in_array('access_all_folders', $roles['roles'])
-        ) {
+        if (in_array('manage_users', $roles['roles']) ||
+            in_array('access_all_folders', $roles['roles'])) {
             return true;
         }
         // else need to check if password id or user id are compatible with the user making the request (e.g. same ID). --> true/false

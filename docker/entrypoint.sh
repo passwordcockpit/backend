@@ -8,13 +8,13 @@ if [ $count -eq "3" ] && [ -a .DS_Store ]; then
     rm -rf .DS_Store
     echo >&2 ".DS_Store removed from $PWD"
 elif [ $count -gt "2" ]; then
-        echo >&2 "ERROR: $PWD is not empty! Passwrd-cockpit will not be installed"
+        echo >&2 "ERROR: $PWD is not empty! Passwrdcockpit will not be installed"
         exit 1
 fi
 
-# move password-cockpit source in container
+# move passwordcockpit source in container
 shopt -s dotglob
-mv /usr/src/password-cockpit/* ./
+mv /usr/src/passwordcockpit/* ./
 echo >&2 "Source copied in $PWD"
 
 # configuration files
