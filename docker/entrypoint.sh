@@ -8,7 +8,7 @@ if [ $count -eq "3" ] && [ -a .DS_Store ]; then
     rm -rf .DS_Store
     echo >&2 ".DS_Store removed from $PWD"
 elif [ $count -gt "2" ]; then
-        echo >&2 "ERROR: $PWD is not empty! Passwrdcockpit will not be installed"
+        echo >&2 "ERROR: $PWD is not empty! Passwordcockpit will not be installed"
         exit 1
 fi
 
