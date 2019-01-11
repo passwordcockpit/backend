@@ -1,0 +1,232 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2018-09-27 13:11+0200\n"
+"PO-Revision-Date: 2018-12-21 14:53+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2\n"
+"X-Poedit-Basepath: ../..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: translate\n"
+"X-Poedit-SearchPath-0: src\n"
+"X-Poedit-SearchPath-1: config/language/log-translations.php\n"
+
+#: config/language/log-translations.php:2
+msgid "Password created"
+msgstr "Password creata"
+
+#: config/language/log-translations.php:3
+msgid "Password viewed"
+msgstr "Password visualizzata"
+
+#: config/language/log-translations.php:4
+msgid "Password modified"
+msgstr "Password modificata"
+
+#: src/Authentication/src/Api/V1/Action/AuthenticationCreateAction.php:202
+#: src/Authentication/src/Api/V1/Action/AuthenticationCreateAction.php:208
+#: src/Authentication/src/Api/V1/Action/AuthenticationCreateAction.php:225
+#: src/Authentication/src/Api/V1/Action/AuthenticationCreateAction.php:231
+msgid "Wrong username or password"
+msgstr "Username o password sbagliate"
+
+#: src/Authentication/src/Api/V1/Action/AuthenticationCreateAction.php:203
+#: src/Authentication/src/Api/V1/Action/AuthenticationCreateAction.php:209
+#: src/Authentication/src/Api/V1/Action/AuthenticationCreateAction.php:226
+#: src/Authentication/src/Api/V1/Action/AuthenticationCreateAction.php:232
+msgid "Unauthorized"
+msgstr "Non autorizzato"
+
+#: src/Authorization/src/Api/V1/Middleware/AuthorizationMiddleware.php:165
+#, php-format
+msgid "Role %s cannot be found"
+msgstr "Ruolo %s non trovato"
+
+#: src/Authorization/src/Api/V1/Middleware/AuthorizationMiddleware.php:200
+#: src/Authorization/src/Api/V1/Middleware/AuthorizationMiddleware.php:230
+#: src/Log/src/Api/V1/Facade/LogFacade.php:55
+#: src/Password/src/Api/V1/Facade/PasswordFacade.php:187
+#: src/Password/src/Api/V1/Facade/PasswordFacade.php:211
+#: src/Password/src/Api/V1/Facade/PasswordFacade.php:235
+#, php-format
+msgid "Password not found"
+msgstr "Password non trovata"
+
+#: src/Authorization/src/Api/V1/Middleware/AuthorizationMiddleware.php:201
+#: src/Authorization/src/Api/V1/Middleware/AuthorizationMiddleware.php:231
+#: src/Authorization/src/Api/V1/Middleware/AuthorizationMiddleware.php:239
+#: src/Folder/src/Api/V1/Action/GetFolderUserAction.php:124
+#: src/Folder/src/Api/V1/Facade/FolderFacade.php:81
+#: src/Folder/src/Api/V1/Facade/FolderFacade.php:135
+#: src/Folder/src/Api/V1/Facade/FolderFacade.php:210
+#: src/Folder/src/Api/V1/Facade/FolderFacade.php:242
+#: src/Folder/src/Api/V1/Facade/FolderFacade.php:252
+#: src/Folder/src/Api/V1/Facade/FolderUserFacade.php:213
+#: src/Log/src/Api/V1/Facade/LogFacade.php:55
+#: src/Log/src/Api/V1/Facade/LogFacade.php:70
+#: src/Log/src/Api/V1/Facade/LogFacade.php:86
+#: src/Password/src/Api/V1/Facade/PasswordFacade.php:155
+#: src/Password/src/Api/V1/Facade/PasswordFacade.php:187
+#: src/Password/src/Api/V1/Facade/PasswordFacade.php:211
+#: src/Password/src/Api/V1/Facade/PasswordFacade.php:235
+#: src/User/src/Api/V1/Facade/PermissionFacade.php:83
+#: src/User/src/Api/V1/Facade/PermissionFacade.php:144
+#: src/User/src/Api/V1/Facade/UserFacade.php:94
+#: src/User/src/Api/V1/Facade/UserFacade.php:127
+#: src/User/src/Api/V1/Facade/UserFacade.php:148
+#: src/User/src/Api/V1/Facade/UserFacade.php:180
+#: src/User/src/Api/V1/Facade/UserFacade.php:210
+msgid "Resource not found"
+msgstr "Risorsa non trovata"
+
+#: src/Authorization/src/Api/V1/Middleware/AuthorizationMiddleware.php:238
+#, php-format
+msgid "File not found"
+msgstr "File non trovato"
+
+#: src/Authorization/src/Api/V1/Middleware/AuthorizationMiddleware.php:259
+#, php-format
+msgid "User %s cannot %s on this resource"
+msgstr "Utente %s non può effettuare %s su questa risorsa"
+
+#: src/File/src/Api/V1/Action/DownloadFileAction.php:109
+msgid "File does not exists"
+msgstr "File non esistente"
+
+#: src/File/src/Api/V1/Facade/FileFacade.php:54
+#, php-format
+msgid "Cannot create %s"
+msgstr "Impossibile creare %s"
+
+#: src/File/src/Api/V1/Facade/FileFacade.php:77
+#: src/File/src/Api/V1/Facade/FileFacade.php:110
+#: src/File/src/Api/V1/Facade/FileFacade.php:148
+#, php-format
+msgid "%s not found"
+msgstr "%s non trovato"
+
+#: src/Folder/src/Api/V1/Action/GetFolderUserAction.php:123
+#: src/Log/src/Api/V1/Facade/LogFacade.php:86
+#: src/User/src/Api/V1/Facade/UserFacade.php:98
+#: src/User/src/Api/V1/Facade/UserFacade.php:147
+#: src/User/src/Api/V1/Facade/UserFacade.php:275
+#, php-format
+msgid "User not found"
+msgstr "Utente non trovato"
+
+#: src/Folder/src/Api/V1/Facade/FolderFacade.php:80
+#: src/Folder/src/Api/V1/Facade/FolderFacade.php:240
+#, php-format
+msgid "Parent folder not found"
+msgstr "Cartella Parent non trovata"
+
+#: src/Folder/src/Api/V1/Facade/FolderFacade.php:113
+#, php-format
+msgid "Folder %s contains passwords"
+msgstr "La cartella %s contiene password"
+
+#: src/Folder/src/Api/V1/Facade/FolderFacade.php:114
+#: src/Folder/src/Api/V1/Facade/FolderFacade.php:122
+msgid "Delete not possible"
+msgstr "Eliminazione non possibile"
+
+#: src/Folder/src/Api/V1/Facade/FolderFacade.php:121
+#, php-format
+msgid "Folder %s has subfolders"
+msgstr "La cartella %s ha delle sottocartelle"
+
+#: src/Folder/src/Api/V1/Facade/FolderFacade.php:134
+#: src/Folder/src/Api/V1/Facade/FolderFacade.php:209
+#: src/Folder/src/Api/V1/Facade/FolderFacade.php:251
+#: src/Password/src/Api/V1/Facade/PasswordFacade.php:155
+#, php-format
+msgid "Folder not found"
+msgstr "Cartella non trovata"
+
+#: src/Folder/src/Api/V1/Facade/FolderUserFacade.php:140
+#, php-format
+msgid "Rights on folder %s already configured for user %s"
+msgstr "Diritti già assegnati sulla cartella %s per l’utente %s"
+
+#: src/Folder/src/Api/V1/Facade/FolderUserFacade.php:142
+#: src/Folder/src/Api/V1/Facade/FolderUserFacade.php:171
+#: src/Folder/src/Api/V1/Facade/FolderUserFacade.php:196
+msgid "Unprocessable Entity"
+msgstr "Entità non processabile"
+
+#: src/Folder/src/Api/V1/Facade/FolderUserFacade.php:169
+#: src/Folder/src/Api/V1/Facade/FolderUserFacade.php:194
+#, php-format
+msgid "Rights on folder %s not found for user %s"
+msgstr "Diritti non trovati sulla cartella %s per l’utente %s"
+
+#: src/Folder/src/Api/V1/Facade/FolderUserFacade.php:212
+#, php-format
+msgid "Access type %s not found"
+msgstr "Tipo di accesso %s non trovato"
+
+#: src/Log/src/Api/V1/Facade/LogFacade.php:70
+#, php-format
+msgid "Log not found"
+msgstr "Log non trovato"
+
+#: src/Password/src/Api/V1/Facade/PasswordFacade.php:148
+msgid "Mime type not allowed"
+msgstr "Mime type non consentito"
+
+#: src/User/src/Api/V1/Action/CreateUserAction.php:137
+msgid "User not created"
+msgstr "Utente non creato"
+
+#: src/User/src/Api/V1/Action/CreateUserAction.php:138
+msgid "Resource not created"
+msgstr "Risorsa non creata"
+
+#: src/User/src/Api/V1/Facade/PermissionFacade.php:82
+#: src/User/src/Api/V1/Facade/PermissionFacade.php:143
+#, php-format
+msgid "Permissions not found on user %s"
+msgstr "Permessi non trovati su utente %s"
+
+#: src/User/src/Api/V1/Facade/UserFacade.php:147
+#, php-format
+msgid "User with username %s not found in DB"
+msgstr "Utente %s non trovato nel DB"
+
+#: src/User/src/Api/V1/Facade/UserFacade.php:179
+msgid "Wrong actual password"
+msgstr "Password attuale sbagliata"
+
+#: src/User/src/Api/V1/Middleware/PermissionValidationMiddleware.php:192
+#: src/User/src/Api/V1/Middleware/UserValidationMiddleware.php:291
+msgid "Validation error"
+msgstr "Errore di validazione"
+
+#~ msgid "No users has rights on Folder %s"
+#~ msgstr "Nessun utente ha diritti sulla cartella %s"
+
+#~ msgid "Password already has a file"
+#~ msgstr "Password ha già un file"
+
+#~ msgid "Bad Request"
+#~ msgstr "Richiesta Sbagliata"
+
+#~ msgid "Resources not found"
+#~ msgstr "Risorse non trovate"
+
+#~ msgid "No passwords in Folder %s"
+#~ msgstr "Nessuna password nella cartella %s"
+
+#~ msgid "User %s is not enabled"
+#~ msgstr "Utente %s non è abilitato"
+
+#~ msgid "User not authorized"
+#~ msgstr "Utente non autorizzato"
+
+#~ msgid "Missing actual password"
+#~ msgstr "Password attuale mancante"

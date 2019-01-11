@@ -1,0 +1,68 @@
+#
+# @see https://github.com/password-cockpit/backend for the canonical source repository
+# @copyright Copyright (c) 2018 Blackpoints AG (https://www.blackpoints.ch)
+# @license https://github.com/password-cockpit/backend/blob/master/LICENSE.md BSD 3-Clause License
+# @author Davide Bucher <davide.bucher@blackpoints.ch>
+#
+
+actor: ApiTester
+modules:
+  enabled:
+    - REST:
+        url: https://127.0.0.1:443/
+        depends: PhpBrowser
+        part: Json
+# For these tests to work:
+# create-environment.sql has been updated to reflect the needs of tests on the database
+# Using this file to create the environment makes all the test pass.
+#
+# ----------GENERAL-----------
+# admin has all the permissions and id = 1
+# user has no permissions and id = 2
+# user2 has view_logs=1, create_folder=1 and id = 3,'read' on folder 3, and has NO 'manage' on any folder
+#
+# ----------LOG---------------
+# log #1, #2 exists
+# log #100000 does not exist
+# log #1 has password_id 4, which is on folder 5 and user2 has read on that folder
+# log #2 has password_id 1, and NOT have user_id=3
+# password #100000 does not exits
+# user #100000 does not exist
+#
+# ---------USERS--------------
+# These tests creates a new user everytime,
+# and since there is no way to delete them,
+# they stay in the database.
+# These user have the following username and email structure:
+#
+# CC-xxxxxxxx
+# xxxxxxxx@blackpoints.ch
+#
+# where xxxxxxxx is a 8 digit random number
+#
+# ---------PASSWORDS-----------
+# We need the following structure:
+# admin has read on folder 1, manage on folder 2 , null on folder 3 (no entries in the folder_user table).
+# user has manage on folder 3, read on folder 2, null on folder 1.
+# password 1 is on folder 1, password 6 is on folder 2, password 2 is on folder 3.
+#
+# CURRENTLY PASSWORD CREATION DOES NOT TEST FILE UPLOADS.
+# I could not find a way to make the file "parsable" by the backend.
+#
+# pass 6 has file 6 associated, pass 1 has no files associated, pass 2 has file 7 and 8 associated
+#
+# --------FOLDERS------------------
+# folder #100000 does not exist
+# admin has read on folder 1, manage on folder 2, nothing on folder 3.
+# user has nothing on folder 1, read on folder 2, manage on folder 3.
+#
+# FILE TESTS
+# user must not have access=1 (read) or access=2 (manage) on folder 5.
+# user2 (the one with id = 3) has access = 1 (read) on folder 5.
+# There must be a 'test.pdf' file under tests/_data folder
+#
+#
+#
+#
+#
+#

@@ -1,0 +1,213 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2018-09-27 13:15+0200\n"
+"PO-Revision-Date: 2018-12-24 10:00+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2\n"
+"X-Poedit-Basepath: ../..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: translate\n"
+"X-Poedit-SearchPath-0: src\n"
+"X-Poedit-SearchPath-1: config/language/log-translations.php\n"
+
+#: Authentication/src/Api/V1/Action/AuthenticationCreateAction.php:202
+#: Authentication/src/Api/V1/Action/AuthenticationCreateAction.php:208
+#: Authentication/src/Api/V1/Action/AuthenticationCreateAction.php:225
+#: Authentication/src/Api/V1/Action/AuthenticationCreateAction.php:231
+msgid "Wrong username or password"
+msgstr "Falscher Benutzername oder Passwort"
+
+#: Authentication/src/Api/V1/Action/AuthenticationCreateAction.php:203
+#: Authentication/src/Api/V1/Action/AuthenticationCreateAction.php:209
+#: Authentication/src/Api/V1/Action/AuthenticationCreateAction.php:226
+#: Authentication/src/Api/V1/Action/AuthenticationCreateAction.php:232
+msgid "Unauthorized"
+msgstr "Kein Zugriff"
+
+#: Authorization/src/Api/V1/Middleware/AuthorizationMiddleware.php:165
+#, php-format
+msgid "Role %s cannot be found"
+msgstr "Rolle %s kann nicht gefunden werden"
+
+#: Authorization/src/Api/V1/Middleware/AuthorizationMiddleware.php:200
+#: Authorization/src/Api/V1/Middleware/AuthorizationMiddleware.php:230
+#: Log/src/Api/V1/Facade/LogFacade.php:55
+#: Password/src/Api/V1/Facade/PasswordFacade.php:187
+#: Password/src/Api/V1/Facade/PasswordFacade.php:211
+#: Password/src/Api/V1/Facade/PasswordFacade.php:235
+#, php-format
+msgid "Password not found"
+msgstr "Passwort nicht gefunden"
+
+#: Authorization/src/Api/V1/Middleware/AuthorizationMiddleware.php:201
+#: Authorization/src/Api/V1/Middleware/AuthorizationMiddleware.php:231
+#: Authorization/src/Api/V1/Middleware/AuthorizationMiddleware.php:239
+#: Folder/src/Api/V1/Action/GetFolderUserAction.php:124
+#: Folder/src/Api/V1/Facade/FolderFacade.php:81
+#: Folder/src/Api/V1/Facade/FolderFacade.php:135
+#: Folder/src/Api/V1/Facade/FolderFacade.php:210
+#: Folder/src/Api/V1/Facade/FolderFacade.php:242
+#: Folder/src/Api/V1/Facade/FolderFacade.php:252
+#: Folder/src/Api/V1/Facade/FolderUserFacade.php:213
+#: Log/src/Api/V1/Facade/LogFacade.php:55
+#: Log/src/Api/V1/Facade/LogFacade.php:70
+#: Log/src/Api/V1/Facade/LogFacade.php:86
+#: Password/src/Api/V1/Facade/PasswordFacade.php:155
+#: Password/src/Api/V1/Facade/PasswordFacade.php:187
+#: Password/src/Api/V1/Facade/PasswordFacade.php:211
+#: Password/src/Api/V1/Facade/PasswordFacade.php:235
+#: User/src/Api/V1/Facade/PermissionFacade.php:83
+#: User/src/Api/V1/Facade/PermissionFacade.php:144
+#: User/src/Api/V1/Facade/UserFacade.php:94
+#: User/src/Api/V1/Facade/UserFacade.php:127
+#: User/src/Api/V1/Facade/UserFacade.php:148
+#: User/src/Api/V1/Facade/UserFacade.php:180
+#: User/src/Api/V1/Facade/UserFacade.php:210
+msgid "Resource not found"
+msgstr "Ressource nicht gefunden"
+
+#: Authorization/src/Api/V1/Middleware/AuthorizationMiddleware.php:238
+#, php-format
+msgid "Files %s not found"
+msgstr "Ordner %s nicht gefunden"
+
+#: Authorization/src/Api/V1/Middleware/AuthorizationMiddleware.php:259
+#, php-format
+msgid "User %s cannot %s on this resource"
+msgstr "Benutzer %s kann mittels %s nicht auf diese Resource zugreifen"
+
+#: File/src/Api/V1/Facade/FileFacade.php:54
+#, php-format
+msgid "Cannot create %s"
+msgstr "Benutzer %s konnte nicht erstellt werden"
+
+#: File/src/Api/V1/Facade/FileFacade.php:77
+#: File/src/Api/V1/Facade/FileFacade.php:110
+#: File/src/Api/V1/Facade/FileFacade.php:148
+#, php-format
+msgid "%s not found"
+msgstr "%s nicht gefunden"
+
+#: Folder/src/Api/V1/Action/GetFolderUserAction.php:123
+#: Log/src/Api/V1/Facade/LogFacade.php:86
+#: User/src/Api/V1/Facade/UserFacade.php:93
+#: User/src/Api/V1/Facade/UserFacade.php:126
+#: User/src/Api/V1/Facade/UserFacade.php:209
+#, php-format
+msgid "User not found"
+msgstr "Benutzer nicht gefunden"
+
+#: Folder/src/Api/V1/Facade/FolderFacade.php:80
+#: Folder/src/Api/V1/Facade/FolderFacade.php:240
+#, php-format
+msgid "Parent folder %s not found"
+msgstr "Übergeordneter Ordner %s nicht gefunden"
+
+#: Folder/src/Api/V1/Facade/FolderFacade.php:113
+#, php-format
+msgid "Folder %s contains passwords"
+msgstr "Ordner %s beinhaltet Passwörter"
+
+#: Folder/src/Api/V1/Facade/FolderFacade.php:114
+#: Folder/src/Api/V1/Facade/FolderFacade.php:122
+msgid "Delete not possible"
+msgstr "Löschen nicht möglich"
+
+#: Folder/src/Api/V1/Facade/FolderFacade.php:121
+#, php-format
+msgid "Folder %s has subfolders"
+msgstr "Ordner %s hat Unterordner"
+
+#: Folder/src/Api/V1/Facade/FolderFacade.php:134
+#: Folder/src/Api/V1/Facade/FolderFacade.php:209
+#: Folder/src/Api/V1/Facade/FolderFacade.php:251
+#: Password/src/Api/V1/Facade/PasswordFacade.php:155
+#, php-format
+msgid "Folder not found"
+msgstr "Ordner nicht gefunden"
+
+#: Folder/src/Api/V1/Facade/FolderUserFacade.php:140
+#, php-format
+msgid "Rights on folder %s already configured for user %s"
+msgstr "Rechte für Ordner %s bereits für Benutzer %s konfiguriert"
+
+#: Folder/src/Api/V1/Facade/FolderUserFacade.php:142
+#: Folder/src/Api/V1/Facade/FolderUserFacade.php:171
+#: Folder/src/Api/V1/Facade/FolderUserFacade.php:196
+msgid "Unprocessable Entity"
+msgstr "Verarbeitung der Anfrage nicht möglich"
+
+#: Folder/src/Api/V1/Facade/FolderUserFacade.php:169
+#: Folder/src/Api/V1/Facade/FolderUserFacade.php:194
+#, php-format
+msgid "Rights on folder %s not found for user %s"
+msgstr "Rechte für Ordner %s und Benutzer %s nicht gefunden"
+
+#: Folder/src/Api/V1/Facade/FolderUserFacade.php:212
+#, php-format
+msgid "Access type %s not found"
+msgstr "Benutzer %s nicht gefunden"
+
+#: Log/src/Api/V1/Facade/LogFacade.php:70
+#, php-format
+msgid "Log not found"
+msgstr "Log nicht gefunden"
+
+#: User/src/Api/V1/Action/CreateUserAction.php:137
+msgid "User not created"
+msgstr "Benutzer konnte nicht erstellt werden"
+
+#: User/src/Api/V1/Action/CreateUserAction.php:138
+msgid "Resource not created"
+msgstr "Ressource konnte nicht erstellt werden"
+
+#: User/src/Api/V1/Facade/PermissionFacade.php:82
+#: User/src/Api/V1/Facade/PermissionFacade.php:143
+#, php-format
+msgid "Permissions not found on user %s"
+msgstr "Rechte für Benutzer %s nicht gefunden"
+
+#: User/src/Api/V1/Facade/UserFacade.php:147
+#, php-format
+msgid "User with username %s not found in DB"
+msgstr "Benutzer %s nicht gefunden"
+
+#: User/src/Api/V1/Facade/UserFacade.php:179
+msgid "Wrong actual password"
+msgstr "Falsches Passwort"
+
+msgid "Password already has a file"
+msgstr "Passwort hat bereits eine Datei"
+
+msgid "Bad Request"
+msgstr "Ungültige Anforderung"
+
+msgid "Mime type not allowed"
+msgstr "Mime-Typ ist nicht erlaubt"
+
+msgid "User %s is not enabled"
+msgstr "Benutzer ist nicht aktiviert"
+
+msgid "File not found"
+msgstr "Datei nicht gefunden"
+
+msgid "User not authorized"
+msgstr "Benutzer nicht autorisiert"
+
+msgid "Parent folder not found"
+msgstr "Der übergeordnete Ordner wurde nicht gefunden"
+
+msgid "Missing actual password"
+msgstr "Fehlendes aktuelles Passwort"
+
+msgid "File does not exists"
+msgstr "Datei existiert nicht"
+
+msgid "Validation error"
+msgstr "Validierungsfehler"
