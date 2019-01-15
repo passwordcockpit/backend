@@ -100,7 +100,7 @@ if [ "${PASSWORDCOCKPIT_BACKEND_DEVELOPMENTMODE}" -eq 1 ]; then
     echo >&2 "Test data installed"
 else
     # production mode
-    vendor/bin/doctrine dbal:import database/create-production-environment.sql.sql
+    vendor/bin/doctrine dbal:import database/create-production-environment.sql
     echo >&2 "Production data installed"
 
     # php configuration for the production
