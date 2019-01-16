@@ -3,7 +3,7 @@
 
 /**
  * @SWG\Swagger(
- *     schemes={"https"},
+ *     schemes={"http","https"},
  *     host=SWAGGER_API_HOST,
  *     basePath="/api",
  *     @SWG\Info(
