@@ -94,7 +94,7 @@ echo >&2 "Configuration files created"
 vendor/bin/doctrine orm:schema-tool:create
 echo >&2 "DB schema created"
 
-if [ "${PASSWORDCOCKPIT_BACKEND_DEVELOPMENTMODE}" -eq 1 ]; then
+if [ "${PASSWORDCOCKPIT_BACKEND_DEVELOPMENTMODE_FOR_ENTRYPOINT}" -eq "1" ]; then
     # development mode
     vendor/bin/doctrine dbal:import database/create-tests-environment.sql
     echo >&2 "Test data installed"
