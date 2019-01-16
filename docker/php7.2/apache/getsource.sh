@@ -14,7 +14,6 @@ if [ $1 -eq 1 ]; then
 
     # swagger
     composer swagger
-    ln -s docs/swagger public/swagger
 else
     echo >&2 "Production mode"
 
