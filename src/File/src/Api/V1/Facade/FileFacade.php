@@ -15,6 +15,7 @@ use File\Api\V1\Entity\File;
 use App\Service\ProblemDetailsException;
 use File\Api\V1\Hydrator\FileHydrator;
 use Password\Api\V1\Entity\Password;
+use Zend\Mvc\I18n\Translator;
 
 class FileFacade extends AbstractFacade
 {
@@ -32,7 +33,7 @@ class FileFacade extends AbstractFacade
      * @param FileHydrator $fileHydrator
      */
     public function __construct(
-        \Zend\I18n\Translator\Translator $translator,
+        Translator $translator,
         \Doctrine\ORM\EntityManager $entityManager,
         $entityName,
         FileHydrator $fileHydrator,

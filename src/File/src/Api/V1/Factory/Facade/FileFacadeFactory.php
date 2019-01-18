@@ -25,7 +25,7 @@ class FileFacadeFactory
     public function __invoke(ContainerInterface $container)
     {
         $entityManager = $container->get(EntityManagerInterface::class);
-        $translator = $container->get(\Zend\I18n\Translator\Translator::class);
+        $translator = $container->get("translator");
         $fileHydrator = $container->get(FileHydrator::class);
         $uploadConfig = $container->get("config")['upload_config'];
         //$passwordFacade = $container->get(PasswordFacade::class);
