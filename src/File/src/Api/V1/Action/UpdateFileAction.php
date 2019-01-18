@@ -148,7 +148,7 @@ class UpdateFileAction implements RequestHandlerInterface
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         // get password
         $passId = $request->getAttribute('id');
@@ -176,56 +176,16 @@ class UpdateFileAction implements RequestHandlerInterface
         // Check if file was uploaded
         if (isset($request->getUploadedFiles()['file'])) {
             $file = $request->getUploadedFiles()['file'];
-            // Check if Mime Type of file is accepted
-            if (in_array(
-                $file->getClientMediaType(),
-                array_keys($this->uploadConfig['accepted_mime_types'])
-            )) {
-                $filename = md5($file->getClientFilename() . time() . rand());
-                $this->fileFacade->createUploadDirectoryStructure(
-                    $this->uploadConfig['upload_path']
-                );
 
-                $path =
-                    $this->uploadConfig['upload_path'] .
-                    DIRECTORY_SEPARATOR .
-                    $filename;
+            // handle physical file
+            $file = $this->fileFacade->handleFile(
+                $file,
+                $this->uploadConfig,
+                $this->fileCipher,
+                $this->encriptionKey,
+                $password
+            );
 
-                // move the file to directory
-                $file->moveTo(
-                    $path .
-                        '.' .
-                        $this->uploadConfig['accepted_mime_types'][$file->getClientMediaType()]
-                );
-
-                //encrypt file
-                $this->fileCipher->setKey($this->encriptionKey);
-                if ($this->fileCipher->encrypt(
-                    $path .
-                        '.' .
-                        $this->uploadConfig['accepted_mime_types'][$file->getClientMediaType()],
-                    $path . '.' . 'crypted'
-                )) {
-                    //remove non crypted file
-                    unlink(
-                        $path .
-                            '.' .
-                            $this->uploadConfig['accepted_mime_types'][$file->getClientMediaType()]
-                    );
-                }
-
-                $file = $this->fileFacade->create([
-                    'password' => $password,
-                    'filename' => $filename,
-                    'name' => $file->getClientFilename(),
-                    'extension' => $file->getClientMediaType()
-                ]);
-            } else {
-                throw new ProblemDetailsException(
-                    400,
-                    $this->translator->translate('Mime type not allowed')
-                );
-            }
             $password->setFileId($file->getFileId());
             $password->setFileName($file->getName());
 

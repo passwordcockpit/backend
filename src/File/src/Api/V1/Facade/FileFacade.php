@@ -68,6 +68,72 @@ class FileFacade extends AbstractFacade
         return $file;
     }
 
+    public function handleFile(
+        $file,
+        $uploadConfig,
+        $fileCipher,
+        $encriptionKey,
+        $password
+    ) {
+        if (
+            in_array(
+                $file->getClientMediaType(),
+                array_keys($uploadConfig['accepted_mime_types'])
+            )
+        ) {
+            $filename = md5($file->getClientFilename() . time() . rand());
+            $this->createUploadDirectoryStructure($uploadConfig['upload_path']);
+
+            $path =
+                $uploadConfig['upload_path'] . DIRECTORY_SEPARATOR . $filename;
+
+            // move the file to directory
+            $file->moveTo(
+                $path .
+                    '.' .
+                    $uploadConfig['accepted_mime_types'][
+                        $file->getClientMediaType()
+                    ]
+            );
+
+            //encrypt file
+            $fileCipher->setKey($encriptionKey);
+            if (
+                $fileCipher->encrypt(
+                    $path .
+                        '.' .
+                        $uploadConfig['accepted_mime_types'][
+                            $file->getClientMediaType()
+                        ],
+                    $path . '.' . 'crypted'
+                )
+            ) {
+                //remove non crypted file
+                unlink(
+                    $path .
+                        '.' .
+                        $uploadConfig['accepted_mime_types'][
+                            $file->getClientMediaType()
+                        ]
+                );
+            }
+
+            $file = $this->create([
+                'password' => $password,
+                'filename' => $filename,
+                'name' => $file->getClientFilename(),
+                'extension' => $file->getClientMediaType()
+            ]);
+
+            return $file;
+        } else {
+            throw new ProblemDetailsException(
+                400,
+                $this->translator->translate('Mime type not allowed')
+            );
+        }
+    }
+
     private function deleteDiskFile($file)
     {
         // delete fisical file
