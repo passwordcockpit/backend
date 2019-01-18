@@ -119,10 +119,8 @@ class DownloadFileAction implements RequestHandlerInterface
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        ob_start();
-
         $file = $this->fileFacade->fetch($request->getAttribute("id"));
         $mimeTypeContentType = $file->getExtension();
         $mimeTypeExtension =
@@ -141,10 +139,12 @@ class DownloadFileAction implements RequestHandlerInterface
         }
 
         $this->fileCipher->setKey($this->encriptionKey);
-        if ($this->fileCipher->decrypt(
-            $path . '.' . 'crypted',
-            $path . '.' . $mimeTypeExtension
-        )) {
+        if (
+            $this->fileCipher->decrypt(
+                $path . '.' . 'crypted',
+                $path . '.' . $mimeTypeExtension
+            )
+        ) {
             $stream = new Stream(
                 $this->uploadConfig['upload_path'] .
                     DIRECTORY_SEPARATOR .
@@ -160,6 +160,11 @@ class DownloadFileAction implements RequestHandlerInterface
         unlink($path . '.' . $mimeTypeExtension);
 
         $response = $response->withHeader("Content-Type", $mimeTypeContentType);
+        $response = $response->withHeader(
+            "Content-Disposition",
+            $mimeTypeContentType
+        );
+        $response = $response->withHeader("X-Content-Type-Option", "nosniff");
 
         // no need for the SapiStreamEmitter, Response already emits the file.
         return $response;
