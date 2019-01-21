@@ -75,9 +75,12 @@ class FileFacade extends AbstractFacade
         $encriptionKey,
         $password
     ) {
+        $realMime = mime_content_type($_FILES["file"]["tmp_name"]);
+        $uploadedFileName = $_FILES["file"]["name"];
+
         if (
             in_array(
-                mime_content_type($_FILES["file"]["tmp_name"]),
+                $realMime,
                 array_keys($uploadConfig['accepted_mime_types'])
             )
         ) {
@@ -121,8 +124,8 @@ class FileFacade extends AbstractFacade
             $file = $this->create([
                 'password' => $password,
                 'filename' => $filename,
-                'name' => $file->getClientFilename(),
-                'extension' => $file->getClientMediaType()
+                'name' => $uploadedFileName,
+                'extension' => $realMime
             ]);
 
             return $file;
