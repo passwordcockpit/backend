@@ -66,7 +66,7 @@ class ListPasswordAction implements RequestHandlerInterface
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $queryParams = $request->getQueryParams();
 
@@ -102,6 +102,14 @@ class ListPasswordAction implements RequestHandlerInterface
             $passwords = $this->passwordFacade->associatePasswordsFiles(
                 $passwords
             );
+        }
+
+        //decrypt passwords
+        foreach ($passwords as $pass) {
+            $decryptedPass = $this->passwordFacade->decrypt(
+                $pass->getPassword()
+            );
+            $pass->setPassword($decryptedPass);
         }
 
         // transforming passwords to collection,
