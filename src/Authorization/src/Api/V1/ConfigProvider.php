@@ -29,11 +29,31 @@ class ConfigProvider
      *
      * @return array
      */
-    public function __invoke() : array
+    public function __invoke(): array
     {
         return [
             'dependencies' => $this->getDependencies(),
-            'routes' => $this->getRoutes()
+            'routes' => $this->getRoutes(),
+            'doctrine' => $this->getDoctrine()
+        ];
+    }
+
+    public function getDoctrine(): array
+    {
+        return [
+            'driver' => [
+                'orm_default' => [
+                    'drivers' => [
+                        'Authorization\Api\V1\Entity' => 'tokenuser'
+                    ]
+                ],
+                'tokenuser' => [
+                    'class' =>
+                        \Doctrine\ORM\Mapping\Driver\AnnotationDriver::class,
+                    'cache' => 'array',
+                    'paths' => __DIR__ . '/Entity'
+                ]
+            ]
         ];
     }
 
@@ -42,7 +62,7 @@ class ConfigProvider
      *
      * @return array
      */
-    public function getDependencies() : array
+    public function getDependencies(): array
     {
         return [
             'invokables' => [],
@@ -52,7 +72,9 @@ class ConfigProvider
                 Action\AuthorizationUpdateToken::class =>
                     Factory\Action\AuthorizationUpdateTokenFactory::class,
                 AssertionPluginManager::class =>
-                    Factory\Middleware\AssertionPluginManagerFactory::class
+                    Factory\Middleware\AssertionPluginManagerFactory::class,
+                Facade\TokenUserFacade::class =>
+                    Factory\Facade\TokenUserFacadeFactory::class
             ]
         ];
     }
@@ -62,7 +84,7 @@ class ConfigProvider
      *
      * @return array
      */
-    public function getRoutes() : array
+    public function getRoutes(): array
     {
         return [
             [
