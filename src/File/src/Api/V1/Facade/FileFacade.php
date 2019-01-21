@@ -77,7 +77,7 @@ class FileFacade extends AbstractFacade
     ) {
         if (
             in_array(
-                $file->getClientMediaType(),
+                mime_content_type($_FILES["file"]["tmp_name"]),
                 array_keys($uploadConfig['accepted_mime_types'])
             )
         ) {
