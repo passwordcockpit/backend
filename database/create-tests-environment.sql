@@ -27,10 +27,10 @@ INSERT INTO folder_user VALUES ('7', '3', '3', '1');
 INSERT INTO folder_user VALUES ('8', '6', '3', '1');
 INSERT INTO folder_user VALUES ('9', '5', '3', '1');
 -- PASSWORDS
-INSERT INTO password VALUES ('1', '1', 'pass1', 'icon', 'testpass', 'admin', 'csL5UFJpDdD2tMop3EKP4+q2rtfTK88McBhJjhuFVeMY0L1lcjgLH80RLEk=', 'http://www.talecraft.net', 'tag1 tag2', '2018-11-11 13:14:15');
-INSERT INTO password VALUES ('2', '3', 'pass2', 'ics', 'test2pass', 'user', 'csL5UFJpDdD2tMop3EKP4+q2rtfTK88McBhJjhuFVeMY0L1lcjgLH80RLEk=', 'http://www.bb.ch', 'tag', '2018-12-01 11:11:11');
-INSERT INTO password VALUES ('6', '2', 'pass6', 'icons', 'pass6description', 'user2', 'csL5UFJpDdD2tMop3EKP4+q2rtfTK88McBhJjhuFVeMY0L1lcjgLH80RLEk=', 'http://www.cc.ch', 'tog', '2018-12-02 08:30:30');
-INSERT INTO password VALUES ('4', '6', 'pass4', 'ics', 'pass4', 'admin', 'csL5UFJpDdD2tMop3EKP4+q2rtfTK88McBhJjhuFVeMY0L1lcjgLH80RLEk=', 'http://www.123.net', 'tug', '2018-12-03 08:09:10');
+INSERT INTO password VALUES ('1', '1', 'pass1', 'icon', 'testpass', 'admin', 'csL5UFJpDdD2tMop3EKP4+q2rtfTK88McBhJjhuFVeMY0L1lcjgLH80RLEk=', 'http://www.talecraft.net', 'tag1 tag2', '2018-11-11 13:14:15',FALSE);
+INSERT INTO password VALUES ('2', '3', 'pass2', 'ics', 'test2pass', 'user', 'csL5UFJpDdD2tMop3EKP4+q2rtfTK88McBhJjhuFVeMY0L1lcjgLH80RLEk=', 'http://www.bb.ch', 'tag', '2018-12-01 11:11:11',FALSE);
+INSERT INTO password VALUES ('6', '2', 'pass6', 'icons', 'pass6description', 'user2', 'csL5UFJpDdD2tMop3EKP4+q2rtfTK88McBhJjhuFVeMY0L1lcjgLH80RLEk=', 'http://www.cc.ch', 'tog', '2018-12-02 08:30:30',FALSE);
+INSERT INTO password VALUES ('4', '6', 'pass4', 'ics', 'pass4', 'admin', 'csL5UFJpDdD2tMop3EKP4+q2rtfTK88McBhJjhuFVeMY0L1lcjgLH80RLEk=', 'http://www.123.net', 'tug', '2018-12-03 08:09:10',FALSE);
 -- LOGS
 INSERT INTO log VALUES ('1', '4', '1', '2018-11-11 11:11:11', 'password viewed');
 INSERT INTO log VALUES ('2', '1', '2', '2018-12-03', 'password modified');

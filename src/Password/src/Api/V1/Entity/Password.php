@@ -116,6 +116,16 @@ class Password
     private $folder;
 
     /**
+     * @var bool
+     *
+     * * @ORM\Column(name="use_pin", type="boolean", precision=0, scale=0, nullable=true, unique=false)
+     *
+     * * @SWG\Property
+     *
+     */
+    private $usePin;
+
+    /**
      *
      *
      * @var boolean
@@ -131,6 +141,22 @@ class Password
      * @var string
      */
     private $fileName;
+
+    /**
+     * @return bool
+     */
+    function getUsePin()
+    {
+        return $this->usePin;
+    }
+
+    /**
+     * @param bool $usePin
+     */
+    function setUsePin($usePin)
+    {
+        $this->usePin = $usePin;
+    }
 
     /**
      * @return int
