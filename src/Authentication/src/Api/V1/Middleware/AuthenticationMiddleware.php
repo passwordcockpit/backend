@@ -79,7 +79,7 @@ class AuthenticationMiddleware implements MiddlewareInterface
         if ($tokenUser == null || $tokenUser->getToken() != $tok) {
             throw new ProblemDetailsException(
                 401,
-                $this->translator->translate("token is invalid"),
+                $this->translator->translate("Token is invalid"),
                 $this->translator->translate("Invalid token"),
                 'https://httpstatus.es/401'
             );
