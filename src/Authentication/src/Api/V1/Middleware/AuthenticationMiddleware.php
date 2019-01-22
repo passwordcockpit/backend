@@ -13,7 +13,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use App\Service\ProblemDetailsException;
 use Psr\Http\Message\ResponseInterface;
-use Zend\Mvc\I18n\Translator;
+use Zend\I18n\Translator\Translator;
 use User\Api\V1\Facade\UserFacade;
 use Authorization\Api\V1\Facade\TokenUserFacade;
 
@@ -79,7 +79,7 @@ class AuthenticationMiddleware implements MiddlewareInterface
         if ($tokenUser == null || $tokenUser->getToken() != $tok) {
             throw new ProblemDetailsException(
                 401,
-                $this->translator->translate("Token is invalid"),
+                $this->translator->translate('Token is not valid'),
                 $this->translator->translate("Invalid token"),
                 'https://httpstatus.es/401'
             );

@@ -10,7 +10,6 @@ namespace App;
 
 use Slim\Middleware\JwtAuthentication;
 use Zend\Expressive\Delegate;
-use Zend\Mvc\I18n\TranslatorFactory;
 
 /**
  * The configuration provider for the App module
@@ -82,7 +81,6 @@ class ConfigProvider
                     \ContainerInteropDoctrine\EntityManagerFactory::class,
                 \Zend\Expressive\Hal\Metadata\MetadataMap::class =>
                     Factory\DoctrineMetadataMapFactory::class,
-                "translator" => TranslatorFactory::class,
                 \Zend\I18n\Translator\Translator::class =>
                     \Zend\I18n\Translator\TranslatorServiceFactory::class
             ],

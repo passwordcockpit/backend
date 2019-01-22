@@ -13,13 +13,14 @@ use Interop\Container\ContainerInterface;
 use Authorization\Api\V1\Assertion\PasswordAssertion;
 use Doctrine\ORM\EntityManagerInterface;
 use Folder\Api\V1\Facade\FolderUserFacade;
+use Zend\I18n\Translator\Translator;
 
 class PasswordAssertionFactory
 {
     public function __invoke(ContainerInterface $container)
     {
         $entityManager = $container->get(EntityManagerInterface::class);
-        $translator = $container->get("translator");
+        $translator = $container->get(Translator::class);
         $folderUserFacade = $container->get(FolderUserFacade::class);
 
         return new PasswordAssertion(

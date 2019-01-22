@@ -17,7 +17,7 @@ use Folder\Api\V1\Entity\FolderUser;
 use User\Api\V1\Entity\User;
 use User\Api\V1\Facade\UserFacade;
 use Doctrine\ORM\EntityManager;
-use Zend\Mvc\I18n\Translator;
+use Zend\I18n\Translator\Translator;
 use Psr\Http\Message\ServerRequestInterface;
 use App\Service\ProblemDetailsException;
 use Password\Api\V1\Entity\Password;
@@ -301,8 +301,10 @@ class FolderFacade
         $viewableFolders = [];
         foreach ($folders as $folder) {
             $viewableFolders[$folder->getFolderId()] = $folder;
-            while ($folder->getParentId() &&
-                !isset($viewableFolders[$folder->getParentId()])) {
+            while (
+                $folder->getParentId() &&
+                !isset($viewableFolders[$folder->getParentId()])
+            ) {
                 $folder = $this->entityManager
                     ->getRepository(Folder::class)
                     ->find($folder->getParentId());

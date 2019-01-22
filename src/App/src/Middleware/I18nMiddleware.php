@@ -16,8 +16,8 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Mvc\I18n\Translator;
 use Zend\I18n\Translator\Resources;
+use Zend\I18n\Translator\Translator;
 use Zend\Validator\AbstractValidator;
 
 class I18nMiddleware implements MiddlewareInterface
@@ -54,11 +54,13 @@ class I18nMiddleware implements MiddlewareInterface
     public function process(
         ServerRequestInterface $request,
         RequestHandlerInterface $handler
-    ) : ResponseInterface {
+    ): ResponseInterface {
         $user = $request->getAttribute('Authentication\User');
         $serverParams = $request->getServerParams();
-        if (isset($serverParams['HTTP_ACCEPT_LANGUAGE']) &&
-            in_array($serverParams['HTTP_ACCEPT_LANGUAGE'], $this->languages)) {
+        if (
+            isset($serverParams['HTTP_ACCEPT_LANGUAGE']) &&
+            in_array($serverParams['HTTP_ACCEPT_LANGUAGE'], $this->languages)
+        ) {
             // Set locale based on the desired client's language
             $locale = $serverParams['HTTP_ACCEPT_LANGUAGE'];
         } elseif ($user) {
@@ -76,7 +78,7 @@ class I18nMiddleware implements MiddlewareInterface
             Resources::getPatternForValidator()
         );
 
-        AbstractValidator::setDefaultTranslator($this->translator);
+        //AbstractValidator::setDefaultTranslator($this->translator);
         $response = $handler->handle($request);
         return $response->withHeader(
             'Content-Language',

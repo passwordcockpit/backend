@@ -17,7 +17,7 @@ use User\Api\V1\Entity\User;
 use Doctrine\ORM\EntityManager;
 use Psr\Http\Message\ServerRequestInterface;
 use App\Service\ProblemDetailsException;
-use Zend\Mvc\I18n\Translator;
+use Zend\I18n\Translator\Translator;
 use User\Api\V1\Entity\Permission;
 use User\Api\V1\Hydrator\UserPermissionHydrator;
 

@@ -16,7 +16,7 @@ use Zend\Expressive\Hal\ResourceGenerator;
 use Zend\Expressive\Hal\HalResponseFactory;
 use File\Api\V1\Facade\FileFacade;
 use App\Service\ProblemDetailsException;
-use Zend\Mvc\I18n\Translator;
+use Zend\I18n\Translator\Translator;
 use Zend\Diactoros\Stream;
 use Zend\Diactoros\Response;
 use Zend\Crypt\FileCipher;

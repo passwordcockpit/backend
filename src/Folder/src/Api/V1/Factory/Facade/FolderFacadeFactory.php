@@ -16,13 +16,14 @@ use Psr\Container\ContainerInterface;
 use Folder\Api\V1\Facade\FolderFacade;
 use Password\Api\V1\Facade\PasswordFacade;
 use User\Api\V1\Facade\UserFacade;
+use Zend\I18n\Translator\Translator;
 
 class FolderFacadeFactory
 {
     public function __invoke(ContainerInterface $container)
     {
         $entityManager = $container->get(EntityManagerInterface::class);
-        $translator = $container->get("translator");
+        $translator = $container->get(Translator::class);
         $userFacade = $container->get(UserFacade::class);
         return new FolderFacade($entityManager, $translator, $userFacade);
     }

@@ -13,7 +13,7 @@ namespace Folder\Api\V1\Facade;
 
 use App\Service\ProblemDetailsException;
 use Doctrine\ORM\EntityManager;
-use Zend\Mvc\I18n\Translator;
+use Zend\I18n\Translator\Translator;
 use User\Api\V1\Facade\UserFacade;
 use Folder\Api\V1\Facade\FolderFacade;
 use Folder\Api\V1\Entity\FolderUser;
@@ -118,8 +118,12 @@ class FolderUserFacade
             $users = [];
             foreach ($folderUsers as $permessiUserFolder) {
                 $realUser = new User();
-                if (!($permessiUserFolder->getUser() instanceof
-                    User\Api\V1\Entity\User)) {
+                if (
+                    !(
+                        $permessiUserFolder->getUser() instanceof
+                        User\Api\V1\Entity\User
+                    )
+                ) {
                     $userData = $userHydrator->extract(
                         $permessiUserFolder->getUser()
                     );

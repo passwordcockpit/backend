@@ -10,7 +10,7 @@
 namespace Log\Api\V1\Facade;
 
 use Doctrine\ORM\EntityManager;
-use Zend\Mvc\I18n\Translator;
+use Zend\I18n\Translator\Translator;
 use App\Service\ProblemDetailsException;
 use Password\Api\V1\Entity\Password;
 use User\Api\V1\Entity\User;

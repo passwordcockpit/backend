@@ -11,7 +11,7 @@ namespace Authorization\Api\V1;
 
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\Permissions\Rbac\AssertionInterface;
-use Zend\Mvc\I18n\Translator;
+use Zend\I18n\Translator\Translator;
 use Folder\Api\V1\Facade\FolderUserFacade;
 use Doctrine\ORM\EntityManager;
 

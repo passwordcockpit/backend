@@ -9,6 +9,7 @@
 namespace App\Factory;
 
 use Psr\Container\ContainerInterface;
+use Zend\I18n\Translator\Translator;
 
 class I18nMiddlewareFactory
 {
@@ -17,8 +18,10 @@ class I18nMiddlewareFactory
      */
     public function __invoke(ContainerInterface $container)
     {
+        $translator = $container->get(Translator::class);
+
         return new \App\Middleware\I18nMiddleware(
-            $container->get("translator"),
+            $translator,
             $container->get("config")['locale']
         );
     }

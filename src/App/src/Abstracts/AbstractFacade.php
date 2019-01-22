@@ -11,7 +11,7 @@ namespace App\Abstracts;
 use Doctrine\ORM\EntityManager;
 use App\Abstracts\FacadeInterface;
 use Zend\Hydrator\Reflection;
-use Zend\Mvc\I18n\Translator;
+use Zend\I18n\Translator\Translator;
 
 abstract class AbstractFacade implements FacadeInterface
 {

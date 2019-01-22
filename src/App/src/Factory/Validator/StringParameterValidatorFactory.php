@@ -13,6 +13,7 @@ use App\Validator\StringParameterValidator;
 use Psr\Container\ContainerInterface;
 use Zend\InputFilter\InputFilterPluginManager;
 use Zend\InputFilter\Factory as InputFilterFactory;
+use Zend\I18n\Translator\Translator;
 
 class StringParameterValidatorFactory
 {
@@ -21,7 +22,7 @@ class StringParameterValidatorFactory
         $filter = new InputFilterFactory(
             $container->get(InputFilterPluginManager::class)
         );
-        $translator = $container->get("translator");
+        $translator = $container->get(Translator::class);
 
         return new StringParameterValidator($filter, $translator);
     }

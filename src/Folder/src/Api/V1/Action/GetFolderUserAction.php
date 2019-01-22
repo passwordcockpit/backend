@@ -18,7 +18,7 @@ use Folder\Api\V1\Facade\FolderFacade;
 use User\Api\V1\Facade\UserFacade;
 use Folder\Api\V1\Facade\FolderUserFacade;
 use Zend\Expressive\Hal\ResourceGenerator;
-use Zend\Mvc\I18n\Translator;
+use Zend\I18n\Translator\Translator;
 use Zend\Expressive\Hal\HalResponseFactory;
 
 /**
@@ -127,7 +127,7 @@ class GetFolderUserAction implements RequestHandlerInterface
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $folder = $this->folderFacade->get($request->getAttribute('folderId'));
         $user = $this->userFacade->get($request->getAttribute('userId'));

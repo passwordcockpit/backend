@@ -17,7 +17,7 @@ use Log\Api\V1\Facade\LogFacade;
 use Zend\Permissions\Rbac\RoleInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Password\Api\V1\Entity\Password;
-use Zend\Mvc\I18n\Translator;
+use Zend\I18n\Translator\Translator;
 use App\Service\ProblemDetailsException;
 use Doctrine\ORM\EntityManagerInterface;
 use Log\Api\V1\Entity\Log;
@@ -172,12 +172,14 @@ class LogsAssertion implements AssertionInterface
         \Zend\Permissions\Rbac\Rbac $rbac,
         RoleInterface $role,
         string $permission
-    ) : bool {
+    ): bool {
         // need to check if the user has manage_user or access_all_folders  --> return true
         $roles = $this->permissionFacade->getUserPermissionArray($this->user);
 
-        if (in_array('manage_users', $roles['roles']) ||
-            in_array('access_all_folders', $roles['roles'])) {
+        if (
+            in_array('manage_users', $roles['roles']) ||
+            in_array('access_all_folders', $roles['roles'])
+        ) {
             return true;
         }
         // else need to check if password id or user id are compatible with the user making the request (e.g. same ID). --> true/false

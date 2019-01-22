@@ -13,6 +13,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use File\Api\V1\Facade\FileFacade;
 use File\Api\V1\Entity\File;
 use File\Api\V1\Hydrator\FileHydrator;
+use Zend\I18n\Translator\Translator;
 
 class FileFacadeFactory
 {
@@ -25,7 +26,7 @@ class FileFacadeFactory
     public function __invoke(ContainerInterface $container)
     {
         $entityManager = $container->get(EntityManagerInterface::class);
-        $translator = $container->get("translator");
+        $translator = $container->get(Translator::class);
         $fileHydrator = $container->get(FileHydrator::class);
         $uploadConfig = $container->get("config")['upload_config'];
         //$passwordFacade = $container->get(PasswordFacade::class);

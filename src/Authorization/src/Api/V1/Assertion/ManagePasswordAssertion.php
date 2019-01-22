@@ -14,7 +14,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Password\Api\V1\Entity\Password;
 use App\Service\ProblemDetailsException;
 use Doctrine\ORM\EntityManager;
-use Zend\Mvc\I18n\Translator;
+use Zend\I18n\Translator\Translator;
 use Folder\Api\V1\Facade\FolderUserFacade;
 use Zend\Permissions\Rbac\RoleInterface;
 
@@ -87,7 +87,7 @@ class ManagePasswordAssertion implements AssertionInterface
         \Zend\Permissions\Rbac\Rbac $rbac,
         RoleInterface $role,
         string $permission
-    ) : bool {
+    ): bool {
         $passwordId = $this->getPasswordId($this->request);
         if ($passwordId) {
             $password = $this->entityManager

@@ -15,6 +15,7 @@ use Folder\Api\V1\Facade\FolderFacade;
 use User\Api\V1\Facade\UserFacade;
 use Zend\Expressive\Hal\ResourceGeneratorFactory;
 use Folder\Api\V1\Action\GetFolderUserAction;
+use Zend\I18n\Translator\Translator;
 
 /**
  * Description of GetFolderUserFactory
@@ -31,11 +32,13 @@ class GetFolderUserFactory
         $halResponseFactory = $container->get(
             \Zend\Expressive\Hal\HalResponseFactory::class
         );
+        $translator = $container->get(Translator::class);
+
         return new GetFolderUserAction(
             $folderUserFacade,
             $folderFacade,
             $userFacade,
-            $container->get("translator"),
+            $translator,
             $halResourceGeneratorInstance,
             $halResponseFactory
         );

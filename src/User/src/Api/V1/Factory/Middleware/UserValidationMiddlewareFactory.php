@@ -15,17 +15,20 @@ use Psr\Container\ContainerInterface;
 use User\Api\V1\Middleware\UserValidationMiddleware;
 use Zend\InputFilter\Factory as InputFilterFactory;
 use Zend\InputFilter\InputFilterPluginManager;
+use Zend\I18n\Translator\Translator;
 
 class UserValidationMiddlewareFactory
 {
     public function __invoke(ContainerInterface $container)
     {
+        $translator = $container->get(Translator::class);
+
         return new UserValidationMiddleware(
             new InputFilterFactory(
                 $container->get(InputFilterPluginManager::class)
             ),
             $container->get('config')['locale'],
-            $container->get("translator")
+            $translator
         );
     }
 }

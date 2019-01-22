@@ -13,8 +13,8 @@ use Interop\Container\ContainerInterface;
 use Zend\Expressive\Hal\ResourceGeneratorFactory;
 use File\Api\V1\Action\DownloadFileAction;
 use File\Api\V1\Facade\FileFacade;
-use Zend\Mvc\I18n\Translator;
 use Zend\Crypt\FileCipher;
+use Zend\I18n\Translator\Translator;
 
 class DownloadFileFactory
 {
@@ -25,7 +25,7 @@ class DownloadFileFactory
         $halResponseFactory = $container->get(
             \Zend\Expressive\Hal\HalResponseFactory::class
         );
-        $translator = $container->get("translator");
+        $translator = $container->get(Translator::class);
         $uploadConfig = $container->get("config")['upload_config'];
         $fileCipher = new FileCipher();
         $encriptionKey = $container->get("config")['block_cipher']['key'];

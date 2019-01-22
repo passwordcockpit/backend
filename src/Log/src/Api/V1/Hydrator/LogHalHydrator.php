@@ -12,7 +12,7 @@ namespace Log\Api\V1\Hydrator;
 use Log\Api\V1\Entity\Log;
 use Zend\Hydrator\AbstractHydrator;
 use App\Service\DateConverter;
-use Zend\Mvc\I18n\Translator;
+use Zend\I18n\Translator\Translator;
 
 /**
  * Description of LogHydrator

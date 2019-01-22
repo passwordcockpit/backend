@@ -18,7 +18,7 @@ use Zend\Crypt\Password\Bcrypt;
 use Doctrine\ORM\EntityManager;
 use User\Api\V1\Entity\User;
 use App\Service\ProblemDetailsException;
-use Zend\Mvc\I18n\Translator;
+use Zend\I18n\Translator\Translator;
 use User\Api\V1\Facade\UserFacade;
 use User\Api\V1\Facade\PermissionFacade;
 use User\Api\V1\Hydrator\UserPermissionHydrator;
@@ -92,7 +92,7 @@ class AuthorizationUpdateToken implements RequestHandlerInterface
         return JWT::encode($token, $authy->getSecret(), "HS256");
     }
 
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $authy = new JwtAuthentication([
             "secret" => $this->config['secret_key']

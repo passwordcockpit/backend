@@ -13,12 +13,13 @@ use Interop\Container\ContainerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Folder\Api\V1\Facade\FolderUserFacade;
 use Authorization\Api\V1\Assertion\UserAssertion;
+use Zend\I18n\Translator\Translator;
 
 class UserAssertionFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $translator = $container->get("translator");
+        $translator = $container->get(Translator::class);
         $folderUserFacade = $container->get(FolderUserFacade::class);
 
         return new UserAssertion($translator, $folderUserFacade);

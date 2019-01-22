@@ -15,6 +15,7 @@ use Zend\Expressive\Hal\ResourceGeneratorFactory;
 use Psr\Container\ContainerInterface;
 use File\Api\V1\Action\UpdateFileAction;
 use Zend\Crypt\FileCipher;
+use Zend\I18n\Translator\Translator;
 
 class UpdateFileActionFactory
 {
@@ -25,7 +26,7 @@ class UpdateFileActionFactory
         $halResourceGenerator = new ResourceGeneratorFactory();
         $halResourceGeneratorInstance = $halResourceGenerator($container);
         $uploadConfig = $container->get("config")['upload_config'];
-        $translator = $container->get("translator");
+        $translator = $container->get(Translator::class);
         $entityManager = $container->get(EntityManagerInterface::class);
         $fileCipher = new FileCipher();
         $encriptionKey = $container->get("config")['block_cipher']['key'];

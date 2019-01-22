@@ -11,6 +11,7 @@ namespace Log\Api\V1\Factory\Hydrator;
 
 use Psr\Container\ContainerInterface;
 use Log\Api\V1\Hydrator\LogHalHydrator;
+use Zend\I18n\Translator\Translator;
 
 /**
  * Description of GetPasswordLogFactory
@@ -19,6 +20,8 @@ class LogHalHydratorFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        return new LogHalHydrator($container->get("translator"));
+        $translator = $container->get(Translator::class);
+
+        return new LogHalHydrator($translator);
     }
 }

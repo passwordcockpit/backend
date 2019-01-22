@@ -14,6 +14,7 @@ namespace User\Api\V1\Factory\Facade;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Container\ContainerInterface;
 use User\Api\V1\Facade\UserFacade;
+use Zend\I18n\Translator\Translator;
 
 class UserFacadeFactory
 {
@@ -21,7 +22,7 @@ class UserFacadeFactory
     public function __invoke(ContainerInterface $container)
     {
         $entityManager = $container->get(EntityManagerInterface::class);
-        $translator = $container->get("translator");
+        $translator = $container->get(Translator::class);
         return new UserFacade($entityManager, $translator);
     }
 }

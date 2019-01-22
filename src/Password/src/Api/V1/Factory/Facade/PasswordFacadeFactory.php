@@ -17,6 +17,7 @@ use Zend\Crypt\FileCipher;
 use Folder\Api\V1\Facade\FolderFacade;
 use Log\Api\V1\Facade\LogFacade;
 use File\Api\V1\Facade\FileFacade;
+use Zend\I18n\Translator\Translator;
 
 /**
  * Description of PasswordFacadeFactory
@@ -27,7 +28,7 @@ class PasswordFacadeFactory
     public function __invoke(ContainerInterface $container)
     {
         $entityManager = $container->get(EntityManagerInterface::class);
-        $translator = $container->get("translator");
+        $translator = $container->get(Translator::class);
         $blockCipher = BlockCipher::factory(
             $container->get("config")['block_cipher']['encryption_library'],
             $container->get("config")['block_cipher']['algorithms']

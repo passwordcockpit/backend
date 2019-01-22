@@ -18,7 +18,7 @@ use Zend\Permissions\Rbac\Rbac;
 use App\Service\ProblemDetailsException;
 use Folder\Api\V1\Facade\FolderUserFacade;
 use Doctrine\ORM\EntityManager;
-use Zend\Mvc\I18n\Translator;
+use Zend\I18n\Translator\Translator;
 use Password\Api\V1\Entity\Password;
 use File\Api\V1\Entity\File;
 use User\Api\V1\Facade\UserFacade;
@@ -173,7 +173,7 @@ class AuthorizationMiddleware implements MiddlewareInterface
     public function process(
         ServerRequestInterface $request,
         RequestHandlerInterface $handler
-    ) : ResponseInterface {
+    ): ResponseInterface {
         //check if token exist
         $token = $request->getAttribute("token", false);
         if (!$token) {
@@ -215,14 +215,16 @@ class AuthorizationMiddleware implements MiddlewareInterface
             // user role
             if ($role == 'user' || $role == 'view_logs') {
                 // check if is granted
-                if ($this->rbac->isGranted($role, $routeName) &&
+                if (
+                    $this->rbac->isGranted($role, $routeName) &&
                     $this->assertionPluginManager->assert(
-                    $this->rbac,
-                    $role,
-                    $routeName,
-                    $request,
-                    $user
-                )) {
+                        $this->rbac,
+                        $role,
+                        $routeName,
+                        $request,
+                        $user
+                    )
+                ) {
                     return $handler->handle($request);
                 }
             } else {

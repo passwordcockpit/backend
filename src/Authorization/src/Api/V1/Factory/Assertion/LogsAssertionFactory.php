@@ -16,12 +16,13 @@ use User\Api\V1\Facade\PermissionFacade;
 use Password\Api\V1\Facade\PasswordFacade;
 use Log\Api\V1\Facade\LogFacade;
 use Doctrine\ORM\EntityManagerInterface;
+use Zend\I18n\Translator\Translator;
 
 class LogsAssertionFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $translator = $container->get("translator");
+        $translator = $container->get(Translator::class);
         $folderUserFacade = $container->get(FolderUserFacade::class);
         $permissionFacade = $container->get(PermissionFacade::class);
         $passwordFacade = $container->get(PasswordFacade::class);

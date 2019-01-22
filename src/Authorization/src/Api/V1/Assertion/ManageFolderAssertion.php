@@ -14,7 +14,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Folder\Api\V1\Entity\Folder;
 use App\Service\ProblemDetailsException;
 use Doctrine\ORM\EntityManager;
-use Zend\Mvc\I18n\Translator;
+use Zend\I18n\Translator\Translator;
 use Folder\Api\V1\Facade\FolderUserFacade;
 use Zend\Permissions\Rbac\RoleInterface;
 
@@ -122,7 +122,7 @@ class ManageFolderAssertion implements AssertionInterface
         \Zend\Permissions\Rbac\Rbac $rbac,
         RoleInterface $role,
         string $permission
-    ) : bool {
+    ): bool {
         if ($permission == 'api.v1.folders.create') {
             $folderId = $this->getParentId($this->request);
         } else {

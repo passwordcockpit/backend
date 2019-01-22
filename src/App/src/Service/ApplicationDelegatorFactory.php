@@ -26,52 +26,53 @@ use Slim\Middleware\JwtAuthentication;
 use App\Middleware\I18nMiddleware;
 use App\Middleware\CorsMiddleware;
 
-class ApplicationDelegatorFactory {
+class ApplicationDelegatorFactory
+{
+    /**
+     * @param ContainerInterface $container
+     * @param string $serviceName Name of the service being created.
+     * @param callable $callback Creates and returns the service.
+     * @return Application
+     */
+    public function __invoke(
+        ContainerInterface $container,
+        $serviceName,
+        callable $callback
+    ) {
+        /** @var $app Application */
+        $app = $callback();
 
-	/**
-	 * @param ContainerInterface $container
-	 * @param string $serviceName Name of the service being created.
-	 * @param callable $callback Creates and returns the service.
-	 * @return Application
-	 */
-	public function __invoke(ContainerInterface $container,
-			$serviceName,
-			callable $callback) {
+        /**
+         * Setup middleware pipeline:
+         */
+        $app->pipe(\Blast\BaseUrl\BaseUrlMiddleware::class);
+        $app->pipe(CorsMiddleware::class);
 
-		/** @var $app Application */
-		$app = $callback();
+        $app->pipe(ErrorHandler::class);
+        $app->pipe(ServerUrlMiddleware::class);
+        $app->pipe(BodyParamsMiddleware::class);
 
-		/**
-		 * Setup middleware pipeline:
-		 */
-		$app->pipe(\Blast\BaseUrl\BaseUrlMiddleware::class);
-		$app->pipe(CorsMiddleware::class);
+        $app->pipe(RouteMiddleware::class);
 
-		$app->pipe(ErrorHandler::class);
-		$app->pipe(ServerUrlMiddleware::class);
-		$app->pipe(BodyParamsMiddleware::class);
+        $app->pipe(ImplicitHeadMiddleware::class);
+        $app->pipe(OptionsMiddleware::class);
+        $app->pipe(UrlHelperMiddleware::class);
 
-		$app->pipe(RouteMiddleware::class);
+        $app->pipe(JwtAuthentication::class);
+        $app->pipe(AuthenticationMiddleware::class);
+        // Translator
+        $app->pipe(I18nMiddleware::class);
+        $app->pipe(AuthorizationMiddleware::class);
 
-		$app->pipe(ImplicitHeadMiddleware::class);
-		$app->pipe(OptionsMiddleware::class);
-		$app->pipe(UrlHelperMiddleware::class);
+        $app->pipe(DispatchMiddleware::class);
 
-		$app->pipe(JwtAuthentication::class);
-		$app->pipe(AuthenticationMiddleware::class);
-		// Translator
-		$app->pipe(I18nMiddleware::class);
-		$app->pipe(AuthorizationMiddleware::class);
+        $app->pipe(NotFoundHandler::class);
 
-		$app->pipe(DispatchMiddleware::class);
+        \Zend\Expressive\Container\ApplicationConfigInjectionDelegator::injectRoutesFromConfig(
+            $app,
+            $container->get('config')
+        );
 
-		$app->pipe(NotFoundHandler::class);
-
-		\Zend\Expressive\Container\ApplicationConfigInjectionDelegator::injectRoutesFromConfig($app,
-				$container->get('config'));
-
-		return $app;
-
-	}
-
+        return $app;
+    }
 }

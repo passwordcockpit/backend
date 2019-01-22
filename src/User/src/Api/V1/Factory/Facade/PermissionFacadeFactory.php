@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Psr\Container\ContainerInterface;
 use User\Api\V1\Facade\PermissionFacade;
 use User\Api\V1\Facade\UserFacade;
+use Zend\I18n\Translator\Translator;
 
 class PermissionFacadeFactory
 {
@@ -22,7 +23,7 @@ class PermissionFacadeFactory
     public function __invoke(ContainerInterface $container)
     {
         $entityManager = $container->get(EntityManagerInterface::class);
-        $translator = $container->get("translator");
+        $translator = $container->get(Translator::class);
         $userFacade = $container->get(UserFacade::class);
         return new PermissionFacade($entityManager, $translator, $userFacade);
     }

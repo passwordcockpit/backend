@@ -12,6 +12,7 @@ use Interop\Container\ContainerInterface;
 use Authentication\Api\V1\Middleware\AuthenticationMiddleware;
 use User\Api\V1\Facade\UserFacade;
 use Authorization\Api\V1\Facade\TokenUserFacade;
+use Zend\I18n\Translator\Translator;
 
 class AuthenticationMiddlewareFactory
 {
@@ -19,7 +20,7 @@ class AuthenticationMiddlewareFactory
     {
         $userFacade = $container->get(UserFacade::class);
         $tokenUserFacade = $container->get(TokenUserFacade::class);
-        $translator = $container->get("translator");
+        $translator = $container->get(Translator::class);
 
         return new AuthenticationMiddleware(
             $translator,

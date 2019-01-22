@@ -12,6 +12,7 @@ namespace Log\Api\V1\Factory\Facade;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Container\ContainerInterface;
 use Log\Api\V1\Facade\LogFacade;
+use Zend\I18n\Translator\Translator;
 
 /**
  * Description of LogFacadeFactory
@@ -21,7 +22,7 @@ class LogFacadeFactory
     public function __invoke(ContainerInterface $container)
     {
         $entityManager = $container->get(EntityManagerInterface::class);
-        $translator = $container->get("translator");
+        $translator = $container->get(Translator::class);
         return new LogFacade($entityManager, $translator);
     }
 }

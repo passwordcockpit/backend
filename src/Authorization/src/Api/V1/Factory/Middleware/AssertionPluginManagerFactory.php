@@ -13,6 +13,7 @@ use Interop\Container\ContainerInterface;
 use Authorization\Api\V1\AssertionPluginManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Folder\Api\V1\Facade\FolderUserFacade;
+use Zend\I18n\Translator\Translator;
 
 class AssertionPluginManagerFactory
 {
@@ -26,7 +27,7 @@ class AssertionPluginManagerFactory
             $assertionConfig['registeredByRoute'] ?? array();
 
         $entityManager = $container->get(EntityManagerInterface::class);
-        $translator = $container->get("translator");
+        $translator = $container->get(Translator::class);
         $folderUserFacade = $container->get(FolderUserFacade::class);
 
         return new AssertionPluginManager(

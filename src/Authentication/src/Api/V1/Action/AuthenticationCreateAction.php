@@ -15,7 +15,7 @@ use Zend\Diactoros\Response\JsonResponse;
 use Firebase\JWT\JWT;
 use User\Api\V1\Entity\User;
 use App\Service\ProblemDetailsException;
-use Zend\Mvc\I18n\Translator;
+use Zend\I18n\Translator\Translator;
 use Zend\Authentication\Adapter\AdapterInterface;
 use Zend\Authentication\Result;
 use Authorization\Api\V1\Facade\TokenUserFacade;

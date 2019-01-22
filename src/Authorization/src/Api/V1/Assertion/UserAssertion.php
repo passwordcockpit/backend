@@ -14,7 +14,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use User\Api\V1\Entity\User;
 use App\Service\ProblemDetailsException;
 use Doctrine\ORM\EntityManager;
-use Zend\Mvc\I18n\Translator;
+use Zend\I18n\Translator\Translator;
 use Folder\Api\V1\Facade\FolderUserFacade;
 use Zend\Permissions\Rbac\RoleInterface;
 
@@ -67,7 +67,7 @@ class UserAssertion implements AssertionInterface
         \Zend\Permissions\Rbac\Rbac $rbac,
         RoleInterface $role,
         string $permission
-    ) : bool {
+    ): bool {
         $userIdRequest = $this->getUserId($this->request);
         $userId = $this->user->getUserId();
         if ($userIdRequest == $userId) {

@@ -19,6 +19,7 @@ use Password\Api\V1\Facade\PasswordFacade;
 use User\Api\V1\Facade\PermissionFacade;
 use Doctrine\ORM\EntityManagerInterface;
 use Authorization\Api\V1\AssertionPluginManager;
+use Zend\I18n\Translator\Translator;
 
 class AuthorizationMiddlewareFactory
 {
@@ -53,7 +54,7 @@ class AuthorizationMiddlewareFactory
         $passwordFacade = $container->get(PasswordFacade::class);
         $permissionFacade = $container->get(PermissionFacade::class);
         $entityManager = $container->get(EntityManagerInterface::class);
-        $translator = $container->get("translator");
+        $translator = $container->get(Translator::class);
 
         $assertionPluginManager = $container->get(
             AssertionPluginManager::class

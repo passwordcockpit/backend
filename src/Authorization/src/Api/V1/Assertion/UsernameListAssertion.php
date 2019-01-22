@@ -13,7 +13,7 @@ use Zend\Permissions\Rbac\AssertionInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use App\Service\ProblemDetailsException;
 use Doctrine\ORM\EntityManager;
-use Zend\Mvc\I18n\Translator;
+use Zend\I18n\Translator\Translator;
 use Folder\Api\V1\Facade\FolderUserFacade;
 use Zend\Permissions\Rbac\RoleInterface;
 use User\Api\V1\Entity\User;
@@ -51,7 +51,7 @@ class UsernameListAssertion implements AssertionInterface
         \Zend\Permissions\Rbac\Rbac $rbac,
         RoleInterface $role,
         string $permission
-    ) : bool {
+    ): bool {
         // return true only if user has a 'manage' somewhere
         return $this->folderUserFacade->checkUserManage($this->user);
     }

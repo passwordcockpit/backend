@@ -13,13 +13,14 @@ use Authentication\Api\V1\Action\AuthenticationCreateAction;
 use Doctrine\ORM\EntityManagerInterface;
 use User\Api\V1\Facade\PermissionFacade;
 use Authorization\Api\V1\Facade\TokenUserFacade;
+use Zend\I18n\Translator\Translator;
 
 class AuthenticationCreateFactory
 {
     public function __invoke(ContainerInterface $container)
     {
         $authenticationConfig = $container->get('config')['authentication'];
-        $translator = $container->get("translator");
+        $translator = $container->get(Translator::class);
         $authenticationAdapter = $container->get(
             \Zend\Authentication\Adapter\AdapterInterface::class
         );
