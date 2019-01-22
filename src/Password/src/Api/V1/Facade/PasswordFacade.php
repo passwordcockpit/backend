@@ -454,7 +454,11 @@ class PasswordFacade
     public function decrypt($encrypted)
     {
         $this->blockCipher->setKey($this->encriptionKey);
-        return $this->blockCipher->decrypt($encrypted);
+        if ($encrypted !== null) {
+            $encrypted = $this->blockCipher->decrypt($encrypted);
+        }
+
+        return $encrypted;
     }
 
     /**
