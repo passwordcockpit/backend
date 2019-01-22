@@ -15,6 +15,7 @@ use App\Service\ProblemDetailsException;
 use Psr\Http\Message\ResponseInterface;
 use Zend\Mvc\I18n\Translator;
 use User\Api\V1\Facade\UserFacade;
+use Authorization\Api\V1\Facade\TokenUserFacade;
 
 class AuthenticationMiddleware implements MiddlewareInterface
 {
@@ -31,15 +32,25 @@ class AuthenticationMiddleware implements MiddlewareInterface
     private $translator;
 
     /**
+     *
+     * @var TokenUserFacade
+     */
+    private $tokenUserFacade;
+
+    /**
      * Constructor
      *
      * @param Translator $translator
      * @param UserFacade $userFacade
      */
-    public function __construct(Translator $translator, UserFacade $userFacade)
-    {
+    public function __construct(
+        Translator $translator,
+        UserFacade $userFacade,
+        TokenUserFacade $tokenUserFacade
+    ) {
         $this->translator = $translator;
         $this->userFacade = $userFacade;
+        $this->tokenUserFacade = $tokenUserFacade;
     }
 
     /**
@@ -51,7 +62,7 @@ class AuthenticationMiddleware implements MiddlewareInterface
     public function process(
         ServerRequestInterface $request,
         RequestHandlerInterface $handler
-    ) : ResponseInterface {
+    ): ResponseInterface {
         $token = $request->getAttribute("token", false);
         if (!$token) {
             return $handler->handle($request);
@@ -59,6 +70,20 @@ class AuthenticationMiddleware implements MiddlewareInterface
 
         $userId = $token->sub;
         $user = $this->userFacade->get($userId);
+
+        $tokenUser = $this->tokenUserFacade->getByUserId($userId)[0];
+        $token1 = $request->getHeader("Authorization")[0];
+
+        $tok = substr($token1, 7);
+
+        if ($tokenUser == null || $tokenUser->getToken() != $tok) {
+            throw new ProblemDetailsException(
+                401,
+                $this->translator->translate("token is invalid"),
+                $this->translator->translate("Invalid token"),
+                'https://httpstatus.es/401'
+            );
+        }
 
         //check if user is enabled
         $access = $user->getEnabled();

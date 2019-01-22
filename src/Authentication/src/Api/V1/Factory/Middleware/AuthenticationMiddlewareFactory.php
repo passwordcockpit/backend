@@ -11,14 +11,20 @@ namespace Authentication\Api\V1\Factory\Middleware;
 use Interop\Container\ContainerInterface;
 use Authentication\Api\V1\Middleware\AuthenticationMiddleware;
 use User\Api\V1\Facade\UserFacade;
+use Authorization\Api\V1\Facade\TokenUserFacade;
 
 class AuthenticationMiddlewareFactory
 {
     public function __invoke(ContainerInterface $container)
     {
         $userFacade = $container->get(UserFacade::class);
+        $tokenUserFacade = $container->get(TokenUserFacade::class);
         $translator = $container->get("translator");
 
-        return new AuthenticationMiddleware($translator, $userFacade);
+        return new AuthenticationMiddleware(
+            $translator,
+            $userFacade,
+            $tokenUserFacade
+        );
     }
 }
