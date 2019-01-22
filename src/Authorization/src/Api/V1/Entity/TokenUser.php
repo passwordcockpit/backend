@@ -106,7 +106,7 @@ class TokenUser
      *
      * @return TokenUser
      */
-    public function setDate($lastLogin = null)
+    public function setLastLogin($lastLogin = null)
     {
         $this->lastLogin = $lastLogin;
 
@@ -120,7 +120,7 @@ class TokenUser
      *
      * @return \Datetime|null
      */
-    public function getDate()
+    public function getLastLogin()
     {
         return $this->lastLogin;
     }

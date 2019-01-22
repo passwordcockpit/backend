@@ -9,23 +9,80 @@
 
 namespace Authorization\Api\V1\Facade;
 
+use Doctrine\ORM\EntityManager;
+use Authorization\Api\V1\Entity\TokenUser;
+use User\Api\V1\Entity\User;
+
 class TokenUserFacade
 {
-    public function __construct()
+    private $entityManager;
+
+    public function __construct(EntityManager $entityManager)
     {
+        $this->entityManager = $entityManager;
     }
 
+    /**
+     * Return a tokenUser
+     *
+     * @param string $token
+     *
+     * @return TokenUser|null
+     *
+     */
     public function getByToken($token)
     {
-        //...
+        $tokenUser = $this->entityManager
+            ->getRepository(TokenUser::class)
+            ->findBy(['token' => $token]);
+
+        return $tokenUser;
     }
 
+    /**
+     * Return a tokenUser
+     *
+     * @param int $userId
+     *
+     * @return TokenUser|null
+     *
+     */
     public function getByUserId($userId)
     {
+        $user = $this->entityManager
+            ->getRepository(User::class)
+            ->findBy(['userId' => $userId]);
+
+        $tokenUser = $this->entityManager
+            ->getRepository(TokenUser::class)
+            ->findBy(['user' => $user]);
+
+        return $tokenUser;
     }
 
     public function create($user, $token)
     {
+        $tokenUser = new TokenUser();
+        $tokenUser->setUser($user);
+        $tokenUser->setToken($token);
+        $tokenUser->setLastLogin(
+            new \Datetime("now", new \DateTimeZone('Europe/Zurich'))
+        );
+
+        $this->entityManager->persist($tokenUser);
+        $this->entityManager->flush();
+
+        return true;
+    }
+
+    public function updateTokenUser($tokenUser, $token)
+    {
+        $tokenUser->setToken($token);
+        $tokenUser->setLastLogin(
+            new \Datetime("now", new \DateTimeZone('Europe/Zurich'))
+        );
+        $this->entityManager->persist($tokenUser);
+        $this->entityManager->flush();
     }
 
     public function deleteToken()

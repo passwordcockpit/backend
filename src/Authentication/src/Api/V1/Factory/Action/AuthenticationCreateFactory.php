@@ -12,6 +12,7 @@ use Interop\Container\ContainerInterface;
 use Authentication\Api\V1\Action\AuthenticationCreateAction;
 use Doctrine\ORM\EntityManagerInterface;
 use User\Api\V1\Facade\PermissionFacade;
+use Authorization\Api\V1\Facade\TokenUserFacade;
 
 class AuthenticationCreateFactory
 {
@@ -22,10 +23,13 @@ class AuthenticationCreateFactory
         $authenticationAdapter = $container->get(
             \Zend\Authentication\Adapter\AdapterInterface::class
         );
+        $tokenUserFacade = $container->get(TokenUserFacade::class);
+
         return new AuthenticationCreateAction(
             $authenticationConfig,
             $translator,
-            $authenticationAdapter
+            $authenticationAdapter,
+            $tokenUserFacade
         );
     }
 }

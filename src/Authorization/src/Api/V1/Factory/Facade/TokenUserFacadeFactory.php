@@ -10,6 +10,8 @@
 namespace Authorization\Api\V1\Factory\Facade;
 
 use Authorization\Api\V1\Facade\TokenUserFacade;
+use Doctrine\ORM\EntityManagerInterface;
+use Psr\Container\ContainerInterface;
 
 class TokenUserFacadeFactory
 {
@@ -21,6 +23,8 @@ class TokenUserFacadeFactory
      */
     public function __invoke(ContainerInterface $container)
     {
-        return new TokenUserFacade();
+        $entityManager = $container->get(EntityManagerInterface::class);
+
+        return new TokenUserFacade($entityManager);
     }
 }

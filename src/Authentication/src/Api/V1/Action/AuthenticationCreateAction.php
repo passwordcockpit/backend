@@ -18,6 +18,7 @@ use App\Service\ProblemDetailsException;
 use Zend\Mvc\I18n\Translator;
 use Zend\Authentication\Adapter\AdapterInterface;
 use Zend\Authentication\Result;
+use Authorization\Api\V1\Facade\TokenUserFacade;
 
 /**
  *
@@ -69,16 +70,46 @@ class AuthenticationCreateAction implements RequestHandlerInterface
 
     /**
      *
+     * @var TokenUserFacade
+     */
+    private $tokenUserFacade;
+
+    /**
+     *
      * @param mixin $config
      */
     public function __construct(
         $config,
         Translator $translator,
-        AdapterInterface $authAdapter
+        AdapterInterface $authAdapter,
+        TokenUserFacade $tokenUserFacade
     ) {
         $this->config = $config;
         $this->translator = $translator;
         $this->authAdapter = $authAdapter;
+        $this->tokenUserFacade = $tokenUserFacade;
+    }
+
+    /**
+     * This function handles the TokenUserTable after a successful login.
+     * It need to map the user with his associated token
+     *
+     * @param User $user
+     * @param string $token
+     */
+    private function updateTokenUserTable($user, $token)
+    {
+        $userId = $user->getUserId();
+        $tokenUser = $this->tokenUserFacade->getByUserId($userId);
+
+        // FIRST TIME LOGIN, entry in the table does not exist!
+        if ($tokenUser == null) {
+            $this->tokenUserFacade->create($user, $token);
+        } else {
+            //user already logged in. Modify token and date.
+            // since the tokenUser are returned as array we just need the first.
+            $this->tokenUserFacade->updateTokenUser($tokenUser[0], $token);
+        }
     }
 
     /**
@@ -102,8 +133,10 @@ class AuthenticationCreateAction implements RequestHandlerInterface
         }
         // Is it an ldap authentication?
         $isLdap = false;
-        if (get_class($this->authAdapter) ==
-            'Authentication\Api\V1\Adapter\LdapAdapter') {
+        if (
+            get_class($this->authAdapter) ==
+            'Authentication\Api\V1\Adapter\LdapAdapter'
+        ) {
             $isLdap = true;
         }
 
@@ -127,7 +160,7 @@ class AuthenticationCreateAction implements RequestHandlerInterface
      * @return ResponseInterface
      * @throws ProblemDetailsException
      */
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $payload = $request->getParsedBody();
         $username = $payload["username"];
@@ -165,6 +198,10 @@ class AuthenticationCreateAction implements RequestHandlerInterface
             case Result::SUCCESS:
                 $user = $result->getIdentity();
                 $token = $this->createToken($user);
+
+                // update the UserToken table, where user_id and token are stored.
+                $this->updateTokenUserTable($user, $token);
+
                 return new JsonResponse(['token' => $token]);
                 break;
 

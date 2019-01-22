@@ -15,8 +15,17 @@ use Zend\Hydrator\AbstractHydrator;
 
 class TokenUserHydrator extends AbstractHydrator
 {
-    public function extract($tokenUser)
+    public function extract($tokenUser): array
     {
-        //...
+        $data = [];
+
+        $data['user_id'] = $tokenUser->getUser()->getUserId();
+        $data['token'] = $tokenUser->getToken();
+        $data['last_login'] = \App\Service\DateConverter::formatDateTime(
+            $tokenUser->getLastLogin(),
+            'outputDate'
+        );
+
+        return $data;
     }
 }
