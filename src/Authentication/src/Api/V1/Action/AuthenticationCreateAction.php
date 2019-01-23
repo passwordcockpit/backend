@@ -96,20 +96,25 @@ class AuthenticationCreateAction implements RequestHandlerInterface
      *
      * @param User $user
      * @param string $token
+     *
+     * @return bool $firstTimeLogin
      */
     private function updateTokenUserTable($user, $token)
     {
         $userId = $user->getUserId();
         $tokenUser = $this->tokenUserFacade->getByUserId($userId);
 
+        $firstTimeLogin = false;
         // FIRST TIME LOGIN, entry in the table does not exist!
         if ($tokenUser == null) {
             $this->tokenUserFacade->create($user, $token);
+            $firstTimeLogin = true;
         } else {
             //user already logged in. Modify token and date.
             // since the tokenUser are returned as array we just need the first.
             $this->tokenUserFacade->updateTokenUser($tokenUser[0], $token);
         }
+        return $firstTimeLogin;
     }
 
     /**
@@ -200,9 +205,16 @@ class AuthenticationCreateAction implements RequestHandlerInterface
                 $token = $this->createToken($user);
 
                 // update the UserToken table, where user_id and token are stored.
-                $this->updateTokenUserTable($user, $token);
+                $firstTimeLogin = $this->updateTokenUserTable($user, $token);
 
-                return new JsonResponse(['token' => $token]);
+                if ($firstTimeLogin) {
+                    return new JsonResponse([
+                        'token' => $token,
+                        'firstTimeLogin' => true
+                    ]);
+                } else {
+                    return new JsonResponse(['token' => $token]);
+                }
                 break;
 
             default:
