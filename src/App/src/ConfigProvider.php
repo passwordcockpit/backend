@@ -56,6 +56,8 @@ class ConfigProvider
                     Factory\Validator\StringParameterValidatorFactory::class,
                 Middleware\I18nMiddleware::class =>
                     Factory\I18nMiddlewareFactory::class,
+                Middleware\StrictTransportSecurityMiddleware::class =>
+                    Factory\StrictTransportSecurityFactory::class,
                 Middleware\OptionsMiddleware::class =>
                     Factory\OptionsMiddlewareFactory::class,
                 \Blast\BaseUrl\BaseUrlMiddleware::class =>
