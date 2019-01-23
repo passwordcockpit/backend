@@ -149,6 +149,11 @@ class UpdateUserAction implements RequestHandlerInterface
 
         //update token on tokenUser table
         $this->tokenUserFacade->updateTokenUser($tokenUser, $token, false);
+        // if user changed his password, token is deleted from tokenUser table forcing then a new login
+
+        if (isset($specifics['actual_password'])) {
+            $this->tokenUserFacade->deleteToken($tokenUser);
+        }
 
         // ship token
         $resource = $resource->withElement("token", $token);
