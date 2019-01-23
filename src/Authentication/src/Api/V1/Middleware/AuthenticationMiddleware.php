@@ -75,7 +75,7 @@ class AuthenticationMiddleware implements MiddlewareInterface
         $token1 = $request->getHeader("Authorization")[0];
 
         $tok = substr($token1, 7);
-
+        // check if the token on the tokenUser table matches the one sent.
         if ($tokenUser == null || $tokenUser->getToken() != $tok) {
             throw new ProblemDetailsException(
                 401,

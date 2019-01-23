@@ -75,17 +75,22 @@ class TokenUserFacade
         return true;
     }
 
-    public function updateTokenUser($tokenUser, $token)
+    public function updateTokenUser($tokenUser, $token, $modifyDate = true)
     {
         $tokenUser->setToken($token);
-        $tokenUser->setLastLogin(
-            new \Datetime("now", new \DateTimeZone('Europe/Zurich'))
-        );
+        if ($modifyDate) {
+            $tokenUser->setLastLogin(
+                new \Datetime("now", new \DateTimeZone('Europe/Zurich'))
+            );
+        }
         $this->entityManager->persist($tokenUser);
         $this->entityManager->flush();
     }
 
-    public function deleteToken()
+    public function deleteToken($tokenUser)
     {
+        $tokenUser->setToken(null);
+        $this->entityManager->persist($tokenUser);
+        $this->entityManager->flush();
     }
 }

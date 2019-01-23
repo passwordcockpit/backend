@@ -27,6 +27,7 @@ use Firebase\JWT\BeforeValidException;
 use Firebase\JWT\ExpiredException;
 use Slim\Middleware\JwtAuthentication;
 use Zend\ProblemDetails\ProblemDetailsResponseFactory;
+use Authorization\Api\V1\Facade\TokenUserFacade;
 
 /**
  *
@@ -63,12 +64,20 @@ class AuthorizationUpdateToken implements RequestHandlerInterface
      */
     private $config;
 
+    /**
+     *
+     * @var TokenUserFacade
+     */
+    private $tokenUserFacade;
+
     public function __construct(
         ProblemDetailsResponseFactory $problemDetailsFactory,
-        $config
+        $config,
+        TokenUserFacade $tokenUserfacade
     ) {
         $this->problemDetailsFactory = $problemDetailsFactory;
         $this->config = $config;
+        $this->tokenUserFacade = $tokenUserfacade;
     }
 
     /**
@@ -116,6 +125,10 @@ class AuthorizationUpdateToken implements RequestHandlerInterface
         }
 
         $newToken = $this->updateToken($authy, $oldPayLoad);
+
+        // add newToken to the tokenUser table
+        $tokenUser = $this->tokenUserFacade->getByToken($token)[0];
+        $this->tokenUserFacade->updateTokenUser($tokenUser, $newToken);
 
         return new JsonResponse(['token' => $newToken]);
     }

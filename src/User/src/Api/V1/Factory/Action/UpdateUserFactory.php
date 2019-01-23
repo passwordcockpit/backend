@@ -13,6 +13,7 @@ use Psr\Container\ContainerInterface;
 use User\Api\V1\Facade\UserFacade;
 use Zend\Expressive\Hal\ResourceGeneratorFactory;
 use User\Api\V1\Action\UpdateUserAction;
+use Authorization\Api\V1\Facade\TokenUserFacade;
 
 /**
  * Description of UpdateUserFactory
@@ -29,11 +30,14 @@ class UpdateUserFactory
             \Zend\Expressive\Hal\HalResponseFactory::class
         );
         $authenticationConfig = $container->get('config')['authentication'];
+        $tokenUserFacade = $container->get(TokenUserFacade::class);
+
         return new UpdateUserAction(
             $userFacade,
             $halResourceGeneratorInstance,
             $halResponseFactory,
-            $authenticationConfig
+            $authenticationConfig,
+            $tokenUserFacade
         );
     }
 }

@@ -20,6 +20,7 @@ use User\Api\V1\Entity\User;
 use Zend\Expressive\Hal\HalResponseFactory;
 use Firebase\JWT\JWT;
 use Slim\Middleware\JwtAuthentication;
+use Authorization\Api\V1\Facade\TokenUserFacade;
 
 /**
  *
@@ -98,6 +99,12 @@ class UpdateUserAction implements RequestHandlerInterface
     private $config;
 
     /**
+     *
+     * @var TokenUserFacade
+     */
+    private $tokenUserFacade;
+
+    /**
      * Constructor
      *
      * @param UserFacade $userFacade
@@ -107,12 +114,14 @@ class UpdateUserAction implements RequestHandlerInterface
         UserFacade $userFacade,
         ResourceGenerator $halResourceGenerator,
         HalResponseFactory $halResponseFactory,
-        $config
+        $config,
+        TokenUserFacade $tokenUserFacade
     ) {
         $this->userFacade = $userFacade;
         $this->halResourceGenerator = $halResourceGenerator;
         $this->halResponseFactory = $halResponseFactory;
         $this->config = $config;
+        $this->tokenUserFacade = $tokenUserFacade;
     }
 
     // return a new token with the language changed
@@ -125,6 +134,8 @@ class UpdateUserAction implements RequestHandlerInterface
         ]);
 
         $token = $authy->fetchToken($request);
+        $tokenUser = $this->tokenUserFacade->getByToken($token)[0];
+
         $payLoad = $authy->decodeToken($token);
 
         $specifics = $request->getParsedBody();
@@ -132,13 +143,14 @@ class UpdateUserAction implements RequestHandlerInterface
         foreach ($specifics as $spec => $value) {
             if ($spec === 'language' && $value != null) {
                 $payLoad->data->$spec = $value;
-                $newtok = JWT::encode($payLoad, $authy->getSecret(), "HS256");
-                $resource = $resource->withElement("token", $newtok);
-
-                return $resource;
+                $token = JWT::encode($payLoad, $authy->getSecret(), "HS256");
             }
         }
 
+        //update token on tokenUser table
+        $this->tokenUserFacade->updateTokenUser($tokenUser, $token, false);
+
+        // ship token
         $resource = $resource->withElement("token", $token);
         return $resource;
     }

@@ -74,7 +74,9 @@ class ConfigProvider
                 AssertionPluginManager::class =>
                     Factory\Middleware\AssertionPluginManagerFactory::class,
                 Facade\TokenUserFacade::class =>
-                    Factory\Facade\TokenUserFacadeFactory::class
+                    Factory\Facade\TokenUserFacadeFactory::class,
+                Action\AuthorizationLogout::class =>
+                    Factory\Action\AuthorizationLogoutFactory::class
             ]
         ];
     }
@@ -92,6 +94,12 @@ class ConfigProvider
                 'path' => '/api/auth/update',
                 'middleware' => [Action\AuthorizationUpdateToken::class],
                 'allowed_methods' => ['POST']
+            ],
+            [
+                'name' => 'api.v1.authorization.logout',
+                'path' => '/api/v1/logout',
+                'middleware' => [Action\AuthorizationLogout::class],
+                'allowed_methods' => ['DELETE']
             ]
         ];
     }

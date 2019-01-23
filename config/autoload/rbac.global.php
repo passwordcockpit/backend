@@ -84,6 +84,7 @@ return [
                 'api.v1.files.get',
                 'api.v1.upload.files.get',
                 'api.v1.files.list',
+                'api.v1.authorization.logout',
                 'api.v1.files.update',
                 'api.v1.files.delete',
                 'api.v1.passwords.files.list'

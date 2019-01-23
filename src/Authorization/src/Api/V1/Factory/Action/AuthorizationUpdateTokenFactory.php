@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use User\Api\V1\Facade\UserFacade;
 use User\Api\V1\Facade\PermissionFacade;
 use Zend\ProblemDetails\ProblemDetailsResponseFactory;
+use Authorization\Api\V1\Facade\TokenUserFacade;
 
 class AuthorizationUpdateTokenFactory
 {
@@ -24,9 +25,12 @@ class AuthorizationUpdateTokenFactory
             ProblemDetailsResponseFactory::class
         );
         $authenticationConfig = $container->get('config')['authentication'];
+        $tokenUserFacade = $container->get(TokenUserFacade::class);
+
         return new AuthorizationUpdateToken(
             $problemDetailsFactory,
-            $authenticationConfig
+            $authenticationConfig,
+            $tokenUserFacade
         );
     }
 }
