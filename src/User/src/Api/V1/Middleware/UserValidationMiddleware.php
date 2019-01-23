@@ -67,7 +67,7 @@ class UserValidationMiddleware implements MiddlewareInterface
     public function process(
         ServerRequestInterface $request,
         RequestHandlerInterface $handler
-    ) : ResponseInterface {
+    ): ResponseInterface {
         $payload = $request->getParsedBody();
 
         // zend filter for booolean value does not allow NULL to go through, even with value.
@@ -138,8 +138,15 @@ class UserValidationMiddleware implements MiddlewareInterface
                     [
                         'name' => \Zend\Validator\StringLength::class,
                         'options' => [
-                            'min' => 4,
+                            'min' => 8,
                             'max' => 200
+                        ]
+                    ],
+                    [
+                        'name' => \Zend\Validator\Regex::class,
+                        'options' => [
+                            'pattern' =>
+                                '/^\S*(?=\S*[\W])(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/'
                         ]
                     ]
                 ]
