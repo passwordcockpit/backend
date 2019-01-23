@@ -20,7 +20,7 @@ class UsersTestCest
             $randCode = $randCode . rand(0, 9);
         }
         $username = "CC-" . $randCode;
-        $password = "user";
+        $password = "User123!";
         $name = "CCTest";
         $surname = "deletedis";
         $language = "it";
@@ -48,7 +48,7 @@ class UsersTestCest
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->sendPOST('/api/auth', [
             'username' => 'user',
-            'password' => 'user'
+            'password' => 'User123!'
         ]);
         $I->seeResponseCodeIs(\Codeception\Util\HttpCode::OK); // 200
         $I->seeResponseIsJson();
@@ -60,7 +60,7 @@ class UsersTestCest
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->sendPOST('/api/auth', [
             'username' => 'admin',
-            'password' => 'admin'
+            'password' => 'Admin123!'
         ]);
         $I->seeResponseCodeIs(\Codeception\Util\HttpCode::OK); // 200
         $I->seeResponseIsJson();
@@ -72,7 +72,7 @@ class UsersTestCest
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->sendPOST('/api/auth', [
             'username' => 'user2',
-            'password' => 'user'
+            'password' => 'User123!'
         ]);
         $I->seeResponseCodeIs(\Codeception\Util\HttpCode::OK); // 200
         $I->seeResponseIsJson();

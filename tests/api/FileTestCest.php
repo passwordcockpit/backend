@@ -21,7 +21,7 @@ class FileTestCest
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->sendPOST('/api/auth', [
             'username' => 'user',
-            'password' => 'user'
+            'password' => 'User123!'
         ]);
         $I->seeResponseCodeIs(\Codeception\Util\HttpCode::OK); // 200
         $I->seeResponseIsJson();
@@ -32,7 +32,7 @@ class FileTestCest
         // get the adminToken
         $I->sendPOST('/api/auth', [
             'username' => 'admin',
-            'password' => 'admin'
+            'password' => 'Admin123!'
         ]);
         $I->seeResponseCodeIs(\Codeception\Util\HttpCode::OK); // 200
         $I->seeResponseIsJson();
@@ -43,7 +43,7 @@ class FileTestCest
         // get the user2Token
         $I->sendPOST('/api/auth', [
             'username' => 'user2',
-            'password' => 'user'
+            'password' => 'User123!'
         ]);
         $I->seeResponseCodeIs(\Codeception\Util\HttpCode::OK); // 200
         $I->seeResponseIsJson();

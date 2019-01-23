@@ -20,7 +20,7 @@ class LoginTestCest
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->sendPOST('/api/auth', [
             'username' => 'admin',
-            'password' => 'admin'
+            'password' => 'Admin123!'
         ]);
         $I->seeResponseCodeIs(\Codeception\Util\HttpCode::OK); // 200
         $I->seeResponseIsJson();
@@ -38,7 +38,7 @@ class LoginTestCest
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->sendPOST('/api/auth', [
             'username' => 'admin',
-            'wrong' => 'admin'
+            'wrong' => 'Admin123!'
         ]);
         $I->seeResponseCodeIs(\Codeception\Util\HttpCode::BAD_REQUEST); // 400
         $I->seeResponseIsJson();

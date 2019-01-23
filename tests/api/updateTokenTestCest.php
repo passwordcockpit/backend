@@ -17,7 +17,7 @@ class updateTokenTestCest
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->sendPOST('/api/auth', [
             'username' => 'user',
-            'password' => 'user'
+            'password' => 'User123!'
         ]);
         $I->seeResponseCodeIs(\Codeception\Util\HttpCode::OK); // 200
         $I->seeResponseIsJson();
