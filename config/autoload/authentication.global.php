@@ -9,7 +9,8 @@ use Zend\Authentication\Adapter\AdapterInterface;
 return [
     'authentication' => [
         'secure' => true,
-        'expiration_time' => 600, // minutes
+        'expiration_time' => 15, // minutes
+        'hard_timeout' => 240, //minutes
         'type' => 'db' // ldap or db
     ],
     'dependencies' => [

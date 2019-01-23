@@ -34,7 +34,7 @@ class updateTokenTestCest
         // test update token
         $I->amBearerAuthenticated($this->token);
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->sendPOST('/api/auth/update');
+        $I->sendPOST('/api/v1/token/update');
 
         $I->seeResponseCodeIs(\Codeception\Util\HttpCode::OK); // 200
         $I->seeResponseIsJson();
@@ -47,10 +47,10 @@ class updateTokenTestCest
             'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDI5MDIyOTYsImV4cCI6MTU0MjkzODI5NiwiZGF0YSI6eyJsYW5ndWFnZSI6Iml0IiwibGRhcCI6ZmFsc2V9LCJzdWIiOjF9.n33gclNRWcIWQza0nvP6Gb3X-Jynny5jetGzxZGhrhY'
         );
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->sendPOST('/api/auth/update');
+        $I->sendPOST('/api/v1/token/update');
 
-        $I->seeResponseCodeIs(\Codeception\Util\HttpCode::BAD_REQUEST); // 400
+        $I->seeResponseCodeIs(\Codeception\Util\HttpCode::OK); // 200 -> default by slim/jwt...
         $I->seeResponseIsJson();
-        $I->seeResponseContainsJson(array('detail' => 'Token is invalid'));
+        $I->seeResponseContainsJson(array('detail' => 'Expired token'));
     }
 }

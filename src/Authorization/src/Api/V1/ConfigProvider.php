@@ -91,13 +91,13 @@ class ConfigProvider
         return [
             [
                 'name' => 'api.v1.authorization.update',
-                'path' => '/api/auth/update',
+                'path' => '/api/v1/token/update',
                 'middleware' => [Action\AuthorizationUpdateToken::class],
                 'allowed_methods' => ['POST']
             ],
             [
                 'name' => 'api.v1.authorization.logout',
-                'path' => '/api/v1/logout',
+                'path' => '/api/v1/token/logout',
                 'middleware' => [Action\AuthorizationLogout::class],
                 'allowed_methods' => ['DELETE']
             ]

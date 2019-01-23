@@ -93,9 +93,10 @@ class AuthorizationUpdateToken implements RequestHandlerInterface
         $currentTime = new \DateTime();
 
         $future = new \DateTime("NOW");
-        $future->modify('+ 10 hour');
+        $expTime = $this->config['expiration_time'];
+        $future->modify('+ ' . $expTime . ' minute');
 
-        $token->iat = $currentTime->getTimestamp();
+        //$token->iat = $currentTime->getTimestamp();
         $token->exp = $future->getTimestamp();
 
         return JWT::encode($token, $authy->getSecret(), "HS256");
@@ -116,6 +117,22 @@ class AuthorizationUpdateToken implements RequestHandlerInterface
 
         // invalid token
         if ($oldPayLoad === false) {
+            $response = $this->problemDetailsFactory->createResponse(
+                $request,
+                400,
+                'Token is invalid'
+            );
+            return $response;
+        }
+
+        // check if the token was issued more than 'hard_timeout' minutes ago.
+        $hard_timeout = $this->config['hard_timeout'];
+        $time_now = new \Datetime('NOW');
+        $time_then = new \DateTime();
+        $time_then->setTimestamp($oldPayLoad->iat);
+        $interval = $time_now->diff($time_then);
+        // hard timeout
+        if (intval($interval->format("%i")) >= $hard_timeout) {
             $response = $this->problemDetailsFactory->createResponse(
                 $request,
                 400,
