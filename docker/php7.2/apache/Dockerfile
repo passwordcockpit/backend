@@ -46,6 +46,7 @@ RUN set -ex; \
     libldap2-dev \
     curl \
     ssh-client \
+    libicu-dev \
     git \
     ; \
     \
@@ -53,6 +54,7 @@ RUN set -ex; \
     # install the PHP extensions we need
     docker-php-ext-install \
     ldap \
+    intl \
     opcache \
     pdo_mysql \
     ; \

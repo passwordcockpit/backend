@@ -28,4 +28,4 @@ else
 fi
 
 # composer install
-composer install
+composer install --prefer-dist
