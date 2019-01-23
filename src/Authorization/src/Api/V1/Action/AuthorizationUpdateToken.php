@@ -126,9 +126,9 @@ class AuthorizationUpdateToken implements RequestHandlerInterface
 
         $newToken = $this->updateToken($authy, $oldPayLoad);
 
-        // add newToken to the tokenUser table
+        // switch to newToken in the correct tokenUser table
         $tokenUser = $this->tokenUserFacade->getByToken($token)[0];
-        $this->tokenUserFacade->updateTokenUser($tokenUser, $newToken);
+        $this->tokenUserFacade->updateTokenUser($tokenUser, $newToken, false);
 
         return new JsonResponse(['token' => $newToken]);
     }
