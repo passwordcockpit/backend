@@ -18,8 +18,7 @@ class AuthorizationLogoutFactory
     public function __invoke(ContainerInterface $container)
     {
         $tokenUserFacade = $container->get(TokenUserFacade::class);
-        $authenticationConfig = $container->get('config')['authentication'];
 
-        return new AuthorizationLogout($tokenUserFacade, $authenticationConfig);
+        return new AuthorizationLogout($tokenUserFacade);
     }
 }

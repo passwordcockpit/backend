@@ -23,12 +23,9 @@ class AuthorizationLogout implements RequestHandlerInterface
      */
     private $tokenUserFacade;
 
-    private $authConfig;
-
-    public function __construct(TokenUserFacade $tokenUserFacade, $authConfig)
+    public function __construct(TokenUserFacade $tokenUserFacade)
     {
         $this->tokenUserFacade = $tokenUserFacade;
-        $this->authConfig = $authConfig;
     }
 
     public function handle(ServerRequestInterface $request): ResponseInterface
@@ -36,8 +33,10 @@ class AuthorizationLogout implements RequestHandlerInterface
         $token = $request->getAttribute("token", false);
         $userId = $token->sub;
 
+        // getting the user making the request
         $tokenUser = $this->tokenUserFacade->getByUserId($userId)[0];
 
+        // delete token from the tokenUser table
         $this->tokenUserFacade->deleteToken($tokenUser);
 
         return new JsonResponse(['message' => "Logout successful"]);
