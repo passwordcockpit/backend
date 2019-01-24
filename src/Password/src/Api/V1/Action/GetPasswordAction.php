@@ -97,11 +97,11 @@ class GetPasswordAction implements RequestHandlerInterface
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         // set the User for logging purpose
         $this->passwordFacade->setUserId(
-            $request->getAttribute("token", false)->sub
+            $request->getAttribute("token", false)['sub']
         );
         $password = $this->passwordFacade->get($request->getAttribute('id'));
         $file = $this->fileFacade->getFiles($password->getPasswordId());

@@ -145,10 +145,10 @@ class CreatePasswordAction implements RequestHandlerInterface
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $this->passwordFacade->setUserId(
-            $request->getAttribute("token", false)->sub
+            $request->getAttribute("token", false)['sub']
         );
         $password = $this->passwordFacade->create($request);
         $this->halResourceGenerator

@@ -68,7 +68,8 @@ class AuthenticationMiddleware implements MiddlewareInterface
             return $handler->handle($request);
         }
 
-        $userId = $token->sub;
+        $userId = $token['sub'];
+
         $user = $this->userFacade->get($userId);
 
         $tokenUser = $this->tokenUserFacade->getByUserId($userId)[0];

@@ -22,7 +22,7 @@ use Authentication\Api\V1\Middleware\AuthenticationMiddleware;
 use Authorization\Api\V1\Middleware\AuthorizationMiddleware;
 use Zend\Expressive\Router\Middleware\RouteMiddleware;
 use Zend\Expressive\Router\Middleware\DispatchMiddleware;
-use Slim\Middleware\JwtAuthentication;
+use Tuupola\Middleware\JwtAuthentication;
 use App\Middleware\I18nMiddleware;
 use App\Middleware\CorsMiddleware;
 use App\Middleware\StrictTransportSecurityMiddleware;

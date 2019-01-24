@@ -16,7 +16,7 @@
     "firebase/php-jwt": "^5.0",
     "mtymek/blast-base-url": "^1.0.0",
     "tuupola/cors-middleware": "^0.9.1",
-    "tuupola/slim-jwt-auth": "^2.3",
+    "tuupola/slim-jwt-auth": "^3.1.1",
     "zendframework/zend-authentication": "^2.5",
     "zendframework/zend-component-installer": "^2.1.0",
     "zendframework/zend-config-aggregator": "^1.1.0",

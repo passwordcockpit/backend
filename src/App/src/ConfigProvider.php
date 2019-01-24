@@ -8,7 +8,7 @@
 
 namespace App;
 
-use Slim\Middleware\JwtAuthentication;
+use Tuupola\Middleware\JwtAuthentication;
 use Zend\Expressive\Delegate;
 
 /**
@@ -89,9 +89,6 @@ class ConfigProvider
             'delegators' => [
                 \Zend\Expressive\Application::class => [
                     Service\ApplicationDelegatorFactory::class
-                ],
-                JwtAuthentication::class => [
-                    Delegator\DoublePassMiddlewareDelegator::class
                 ]
             ]
         ];

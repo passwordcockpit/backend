@@ -9,7 +9,7 @@
 namespace Authentication\Api\V1\Factory\Middleware;
 
 use Psr\Container\ContainerInterface;
-use Slim\Middleware\JwtAuthentication;
+use Tuupola\Middleware\JwtAuthentication;
 use Zend\Diactoros\Response\JsonResponse;
 
 class JwtAuthenticationFactory
@@ -30,8 +30,8 @@ class JwtAuthenticationFactory
             "secure" => $secure,
             "secret" => $config['authentication']['secret_key'],
             "path" => ["/api", "/"],
-            "passthrough" => ["/api/auth", "/api/ping"], //"/api/v1/"
-            "error" => function ($request, $response, $arguments) {
+            "ignore" => ["/api/auth", "/api/ping"], //"/api/v1/"
+            "error" => function ($response, $arguments) {
                 $data["status"] = 401;
                 $data["title"] = "Unauthorized";
                 $data["type"] = "https://httpstatuses.com/401";

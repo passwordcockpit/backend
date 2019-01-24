@@ -19,7 +19,7 @@ use Zend\Expressive\Hal\ResourceGenerator;
 use User\Api\V1\Entity\User;
 use Zend\Expressive\Hal\HalResponseFactory;
 use Firebase\JWT\JWT;
-use Slim\Middleware\JwtAuthentication;
+use Tuupola\Middleware\JwtAuthentication;
 use Authorization\Api\V1\Facade\TokenUserFacade;
 
 /**
@@ -129,21 +129,22 @@ class UpdateUserAction implements RequestHandlerInterface
     // if language is not changed, return normal token
     private function updateTokenSpecifics($request, $resource)
     {
-        $authy = new JwtAuthentication([
-            "secret" => $this->config['secret_key']
-        ]);
-
-        $token = $authy->fetchToken($request);
+        $token1 = $request->getHeader("Authorization")[0];
+        $token = substr($token1, 7);
         $tokenUser = $this->tokenUserFacade->getByToken($token)[0];
 
-        $payLoad = $authy->decodeToken($token);
+        $payLoad = JWT::decode($token, $this->config['secret_key'], ["HS256"]);
 
         $specifics = $request->getParsedBody();
 
         foreach ($specifics as $spec => $value) {
             if ($spec === 'language' && $value != null) {
                 $payLoad->data->$spec = $value;
-                $token = JWT::encode($payLoad, $authy->getSecret(), "HS256");
+                $token = JWT::encode(
+                    $payLoad,
+                    $this->config['secret_key'],
+                    "HS256"
+                );
             }
         }
 

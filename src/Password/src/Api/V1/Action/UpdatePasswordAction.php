@@ -165,7 +165,7 @@ class UpdatePasswordAction implements RequestHandlerInterface
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         // checking ldap info
         $token = $request->getAttribute("token", false);
@@ -181,7 +181,7 @@ class UpdatePasswordAction implements RequestHandlerInterface
         }
 
         $this->passwordFacade->setUserId(
-            $request->getAttribute("token", false)->sub
+            $request->getAttribute("token", false)['sub']
         );
         $passwordId = $request->getAttribute('id');
         $password = $this->passwordFacade->update($passwordId, $request);

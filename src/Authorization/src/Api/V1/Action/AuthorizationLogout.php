@@ -31,7 +31,7 @@ class AuthorizationLogout implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $token = $request->getAttribute("token", false);
-        $userId = $token->sub;
+        $userId = $token['sub'];
 
         // getting the user making the request
         $tokenUser = $this->tokenUserFacade->getByUserId($userId)[0];

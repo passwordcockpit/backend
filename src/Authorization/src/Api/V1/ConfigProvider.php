@@ -12,7 +12,7 @@
 
 namespace Authorization\Api\V1;
 
-use Slim\Middleware\JwtAuthentication;
+use Tuupola\Middleware\JwtAuthentication;
 
 /**
  * The configuration provider for the App module

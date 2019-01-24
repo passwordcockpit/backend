@@ -25,7 +25,7 @@ use User\Api\V1\Hydrator\UserPermissionHydrator;
 use Zend\Authentication\Adapter\Ldap;
 use Firebase\JWT\BeforeValidException;
 use Firebase\JWT\ExpiredException;
-use Slim\Middleware\JwtAuthentication;
+use Tuupola\Middleware\JwtAuthentication;
 use Zend\ProblemDetails\ProblemDetailsResponseFactory;
 use Authorization\Api\V1\Facade\TokenUserFacade;
 
@@ -87,7 +87,7 @@ class AuthorizationUpdateToken implements RequestHandlerInterface
      * @param JWT $token
      * @return JWT
      */
-    private function updateToken(JwtAuthentication $authy, $token)
+    private function updateToken($token)
     {
         // Current time for token
         $currentTime = new \DateTime();
@@ -99,21 +99,20 @@ class AuthorizationUpdateToken implements RequestHandlerInterface
         //$token->iat = $currentTime->getTimestamp();
         $token->exp = $future->getTimestamp();
 
-        return JWT::encode($token, $authy->getSecret(), "HS256");
+        return JWT::encode($token, $this->config['secret_key'], "HS256");
     }
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $authy = new JwtAuthentication([
-            "secret" => $this->config['secret_key']
-        ]);
-
-        $token = $authy->fetchToken($request);
+        $token1 = $request->getHeader("Authorization")[0];
+        $token = substr($token1, 7);
 
         if ($token === null || $token === false) {
             $token = $request->getParsedBody()['token'];
         }
-        $oldPayLoad = $authy->decodeToken($token);
+        $oldPayLoad = JWT::decode($token, $this->config['secret_key'], [
+            "HS256"
+        ]);
 
         // invalid token
         if ($oldPayLoad === false) {
@@ -141,7 +140,7 @@ class AuthorizationUpdateToken implements RequestHandlerInterface
             return $response;
         }
 
-        $newToken = $this->updateToken($authy, $oldPayLoad);
+        $newToken = $this->updateToken($oldPayLoad);
 
         // switch to newToken in the correct tokenUser table
         $tokenUser = $this->tokenUserFacade->getByToken($token)[0];
