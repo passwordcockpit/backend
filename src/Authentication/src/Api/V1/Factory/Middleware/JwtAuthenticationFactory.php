@@ -30,7 +30,7 @@ class JwtAuthenticationFactory
             "secure" => $secure,
             "secret" => $config['authentication']['secret_key'],
             "path" => ["/api", "/"],
-            "ignore" => ["/api/auth", "/api/ping"], //"/api/v1/"
+            "ignore" => ["/api/auth", "/api/v1/token/update"], //"/api/v1/"
             "error" => function ($response, $arguments) {
                 $data["status"] = 401;
                 $data["title"] = "Unauthorized";

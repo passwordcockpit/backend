@@ -104,15 +104,29 @@ class AuthorizationUpdateToken implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $token1 = $request->getHeader("Authorization")[0];
-        $token = substr($token1, 7);
-
-        if ($token === null || $token === false) {
-            $token = $request->getParsedBody()['token'];
+        if (!isset($request->getParsedBody()['token'])) {
+            throw new ProblemDetailsException(
+                401,
+                'Token is not valid',
+                "Invalid token",
+                'https://httpstatus.es/401'
+            );
         }
-        $oldPayLoad = JWT::decode($token, $this->config['secret_key'], [
-            "HS256"
-        ]);
+
+        $token = $request->getParsedBody()['token'];
+
+        try {
+            $oldPayLoad = JWT::decode($token, $this->config['secret_key'], [
+                "HS256"
+            ]);
+        } catch (\Exception $ex) {
+            throw new ProblemDetailsException(
+                401,
+                'Token is not valid',
+                "Invalid token",
+                'https://httpstatus.es/401'
+            );
+        }
 
         // invalid token
         if ($oldPayLoad === false) {
