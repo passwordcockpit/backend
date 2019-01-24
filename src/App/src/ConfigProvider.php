@@ -90,9 +90,6 @@ class ConfigProvider
                 \Zend\Expressive\Application::class => [
                     Service\ApplicationDelegatorFactory::class
                 ],
-                \Blast\BaseUrl\BaseUrlMiddleware::class => [
-                    Delegator\DoublePassMiddlewareDelegator::class
-                ],
                 JwtAuthentication::class => [
                     Delegator\DoublePassMiddlewareDelegator::class
                 ]

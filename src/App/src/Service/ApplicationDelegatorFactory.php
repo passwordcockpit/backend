@@ -27,6 +27,7 @@ use App\Middleware\I18nMiddleware;
 use App\Middleware\CorsMiddleware;
 use App\Middleware\StrictTransportSecurityMiddleware;
 use App\Middleware\ContentSecurityMiddleware;
+use Blast\BaseUrl\BaseUrlMiddleware;
 
 class ApplicationDelegatorFactory
 {
@@ -47,7 +48,7 @@ class ApplicationDelegatorFactory
         /**
          * Setup middleware pipeline:
          */
-        $app->pipe(\Blast\BaseUrl\BaseUrlMiddleware::class);
+        $app->pipe(BaseUrlMiddleware::class);
         $app->pipe(CorsMiddleware::class);
 
         $app->pipe(ErrorHandler::class);

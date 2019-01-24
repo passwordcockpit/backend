@@ -14,7 +14,7 @@
     "dasprid/container-interop-doctrine": "^1.0",
     "doctrine/orm": "^2.5",
     "firebase/php-jwt": "^5.0",
-    "mtymek/blast-base-url": "^0.2.0",
+    "mtymek/blast-base-url": "^1.0.0",
     "tuupola/cors-middleware": "^0.9.1",
     "tuupola/slim-jwt-auth": "^2.3",
     "zendframework/zend-authentication": "^2.5",
