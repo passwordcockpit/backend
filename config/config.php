@@ -18,7 +18,6 @@ $aggregator = new ConfigAggregator(
         \Zend\Db\ConfigProvider::class,
         \Zend\Expressive\ConfigProvider::class,
         \Zend\Expressive\Router\ConfigProvider::class,
-        \Zend\Mvc\I18n\ConfigProvider::class,
         \Zend\InputFilter\ConfigProvider::class,
         \Zend\Filter\ConfigProvider::class,
         \Acelaya\ExpressiveErrorHandler\ConfigProvider::class,
@@ -33,7 +32,6 @@ $aggregator = new ConfigAggregator(
         new ArrayProvider($cacheConfig),
         // Default App module config
         App\ConfigProvider::class,
-
         // --- Aggiungo le configurazioni dei miei moduli ----
         Authentication\ConfigProvider::class,
         Authorization\ConfigProvider::class,
@@ -42,7 +40,6 @@ $aggregator = new ConfigAggregator(
         Password\ConfigProvider::class,
         Log\ConfigProvider::class,
         File\ConfigProvider::class,
-
         // Load application config in a pre-defined order in such a way that local settings
         // overwrite global settings. (Loaded as first to last):
         //   - `global.php`

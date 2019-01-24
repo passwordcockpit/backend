@@ -8,7 +8,7 @@
 
 namespace Authentication\Api\V1\Factory\Middleware;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Slim\Middleware\JwtAuthentication;
 use Zend\Diactoros\Response\JsonResponse;
 
