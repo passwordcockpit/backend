@@ -29,11 +29,12 @@ class ConfigProvider
      *
      * @return array
      */
-    public function __invoke() : array
+    public function __invoke(): array
     {
         return [
             'dependencies' => $this->getDependencies(),
-            'routes' => $this->getRoutes()
+            'routes' => $this->getRoutes(),
+            'doctrine' => $this->getDoctrine()
         ];
     }
 
@@ -42,7 +43,7 @@ class ConfigProvider
      *
      * @return array
      */
-    public function getDependencies() : array
+    public function getDependencies(): array
     {
         return [
             'invokables' => [],
@@ -54,7 +55,33 @@ class ConfigProvider
                 Action\AuthenticationCreateAction::class =>
                     Factory\Action\AuthenticationCreateFactory::class,
                 "AuthenticationValidationMiddleware" =>
-                    Factory\Middleware\AuthenticationValidationMiddlewareFactory::class
+                    Factory\Middleware\AuthenticationValidationMiddlewareFactory::class,
+                Facade\LoginRequestFacade::class =>
+                    Factory\Facade\LoginRequestFacadeFactory::class
+            ]
+        ];
+    }
+
+    /**
+     * Return the doctrine configuration
+     *
+     * @return array
+     */
+    public function getDoctrine(): array
+    {
+        return [
+            'driver' => [
+                'orm_default' => [
+                    'drivers' => [
+                        'Authentication\Api\V1\Entity' => 'loginrequest'
+                    ]
+                ],
+                'loginrequest' => [
+                    'class' =>
+                        \Doctrine\ORM\Mapping\Driver\AnnotationDriver::class,
+                    'cache' => 'array',
+                    'paths' => __DIR__ . '/Entity'
+                ]
             ]
         ];
     }
@@ -64,7 +91,7 @@ class ConfigProvider
      *
      * @return array
      */
-    public function getRoutes() : array
+    public function getRoutes(): array
     {
         return [
             [

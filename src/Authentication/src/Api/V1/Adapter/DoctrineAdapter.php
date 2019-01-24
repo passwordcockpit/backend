@@ -61,7 +61,7 @@ class DoctrineAdapter implements AdapterInterface
                 return $result;
             } else {
                 // wrong pass
-                $result = new Result(0, $user, []);
+                $result = new Result(-3, $user, []);
                 return $result;
             }
         } else {

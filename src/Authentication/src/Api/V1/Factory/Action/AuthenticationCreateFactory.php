@@ -14,6 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use User\Api\V1\Facade\PermissionFacade;
 use Authorization\Api\V1\Facade\TokenUserFacade;
 use Zend\I18n\Translator\Translator;
+use Authentication\Api\V1\Facade\LoginRequestFacade;
 
 class AuthenticationCreateFactory
 {
@@ -25,12 +26,14 @@ class AuthenticationCreateFactory
             \Zend\Authentication\Adapter\AdapterInterface::class
         );
         $tokenUserFacade = $container->get(TokenUserFacade::class);
+        $loginRequestFacade = $container->get(LoginRequestFacade::class);
 
         return new AuthenticationCreateAction(
             $authenticationConfig,
             $translator,
             $authenticationAdapter,
-            $tokenUserFacade
+            $tokenUserFacade,
+            $loginRequestFacade
         );
     }
 }

@@ -19,6 +19,7 @@ use Zend\I18n\Translator\Translator;
 use Zend\Authentication\Adapter\AdapterInterface;
 use Zend\Authentication\Result;
 use Authorization\Api\V1\Facade\TokenUserFacade;
+use Authentication\Api\V1\Facade\LoginRequestFacade;
 
 /**
  *
@@ -76,18 +77,26 @@ class AuthenticationCreateAction implements RequestHandlerInterface
 
     /**
      *
+     * @var LoginRequestFacade
+     */
+    private $loginRequestFacade;
+
+    /**
+     *
      * @param mixin $config
      */
     public function __construct(
         $config,
         Translator $translator,
         AdapterInterface $authAdapter,
-        TokenUserFacade $tokenUserFacade
+        TokenUserFacade $tokenUserFacade,
+        LoginRequestFacade $loginRequestFacade
     ) {
         $this->config = $config;
         $this->translator = $translator;
         $this->authAdapter = $authAdapter;
         $this->tokenUserFacade = $tokenUserFacade;
+        $this->loginRequestFacade = $loginRequestFacade;
     }
 
     /**
@@ -171,6 +180,28 @@ class AuthenticationCreateAction implements RequestHandlerInterface
         $username = $payload["username"];
         $password = $payload["password"];
 
+        // -- IP CHECK FOR REQUESTS ---
+        $timeAgo = new \DateTime("NOW");
+        $timeAgo->modify('- 1 hour');
+        $timeAgo = \App\Service\DateConverter::formatDateTime(
+            $timeAgo,
+            'outputDate'
+        );
+        // get how many failed attempts the ip did on the user the last hour
+        $attempts = $this->loginRequestFacade->getLastAttempts(
+            $_SERVER['REMOTE_ADDR'],
+            $username,
+            $timeAgo
+        );
+        if (sizeof($attempts) > $this->config['max_requests_per_hour']) {
+            throw new ProblemDetailsException(
+                429,
+                $this->translator->translate('Too many failed login attempts'),
+                $this->translator->translate('Please wait 1 hour'),
+                'https://httpstatus.es/429'
+            );
+        }
+
         $this->authAdapter->setUsername($username);
         $this->authAdapter->setPassword($password);
 
@@ -178,6 +209,11 @@ class AuthenticationCreateAction implements RequestHandlerInterface
 
         switch ($result->getCode()) {
             case Result::FAILURE_CREDENTIAL_INVALID:
+                //need to log failed attempt
+                $this->loginRequestFacade->addLoginRequest(
+                    $_SERVER['REMOTE_ADDR'],
+                    $username
+                );
                 throw new ProblemDetailsException(
                     401,
                     $this->translator->translate('Wrong username or password'),
