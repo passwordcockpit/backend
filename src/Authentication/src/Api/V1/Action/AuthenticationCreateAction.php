@@ -182,7 +182,7 @@ class AuthenticationCreateAction implements RequestHandlerInterface
 
         // -- IP CHECK FOR REQUESTS ---
         $timeAgo = new \DateTime("NOW");
-        $timeAgo->modify('- 1 hour');
+        $timeAgo->modify('- ' . $this->config['attempt_timespan'] . ' hour');
         $timeAgo = \App\Service\DateConverter::formatDateTime(
             $timeAgo,
             'outputDate'

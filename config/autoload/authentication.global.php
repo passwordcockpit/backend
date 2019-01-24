@@ -12,6 +12,7 @@ return [
         'expiration_time' => 15, // minutes
         'hard_timeout' => 240, //minutes
         'max_requests_per_hour' => 6, //maximum failed login requests per hour
+        'attempt_timespan' => 1, // time to check how many failed attempts were made (hour)
         'type' => 'db' // ldap or db
     ],
     'dependencies' => [
