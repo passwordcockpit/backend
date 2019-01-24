@@ -26,6 +26,7 @@ use Slim\Middleware\JwtAuthentication;
 use App\Middleware\I18nMiddleware;
 use App\Middleware\CorsMiddleware;
 use App\Middleware\StrictTransportSecurityMiddleware;
+use App\Middleware\ContentSecurityMiddleware;
 
 class ApplicationDelegatorFactory
 {
@@ -61,8 +62,9 @@ class ApplicationDelegatorFactory
 
         $app->pipe(JwtAuthentication::class);
 
-        // Middleware that adds the Strict-Transport-Security header to each request.
-        $app->pipe(StrictTransportSecurityMiddleware::class);
+        // Middlewares that adds security headers to each request.
+        $app->pipe(StrictTransportSecurityMiddleware::class); // force https
+        $app->pipe(ContentSecurityMiddleware::class); // disable external scripts
 
         $app->pipe(AuthenticationMiddleware::class);
         // Translator
