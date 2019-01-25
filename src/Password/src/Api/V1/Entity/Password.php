@@ -118,12 +118,12 @@ class Password
     /**
      * @var bool
      *
-     * * @ORM\Column(name="use_pin", type="boolean", precision=0, scale=0, nullable=true, unique=false)
+     * * @ORM\Column(name="frontend_crypted", type="boolean", precision=0, scale=0, nullable=true, unique=false)
      *
      * * @SWG\Property
      *
      */
-    private $usePin;
+    private $frontendCrypted;
 
     /**
      *
@@ -145,17 +145,17 @@ class Password
     /**
      * @return bool
      */
-    function getUsePin()
+    function getfrontendCrypted()
     {
-        return $this->usePin;
+        return $this->frontendCrypted;
     }
 
     /**
-     * @param bool $usePin
+     * @param bool $frontendCrypted
      */
-    function setUsePin($usePin)
+    function setfrontendCrypted($frontendCrypted)
     {
-        $this->usePin = $usePin;
+        $this->frontendCrypted = $frontendCrypted;
     }
 
     /**

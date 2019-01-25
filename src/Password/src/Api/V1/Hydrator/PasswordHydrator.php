@@ -39,7 +39,7 @@ class PasswordHydrator extends AbstractHydrator
             $data['tags'] = $password->getTags();
             $data['fileId'] = $password->getFileId();
             $data['fileName'] = $password->getFileName();
-            $data['usePin'] = $password->getUsePin();
+            $data['frontendCrypted'] = $password->getfrontendCrypted();
             $data['last_modification_date'] = DateConverter::formatDateTime(
                 $password->getLastModificationDate(),
                 'outputDateTime'
@@ -74,10 +74,10 @@ class PasswordHydrator extends AbstractHydrator
         if ($this->isPropertyAvailable('tags', $data)) {
             $password->setTags($data['tags']);
         }
-        if ($this->isPropertyAvailable('usePin', $data)) {
-            $password->setUsePin($data['usePin']);
+        if ($this->isPropertyAvailable('frontendCrypted', $data)) {
+            $password->setfrontendCrypted($data['frontendCrypted']);
         } else {
-            $password->setUsePin(false);
+            $password->setfrontendCrypted(false);
         }
         if ($this->isPropertyAvailable('last_modification_date', $data)) {
             $password->setLastModificationDate($data['last_modification_date']);
