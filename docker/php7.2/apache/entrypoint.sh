@@ -80,6 +80,19 @@ if [ ! -e $filename ]; then
 
 fi
 
+filename=config/autoload/client.local.php
+if [ ! -e $filename ]; then
+    {
+        echo "<?php"
+        echo "return ["
+        echo "    'client_address' => ["
+        echo "        'address' => '${PASSWORDCOCKPIT_BACKEND_CLIENT_ADDRESS}'"
+        echo "    ]" 
+        echo "];"
+    } >> $filename
+
+fi
+
 filename=config/constants.local.php
 if [ ! -e $filename ]; then
     {

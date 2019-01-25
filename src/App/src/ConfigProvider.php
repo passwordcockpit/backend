@@ -78,6 +78,8 @@ class ConfigProvider
                     \Acelaya\ExpressiveErrorHandler\ErrorHandler\Factory\ContentBasedErrorResponseGeneratorFactory::class,
                 \Zend\Stratigility\Middleware\NotFoundHandler::class =>
                     \Zend\ProblemDetails\ProblemDetailsNotFoundHandlerFactory::class,
+                Middleware\CorsMiddleware::class =>
+                    Factory\CorsMiddlewareFactory::class,
                 //Doctrine factory
                 \Doctrine\ORM\EntityManagerInterface::class =>
                     \ContainerInteropDoctrine\EntityManagerFactory::class,

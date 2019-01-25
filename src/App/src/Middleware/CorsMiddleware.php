@@ -32,6 +32,12 @@ use Psr\Http\Server\RequestHandlerInterface;
  */
 class CorsMiddleware implements MiddlewareInterface
 {
+    private $clientAddress;
+
+    public function __construct($clientAddress)
+    {
+        $this->clientAddress = $clientAddress;
+    }
     /**
      * Handle an implicit OPTIONS request.
      *
@@ -45,7 +51,10 @@ class CorsMiddleware implements MiddlewareInterface
     ): ResponseInterface {
         $response = $handler->handle($request);
         return $response
-            ->withAddedHeader('Access-Control-Allow-Origin', '*')
+            ->withAddedHeader(
+                'Access-Control-Allow-Origin',
+                $this->clientAddress['address']
+            )
             ->withAddedHeader(
                 "Access-Control-Allow-Headers",
                 "Authorization, Content-Type, Accept"
