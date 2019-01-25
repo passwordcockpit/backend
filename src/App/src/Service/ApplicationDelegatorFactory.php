@@ -49,7 +49,7 @@ class ApplicationDelegatorFactory
          * Setup middleware pipeline:
          */
         $app->pipe(BaseUrlMiddleware::class);
-        $app->pipe(CorsMiddleware::class);
+        $app->pipe(CorsMiddleware::class); //this can be removed in prod since client is same origin as the server (and NOT localhost:4200 -> 10.0.3.150:4344)
 
         $app->pipe(ErrorHandler::class);
         $app->pipe(ServerUrlMiddleware::class);

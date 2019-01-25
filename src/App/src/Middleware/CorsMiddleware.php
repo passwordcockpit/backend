@@ -30,21 +30,26 @@ use Psr\Http\Server\RequestHandlerInterface;
  *
  * In all other circumstances, it will return the result of the delegate.
  */
-class CorsMiddleware implements MiddlewareInterface {
-
-	/**
-	 * Handle an implicit OPTIONS request.
-	 *
-	 * @param ServerRequestInterface $request
-	 * @param RequestHandlerInterface $handler
-	 * @return ResponseInterface
-	 */
-	public function process(ServerRequestInterface $request,
-			RequestHandlerInterface $handler): ResponseInterface {
-		$response = $handler->handle($request);
-		return $response->withAddedHeader('Access-Control-Allow-Origin', '*')->withAddedHeader("Access-Control-Allow-Headers",
-						"Authorization, Content-Type, Accept");
-
-	}
-
+class CorsMiddleware implements MiddlewareInterface
+{
+    /**
+     * Handle an implicit OPTIONS request.
+     *
+     * @param ServerRequestInterface $request
+     * @param RequestHandlerInterface $handler
+     * @return ResponseInterface
+     */
+    public function process(
+        ServerRequestInterface $request,
+        RequestHandlerInterface $handler
+    ): ResponseInterface {
+        $response = $handler->handle($request);
+        return $response
+            ->withAddedHeader('Access-Control-Allow-Origin', '*')
+            ->withAddedHeader(
+                "Access-Control-Allow-Headers",
+                "Authorization, Content-Type, Accept"
+            );
+        //->withAddedHeader('Access-Control-Allow-Origin', 'http://localhost:4200')
+    }
 }
