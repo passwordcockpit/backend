@@ -49,6 +49,10 @@ class ApplicationDelegatorFactory
          * Setup middleware pipeline:
          */
         $app->pipe(BaseUrlMiddleware::class);
+
+        // Middlewares that adds security headers to each request.
+        $app->pipe(StrictTransportSecurityMiddleware::class); // force https
+
         $app->pipe(CorsMiddleware::class); //this can be removed in prod since client is same origin as the server (and NOT localhost:4200 -> 10.0.3.150:4344)
 
         $app->pipe(ErrorHandler::class);
@@ -62,9 +66,6 @@ class ApplicationDelegatorFactory
         $app->pipe(UrlHelperMiddleware::class);
 
         $app->pipe(JwtAuthentication::class);
-
-        // Middlewares that adds security headers to each request.
-        $app->pipe(StrictTransportSecurityMiddleware::class); // force https
         $app->pipe(ContentSecurityMiddleware::class); // disable external scripts
 
         $app->pipe(AuthenticationMiddleware::class);
