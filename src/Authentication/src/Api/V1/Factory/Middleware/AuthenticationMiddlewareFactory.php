@@ -16,16 +16,18 @@ use Zend\I18n\Translator\Translator;
 
 class AuthenticationMiddlewareFactory
 {
+    /**
+     * Invoke method, create instance of AuthenticationMiddleware class
+     * 
+     * @param ContainerInterface $container
+     * @return AuthenticationMiddleware
+     */
     public function __invoke(ContainerInterface $container)
     {
-        $userFacade = $container->get(UserFacade::class);
-        $tokenUserFacade = $container->get(TokenUserFacade::class);
-        $translator = $container->get(Translator::class);
-
         return new AuthenticationMiddleware(
-            $translator,
-            $userFacade,
-            $tokenUserFacade
+            $container->get(Translator::class),
+            $container->get(UserFacade::class),
+            $container->get(TokenUserFacade::class)
         );
     }
 }
