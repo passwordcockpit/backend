@@ -154,6 +154,8 @@ class UpdateUserAction implements RequestHandlerInterface
 
         if (isset($specifics['actual_password'])) {
             $this->tokenUserFacade->deleteToken($tokenUser);
+            $resource = $resource->withElement("forceLogin", "true");
+            return $resource;
         }
 
         // ship token
