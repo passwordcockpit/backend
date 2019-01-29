@@ -17,6 +17,7 @@ use Zend\I18n\Translator\Translator;
 class AuthenticationMiddlewareFactory
 {
     /**
+     * 
      * Invoke method, create instance of AuthenticationMiddleware class
      * 
      * @param ContainerInterface $container
