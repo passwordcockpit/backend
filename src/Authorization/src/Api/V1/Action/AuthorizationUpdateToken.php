@@ -49,7 +49,6 @@ use Authorization\Api\V1\Facade\TokenUserFacade;
  * )
  *
  */
-
 class AuthorizationUpdateToken implements RequestHandlerInterface
 {
     /**
@@ -102,7 +101,7 @@ class AuthorizationUpdateToken implements RequestHandlerInterface
         return JWT::encode($token, $this->config['secret_key'], "HS256");
     }
 
-    public function handle(ServerRequestInterface $request): ResponseInterface
+    public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         if (!isset($request->getParsedBody()['token'])) {
             throw new ProblemDetailsException(
@@ -132,7 +131,7 @@ class AuthorizationUpdateToken implements RequestHandlerInterface
         if ($oldPayLoad === false) {
             $response = $this->problemDetailsFactory->createResponse(
                 $request,
-                400,
+                401,
                 'Token is invalid'
             );
             return $response;
@@ -148,7 +147,7 @@ class AuthorizationUpdateToken implements RequestHandlerInterface
         if (intval($interval->format("%i")) >= $hard_timeout) {
             $response = $this->problemDetailsFactory->createResponse(
                 $request,
-                400,
+                401,
                 'Token is invalid'
             );
             return $response;

@@ -32,12 +32,6 @@ class AuthenticationValidationMiddlewareFactory
                 'validators' => [
                     [
                         'name' => \Zend\Validator\NotEmpty::class
-                    ],
-                    [
-                        'name' => \Zend\Validator\StringLength::class,
-                        'options' => [
-                            'min' => 1
-                        ]
                     ]
                 ]
             ],
@@ -47,12 +41,6 @@ class AuthenticationValidationMiddlewareFactory
                 'validators' => [
                     [
                         'name' => \Zend\Validator\NotEmpty::class
-                    ],
-                    [
-                        'name' => \Zend\Validator\StringLength::class,
-                        'options' => [
-                            'min' => 4
-                        ]
                     ]
                 ]
             ]
