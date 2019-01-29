@@ -14,7 +14,7 @@ use Swagger\Annotations as SWG;
 /**
  * Log
  *
- * @ORM\Table(name="log", indexes={@ORM\Index(name="fk_log_password1_idx", columns={"password_id"}), @ORM\Index(name="fk_log_user1_idx", columns={"user_id"})})
+ * @ORM\Table(name="log")
  * @ORM\Entity
  * @SWG\Definition(definition="Log")
  */

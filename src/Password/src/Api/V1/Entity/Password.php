@@ -14,7 +14,7 @@ use Swagger\Annotations as SWG;
 /**
  * Password
  *
- * @ORM\Table(name="password", indexes={@ORM\Index(name="fk_password_folder1_idx", columns={"folder_id"})})
+ * @ORM\Table(name="password")
  * @ORM\Entity
  * @SWG\Definition(definition="Password")
  */

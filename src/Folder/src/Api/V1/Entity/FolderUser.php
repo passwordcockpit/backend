@@ -14,7 +14,7 @@ use Swagger\Annotations as SWG;
 /**
  * FolderUser
  *
- * @ORM\Table(name="folder_user", uniqueConstraints={@ORM\UniqueConstraint(name="user_folder_unique_idx", columns={"user_id", "folder_id"})}, indexes={@ORM\Index(name="fk_folder_user_folder1_idx", columns={"folder_id"}), @ORM\Index(name="fk_folder_user_user1_idx", columns={"user_id"})})
+ * @ORM\Table(name="folder_user")
  * @ORM\Entity
  * @SWG\Definition(definition="FolderUser")
  */
