@@ -26,7 +26,7 @@ class LoginRequest
      *
      * @ORM\Column(name="request_id", type="integer", precision=0, scale=0, nullable=false, unique=true)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
      */
     private $requestId;
 

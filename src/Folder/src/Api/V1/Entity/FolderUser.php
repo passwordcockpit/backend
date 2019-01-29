@@ -25,7 +25,7 @@ class FolderUser
      *
      * @ORM\Column(name="folder_user_id", type="integer", precision=0, scale=0, nullable=false, unique=true)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
      */
     private $folderUserId;
 
