@@ -48,7 +48,7 @@ class LoginRequestFacade
      * @param string $username
      * @param int $time
      *
-     * @return array $LoginAttempt
+     * @return LoginRequest[]
      */
     public function getLastAttempts($ip, $username, $time)
     {
