@@ -9,8 +9,17 @@ use Psr\Http\Message\ResponseInterface;
 
 class StrictTransportSecurityMiddleware implements MiddlewareInterface
 {
-    public function __construct()
+    /**
+     * @var int
+     */
+    private $maxAge;
+
+    /**
+     * Constructor
+     */
+    public function __construct($config)
     {
+        $this->maxAge = $config['security']['max-age'];
     }
 
     /**
@@ -26,7 +35,7 @@ class StrictTransportSecurityMiddleware implements MiddlewareInterface
         $response = $handler->handle($request);
         return $response->withAddedHeader(
             'Strict-Transport-Security',
-            "max-age=10886400"
+            "max-age=" . $this->maxAge
         );
     }
 }

@@ -9,6 +9,6 @@ class StrictTransportSecurityFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        return new StrictTransportSecurityMiddleware();
+        return new StrictTransportSecurityMiddleware($container->get('config'));
     }
 }
