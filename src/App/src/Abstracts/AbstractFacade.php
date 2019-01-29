@@ -9,7 +9,6 @@
 namespace App\Abstracts;
 
 use Doctrine\ORM\EntityManager;
-use Blackpoints\Formflow\Core\App\Abstracts\FacadeInterface;
 use Zend\Hydrator\Reflection;
 use Zend\I18n\Translator\Translator;
 
