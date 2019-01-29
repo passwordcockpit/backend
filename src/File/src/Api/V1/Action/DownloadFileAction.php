@@ -160,10 +160,7 @@ class DownloadFileAction implements RequestHandlerInterface
         unlink($path . '.' . $mimeTypeExtension);
 
         $response = $response->withHeader("Content-Type", $mimeTypeContentType);
-        $response = $response->withHeader(
-            "Content-Disposition",
-            $mimeTypeContentType
-        );
+        $response = $response->withHeader("Content-Disposition", 'attachment');
         $response = $response->withHeader("X-Content-Type-Option", "nosniff");
 
         // no need for the SapiStreamEmitter, Response already emits the file.
