@@ -10,37 +10,84 @@
 namespace Authentication\Api\V1\Facade;
 
 use Doctrine\ORM\EntityManager;
+use Zend\I18n\Translator\Translator;
 use Authentication\Api\V1\Entity\LoginRequest;
+use App\Abstracts\AbstractFacade;
+use Exception;
 
-class LoginRequestFacade
+class LoginRequestFacade extends AbstractFacade
 {
-    private $entityManager;
-
-    public function __construct(EntityManager $entityManager)
-    {
-        $this->entityManager = $entityManager;
+    /**
+     * Constructor
+     *
+     * @param Translator $translator
+     * @param EntityManager $entityManager
+     */
+    public function __construct(
+        Translator $translator,
+        EntityManager $entityManager
+    ) {
+        parent::__construct(
+            $translator,
+            $entityManager,
+            LoginRequest::class
+        );
     }
 
     /**
-     * Add a failed login request
-     *
-     * @param string $ip
-     * @param string $username
-     *
+     * Create new instance of LoginRequest
+     * 
+     * @param array $data
+     * @return LoginRequest
      */
-    public function addLoginRequest($ip, $username)
+    public function create($data)
     {
-        $loginRequest = new LoginRequest();
-        $loginRequest->setIp($ip);
-        $loginRequest->setUsername($username);
-        $loginRequest->setAttemptDate(
-            new \Datetime("now", new \DateTimeZone('Europe/Zurich'))
+        $loginRequest = $this->reflectionHydrator->hydrate(
+            $data,
+            new LoginRequest()
         );
+        $this->persist($loginRequest);
 
-        $this->entityManager->persist($loginRequest);
-        $this->entityManager->flush();
+        return $loginRequest;
+    }
 
-        return true;
+    /**
+     *
+     * @param type $id
+     * @param type $filter
+     */
+    public function delete($id, $filter)
+    {
+        throw new Exception("Method not implemented");
+    }
+
+    /**
+     *
+     * @param string $id
+     * @param array $filter
+     */
+    public function fetch($id, $filter)
+    {
+        throw new Exception("Method not implemented");
+    }
+
+    /**
+     *
+     * @param array $filter
+     */
+    public function fetchAll($filter)
+    {
+        throw new Exception("Method not implemented");
+    }
+
+    /**
+     *
+     * @param string $id
+     * @param array $data
+     */
+    public function update($id, $data)
+    {
+        throw new Exception("Method not implemented");
     }
 
     /**
