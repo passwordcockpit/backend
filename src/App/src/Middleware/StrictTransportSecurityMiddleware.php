@@ -7,6 +7,9 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ResponseInterface;
 
+/**
+ * Force https middleware
+ */
 class StrictTransportSecurityMiddleware implements MiddlewareInterface
 {
     /**

@@ -7,10 +7,26 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ResponseInterface;
 
+/**
+ * Block all resources which do not respect the defined directives of Content-Security-Policy
+ */
 class ContentSecurityMiddleware implements MiddlewareInterface
 {
-    public function __construct()
+    /**
+     * Set of directives
+     *
+     *@var string
+     */
+    private $directives;
+
+    /**
+     * Constructor
+     *
+     * @param string
+     */
+    public function __construct($directives)
     {
+        $this->directives = $directives;
     }
 
     /**
@@ -24,10 +40,9 @@ class ContentSecurityMiddleware implements MiddlewareInterface
         RequestHandlerInterface $handler
     ): ResponseInterface {
         $response = $handler->handle($request);
-        //since we don't load external or internal scripts, we can set it to 'none'.
         return $response->withAddedHeader(
             'Content-Security-Policy',
-            "default-src 'none'"
+            $this->directives
         );
     }
 }

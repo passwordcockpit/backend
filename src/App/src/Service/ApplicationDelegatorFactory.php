@@ -26,8 +26,8 @@ use Tuupola\Middleware\JwtAuthentication;
 use App\Middleware\I18nMiddleware;
 use App\Middleware\CorsMiddleware;
 use App\Middleware\StrictTransportSecurityMiddleware;
-use App\Middleware\ContentSecurityMiddleware;
 use Blast\BaseUrl\BaseUrlMiddleware;
+use App\Middleware\ContentSecurityMiddleware;
 
 class ApplicationDelegatorFactory
 {
@@ -50,10 +50,10 @@ class ApplicationDelegatorFactory
          */
         $app->pipe(BaseUrlMiddleware::class);
 
-        // Middlewares that adds security headers to each request.
-        $app->pipe(StrictTransportSecurityMiddleware::class); // force https
-
         $app->pipe(CorsMiddleware::class); //this can be removed in prod since client is same origin as the server (and NOT localhost:4200 -> 10.0.3.150:4344)
+        // Middlewares that adds security headers to each request.
+        $app->pipe(StrictTransportSecurityMiddleware::class);
+        $app->pipe(ContentSecurityMiddleware::class);
 
         $app->pipe(ErrorHandler::class);
         $app->pipe(ServerUrlMiddleware::class);
@@ -66,7 +66,6 @@ class ApplicationDelegatorFactory
         $app->pipe(UrlHelperMiddleware::class);
 
         $app->pipe(JwtAuthentication::class);
-        $app->pipe(ContentSecurityMiddleware::class); // disable external scripts
 
         $app->pipe(AuthenticationMiddleware::class);
         // Translator
