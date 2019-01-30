@@ -21,6 +21,12 @@ use Folder\Api\V1\Facade\FolderUserFacade;
  */
 class AddFolderUserFactory
 {
+    /**
+     * Invoke method, create instance of AddFolderUserAction class
+     *
+     * @param ContainerInterface $container
+     * @return AddFolderUserAction
+     */
     public function __invoke(ContainerInterface $container)
     {
         $halResourceGenerator = new ResourceGeneratorFactory();

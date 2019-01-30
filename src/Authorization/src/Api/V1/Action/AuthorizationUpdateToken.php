@@ -69,6 +69,13 @@ class AuthorizationUpdateToken implements RequestHandlerInterface
      */
     private $tokenUserFacade;
 
+    /**
+     * Constructor
+     *
+     * @param ProblemDetailsFactory $problemDetailsFactory
+     * @param array $config
+     * @param TokenUserFacade $tokenUserFacade
+     */
     public function __construct(
         ProblemDetailsResponseFactory $problemDetailsFactory,
         $config,
@@ -101,7 +108,13 @@ class AuthorizationUpdateToken implements RequestHandlerInterface
         return JWT::encode($token, $this->config['secret_key'], "HS256");
     }
 
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    /**
+     *
+     * @param ServerRequestInterface $request
+     * @return ResponseInterface
+     * @throws ProblemDetailsException
+     */
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         if (!isset($request->getParsedBody()['token'])) {
             throw new ProblemDetailsException(

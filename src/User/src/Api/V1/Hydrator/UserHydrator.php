@@ -17,9 +17,10 @@ use User\Api\V1\Entity\User;
 class UserHydrator extends AbstractHydrator
 {
     /**
+     * Extract information from User object
      *
      * @param User $user
-     * @return type
+     * @return array
      */
     public function extract($user)
     {

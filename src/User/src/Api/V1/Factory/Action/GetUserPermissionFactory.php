@@ -20,6 +20,12 @@ use Zend\Expressive\Hal\ResourceGeneratorFactory;
  */
 class GetUserPermissionFactory
 {
+    /**
+     * Invoke method, create instance of GetUserPermissionAction class
+     *
+     * @param ContainerInterface $container
+     * @return GetUserPermissionAction
+     */
     public function __invoke(ContainerInterface $container)
     {
         $halResourceGenerator = new ResourceGeneratorFactory();

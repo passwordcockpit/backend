@@ -17,6 +17,12 @@ use App\Middleware\ValidationMiddleware;
  */
 class PasswordValidationUpdateMiddlewareFactory
 {
+    /**
+     * Invoke method, create instance of ValidationMiddleware class
+     *
+     * @param ContainerInterface $container
+     * @return ValidationMiddleware
+     */
     public function __invoke(ContainerInterface $container)
     {
         return new ValidationMiddleware([

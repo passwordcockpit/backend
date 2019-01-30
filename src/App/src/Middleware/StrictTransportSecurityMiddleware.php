@@ -19,6 +19,8 @@ class StrictTransportSecurityMiddleware implements MiddlewareInterface
 
     /**
      * Constructor
+     *
+     * @param array $config
      */
     public function __construct($config)
     {

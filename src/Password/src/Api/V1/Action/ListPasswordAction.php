@@ -47,6 +47,11 @@ class ListPasswordAction implements RequestHandlerInterface
 
     /**
      * Constructor
+     *
+     * @param PasswordFacade $passwordFacade
+     * @param PermissionFacade $permissionFacade
+     * @param ResourceGenerator $halResourceGenerator
+     * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
         PasswordFacade $passwordFacade,

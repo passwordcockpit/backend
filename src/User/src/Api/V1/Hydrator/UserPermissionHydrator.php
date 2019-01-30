@@ -16,6 +16,14 @@ use Zend\Hydrator\AbstractHydrator;
  */
 class UserPermissionHydrator extends AbstractHydrator
 {
+    /**
+     * Extract information from Permission object
+     *
+     * @param Permission
+     *
+     * @return array
+     *
+     */
     public function extract($userPermission)
     {
         $data = [];
@@ -27,7 +35,7 @@ class UserPermissionHydrator extends AbstractHydrator
         return $data;
     }
 
-    public function hydrate(array $data, $object) : object
+    public function hydrate(array $data, $object): object
     {
     }
 }

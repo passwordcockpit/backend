@@ -28,6 +28,12 @@ class AuthorizationLogout implements RequestHandlerInterface
         $this->tokenUserFacade = $tokenUserFacade;
     }
 
+    /**
+     *
+     * @param ServerRequestInterface $request
+     * @return ResponseInterface
+     * @throws ProblemDetailsException
+     */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $token = $request->getAttribute("token", false);

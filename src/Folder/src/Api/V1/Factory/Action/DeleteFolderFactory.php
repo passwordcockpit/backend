@@ -19,6 +19,12 @@ use Zend\Expressive\Hal\ResourceGeneratorFactory;
  */
 class DeleteFolderFactory
 {
+    /**
+     * Invoke method, create instance of DeleteFolderAction class
+     *
+     * @param ContainerInterface $container
+     * @return DeleteFolderAction
+     */
     public function __invoke(ContainerInterface $container)
     {
         $halResourceGenerator = new ResourceGeneratorFactory();

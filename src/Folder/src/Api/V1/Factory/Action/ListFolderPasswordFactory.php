@@ -20,6 +20,12 @@ use Password\Api\V1\Facade\PasswordFacade;
  */
 class ListFolderPasswordFactory
 {
+    /**
+     * Invoke method, create instance of ListFolderPasswordAction class
+     *
+     * @param ContainerInterface $container
+     * @return ListFolderPasswordAction
+     */
     public function __invoke(ContainerInterface $container)
     {
         $halResourceGenerator = new ResourceGeneratorFactory();

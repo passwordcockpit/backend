@@ -50,6 +50,8 @@ class PermissionValidationMiddleware implements MiddlewareInterface
      * Constructor
      *
      * @param Adapter $adapter
+     * @param array $languages
+     * @param Translator $translator
      */
     public function __construct(Adapter $adapter, $languages, $translator)
     {
@@ -59,11 +61,16 @@ class PermissionValidationMiddleware implements MiddlewareInterface
         $this->translator = $translator;
     }
 
-    //put your code here
+    /**
+     *
+     * @param ServerRequestInterface $request
+     * @param RequestHandlerInterface $handler
+     * @return ResponseInterface
+     */
     public function process(
         ServerRequestInterface $request,
         RequestHandlerInterface $handler
-    ) : ResponseInterface {
+    ): ResponseInterface {
         $payload = $request->getParsedBody();
 
         $exclude = null;

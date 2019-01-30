@@ -19,7 +19,12 @@ use Zend\I18n\Translator\Translator;
 
 class PermissionFacadeFactory
 {
-    //put your code here
+    /**
+     * Invoke method, create instance of PermissionFacade class
+     *
+     * @param ContainerInterface $container
+     * @return PermissionFacade
+     */
     public function __invoke(ContainerInterface $container)
     {
         return new PermissionFacade(

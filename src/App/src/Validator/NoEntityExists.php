@@ -62,6 +62,11 @@ class NoEntityExists extends AbstractValidator
         parent::__construct($options);
     }
 
+    /**
+     * function called by the interface
+     * @param string $value
+     * @return bool true|false
+     */
     public function isValid($value)
     {
         $criteria = Criteria::create();

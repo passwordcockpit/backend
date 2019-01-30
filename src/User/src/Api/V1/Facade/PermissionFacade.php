@@ -46,6 +46,7 @@ class PermissionFacade
      *
      * @param EntityManager $entityManager
      * @param Translator $translator
+     * @param UserFacade $userFacade
      */
     public function __construct(
         EntityManager $entityManager,

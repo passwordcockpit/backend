@@ -19,10 +19,13 @@ class FileHydrator extends \Zend\Hydrator\AbstractHydrator
     {
     }
     /**
+     * Extract informations from File object
      *
      * @param File $object
+     *
+     * @return array
      */
-    public function extract($object) : array
+    public function extract($object): array
     {
         $data = [];
         $data['file_id'] = $object->getFileId();

@@ -17,6 +17,12 @@ use Zend\I18n\Translator\Translator;
 
 class FileAssertionFactory
 {
+    /**
+     * Invoke method, create instance of FileAssertion class
+     *
+     * @param ContainerInterface $container
+     * @return FileAssertion
+     */
     public function __invoke(ContainerInterface $container)
     {
         return new FileAssertion(

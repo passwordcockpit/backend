@@ -19,6 +19,12 @@ use Zend\Expressive\Hal\ResourceGeneratorFactory;
  */
 class DeletePasswordFactory
 {
+    /**
+     * Invoke method, create instance of DeletePasswordAction class
+     *
+     * @param ContainerInterface $container
+     * @return DeletePasswordAction
+     */
     public function __invoke(ContainerInterface $container)
     {
         $halResourceGenerator = new ResourceGeneratorFactory();

@@ -35,6 +35,12 @@ class LdapAdapter implements AdapterInterface
      */
     private $entityManager;
 
+    /**
+     * Constructor
+     *
+     * @param UserFacade $userFacade
+     * @param array $ldapConfig
+     */
     public function __construct(UserFacade $userFacade, $ldapConfig)
     {
         $this->userFacade = $userFacade;

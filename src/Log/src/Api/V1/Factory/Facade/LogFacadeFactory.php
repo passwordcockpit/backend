@@ -19,6 +19,12 @@ use Zend\I18n\Translator\Translator;
  */
 class LogFacadeFactory
 {
+    /**
+     * Invoke method, create instance of LogFacade class
+     *
+     * @param ContainerInterface $container
+     * @return LogFacade
+     */
     public function __invoke(ContainerInterface $container)
     {
         return new LogFacade(

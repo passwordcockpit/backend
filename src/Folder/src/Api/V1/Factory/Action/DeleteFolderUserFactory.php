@@ -21,6 +21,12 @@ use Folder\Api\V1\Facade\FolderUserFacade;
  */
 class DeleteFolderUserFactory
 {
+    /**
+     * Invoke method, create instance of DeleteFolderUserAction class
+     *
+     * @param ContainerInterface $container
+     * @return DeleteFolderUserAction
+     */
     public function __invoke(ContainerInterface $container)
     {
         $halResourceGenerator = new ResourceGeneratorFactory();

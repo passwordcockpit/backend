@@ -17,6 +17,12 @@ use Password\Api\V1\Action\ListPasswordAction;
 
 class ListPasswordFactory
 {
+    /**
+     * Invoke method, create instance of ListPasswordAction class
+     *
+     * @param ContainerInterface $container
+     * @return ListPasswordAction
+     */
     public function __invoke(ContainerInterface $container)
     {
         $halResourceGenerator = new ResourceGeneratorFactory();

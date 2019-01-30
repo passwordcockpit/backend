@@ -48,6 +48,15 @@ class PasswordHydrator extends AbstractHydrator
         return $data;
     }
 
+    /**
+     * Hydrate an array into a Password
+     *
+     * @param array $data
+     * @param Password $password
+     *
+     * @return Password
+     *
+     */
     public function hydrate(array $data, $password)
     {
         if (!$password instanceof Password) {
@@ -85,6 +94,14 @@ class PasswordHydrator extends AbstractHydrator
         return $password;
     }
 
+    /**
+     * check if a property is available in an array
+     *
+     * @param string $property
+     * @param array $data
+     *
+     * @return bool
+     */
     protected function isPropertyAvailable($property, $data)
     {
         return isset($data[$property]);

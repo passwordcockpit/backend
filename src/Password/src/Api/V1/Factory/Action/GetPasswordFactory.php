@@ -20,6 +20,12 @@ use Zend\Expressive\Hal\ResourceGeneratorFactory;
  */
 class GetPasswordFactory
 {
+    /**
+     * Invoke method, create instance of GetPasswordAction class
+     *
+     * @param ContainerInterface $container
+     * @return GetPasswordAction
+     */
     public function __invoke(ContainerInterface $container)
     {
         $halResourceGenerator = new ResourceGeneratorFactory();

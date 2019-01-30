@@ -22,9 +22,14 @@ use Zend\I18n\Translator\Translator;
 /**
  * Description of PasswordFacadeFactory
  */
-
 class PasswordFacadeFactory
 {
+    /**
+     * Invoke method, create instance of PasswordFacade class
+     *
+     * @param ContainerInterface $container
+     * @return PasswordFacade
+     */
     public function __invoke(ContainerInterface $container)
     {
         return new PasswordFacade(

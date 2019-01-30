@@ -22,6 +22,12 @@ use Zend\I18n\Translator\Translator;
  */
 class GetFolderUserFactory
 {
+    /**
+     * Invoke method, create instance of GetFolderUserAction class
+     *
+     * @param ContainerInterface $container
+     * @return GetFolderUserAction
+     */
     public function __invoke(ContainerInterface $container)
     {
         $halResourceGenerator = new ResourceGeneratorFactory();

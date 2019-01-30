@@ -94,7 +94,12 @@ class PasswordFacade
      * @param EntityManager $entityManager
      * @param Translator $translator
      * @param BlockCipher $blockCipher
+     * @param FileCipher $fileCipher
      * @param string $encriptionKey
+     * @param FolderFacade $folderFacade
+     * @param LogFacade $logFacade
+     * @param FileFacade $fileFacade
+     * @param array $uploadConfig
      */
     public function __construct(
         EntityManager $entityManager,
@@ -102,9 +107,9 @@ class PasswordFacade
         BlockCipher $blockCipher,
         FileCipher $fileCipher,
         $encriptionKey,
-        $folderFacade,
-        $logFacade,
-        $fileFacade,
+        FolderFacade $folderFacade,
+        LogFacade $logFacade,
+        FileFacade $fileFacade,
         $uploadConfig
     ) {
         $this->entityManager = $entityManager;
@@ -128,6 +133,9 @@ class PasswordFacade
         $this->userId = $userId;
     }
 
+    /**
+     * @return int
+     */
     private function getUserId()
     {
         return $this->userId;

@@ -21,6 +21,12 @@ use Zend\Expressive\Hal\ResourceGeneratorFactory;
  */
 class ListFolderFactory
 {
+    /**
+     * Invoke method, create instance of ListFolderAction class
+     *
+     * @param ContainerInterface $container
+     * @return ListFolderAction
+     */
     public function __invoke(ContainerInterface $container)
     {
         $halResourceGenerator = new ResourceGeneratorFactory();

@@ -15,6 +15,12 @@ use File\Api\V1\Facade\FileFacade;
 
 class GetFileFactory
 {
+    /**
+     * Invoke method, create instance of GetFileAction class
+     *
+     * @param ContainerInterface $container
+     * @return GetFileAction
+     */
     public function __invoke(ContainerInterface $container)
     {
         $resourceGenerator = new ResourceGeneratorFactory();

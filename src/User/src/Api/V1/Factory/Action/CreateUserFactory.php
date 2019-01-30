@@ -20,7 +20,12 @@ use Zend\Expressive\Hal\ResourceGeneratorFactory;
  */
 class CreateUserFactory
 {
-    //put your code here
+    /**
+     * Invoke method, create instance of CreateUserAction class
+     *
+     * @param ContainerInterface $container
+     * @return CreateUserAction
+     */
     public function __invoke(ContainerInterface $container)
     {
         $halResourceGenerator = new ResourceGeneratorFactory();

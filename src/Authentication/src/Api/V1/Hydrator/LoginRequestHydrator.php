@@ -15,6 +15,12 @@ use Zend\Hydrator\AbstractHydrator;
 
 class LoginRequestHydrator extends AbstractHydrator
 {
+    /**
+     * extract method, information from a LoginRequest class
+     *
+     * @param LoginRequest $loginRequest
+     * @return array
+     */
     public function extract($loginRequest): array
     {
         $data = [];

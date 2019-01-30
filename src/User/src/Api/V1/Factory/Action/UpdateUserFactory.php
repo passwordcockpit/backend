@@ -20,7 +20,12 @@ use Authorization\Api\V1\Facade\TokenUserFacade;
  */
 class UpdateUserFactory
 {
-    //put your code here
+    /**
+     * Invoke method, create instance of UpdateUserAction class
+     *
+     * @param ContainerInterface $container
+     * @return UpdateUserAction
+     */
     public function __invoke(ContainerInterface $container)
     {
         $halResourceGenerator = new ResourceGeneratorFactory();

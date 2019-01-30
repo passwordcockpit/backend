@@ -26,6 +26,16 @@ class AssertionPluginManager extends AbstractPluginManager
 
     protected $assertions;
 
+    /**
+     * Constructor
+     *
+     * @param string $configIstanceOrParentLocator
+     * @param array $config
+     * @param array $assertionRegisteredByRoute
+     * @param Translator $translator
+     * @param FolderUserFacade $folderUserFacade
+     * @param EntityManager $entityManager
+     */
     public function __construct(
         $configInstanceOrParentLocator = null,
         array $config = array(),
@@ -42,6 +52,17 @@ class AssertionPluginManager extends AbstractPluginManager
         $this->entityManager = $entityManager;
     }
 
+    /**
+     * function called by the abstract plugin manager
+     *
+     * @param Rbac $rbac
+     * @param string $role
+     * @param string $permission
+     * @param ServerRequestInterface $request
+     * @param User $user
+     *
+     * @return bool true|false
+     */
     public function assert(
         \Zend\Permissions\Rbac\Rbac $rbac,
         $role,

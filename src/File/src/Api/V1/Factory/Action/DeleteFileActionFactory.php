@@ -15,6 +15,12 @@ use File\Api\V1\Action\DeleteFileAction;
 
 class DeleteFileActionFactory
 {
+    /**
+     * Invoke method, create instance of DeleteFileAction class
+     *
+     * @param ContainerInterface $container
+     * @return DeleteFileAction
+     */
     public function __invoke(ContainerInterface $container)
     {
         $halResourceGenerator = new ResourceGeneratorFactory();

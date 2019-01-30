@@ -15,6 +15,12 @@ use Zend\Hydrator\AbstractHydrator;
 
 class TokenUserHydrator extends AbstractHydrator
 {
+    /**
+     * Extract information from a TokenUser object
+     *
+     * @param Tokenuser $tokenUser
+     * @return array
+     */
     public function extract($tokenUser): array
     {
         $data = [];

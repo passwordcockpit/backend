@@ -17,6 +17,12 @@ use Zend\I18n\Translator\Translator;
 
 class PasswordAssertionFactory
 {
+    /**
+     * Invoke method, create instance of PasswordAssertion class
+     *
+     * @param ContainerInterface $container
+     * @return PasswordAssertion
+     */
     public function __invoke(ContainerInterface $container)
     {
         return new PasswordAssertion(

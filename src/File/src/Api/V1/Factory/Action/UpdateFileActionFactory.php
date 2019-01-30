@@ -19,6 +19,12 @@ use Zend\I18n\Translator\Translator;
 
 class UpdateFileActionFactory
 {
+    /**
+     * Invoke method, create instance of UpdateFileAction class
+     *
+     * @param ContainerInterface $container
+     * @return UpdateFileAction
+     */
     public function __invoke(ContainerInterface $container)
     {
         $halResourceGenerator = new ResourceGeneratorFactory();

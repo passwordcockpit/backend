@@ -77,6 +77,8 @@ class GetUserPermissionAction implements RequestHandlerInterface
      *
      * @param UserFacade $userFacade
      * @param ResourceGenerator $halResourceGenerator
+     * @param HalResponseFactory $halResponseFactory
+     * @param PermissionFacade $permissionFacade
      */
     public function __construct(
         UserFacade $userFacade,
@@ -96,7 +98,7 @@ class GetUserPermissionAction implements RequestHandlerInterface
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $permission = $this->permissionFacade->getUserPermission(
             $request->getAttribute('id')

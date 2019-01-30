@@ -19,6 +19,12 @@ use Zend\Expressive\Hal\ResourceGeneratorFactory;
  */
 class ListUserLogFactory
 {
+    /**
+     * Invoke method, create instance of ListUserLogAction class
+     *
+     * @param ContainerInterface $container
+     * @return ListUserLogAction
+     */
     public function __invoke(ContainerInterface $container)
     {
         $halResourceGenerator = new ResourceGeneratorFactory();

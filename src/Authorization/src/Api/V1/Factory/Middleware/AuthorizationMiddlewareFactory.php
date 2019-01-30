@@ -23,6 +23,12 @@ use Zend\I18n\Translator\Translator;
 
 class AuthorizationMiddlewareFactory
 {
+    /**
+     * Invoke method, create instance of AuthorizationMiddleware class
+     *
+     * @param ContainerInterface $container
+     * @return AuthorizationMiddleware
+     */
     public function __invoke(ContainerInterface $container)
     {
         $config = $container->get('config');

@@ -16,10 +16,10 @@ use Psr\Container\ContainerInterface;
 class TokenUserFacadeFactory
 {
     /**
-     * Invoke method
+     * Invoke method, create instance of TokenUserFacade class
      *
      * @param ContainerInterface $container
-     * @return DossierFacade
+     * @return TokenUserFacade
      */
     public function __invoke(ContainerInterface $container)
     {

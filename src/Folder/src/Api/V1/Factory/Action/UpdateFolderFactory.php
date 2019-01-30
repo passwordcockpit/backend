@@ -20,6 +20,12 @@ use Folder\Api\V1\Action\UpdateFolderAction;
  */
 class UpdateFolderFactory
 {
+    /**
+     * Invoke method, create instance of UpdateFolderAction class
+     *
+     * @param ContainerInterface $container
+     * @return UpdateFolderAction
+     */
     public function __invoke(ContainerInterface $container)
     {
         $halResourceGenerator = new ResourceGeneratorFactory();

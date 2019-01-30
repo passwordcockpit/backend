@@ -14,6 +14,12 @@ use Zend\Diactoros\Response\JsonResponse;
 
 class JwtAuthenticationFactory
 {
+    /**
+     * Invoke method, create instance of JwtAuthentication class
+     *
+     * @param ContainerInterface $container
+     * @return JwtAuthentication
+     */
     public function __invoke(ContainerInterface $container)
     {
         $config = $container->has('config') ? $container->get('config') : [];

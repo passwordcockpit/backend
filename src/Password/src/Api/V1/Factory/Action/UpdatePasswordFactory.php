@@ -20,6 +20,12 @@ use Zend\ProblemDetails\ProblemDetailsResponseFactory;
  */
 class UpdatePasswordFactory
 {
+    /**
+     * Invoke method, create instance of UpdatePasswordAction class
+     *
+     * @param ContainerInterface $container
+     * @return UpdatePasswordAction
+     */
     public function __invoke(ContainerInterface $container)
     {
         $halResourceGenerator = new ResourceGeneratorFactory();

@@ -19,6 +19,12 @@ use Log\Api\V1\Action\GetLogAction;
  */
 class GetLogFactory
 {
+    /**
+     * Invoke method, create instance of GetLogAction class
+     *
+     * @param ContainerInterface $container
+     * @return GetLogAction
+     */
     public function __invoke(ContainerInterface $container)
     {
         $halResourceGenerator = new ResourceGeneratorFactory();

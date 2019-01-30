@@ -25,6 +25,10 @@ class DoctrineAdapter implements AdapterInterface
      */
     private $entityManager;
 
+    /**
+     * Constructor
+     * @param EntityManager $entityManager
+     */
     public function __construct($entityManager)
     {
         $this->username = null;
@@ -32,11 +36,21 @@ class DoctrineAdapter implements AdapterInterface
         $this->entityManager = $entityManager;
     }
 
+    /**
+     * Set the login password
+     *
+     * @param string $password
+     */
     public function setPassword($password)
     {
         $this->password = $password;
     }
 
+    /**
+     * Set the login username
+     *
+     * @param string $username
+     */
     public function setUsername($username)
     {
         $this->username = $username;

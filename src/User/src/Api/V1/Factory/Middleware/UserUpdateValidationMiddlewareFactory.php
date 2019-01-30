@@ -19,6 +19,12 @@ use Zend\I18n\Translator\Translator;
 
 class UserUpdateValidationMiddlewareFactory
 {
+    /**
+     * Invoke method
+     *
+     * @param ContainerInterface $container
+     * @return UserValidationMiddleware
+     */
     public function __invoke(ContainerInterface $container)
     {
         return new UserValidationMiddleware(

@@ -51,6 +51,10 @@ class UserValidationMiddleware implements MiddlewareInterface
     /**
      * Constructor
      *
+     * @param InputFilterFactory $inputFilterfactory
+     * @param array $languages
+     * @param Translator $translator
+     * @param bool $update
      */
     public function __construct(
         InputFilterFactory $inputFilterFactory,
@@ -64,6 +68,12 @@ class UserValidationMiddleware implements MiddlewareInterface
         $this->update = $update;
     }
 
+    /**
+     *
+     * @param ServerRequestInterface $request
+     * @param RequestHandlerInterface $handler
+     * @return ResponseInterface
+     */
     public function process(
         ServerRequestInterface $request,
         RequestHandlerInterface $handler

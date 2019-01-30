@@ -42,10 +42,16 @@ class ValidationMiddleware implements MiddlewareInterface
         $this->inputFilterSpecification = $inputFilterSpecification;
     }
 
+    /**
+     *
+     * @param ServerRequestInterface $request
+     * @param RequestHandlerInterface $handler
+     * @return ResponseInterface
+     */
     public function process(
         ServerRequestInterface $request,
         RequestHandlerInterface $handler
-    ) : ResponseInterface {
+    ): ResponseInterface {
         $payload = $request->getParsedBody();
         $inputFilter = $this->inputFilterFactory->createInputFilter(
             $this->inputFilterSpecification

@@ -15,6 +15,12 @@ use Psr\Container\ContainerInterface;
 
 class AuthorizationLogoutFactory
 {
+    /**
+     * Invoke method, create instance of AuthorizationLogout class
+     *
+     * @param ContainerInterface $container
+     * @return AuthorizationLogout
+     */
     public function __invoke(ContainerInterface $container)
     {
         return new AuthorizationLogout($container->get(TokenUserFacade::class));

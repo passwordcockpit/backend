@@ -19,6 +19,12 @@ use Zend\Expressive\Hal\ResourceGeneratorFactory;
  */
 class ListPasswordLogFactory
 {
+    /**
+     * Invoke method, create instance of ListPasswordLogAction class
+     *
+     * @param ContainerInterface $container
+     * @return ListPasswordLogAction
+     */
     public function __invoke(ContainerInterface $container)
     {
         $halResourceGenerator = new ResourceGeneratorFactory();

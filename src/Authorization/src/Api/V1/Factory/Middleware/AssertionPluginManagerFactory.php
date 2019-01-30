@@ -17,6 +17,12 @@ use Zend\I18n\Translator\Translator;
 
 class AssertionPluginManagerFactory
 {
+    /**
+     * Invoke method, create instance of AssertionPluginManager class
+     *
+     * @param ContainerInterface $container
+     * @return AssertionPluginManager
+     */
     public function __invoke(ContainerInterface $container)
     {
         $config = $container->get('config');

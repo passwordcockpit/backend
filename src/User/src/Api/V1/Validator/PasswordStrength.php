@@ -19,6 +19,11 @@ class PasswordStrength extends AbstractValidator
     const LOWER = 'lower';
     const DIGIT = 'digit';
 
+    /**
+     * Constructor
+     *
+     * @param array $options
+     */
     public function __construct($options = [])
     {
         if (!is_array($options)) {
@@ -39,6 +44,11 @@ class PasswordStrength extends AbstractValidator
         self::DIGIT => "Password must contain at least one digit character"
     ];
 
+    /**
+     * Function that gets called by the Interface
+     *
+     * @param string $value
+     */
     public function isValid($value)
     {
         $this->setValue($value);

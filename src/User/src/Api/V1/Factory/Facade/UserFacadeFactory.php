@@ -18,7 +18,12 @@ use Zend\I18n\Translator\Translator;
 
 class UserFacadeFactory
 {
-    //put your code here
+    /**
+     * Invoke method, create instance of UserFacade class
+     *
+     * @param ContainerInterface $container
+     * @return UserFacade
+     */
     public function __invoke(ContainerInterface $container)
     {
         return new UserFacade(

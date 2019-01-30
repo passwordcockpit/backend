@@ -21,7 +21,7 @@ class FileFacadeFactory
      * Invoke method
      *
      * @param ContainerInterface $container
-     * @return DossierFacade
+     * @return FileFacade
      */
     public function __invoke(ContainerInterface $container)
     {

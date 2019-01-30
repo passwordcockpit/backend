@@ -17,6 +17,12 @@ use Zend\I18n\Translator\Translator;
 
 class ManageFolderAssertionFactory
 {
+    /**
+     * Invoke method, create instance of ManageFolderAssertion class
+     *
+     * @param ContainerInterface $container
+     * @return ManageFolderAssertion
+     */
     public function __invoke(ContainerInterface $container)
     {
         return new ManageFolderAssertion(

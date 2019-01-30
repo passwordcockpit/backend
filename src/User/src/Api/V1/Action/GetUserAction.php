@@ -72,6 +72,7 @@ class GetUserAction implements RequestHandlerInterface
      *
      * @param UserFacade $userFacade
      * @param ResourceGenerator $halResourceGenerator
+     * @param HalResponseFactory $halResponseFactory
      */
 
     public function __construct(

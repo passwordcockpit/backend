@@ -76,6 +76,18 @@ class AuthorizationMiddleware implements MiddlewareInterface
      */
     private $assertionPluginManager;
 
+    /**
+     * Constructor
+     *
+     * @param Rbac $rbac
+     * @param FolderUserFacade $folderUserFacade
+     * @param Translator $translator
+     * @param EntityManager $entityManager
+     * @param UserFacade $userFacade
+     * @param PasswordFacade $passwordFacade
+     * @param PermissionFacade $permissionFacade
+     * @param AssertionPluginManager $assertionPluginManager
+     */
     public function __construct(
         Rbac $rbac,
         FolderUserFacade $folderUserFacade,

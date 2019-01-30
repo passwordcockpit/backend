@@ -18,6 +18,12 @@ use Zend\I18n\Translator\Translator;
  */
 class LogHalHydratorFactory
 {
+    /**
+     * Invoke method, create instance of LogHalHydrator class
+     *
+     * @param ContainerInterface $container
+     * @return LogHalHydrator
+     */
     public function __invoke(ContainerInterface $container)
     {
         return new LogHalHydrator($container->get(Translator::class));

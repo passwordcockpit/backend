@@ -18,6 +18,12 @@ use File\Api\V1\Action\ListFileAction;
  */
 class ListFileFactory
 {
+    /**
+     * Invoke method, create instance of ListFileAction class
+     *
+     * @param ContainerInterface $container
+     * @return ListFileAction
+     */
     public function __invoke(ContainerInterface $container)
     {
         return new ListFileAction();

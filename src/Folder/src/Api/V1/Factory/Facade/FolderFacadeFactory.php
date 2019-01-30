@@ -20,6 +20,12 @@ use Zend\I18n\Translator\Translator;
 
 class FolderFacadeFactory
 {
+    /**
+     * Invoke method, create instance of FolderFacade class
+     *
+     * @param ContainerInterface $container
+     * @return FolderFacade
+     */
     public function __invoke(ContainerInterface $container)
     {
         return new FolderFacade(

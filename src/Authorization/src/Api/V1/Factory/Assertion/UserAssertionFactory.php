@@ -17,6 +17,12 @@ use Zend\I18n\Translator\Translator;
 
 class UserAssertionFactory
 {
+    /**
+     * Invoke method, create instance of UserAssertion class
+     *
+     * @param ContainerInterface $container
+     * @return UserAssertion
+     */
     public function __invoke(ContainerInterface $container)
     {
         return new UserAssertion(

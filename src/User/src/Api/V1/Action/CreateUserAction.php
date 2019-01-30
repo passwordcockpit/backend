@@ -92,7 +92,9 @@ class CreateUserAction implements RequestHandlerInterface
      * Constructor
      *
      * @param UserFacade $userFacade
+     * @param PermissionFacade $permissionFacade
      * @param ResourceGenerator $halResourceGenerator
+     * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
         UserFacade $userFacade,

@@ -19,6 +19,12 @@ use Authorization\Api\V1\Facade\TokenUserFacade;
 
 class AuthorizationUpdateTokenFactory
 {
+    /**
+     * Invoke method, create instance of AuthorizationUpdateToken class
+     *
+     * @param ContainerInterface $container
+     * @return AuthorizationUpdateToken
+     */
     public function __invoke(ContainerInterface $container)
     {
         return new AuthorizationUpdateToken(

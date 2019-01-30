@@ -18,6 +18,12 @@ use Zend\I18n\Translator\Translator;
 
 class DownloadFileFactory
 {
+    /**
+     * Invoke method, create instance of DownloadFileAction class
+     *
+     * @param ContainerInterface $container
+     * @return DownloadFileAction
+     */
     public function __invoke(ContainerInterface $container)
     {
         $resourceGenerator = new ResourceGeneratorFactory();

@@ -109,6 +109,9 @@ class UpdateUserAction implements RequestHandlerInterface
      *
      * @param UserFacade $userFacade
      * @param ResourceGenerator $halResourceGenerator
+     * @param HalResponseFactory $halResponseFactory
+     * @param array $config
+     * @param TokenUserFacade $tokenUserFacade
      */
     public function __construct(
         UserFacade $userFacade,

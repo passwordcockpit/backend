@@ -17,6 +17,12 @@ use Zend\I18n\Translator\Translator;
 
 class FileManageAssertionFactory
 {
+    /**
+     * Invoke method, create instance of FileManageAssertion class
+     *
+     * @param ContainerInterface $container
+     * @return FileManageAssertion
+     */
     public function __invoke(ContainerInterface $container)
     {
         return new FileManageAssertion(

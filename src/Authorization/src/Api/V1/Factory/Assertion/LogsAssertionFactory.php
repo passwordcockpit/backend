@@ -20,6 +20,12 @@ use Zend\I18n\Translator\Translator;
 
 class LogsAssertionFactory
 {
+    /**
+     * Invoke method, create instance of LogsAssertion class
+     *
+     * @param ContainerInterface $container
+     * @return LogsAssertion
+     */
     public function __invoke(ContainerInterface $container)
     {
         return new LogsAssertion(
