@@ -42,7 +42,7 @@ class LoginRequest
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="attemptDate", type="datetime", precision=0, scale=0, nullable=true, unique=false)
+     * @ORM\Column(name="attempt_date", type="datetime", precision=0, scale=0, nullable=true, unique=false)
      *
      * @SWG\Property(property="dateTime", type="datetime", description="Login request date", example="2019-01-22 18:18:18")
      */
