@@ -17,9 +17,10 @@ class DeleteFileActionFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $fileFacade = $container->get(FileFacade::class);
         $halResourceGenerator = new ResourceGeneratorFactory();
-        $halResourceGeneratorInstance = $halResourceGenerator($container);
-        return new DeleteFileAction($fileFacade, $halResourceGeneratorInstance);
+        return new DeleteFileAction(
+            $container->get(FileFacade::class),
+            $halResourceGenerator($container)
+        );
     }
 }

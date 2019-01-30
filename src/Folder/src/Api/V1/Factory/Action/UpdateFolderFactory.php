@@ -22,18 +22,13 @@ class UpdateFolderFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $folderUserFacade = $container->get(FolderUserFacade::class);
-        $folderFacade = $container->get(FolderFacade::class);
         $halResourceGenerator = new ResourceGeneratorFactory();
-        $halResourceGeneratorInstance = $halResourceGenerator($container);
-        $halResponseFactory = $container->get(
-            \Zend\Expressive\Hal\HalResponseFactory::class
-        );
+
         return new UpdateFolderAction(
-            $folderUserFacade,
-            $folderFacade,
-            $halResourceGeneratorInstance,
-            $halResponseFactory
+            $container->get(FolderUserFacade::class),
+            $container->get(FolderFacade::class),
+            $halResourceGenerator($container),
+            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class)
         );
     }
 }

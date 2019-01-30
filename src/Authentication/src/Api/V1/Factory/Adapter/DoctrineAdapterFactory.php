@@ -10,8 +10,8 @@ class DoctrineAdapterFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $entityManager = $container->get(EntityManagerInterface::class);
-
-        return new DoctrineAdapter($entityManager);
+        return new DoctrineAdapter(
+            $container->get(EntityManagerInterface::class)
+        );
     }
 }

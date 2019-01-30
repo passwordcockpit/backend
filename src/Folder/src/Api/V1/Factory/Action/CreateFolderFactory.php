@@ -21,16 +21,12 @@ class CreateFolderFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $folderFacade = $container->get(FolderFacade::class);
         $halResourceGenerator = new ResourceGeneratorFactory();
-        $halResourceGeneratorInstance = $halResourceGenerator($container);
-        $halResponseFactory = $container->get(
-            \Zend\Expressive\Hal\HalResponseFactory::class
-        );
+
         return new CreateFolderAction(
-            $folderFacade,
-            $halResourceGeneratorInstance,
-            $halResponseFactory
+            $container->get(FolderFacade::class),
+            $halResourceGenerator($container),
+            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class)
         );
     }
 }

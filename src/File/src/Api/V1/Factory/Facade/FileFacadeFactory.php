@@ -25,18 +25,12 @@ class FileFacadeFactory
      */
     public function __invoke(ContainerInterface $container)
     {
-        $entityManager = $container->get(EntityManagerInterface::class);
-        $translator = $container->get(Translator::class);
-        $fileHydrator = $container->get(FileHydrator::class);
-        $uploadConfig = $container->get("config")['upload_config'];
-        //$passwordFacade = $container->get(PasswordFacade::class);
-
         return new FileFacade(
-            $translator,
-            $entityManager,
+            $container->get(Translator::class),
+            $container->get(EntityManagerInterface::class),
             File::class,
-            $fileHydrator,
-            $uploadConfig
+            $container->get(FileHydrator::class),
+            $container->get("config")['upload_config']
         );
     }
 }

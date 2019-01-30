@@ -49,26 +49,15 @@ class AuthorizationMiddlewareFactory
             }
         }
 
-        $folderUserFacade = $container->get(FolderUserFacade::class);
-        $userFacade = $container->get(UserFacade::class);
-        $passwordFacade = $container->get(PasswordFacade::class);
-        $permissionFacade = $container->get(PermissionFacade::class);
-        $entityManager = $container->get(EntityManagerInterface::class);
-        $translator = $container->get(Translator::class);
-
-        $assertionPluginManager = $container->get(
-            AssertionPluginManager::class
-        );
-
         return new AuthorizationMiddleware(
             $rbac,
-            $folderUserFacade,
-            $translator,
-            $entityManager,
-            $userFacade,
-            $passwordFacade,
-            $permissionFacade,
-            $assertionPluginManager
+            $container->get(FolderUserFacade::class),
+            $container->get(Translator::class),
+            $container->get(EntityManagerInterface::class),
+            $container->get(UserFacade::class),
+            $container->get(PasswordFacade::class),
+            $container->get(PermissionFacade::class),
+            $container->get(AssertionPluginManager::class)
         );
     }
 }

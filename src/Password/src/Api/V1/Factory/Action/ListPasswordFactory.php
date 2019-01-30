@@ -19,19 +19,13 @@ class ListPasswordFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $passwordFacade = $container->get(PasswordFacade::class);
-        $permissionFacade = $container->get(PermissionFacade::class);
         $halResourceGenerator = new ResourceGeneratorFactory();
-        $halResourceGeneratorInstance = $halResourceGenerator($container);
-        $halResponseFactory = $container->get(
-            \Zend\Expressive\Hal\HalResponseFactory::class
-        );
 
         return new ListPasswordAction(
-            $passwordFacade,
-            $permissionFacade,
-            $halResourceGeneratorInstance,
-            $halResponseFactory
+            $container->get(PasswordFacade::class),
+            $container->get(PermissionFacade::class),
+            $halResourceGenerator($container),
+            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class)
         );
     }
 }

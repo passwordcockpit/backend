@@ -20,8 +20,6 @@ class LogHydratorFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $translator = $container->get(Translator::class);
-
-        return new LogHydrator($translator);
+        return new LogHydrator($container->get(Translator::class));
     }
 }

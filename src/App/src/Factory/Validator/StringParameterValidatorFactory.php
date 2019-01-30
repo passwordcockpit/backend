@@ -19,11 +19,11 @@ class StringParameterValidatorFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $filter = new InputFilterFactory(
-            $container->get(InputFilterPluginManager::class)
+        return new StringParameterValidator(
+            new InputFilterFactory(
+                $container->get(InputFilterPluginManager::class)
+            ),
+            $container->get(Translator::class)
         );
-        $translator = $container->get(Translator::class);
-
-        return new StringParameterValidator($filter, $translator);
     }
 }

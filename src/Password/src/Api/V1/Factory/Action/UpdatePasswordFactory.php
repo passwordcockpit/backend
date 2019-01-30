@@ -22,22 +22,14 @@ class UpdatePasswordFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $passwordFacade = $container->get(PasswordFacade::class);
-        $problemDetailsFactory = $container->get(
-            ProblemDetailsResponseFactory::class
-        );
-        $config = $container->get('config')['authentication'];
         $halResourceGenerator = new ResourceGeneratorFactory();
-        $halResourceGeneratorInstance = $halResourceGenerator($container);
-        $halResponseFactory = $container->get(
-            \Zend\Expressive\Hal\HalResponseFactory::class
-        );
+
         return new UpdatePasswordAction(
-            $passwordFacade,
-            $problemDetailsFactory,
-            $config,
-            $halResourceGeneratorInstance,
-            $halResponseFactory
+            $container->get(PasswordFacade::class),
+            $container->get(ProblemDetailsResponseFactory::class),
+            $container->get('config')['authentication'],
+            $halResourceGenerator($container),
+            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class)
         );
     }
 }

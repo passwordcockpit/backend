@@ -21,12 +21,11 @@ class DeletePasswordFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $folderFacade = $container->get(PasswordFacade::class);
         $halResourceGenerator = new ResourceGeneratorFactory();
-        $halResourceGeneratorInstance = $halResourceGenerator($container);
+
         return new DeletePasswordAction(
-            $folderFacade,
-            $halResourceGeneratorInstance
+            $container->get(PasswordFacade::class),
+            $halResourceGenerator($container)
         );
     }
 }

@@ -18,16 +18,12 @@ class ListUserFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $userFacade = $container->get(UserFacade::class);
         $halResourceGenerator = new ResourceGeneratorFactory();
-        $halResourceGeneratorInstance = $halResourceGenerator($container);
-        $halResponseFactory = $container->get(
-            \Zend\Expressive\Hal\HalResponseFactory::class
-        );
+
         return new ListUserAction(
-            $userFacade,
-            $halResourceGeneratorInstance,
-            $halResponseFactory
+            $container->get(UserFacade::class),
+            $halResourceGenerator($container),
+            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class)
         );
     }
 }

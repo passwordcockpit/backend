@@ -24,23 +24,15 @@ class GetFolderUserFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $folderUserFacade = $container->get(FolderUserFacade::class);
-        $folderFacade = $container->get(FolderFacade::class);
-        $userFacade = $container->get(UserFacade::class);
         $halResourceGenerator = new ResourceGeneratorFactory();
-        $halResourceGeneratorInstance = $halResourceGenerator($container);
-        $halResponseFactory = $container->get(
-            \Zend\Expressive\Hal\HalResponseFactory::class
-        );
-        $translator = $container->get(Translator::class);
 
         return new GetFolderUserAction(
-            $folderUserFacade,
-            $folderFacade,
-            $userFacade,
-            $translator,
-            $halResourceGeneratorInstance,
-            $halResponseFactory
+            $container->get(FolderUserFacade::class),
+            $container->get(FolderFacade::class),
+            $container->get(UserFacade::class),
+            $container->get(Translator::class),
+            $halResourceGenerator($container),
+            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class)
         );
     }
 }

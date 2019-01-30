@@ -21,16 +21,10 @@ class AuthorizationUpdateTokenFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $problemDetailsFactory = $container->get(
-            ProblemDetailsResponseFactory::class
-        );
-        $authenticationConfig = $container->get('config')['authentication'];
-        $tokenUserFacade = $container->get(TokenUserFacade::class);
-
         return new AuthorizationUpdateToken(
-            $problemDetailsFactory,
-            $authenticationConfig,
-            $tokenUserFacade
+            $container->get(ProblemDetailsResponseFactory::class),
+            $container->get('config')['authentication'],
+            $container->get(TokenUserFacade::class)
         );
     }
 }

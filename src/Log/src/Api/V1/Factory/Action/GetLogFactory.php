@@ -21,16 +21,12 @@ class GetLogFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $logFacade = $container->get(LogFacade::class);
         $halResourceGenerator = new ResourceGeneratorFactory();
-        $halResourceGeneratorInstance = $halResourceGenerator($container);
-        $halResponseFactory = $container->get(
-            \Zend\Expressive\Hal\HalResponseFactory::class
-        );
+
         return new GetLogAction(
-            $logFacade,
-            $halResourceGeneratorInstance,
-            $halResponseFactory
+            $container->get(LogFacade::class),
+            $halResourceGenerator($container),
+            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class)
         );
     }
 }

@@ -26,17 +26,13 @@ class AssertionPluginManagerFactory
         $assertionRegisteredByRoute =
             $assertionConfig['registeredByRoute'] ?? array();
 
-        $entityManager = $container->get(EntityManagerInterface::class);
-        $translator = $container->get(Translator::class);
-        $folderUserFacade = $container->get(FolderUserFacade::class);
-
         return new AssertionPluginManager(
             $container,
             ['factories' => $assertionFactories],
             $assertionRegisteredByRoute,
-            $translator,
-            $folderUserFacade,
-            $entityManager
+            $container->get(Translator::class),
+            $container->get(FolderUserFacade::class),
+            $container->get(EntityManagerInterface::class)
         );
     }
 }

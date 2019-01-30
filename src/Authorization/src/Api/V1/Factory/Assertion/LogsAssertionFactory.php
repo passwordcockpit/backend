@@ -22,20 +22,13 @@ class LogsAssertionFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $translator = $container->get(Translator::class);
-        $folderUserFacade = $container->get(FolderUserFacade::class);
-        $permissionFacade = $container->get(PermissionFacade::class);
-        $passwordFacade = $container->get(PasswordFacade::class);
-        $logFacade = $container->get(LogFacade::class);
-        $entityManager = $container->get(EntityManagerInterface::class);
-
         return new LogsAssertion(
-            $translator,
-            $folderUserFacade,
-            $permissionFacade,
-            $passwordFacade,
-            $logFacade,
-            $entityManager
+            $container->get(Translator::class),
+            $container->get(FolderUserFacade::class),
+            $container->get(PermissionFacade::class),
+            $container->get(PasswordFacade::class),
+            $container->get(LogFacade::class),
+            $container->get(EntityManagerInterface::class)
         );
     }
 }

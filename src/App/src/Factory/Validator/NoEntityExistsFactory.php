@@ -21,7 +21,9 @@ class NoEntityExistsFactory
         $requestedName,
         array $options = null
     ) {
-        $entityManager = $container->get(EntityManagerInterface::class);
-        return new NoEntityExists($options, $entityManager);
+        return new NoEntityExists(
+            $options,
+            $container->get(EntityManagerInterface::class)
+        );
     }
 }

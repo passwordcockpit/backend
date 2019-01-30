@@ -18,9 +18,9 @@ class UsernameListAssertionFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $translator = $container->get(Translator::class);
-        $folderUserFacade = $container->get(FolderUserFacade::class);
-
-        return new UsernameListAssertion($translator, $folderUserFacade);
+        return new UsernameListAssertion(
+            $container->get(Translator::class),
+            $container->get(FolderUserFacade::class)
+        );
     }
 }

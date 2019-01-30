@@ -21,14 +21,12 @@ class UserValidationMiddlewareFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $translator = $container->get(Translator::class);
-
         return new UserValidationMiddleware(
             new InputFilterFactory(
                 $container->get(InputFilterPluginManager::class)
             ),
             $container->get('config')['locale'],
-            $translator
+            $container->get(Translator::class)
         );
     }
 }

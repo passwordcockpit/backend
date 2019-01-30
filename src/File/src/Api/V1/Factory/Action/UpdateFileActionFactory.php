@@ -21,33 +21,21 @@ class UpdateFileActionFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $fileFacade = $container->get(FileFacade::class);
-        $passwordFacade = $container->get(PasswordFacade::class);
         $halResourceGenerator = new ResourceGeneratorFactory();
-        $halResourceGeneratorInstance = $halResourceGenerator($container);
-        $uploadConfig = $container->get("config")['upload_config'];
-        $translator = $container->get(Translator::class);
-        $entityManager = $container->get(EntityManagerInterface::class);
-        $fileCipher = new FileCipher();
-        $encriptionKey = $container->get("config")['block_cipher']['key'];
 
         $resourceGenerator = new ResourceGeneratorFactory();
-        $resourceGeneratorInstance = $resourceGenerator($container);
-        $halResponseFactory = $container->get(
-            \Zend\Expressive\Hal\HalResponseFactory::class
-        );
 
         return new UpdateFileAction(
-            $fileFacade,
-            $passwordFacade,
-            $halResourceGeneratorInstance,
-            $uploadConfig,
-            $translator,
-            $entityManager,
-            $fileCipher,
-            $encriptionKey,
-            $resourceGeneratorInstance,
-            $halResponseFactory
+            $container->get(FileFacade::class),
+            $container->get(PasswordFacade::class),
+            $halResourceGenerator($container),
+            $container->get("config")['upload_config'],
+            $container->get(Translator::class),
+            $container->get(EntityManagerInterface::class),
+            new FileCipher(),
+            $container->get("config")['block_cipher']['key'],
+            $resourceGenerator($container),
+            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class)
         );
     }
 }

@@ -22,18 +22,13 @@ class ListPasswordFilesFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $fileFacade = $container->get(FileFacade::class);
-        $passwordFacade = $container->get(PasswordFacade::class);
         $halResourceGenerator = new ResourceGeneratorFactory();
-        $halResourceGeneratorInstance = $halResourceGenerator($container);
-        $halResponseFactory = $container->get(
-            \Zend\Expressive\Hal\HalResponseFactory::class
-        );
+
         return new ListPasswordFilesAction(
-            $fileFacade,
-            $passwordFacade,
-            $halResourceGeneratorInstance,
-            $halResponseFactory
+            $container->get(FileFacade::class),
+            $container->get(PasswordFacade::class),
+            $halResourceGenerator($container),
+            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class)
         );
     }
 }

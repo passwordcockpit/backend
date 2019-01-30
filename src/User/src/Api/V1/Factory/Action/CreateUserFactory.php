@@ -23,18 +23,13 @@ class CreateUserFactory
     //put your code here
     public function __invoke(ContainerInterface $container)
     {
-        $userFacade = $container->get(UserFacade::class);
-        $permissionFacade = $container->get(PermissionFacade::class);
         $halResourceGenerator = new ResourceGeneratorFactory();
-        $halResourceGeneratorInstance = $halResourceGenerator($container);
-        $halResponseFactory = $container->get(
-            \Zend\Expressive\Hal\HalResponseFactory::class
-        );
+
         return new CreateUserAction(
-            $userFacade,
-            $permissionFacade,
-            $halResourceGeneratorInstance,
-            $halResponseFactory
+            $container->get(UserFacade::class),
+            $container->get(PermissionFacade::class),
+            $halResourceGenerator($container),
+            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class)
         );
     }
 }

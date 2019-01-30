@@ -8,8 +8,6 @@ class CorsMiddlewareFactory
 {
     public function __invoke($container)
     {
-        $addrConfig = $container->get('config')['client_address'];
-
-        return new CorsMiddleware($addrConfig);
+        return new CorsMiddleware($container->get('config')['client_address']);
     }
 }

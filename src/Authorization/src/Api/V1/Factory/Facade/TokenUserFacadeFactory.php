@@ -23,8 +23,8 @@ class TokenUserFacadeFactory
      */
     public function __invoke(ContainerInterface $container)
     {
-        $entityManager = $container->get(EntityManagerInterface::class);
-
-        return new TokenUserFacade($entityManager);
+        return new TokenUserFacade(
+            $container->get(EntityManagerInterface::class)
+        );
     }
 }

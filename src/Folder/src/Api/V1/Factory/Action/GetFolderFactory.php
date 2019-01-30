@@ -23,17 +23,13 @@ class GetFolderFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $folderUserFacade = $container->get(FolderUserFacade::class);
-        $folderFacade = $container->get(FolderFacade::class);
-
         $halResourceGenerator = new ResourceGeneratorFactory();
-        $halResourceGeneratorInstance = $halResourceGenerator($container);
-        $halFactory = $container->get(HalResponseFactory::class);
+
         return new GetFolderAction(
-            $folderUserFacade,
-            $folderFacade,
-            $halResourceGeneratorInstance,
-            $halFactory
+            $container->get(FolderUserFacade::class),
+            $container->get(FolderFacade::class),
+            $halResourceGenerator($container),
+            $container->get(HalResponseFactory::class)
         );
     }
 }

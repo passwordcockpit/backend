@@ -19,14 +19,10 @@ class ManagePasswordAssertionFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $entityManager = $container->get(EntityManagerInterface::class);
-        $translator = $container->get(Translator::class);
-        $folderUserFacade = $container->get(FolderUserFacade::class);
-
         return new ManagePasswordAssertion(
-            $entityManager,
-            $translator,
-            $folderUserFacade
+            $container->get(EntityManagerInterface::class),
+            $container->get(Translator::class),
+            $container->get(FolderUserFacade::class)
         );
     }
 }

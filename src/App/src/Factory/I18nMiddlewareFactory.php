@@ -18,10 +18,8 @@ class I18nMiddlewareFactory
      */
     public function __invoke(ContainerInterface $container)
     {
-        $translator = $container->get(Translator::class);
-
         return new \App\Middleware\I18nMiddleware(
-            $translator,
+            $container->get(Translator::class),
             $container->get("config")['locale']
         );
     }

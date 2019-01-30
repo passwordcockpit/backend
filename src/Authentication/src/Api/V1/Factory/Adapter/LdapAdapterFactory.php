@@ -10,9 +10,9 @@ class LdapAdapterFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $userFacade = $container->get(UserFacade::class);
-        $ldapConfig = $container->get('config')['ldap'];
-
-        return new LdapAdapter($userFacade, $ldapConfig);
+        return new LdapAdapter(
+            $container->get(UserFacade::class),
+            $container->get('config')['ldap']
+        );
     }
 }

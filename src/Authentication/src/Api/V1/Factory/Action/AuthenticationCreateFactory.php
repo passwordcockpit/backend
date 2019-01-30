@@ -20,20 +20,14 @@ class AuthenticationCreateFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $authenticationConfig = $container->get('config')['authentication'];
-        $translator = $container->get(Translator::class);
-        $authenticationAdapter = $container->get(
-            \Zend\Authentication\Adapter\AdapterInterface::class
-        );
-        $tokenUserFacade = $container->get(TokenUserFacade::class);
-        $loginRequestFacade = $container->get(LoginRequestFacade::class);
-
         return new AuthenticationCreateAction(
-            $authenticationConfig,
-            $translator,
-            $authenticationAdapter,
-            $tokenUserFacade,
-            $loginRequestFacade
+            $container->get('config')['authentication'],
+            $container->get(Translator::class),
+            $container->get(
+                \Zend\Authentication\Adapter\AdapterInterface::class
+            ),
+            $container->get(TokenUserFacade::class),
+            $container->get(LoginRequestFacade::class)
         );
     }
 }

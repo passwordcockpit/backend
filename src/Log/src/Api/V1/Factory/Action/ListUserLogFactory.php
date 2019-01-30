@@ -21,18 +21,13 @@ class ListUserLogFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $logFacade = $container->get(LogFacade::class);
         $halResourceGenerator = new ResourceGeneratorFactory();
-        $halResourceGeneratorInstance = $halResourceGenerator($container);
-        $halResponseFactory = $container->get(
-            \Zend\Expressive\Hal\HalResponseFactory::class
-        );
-        $paginatorConfig = $container->get("config")['paginator_config'];
+
         return new ListUserLogAction(
-            $logFacade,
-            $halResourceGeneratorInstance,
-            $halResponseFactory,
-            $paginatorConfig
+            $container->get(LogFacade::class),
+            $halResourceGenerator($container),
+            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class),
+            $container->get("config")['paginator_config']
         );
     }
 }

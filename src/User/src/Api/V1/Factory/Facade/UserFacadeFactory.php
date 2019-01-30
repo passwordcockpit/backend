@@ -21,8 +21,9 @@ class UserFacadeFactory
     //put your code here
     public function __invoke(ContainerInterface $container)
     {
-        $entityManager = $container->get(EntityManagerInterface::class);
-        $translator = $container->get(Translator::class);
-        return new UserFacade($entityManager, $translator);
+        return new UserFacade(
+            $container->get(EntityManagerInterface::class),
+            $container->get(Translator::class)
+        );
     }
 }

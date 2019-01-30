@@ -21,22 +21,15 @@ class DownloadFileFactory
     public function __invoke(ContainerInterface $container)
     {
         $resourceGenerator = new ResourceGeneratorFactory();
-        $resourceGeneratorInstance = $resourceGenerator($container);
-        $halResponseFactory = $container->get(
-            \Zend\Expressive\Hal\HalResponseFactory::class
-        );
-        $translator = $container->get(Translator::class);
-        $uploadConfig = $container->get("config")['upload_config'];
-        $fileCipher = new FileCipher();
-        $encriptionKey = $container->get("config")['block_cipher']['key'];
+
         return new DownloadFileAction(
-            $resourceGeneratorInstance,
-            $halResponseFactory,
+            $resourceGenerator($container),
+            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class),
             $container->get(FileFacade::class),
-            $translator,
-            $uploadConfig,
-            $fileCipher,
-            $encriptionKey
+            $container->get(Translator::class),
+            $container->get("config")['upload_config'],
+            new FileCipher(),
+            $container->get("config")['block_cipher']['key']
         );
     }
 }

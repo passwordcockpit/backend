@@ -21,12 +21,11 @@ class DeleteFolderFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $folderFacade = $container->get(FolderFacade::class);
         $halResourceGenerator = new ResourceGeneratorFactory();
-        $halResourceGeneratorInstance = $halResourceGenerator($container);
+
         return new DeleteFolderAction(
-            $folderFacade,
-            $halResourceGeneratorInstance
+            $container->get(FolderFacade::class),
+            $halResourceGenerator($container)
         );
     }
 }

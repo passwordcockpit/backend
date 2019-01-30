@@ -27,28 +27,19 @@ class PasswordFacadeFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $entityManager = $container->get(EntityManagerInterface::class);
-        $translator = $container->get(Translator::class);
-        $blockCipher = BlockCipher::factory(
-            $container->get("config")['block_cipher']['encryption_library'],
-            $container->get("config")['block_cipher']['algorithms']
-        );
-        $fileCipher = new FileCipher();
-        $encriptionKey = $container->get("config")['block_cipher']['key'];
-        $folderFacade = $container->get(FolderFacade::class);
-        $logFacade = $container->get(LogFacade::class);
-        $fileFacade = $container->get(FileFacade::class);
-        $uploadConfig = $container->get("config")['upload_config'];
         return new PasswordFacade(
-            $entityManager,
-            $translator,
-            $blockCipher,
-            $fileCipher,
-            $encriptionKey,
-            $folderFacade,
-            $logFacade,
-            $fileFacade,
-            $uploadConfig
+            $container->get(EntityManagerInterface::class),
+            $container->get(Translator::class),
+            BlockCipher::factory(
+                $container->get("config")['block_cipher']['encryption_library'],
+                $container->get("config")['block_cipher']['algorithms']
+            ),
+            new FileCipher(),
+            $container->get("config")['block_cipher']['key'],
+            $container->get(FolderFacade::class),
+            $container->get(LogFacade::class),
+            $container->get(FileFacade::class),
+            $container->get("config")['upload_config']
         );
     }
 }

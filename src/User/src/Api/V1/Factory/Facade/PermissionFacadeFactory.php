@@ -22,9 +22,10 @@ class PermissionFacadeFactory
     //put your code here
     public function __invoke(ContainerInterface $container)
     {
-        $entityManager = $container->get(EntityManagerInterface::class);
-        $translator = $container->get(Translator::class);
-        $userFacade = $container->get(UserFacade::class);
-        return new PermissionFacade($entityManager, $translator, $userFacade);
+        return new PermissionFacade(
+            $container->get(EntityManagerInterface::class),
+            $container->get(Translator::class),
+            $container->get(UserFacade::class)
+        );
     }
 }

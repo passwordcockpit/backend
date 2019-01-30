@@ -17,8 +17,6 @@ class AuthorizationLogoutFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $tokenUserFacade = $container->get(TokenUserFacade::class);
-
-        return new AuthorizationLogout($tokenUserFacade);
+        return new AuthorizationLogout($container->get(TokenUserFacade::class));
     }
 }

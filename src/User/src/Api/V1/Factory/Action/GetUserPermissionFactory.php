@@ -22,18 +22,13 @@ class GetUserPermissionFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $userFacade = $container->get(UserFacade::class);
-        $permissionFacade = $container->get(PermissionFacade::class);
         $halResourceGenerator = new ResourceGeneratorFactory();
-        $halResourceGeneratorInstance = $halResourceGenerator($container);
-        $halResponseFactory = $container->get(
-            \Zend\Expressive\Hal\HalResponseFactory::class
-        );
+
         return new GetUserPermissionAction(
-            $userFacade,
-            $halResourceGeneratorInstance,
-            $halResponseFactory,
-            $permissionFacade
+            $container->get(UserFacade::class),
+            $halResourceGenerator($container),
+            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class),
+            $container->get(PermissionFacade::class)
         );
     }
 }

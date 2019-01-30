@@ -21,8 +21,9 @@ class LogFacadeFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $entityManager = $container->get(EntityManagerInterface::class);
-        $translator = $container->get(Translator::class);
-        return new LogFacade($entityManager, $translator);
+        return new LogFacade(
+            $container->get(EntityManagerInterface::class),
+            $container->get(Translator::class)
+        );
     }
 }

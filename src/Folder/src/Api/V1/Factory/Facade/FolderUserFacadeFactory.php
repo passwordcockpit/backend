@@ -22,15 +22,11 @@ class FolderUserFacadeFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $entityManager = $container->get(EntityManagerInterface::class);
-        $translator = $container->get(Translator::class);
-        $userFacade = $container->get(UserFacade::class);
-        $folderFacade = $container->get(FolderFacade::class);
         return new FolderUserFacade(
-            $entityManager,
-            $translator,
-            $userFacade,
-            $folderFacade
+            $container->get(EntityManagerInterface::class),
+            $container->get(Translator::class),
+            $container->get(UserFacade::class),
+            $container->get(FolderFacade::class)
         );
     }
 }
