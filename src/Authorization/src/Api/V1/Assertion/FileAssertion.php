@@ -50,6 +50,13 @@ class FileAssertion implements AssertionInterface
 
     protected $user;
 
+    /**
+     * Constructor
+     *
+     * @param EntityManager $entityManager
+     * @param Translator $translator
+     * @param FolderUserFacade $folderUserFacade
+     */
     public function __construct(
         EntityManager $entityManager,
         Translator $translator,
@@ -74,6 +81,15 @@ class FileAssertion implements AssertionInterface
         $this->user = $user;
     }
 
+    /**
+     * Function that gets called by the interface
+     *
+     * @param Rbac $rbac
+     * @param RoleInterface $role
+     * @param string $permission
+     *
+     * @return bool
+     */
     public function assert(
         \Zend\Permissions\Rbac\Rbac $rbac,
         RoleInterface $role,

@@ -86,6 +86,8 @@ class DeleteFolderUserAction implements RequestHandlerInterface
      *
      * @param FolderFacade $folderFacade
      * @param ResourceGenerator $halResourceGenerator
+     * @param UserFacade $useFacade
+     * @param FolderUserFacade $folderUserFacade
      */
     public function __construct(
         FolderFacade $folderFacade,
@@ -105,7 +107,7 @@ class DeleteFolderUserAction implements RequestHandlerInterface
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $folder = $this->folderFacade->get($request->getAttribute('folderId'));
         $user = $this->userFacade->get($request->getAttribute('userId'));

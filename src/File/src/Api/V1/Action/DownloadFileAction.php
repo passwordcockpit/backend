@@ -95,6 +95,10 @@ class DownloadFileAction implements RequestHandlerInterface
      * @param ResourceGenerator $resourceGeneratorInstance
      * @param HalResponseFactory $halResponseFactory
      * @param FileFacade $fileFacade
+     * @param Translator $translator
+     * @param array $uploadconfig
+     * @param FileCipher $fileCipher
+     * @param string $encriptionkey
      */
     public function __construct(
         ResourceGenerator $resourceGeneratorInstance,

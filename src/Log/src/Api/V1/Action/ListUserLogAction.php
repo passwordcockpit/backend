@@ -73,8 +73,10 @@ class ListUserLogAction implements RequestHandlerInterface
     /**
      * Constructor
      *
+     * @param LogFacade $logFacade
      * @param PasswordFacade $passwordFacade
      * @param ResourceGenerator $halResourceGenerator
+     * @param array $paginatorCofig
      */
     public function __construct(
         LogFacade $logFacade,
@@ -94,7 +96,7 @@ class ListUserLogAction implements RequestHandlerInterface
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $userId = $request->getAttribute('id');
         $logs = $this->logFacade->getUserLog($userId);

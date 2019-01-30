@@ -77,7 +77,9 @@ class GetPasswordAction implements RequestHandlerInterface
      * Constructor
      *
      * @param PasswordFacade $passwordFacade
+     * @param FileFacade $fileFacade
      * @param ResourceGenerator $halResourceGenerator
+     * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
         PasswordFacade $passwordFacade,

@@ -68,6 +68,7 @@ class GetLogAction implements RequestHandlerInterface
      *
      * @param PasswordFacade $passwordFacade
      * @param ResourceGenerator $halResourceGenerator
+     * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
         LogFacade $logFacade,
@@ -85,7 +86,7 @@ class GetLogAction implements RequestHandlerInterface
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $logId = $request->getAttribute('id');
         $log = $this->logFacade->getLog($logId);

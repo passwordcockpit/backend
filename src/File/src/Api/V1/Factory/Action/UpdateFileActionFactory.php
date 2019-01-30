@@ -27,14 +27,11 @@ class UpdateFileActionFactory
      */
     public function __invoke(ContainerInterface $container)
     {
-        $halResourceGenerator = new ResourceGeneratorFactory();
-
         $resourceGenerator = new ResourceGeneratorFactory();
 
         return new UpdateFileAction(
             $container->get(FileFacade::class),
             $container->get(PasswordFacade::class),
-            $halResourceGenerator($container),
             $container->get("config")['upload_config'],
             $container->get(Translator::class),
             $container->get(EntityManagerInterface::class),

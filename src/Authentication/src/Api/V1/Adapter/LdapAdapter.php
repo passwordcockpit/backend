@@ -7,6 +7,7 @@ use Zend\Authentication\Result;
 use Zend\Authentication\Adapter\Ldap;
 use User\Api\V1\Facade\UserFacade;
 use User\Api\V1\Entity\User;
+use Doctrine\ORM\EntityManager;
 
 class LdapAdapter implements AdapterInterface
 {
@@ -31,7 +32,7 @@ class LdapAdapter implements AdapterInterface
     private $ldapConfig;
 
     /**
-     * @var EntityManagerInterface $entitymanager
+     * @var EntityManager $entitymanager
      */
     private $entityManager;
 
@@ -41,8 +42,11 @@ class LdapAdapter implements AdapterInterface
      * @param UserFacade $userFacade
      * @param array $ldapConfig
      */
-    public function __construct(UserFacade $userFacade, $ldapConfig)
-    {
+    public function __construct(
+        UserFacade $userFacade,
+        $ldapConfig,
+        $entityManager
+    ) {
         $this->userFacade = $userFacade;
         $this->ldapConfig = $ldapConfig;
         $this->entityManager = $entityManager;

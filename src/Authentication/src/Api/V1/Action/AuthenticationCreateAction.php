@@ -83,7 +83,10 @@ class AuthenticationCreateAction implements RequestHandlerInterface
 
     /**
      *
-     * @param mixin $config
+     * @param array $config
+     * @param AdapterInterface $adapterInterface
+     * @param TokenUserFacade $tokenUserFacade
+     * @param LoginRequestFacade $loginRequestFacade
      */
     public function __construct(
         $config,
@@ -147,8 +150,10 @@ class AuthenticationCreateAction implements RequestHandlerInterface
         }
         // Is it an ldap authentication?
         $isLdap = false;
-        if (get_class($this->authAdapter) ==
-            'Authentication\Api\V1\Adapter\LdapAdapter') {
+        if (
+            get_class($this->authAdapter) ==
+            'Authentication\Api\V1\Adapter\LdapAdapter'
+        ) {
             $isLdap = true;
         }
 
@@ -172,7 +177,7 @@ class AuthenticationCreateAction implements RequestHandlerInterface
      * @return ResponseInterface
      * @throws ProblemDetailsException
      */
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $payload = $request->getParsedBody();
         $username = $payload["username"];
@@ -211,7 +216,10 @@ class AuthenticationCreateAction implements RequestHandlerInterface
                 $loginRequest = $this->loginRequestFacade->create([
                     "ip" => $_SERVER['REMOTE_ADDR'],
                     "username" => $username,
-                    "attemptDate" => new \Datetime("now", new \DateTimeZone('Europe/Zurich'))
+                    "attemptDate" => new \Datetime(
+                        "now",
+                        new \DateTimeZone('Europe/Zurich')
+                    )
                 ]);
                 throw new ProblemDetailsException(
                     401,

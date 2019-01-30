@@ -77,7 +77,10 @@ class ListFolderAction implements RequestHandlerInterface
      * Constructor
      *
      * @param FolderFacade $folderFacade
+     * @param UserFacade $userFacade
+     * @param PermissionFacade $permissionFacade
      * @param ResourceGenerator $halResourceGenerator
+     * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
         FolderFacade $folderFacade,
@@ -99,7 +102,7 @@ class ListFolderAction implements RequestHandlerInterface
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $queryParams = $request->getQueryParams();
 

@@ -80,7 +80,9 @@ class ListPasswordFilesAction implements RequestHandlerInterface
      * Constructor
      *
      * @param FileFacade $fileFacade
+     * @param PasswordFacade $passwordFacade
      * @param ResourceGenerator $halResourceGenerator
+     * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
         FileFacade $fileFacade,
@@ -100,7 +102,7 @@ class ListPasswordFilesAction implements RequestHandlerInterface
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $passwordId = $request->getAttribute('id');
         $files = $this->fileFacade->getFiles($passwordId);

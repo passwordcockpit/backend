@@ -42,6 +42,7 @@ class AuthenticationMiddleware implements MiddlewareInterface
      *
      * @param Translator $translator
      * @param UserFacade $userFacade
+     * @param TokenUserFacade $tokenUserFacade
      */
     public function __construct(
         Translator $translator,

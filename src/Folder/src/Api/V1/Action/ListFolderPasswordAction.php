@@ -77,7 +77,9 @@ class ListFolderPasswordAction implements RequestHandlerInterface
      * Constructor
      *
      * @param FolderFacade $folderFacade
+     * @param PasswordFacade $passwordFacade
      * @param ResourceGenerator $halResourceGenerator
+     * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
         FolderFacade $folderFacade,
@@ -97,7 +99,7 @@ class ListFolderPasswordAction implements RequestHandlerInterface
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $folderId = $request->getAttribute('id');
         $passwords = $this->passwordFacade->getPasswords($folderId);

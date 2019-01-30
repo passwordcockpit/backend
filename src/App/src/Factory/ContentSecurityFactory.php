@@ -7,6 +7,12 @@ use App\Middleware\ContentSecurityMiddleware;
 
 class ContentSecurityFactory
 {
+    /**
+     * Invoke method, create instance of ContentSecurityMiddleware class
+     *
+     * @param ContainerInterface $container
+     * @return ContentSecurityMiddleware
+     */
     public function __invoke(ContainerInterface $container)
     {
         $config = $container->get('config');

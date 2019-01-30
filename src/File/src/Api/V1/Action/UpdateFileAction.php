@@ -91,12 +91,6 @@ class UpdateFileAction implements RequestHandlerInterface
 
     /**
      *
-     * @var ResourceGenerator
-     */
-    protected $halResourceGenerator;
-
-    /**
-     *
      * @var array
      */
     private $uploadConfig;
@@ -115,13 +109,19 @@ class UpdateFileAction implements RequestHandlerInterface
     /**
      * Constructor
      *
-     * @param File $fileFacade
-     * @param ResourceGenerator $halResourceGenerator
+     * @param FileFacade $fileFacade
+     * @param PasswordFacade $passwordFacade
+     * @param array $uploadConfig
+     * @param Translator $translator
+     * @param EntityManager $entityManager
+     * @param FileCipher $fileCipher
+     * @param string $encriptionkey
+     * @param ResourceGenerator $resourceGeneratorInstance
+     * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
         FileFacade $fileFacade,
         PasswordFacade $passwordFacade,
-        ResourceGenerator $halResourceGenerator,
         $uploadConfig,
         $translator,
         $entityManager,
@@ -132,7 +132,6 @@ class UpdateFileAction implements RequestHandlerInterface
     ) {
         $this->fileFacade = $fileFacade;
         $this->passwordFacade = $passwordFacade;
-        $this->halResourceGenerator = $halResourceGenerator;
         $this->uploadConfig = $uploadConfig;
         $this->translator = $translator;
         $this->entityManager = $entityManager;

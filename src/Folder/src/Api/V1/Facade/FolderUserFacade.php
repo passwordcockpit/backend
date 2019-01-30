@@ -54,6 +54,7 @@ class FolderUserFacade
      * @param EntityManager $entityManager
      * @param Translator $translator
      * @param UserFacade $userFacade
+     * @param FolderFacade $folderFacade
      */
     public function __construct(
         EntityManager $entityManager,
@@ -67,6 +68,14 @@ class FolderUserFacade
         $this->folderFacade = $folderFacade;
     }
 
+    /**
+     * Return the FolderUser object given a folder and a user
+     *
+     * @param Folder $folder
+     * @param User $user
+     *
+     * @return FolderUser
+     */
     public function getFolderUsers($folder, $user)
     {
         $folderUser = $this->entityManager

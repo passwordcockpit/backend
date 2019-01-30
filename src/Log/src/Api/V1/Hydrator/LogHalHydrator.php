@@ -19,6 +19,11 @@ use Zend\I18n\Translator\Translator;
  */
 class LogHalHydrator extends AbstractHydrator
 {
+    /**
+     * Constructor
+     *
+     * @param Translator $translator
+     */
     function __construct(Translator $translator)
     {
         $this->translator = $translator;

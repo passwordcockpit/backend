@@ -128,6 +128,7 @@ class CreatePasswordAction implements RequestHandlerInterface
      *
      * @param PasswordFacade $passwordFacade
      * @param ResourceGenerator $halResourceGenerator
+     * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
         PasswordFacade $passwordFacade,

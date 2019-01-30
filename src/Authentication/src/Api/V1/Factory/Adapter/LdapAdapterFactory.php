@@ -5,6 +5,7 @@ namespace Authentication\Api\V1\Factory\Adapter;
 use Authentication\Api\V1\Adapter\LdapAdapter;
 use Psr\Container\ContainerInterface;
 use User\Api\V1\Facade\UserFacade;
+use Doctrine\ORM\EntityManagerInterface;
 
 class LdapAdapterFactory
 {
@@ -18,7 +19,8 @@ class LdapAdapterFactory
     {
         return new LdapAdapter(
             $container->get(UserFacade::class),
-            $container->get('config')['ldap']
+            $container->get('config')['ldap'],
+            $container->get(EntityManagerInterface::class)
         );
     }
 }

@@ -71,6 +71,7 @@ class ListFolderUserAction implements RequestHandlerInterface
      *
      * @param FolderUserFacade $folderUserFacade
      * @param ResourceGenerator $halResourceGenerator
+     * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
         FolderUserFacade $folderUserFacade,
@@ -88,7 +89,7 @@ class ListFolderUserAction implements RequestHandlerInterface
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $folderId = $request->getAttribute('id');
         $withoutRights = $request->getQueryParams()['without_rights'] ?? null;

@@ -107,7 +107,10 @@ class UpdateFolderUserAction implements RequestHandlerInterface
      * Constructor
      *
      * @param FolderFacade $folderFacade
+     * @param UserFacade $userFacade
+     * @param FolderUserFacade $folderUserFacade
      * @param ResourceGenerator $halResourceGenerator
+     * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
         FolderFacade $folderFacade,
@@ -131,7 +134,7 @@ class UpdateFolderUserAction implements RequestHandlerInterface
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $folder = $this->folderFacade->get($request->getAttribute('folderId'));
         $user = $this->userFacade->get($request->getAttribute('userId'));

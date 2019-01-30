@@ -33,6 +33,16 @@ class LogsAssertion implements AssertionInterface
     protected $request;
     protected $user;
 
+    /**
+     * Constructor
+     *
+     * @param Translator $translator
+     * @param FolderUserFacade $folderUserFacade
+     * @param PermissionFacade $permissionFacade
+     * @param PasswordFacade $passwordFacade
+     * @param LogFacade $logFacade
+     * @param EntityManager $entityManager
+     */
     public function __construct(
         Translator $translator,
         FolderUserFacade $folderUserFacade,
@@ -168,6 +178,15 @@ class LogsAssertion implements AssertionInterface
         return false;
     }
 
+    /**
+     * Function that gets called by the interface
+     *
+     * @param Rbac $rbac
+     * @param RoleInterface $role
+     * @param string $permission
+     *
+     * @return bool
+     */
     public function assert(
         \Zend\Permissions\Rbac\Rbac $rbac,
         RoleInterface $role,

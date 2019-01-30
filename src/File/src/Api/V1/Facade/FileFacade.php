@@ -31,6 +31,7 @@ class FileFacade extends AbstractFacade
      * @param \Doctrine\ORM\EntityManager $entityManager
      * @param type entityName
      * @param FileHydrator $fileHydrator
+     * @param array $uploadConfig
      */
     public function __construct(
         Translator $translator,

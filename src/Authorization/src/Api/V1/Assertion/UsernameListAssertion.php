@@ -25,6 +25,12 @@ class UsernameListAssertion implements AssertionInterface
     protected $request;
     protected $user;
 
+    /**
+     * Constructor
+     *
+     * @param Translator $translator
+     * @param FolderUserFacade $folderUserFacade
+     */
     public function __construct(
         Translator $translator,
         FolderUserFacade $folderUserFacade
@@ -47,6 +53,15 @@ class UsernameListAssertion implements AssertionInterface
         $this->user = $user;
     }
 
+    /**
+     * Function that gets called by the interface
+     *
+     * @param Rbac $rbac
+     * @param RoleInterface $role
+     * @param string $permission
+     *
+     * @return bool
+     */
     public function assert(
         \Zend\Permissions\Rbac\Rbac $rbac,
         RoleInterface $role,
