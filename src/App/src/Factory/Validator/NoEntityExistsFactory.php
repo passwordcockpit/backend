@@ -16,6 +16,12 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class NoEntityExistsFactory
 {
+    /**
+     * Invoke method, create instance of NoEntityExists class
+     *
+     * @param ContainerInterface $container
+     * @return NoEntityExists
+     */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,

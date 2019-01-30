@@ -8,6 +8,12 @@ class CorsMiddlewareFactory
 {
     public function __invoke($container)
     {
+        /**
+         * Invoke method, create instance of CorsMiddleware class
+         *
+         * @param ContainerInterface $container
+         * @return CorsMiddleware
+         */
         return new CorsMiddleware($container->get('config')['client_address']);
     }
 }

@@ -18,6 +18,12 @@ use Authentication\Api\V1\Facade\LoginRequestFacade;
 
 class AuthenticationCreateFactory
 {
+    /**
+     * Invoke method, create instance of AuthenticationCreateAction class
+     *
+     * @param ContainerInterface $container
+     * @return AuthenticationCreateAction
+     */
     public function __invoke(ContainerInterface $container)
     {
         return new AuthenticationCreateAction(

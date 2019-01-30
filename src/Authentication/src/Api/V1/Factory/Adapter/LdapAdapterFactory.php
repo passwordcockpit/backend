@@ -8,6 +8,12 @@ use User\Api\V1\Facade\UserFacade;
 
 class LdapAdapterFactory
 {
+    /**
+     * Invoke method, create instance of LdapAdapter class
+     *
+     * @param ContainerInterface $container
+     * @return LdapAdapter
+     */
     public function __invoke(ContainerInterface $container)
     {
         return new LdapAdapter(

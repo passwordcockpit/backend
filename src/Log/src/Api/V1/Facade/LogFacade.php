@@ -149,7 +149,15 @@ class LogFacade
             );
         }
     }
-
+    /**
+     * Create a new Log
+     *
+     * @param int $passwordId
+     * @param string $action
+     * @param int $userId
+     *
+     * @return bool true
+     */
     public function updateLog($passwordId, $action, $userId)
     {
         $log = new Log();
@@ -171,6 +179,9 @@ class LogFacade
     /**
      *
      * Create a log that shows who deleted a password.
+     *
+     * @param int $passwordId
+     * @param User $user
      *
      */
     public function createDeletedLog($passwordId, $user)

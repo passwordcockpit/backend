@@ -17,6 +17,12 @@ use Zend\I18n\Translator\Translator;
 
 class StringParameterValidatorFactory
 {
+    /**
+     * Invoke method, create instance of StringParameterValidator class
+     *
+     * @param ContainerInterface $container
+     * @return StringParameterValidator
+     */
     public function __invoke(ContainerInterface $container)
     {
         return new StringParameterValidator(

@@ -68,6 +68,18 @@ class FileFacade extends AbstractFacade
         return $file;
     }
 
+    /**
+     * Handles check,moving and encrypting files
+     *
+     * @param File $file
+     * @param string $uploadConfig
+     * @param FileCipher $fileCipher
+     * @param string $encriptionkey
+     * @param Password $password
+     *
+     * @return File|Exception
+     *
+     */
     public function handleFile(
         $file,
         $uploadConfig,
@@ -137,6 +149,11 @@ class FileFacade extends AbstractFacade
         }
     }
 
+    /**
+     * Delete the phisical file
+     *
+     * @param File $file
+     */
     private function deleteDiskFile($file)
     {
         // delete fisical file

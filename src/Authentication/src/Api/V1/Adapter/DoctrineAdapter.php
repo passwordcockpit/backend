@@ -42,6 +42,11 @@ class DoctrineAdapter implements AdapterInterface
         $this->username = $username;
     }
 
+    /**
+     * Function called by the adapter
+     *
+     * @return Result
+     */
     public function authenticate()
     {
         $user = $this->entityManager

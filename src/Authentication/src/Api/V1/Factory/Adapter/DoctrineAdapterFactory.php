@@ -10,6 +10,12 @@ class DoctrineAdapterFactory
 {
     public function __invoke(ContainerInterface $container)
     {
+        /**
+         * Invoke method, create instance of DoctrineAdapter class
+         *
+         * @param ContainerInterface $container
+         * @return DoctrineAdapter
+         */
         return new DoctrineAdapter(
             $container->get(EntityManagerInterface::class)
         );

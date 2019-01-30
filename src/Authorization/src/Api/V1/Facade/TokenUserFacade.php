@@ -60,6 +60,15 @@ class TokenUserFacade
         return $tokenUser;
     }
 
+    /**
+     * Create a tokenUser
+     *
+     * @param User $user
+     * @param string $token
+     *
+     * @return bool true
+     *
+     */
     public function create($user, $token)
     {
         $tokenUser = new TokenUser();
@@ -75,6 +84,14 @@ class TokenUserFacade
         return true;
     }
 
+    /**
+     * Updates a tokenUser
+     *
+     * @param TokenUser $tokenUser
+     * @param string $token
+     * @param bool $modifyDate
+     *
+     */
     public function updateTokenUser($tokenUser, $token, $modifyDate = true)
     {
         $tokenUser->setToken($token);
@@ -87,6 +104,12 @@ class TokenUserFacade
         $this->entityManager->flush();
     }
 
+    /**
+     * Delete token from a TokenUser
+     *
+     * @param TokenUser $tokenUser
+     *
+     */
     public function deleteToken($tokenUser)
     {
         $tokenUser->setToken(null);
