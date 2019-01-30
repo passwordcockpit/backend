@@ -19,6 +19,21 @@ use Zend\Expressive\Hal\ResourceGenerator;
 use Password\Api\V1\Collection\PasswordCollection;
 use Zend\Expressive\Hal\HalResource;
 
+/**
+ * @SWG\Get(
+ *     path="/v1/passwords",
+ *     tags={"passwords"},
+ *     operationId="listPasswords",
+ *     summary="Get a list of password",
+ *     description="Get a list of passwords. Use ?q=... to search for specific passwords.",
+ *     produces={"application/json"},
+ *     @SWG\Response(
+ *         response=200,
+ *         description="Ok",
+ *     ),
+ * security={{"bearerAuth": {}}}
+ * )
+ */
 class ListPasswordAction implements RequestHandlerInterface
 {
     /**

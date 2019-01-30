@@ -26,17 +26,13 @@ use Zend\Expressive\Hal\HalResponseFactory;
  * @SWG\Get(
  *     path="/v1/folders",
  *     summary="List folders",
- *     description="Returns the list of folders",
+ *     description="Returns the list of folders. Use ?q=... to search for specific folders.",
  *     operationId="listFolders",
  *     produces={"application/json"},
  *     tags={"folders"},
  *     @SWG\Response(
  *         response=200,
  *         description="OK"
- *     ),
- *     @SWG\Response(
- *         response=204,
- *         description="No Content"
  *     ),
  * security={{"bearerAuth": {}}}
  * )

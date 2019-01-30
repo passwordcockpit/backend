@@ -32,7 +32,7 @@ use Authorization\Api\V1\Facade\TokenUserFacade;
 /**
  *
  * @SWG\Post(
- *     path="/auth/update",
+ *     path="/api/v1/token/update",
  *     tags={"authentication"},
  *     operationId="UpdateToken",
  *     summary="Update Token",

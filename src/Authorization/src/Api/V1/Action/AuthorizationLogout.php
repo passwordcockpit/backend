@@ -15,6 +15,26 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Authorization\Api\V1\Facade\TokenUserFacade;
 use Zend\Diactoros\Response\JsonResponse;
 
+/**
+ * @SWG\Delete(
+ *     path="/api/v1/token/logout",
+ *     tags={"authentication"},
+ *     operationId="Logout",
+ *     summary="Delete token in tokenUser table",
+ *     description="When user logs out token is invalidated",
+ *     consumes={"application/json"},
+ *     produces={"application/json"},
+ *     @SWG\Response(
+ *         response=200,
+ *         description="Ok"
+ *     ),
+ *     security={
+ *       {"bearerAuth": {}}
+ *     }
+ * )
+ *
+ */
+
 class AuthorizationLogout implements RequestHandlerInterface
 {
     /**
