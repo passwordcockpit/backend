@@ -40,21 +40,7 @@ class ConfigProvider
 
     public function getDoctrine(): array
     {
-        return [
-            'driver' => [
-                'orm_default' => [
-                    'drivers' => [
-                        'Authorization\Api\V1\Entity' => 'tokenuser'
-                    ]
-                ],
-                'tokenuser' => [
-                    'class' =>
-                        \Doctrine\ORM\Mapping\Driver\AnnotationDriver::class,
-                    'cache' => 'array',
-                    'paths' => __DIR__ . '/Entity'
-                ]
-            ]
-        ];
+        return [];
     }
 
     /**
@@ -69,14 +55,8 @@ class ConfigProvider
             'factories' => [
                 Middleware\AuthorizationMiddleware::class =>
                     Factory\Middleware\AuthorizationMiddlewareFactory::class,
-                Action\AuthorizationUpdateToken::class =>
-                    Factory\Action\AuthorizationUpdateTokenFactory::class,
                 AssertionPluginManager::class =>
-                    Factory\Middleware\AssertionPluginManagerFactory::class,
-                Facade\TokenUserFacade::class =>
-                    Factory\Facade\TokenUserFacadeFactory::class,
-                Action\AuthorizationLogout::class =>
-                    Factory\Action\AuthorizationLogoutFactory::class
+                    Factory\Middleware\AssertionPluginManagerFactory::class
             ]
         ];
     }
@@ -88,19 +68,6 @@ class ConfigProvider
      */
     public function getRoutes(): array
     {
-        return [
-            [
-                'name' => 'api.v1.authorization.update',
-                'path' => '/api/v1/token/update',
-                'middleware' => [Action\AuthorizationUpdateToken::class],
-                'allowed_methods' => ['POST']
-            ],
-            [
-                'name' => 'api.v1.authorization.logout',
-                'path' => '/api/v1/token/logout',
-                'middleware' => [Action\AuthorizationLogout::class],
-                'allowed_methods' => ['DELETE']
-            ]
-        ];
+        return [];
     }
 }

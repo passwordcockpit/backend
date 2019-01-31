@@ -7,10 +7,10 @@
  * @author Davide Bucher <davide.bucher@blackpoints.ch>
  */
 
-namespace Authorization\Api\V1\Facade;
+namespace Authentication\Api\V1\Facade;
 
 use Doctrine\ORM\EntityManager;
-use Authorization\Api\V1\Entity\TokenUser;
+use Authentication\Api\V1\Entity\TokenUser;
 use User\Api\V1\Entity\User;
 
 class TokenUserFacade

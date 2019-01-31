@@ -11,15 +11,15 @@ namespace Authentication\Api\V1\Factory\Middleware;
 use Interop\Container\ContainerInterface;
 use Authentication\Api\V1\Middleware\AuthenticationMiddleware;
 use User\Api\V1\Facade\UserFacade;
-use Authorization\Api\V1\Facade\TokenUserFacade;
+use Authentication\Api\V1\Facade\TokenUserFacade;
 use Zend\I18n\Translator\Translator;
 
 class AuthenticationMiddlewareFactory
 {
     /**
-     * 
+     *
      * Invoke method, create instance of AuthenticationMiddleware class
-     * 
+     *
      * @param ContainerInterface $container
      * @return AuthenticationMiddleware
      */

@@ -7,9 +7,9 @@
  * @author Davide Bucher <davide.bucher@blackpoints.ch>
  */
 
-namespace Authorization\Api\V1\Factory\Facade;
+namespace Authentication\Api\V1\Factory\Facade;
 
-use Authorization\Api\V1\Facade\TokenUserFacade;
+use Authentication\Api\V1\Facade\TokenUserFacade;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Container\ContainerInterface;
 

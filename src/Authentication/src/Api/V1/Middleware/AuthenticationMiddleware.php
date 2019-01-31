@@ -15,7 +15,7 @@ use App\Service\ProblemDetailsException;
 use Psr\Http\Message\ResponseInterface;
 use Zend\I18n\Translator\Translator;
 use User\Api\V1\Facade\UserFacade;
-use Authorization\Api\V1\Facade\TokenUserFacade;
+use Authentication\Api\V1\Facade\TokenUserFacade;
 
 class AuthenticationMiddleware implements MiddlewareInterface
 {

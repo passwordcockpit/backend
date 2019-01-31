@@ -20,7 +20,7 @@ use User\Api\V1\Entity\User;
 use Zend\Expressive\Hal\HalResponseFactory;
 use Firebase\JWT\JWT;
 use Tuupola\Middleware\JwtAuthentication;
-use Authorization\Api\V1\Facade\TokenUserFacade;
+use Authentication\Api\V1\Facade\TokenUserFacade;
 
 /**
  *

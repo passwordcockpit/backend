@@ -7,12 +7,12 @@
  * @author Davide Bucher <davide.bucher@blackpoints.ch>
  */
 
-namespace Authorization\Api\V1\Action;
+namespace Authentication\Api\V1\Action;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Authorization\Api\V1\Facade\TokenUserFacade;
+use Authentication\Api\V1\Facade\TokenUserFacade;
 use Zend\Diactoros\Response\JsonResponse;
 
 /**
@@ -35,7 +35,7 @@ use Zend\Diactoros\Response\JsonResponse;
  *
  */
 
-class AuthorizationLogout implements RequestHandlerInterface
+class AuthenticationLogout implements RequestHandlerInterface
 {
     /**
      *

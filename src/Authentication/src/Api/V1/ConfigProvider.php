@@ -57,7 +57,13 @@ class ConfigProvider
                 "AuthenticationValidationMiddleware" =>
                     Factory\Middleware\AuthenticationValidationMiddlewareFactory::class,
                 Facade\LoginRequestFacade::class =>
-                    Factory\Facade\LoginRequestFacadeFactory::class
+                    Factory\Facade\LoginRequestFacadeFactory::class,
+                Facade\TokenUserFacade::class =>
+                    Factory\Facade\TokenUserFacadeFactory::class,
+                Action\AuthenticationLogout::class =>
+                    Factory\Action\AuthenticationLogoutFactory::class,
+                Action\AuthenticationUpdateToken::class =>
+                    Factory\Action\AuthenticationUpdateTokenFactory::class
             ]
         ];
     }
@@ -77,6 +83,19 @@ class ConfigProvider
                     ]
                 ],
                 'loginrequest' => [
+                    'class' =>
+                        \Doctrine\ORM\Mapping\Driver\AnnotationDriver::class,
+                    'cache' => 'array',
+                    'paths' => __DIR__ . '/Entity'
+                ]
+            ],
+            'driver' => [
+                'orm_default' => [
+                    'drivers' => [
+                        'Authentication\Api\V1\Entity' => 'tokenuser'
+                    ]
+                ],
+                'tokenuser' => [
                     'class' =>
                         \Doctrine\ORM\Mapping\Driver\AnnotationDriver::class,
                     'cache' => 'array',
@@ -102,6 +121,18 @@ class ConfigProvider
                     Action\AuthenticationCreateAction::class
                 ],
                 'allowed_methods' => ['POST']
+            ],
+            [
+                'name' => 'api.v1.authentication.update',
+                'path' => '/api/v1/token/update',
+                'middleware' => [Action\AuthenticationUpdateToken::class],
+                'allowed_methods' => ['POST']
+            ],
+            [
+                'name' => 'api.v1.authentication.logout',
+                'path' => '/api/v1/token/logout',
+                'middleware' => [Action\AuthenticationLogout::class],
+                'allowed_methods' => ['DELETE']
             ]
         ];
     }

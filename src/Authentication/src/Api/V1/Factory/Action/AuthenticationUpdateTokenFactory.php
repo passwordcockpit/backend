@@ -7,27 +7,27 @@
  * @author Davide Bucher <davide.bucher@blackpoints.ch>
  */
 
-namespace Authorization\Api\V1\Factory\Action;
+namespace Authentication\Api\V1\Factory\Action;
 
 use Interop\Container\ContainerInterface;
-use Authorization\Api\V1\Action\AuthorizationUpdateToken;
+use Authentication\Api\V1\Action\AuthenticationUpdateToken;
 use Doctrine\ORM\EntityManagerInterface;
 use User\Api\V1\Facade\UserFacade;
 use User\Api\V1\Facade\PermissionFacade;
 use Zend\ProblemDetails\ProblemDetailsResponseFactory;
-use Authorization\Api\V1\Facade\TokenUserFacade;
+use Authentication\Api\V1\Facade\TokenUserFacade;
 
-class AuthorizationUpdateTokenFactory
+class AuthenticationUpdateTokenFactory
 {
     /**
-     * Invoke method, create instance of AuthorizationUpdateToken class
+     * Invoke method, create instance of AuthenticationUpdateToken class
      *
      * @param ContainerInterface $container
-     * @return AuthorizationUpdateToken
+     * @return AuthenticationUpdateToken
      */
     public function __invoke(ContainerInterface $container)
     {
-        return new AuthorizationUpdateToken(
+        return new AuthenticationUpdateToken(
             $container->get(ProblemDetailsResponseFactory::class),
             $container->get('config')['authentication'],
             $container->get(TokenUserFacade::class)

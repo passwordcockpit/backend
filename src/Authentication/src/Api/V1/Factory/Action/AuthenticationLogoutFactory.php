@@ -7,22 +7,24 @@
  * @author Davide Bucher <davide.bucher@blackpoints.ch>
  */
 
-namespace Authorization\Api\V1\Factory\Action;
+namespace Authentication\Api\V1\Factory\Action;
 
-use Authorization\Api\V1\Action\AuthorizationLogout;
-use Authorization\Api\V1\Facade\TokenUserFacade;
+use Authentication\Api\V1\Action\AuthenticationLogout;
+use Authentication\Api\V1\Facade\TokenUserFacade;
 use Psr\Container\ContainerInterface;
 
-class AuthorizationLogoutFactory
+class AuthenticationLogoutFactory
 {
     /**
-     * Invoke method, create instance of AuthorizationLogout class
+     * Invoke method, create instance of AuthenticationLogout class
      *
      * @param ContainerInterface $container
-     * @return AuthorizationLogout
+     * @return AuthenticationLogout
      */
     public function __invoke(ContainerInterface $container)
     {
-        return new AuthorizationLogout($container->get(TokenUserFacade::class));
+        return new AuthenticationLogout(
+            $container->get(TokenUserFacade::class)
+        );
     }
 }

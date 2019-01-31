@@ -9,7 +9,7 @@
  * @author Davide Bucher <davide.bucher@blackpoints.ch>
  */
 
-namespace Authorization\Api\V1\Hydrator;
+namespace Authentication\Api\V1\Hydrator;
 
 use Zend\Hydrator\AbstractHydrator;
 

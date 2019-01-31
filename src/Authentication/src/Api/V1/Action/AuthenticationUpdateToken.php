@@ -7,7 +7,7 @@
  * @author Davide Bucher <davide.bucher@blackpoints.ch>
  */
 
-namespace Authorization\Api\V1\Action;
+namespace Authentication\Api\V1\Action;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -27,7 +27,7 @@ use Firebase\JWT\BeforeValidException;
 use Firebase\JWT\ExpiredException;
 use Tuupola\Middleware\JwtAuthentication;
 use Zend\ProblemDetails\ProblemDetailsResponseFactory;
-use Authorization\Api\V1\Facade\TokenUserFacade;
+use Authentication\Api\V1\Facade\TokenUserFacade;
 
 /**
  *
@@ -49,7 +49,7 @@ use Authorization\Api\V1\Facade\TokenUserFacade;
  * )
  *
  */
-class AuthorizationUpdateToken implements RequestHandlerInterface
+class AuthenticationUpdateToken implements RequestHandlerInterface
 {
     /**
      *

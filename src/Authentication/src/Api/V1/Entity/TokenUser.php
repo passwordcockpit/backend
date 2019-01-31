@@ -7,7 +7,7 @@
  * @author Davide Bucher <davide.bucher@blackpoints.ch>
  */
 
-namespace Authorization\Api\V1\Entity;
+namespace Authentication\Api\V1\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Swagger\Annotations as SWG;

@@ -12,7 +12,7 @@ use Interop\Container\ContainerInterface;
 use Authentication\Api\V1\Action\AuthenticationCreateAction;
 use Doctrine\ORM\EntityManagerInterface;
 use User\Api\V1\Facade\PermissionFacade;
-use Authorization\Api\V1\Facade\TokenUserFacade;
+use Authentication\Api\V1\Facade\TokenUserFacade;
 use Zend\I18n\Translator\Translator;
 use Authentication\Api\V1\Facade\LoginRequestFacade;
 

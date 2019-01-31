@@ -13,7 +13,7 @@ use Psr\Container\ContainerInterface;
 use User\Api\V1\Facade\UserFacade;
 use Zend\Expressive\Hal\ResourceGeneratorFactory;
 use User\Api\V1\Action\UpdateUserAction;
-use Authorization\Api\V1\Facade\TokenUserFacade;
+use Authentication\Api\V1\Facade\TokenUserFacade;
 
 /**
  * Description of UpdateUserFactory

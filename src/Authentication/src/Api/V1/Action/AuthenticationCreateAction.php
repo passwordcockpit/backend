@@ -18,7 +18,7 @@ use App\Service\ProblemDetailsException;
 use Zend\I18n\Translator\Translator;
 use Zend\Authentication\Adapter\AdapterInterface;
 use Zend\Authentication\Result;
-use Authorization\Api\V1\Facade\TokenUserFacade;
+use Authentication\Api\V1\Facade\TokenUserFacade;
 use Authentication\Api\V1\Facade\LoginRequestFacade;
 
 /**
