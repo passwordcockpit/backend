@@ -12,6 +12,7 @@ $cacheConfig = [
 
 $aggregator = new ConfigAggregator(
     [
+        \Blast\BaseUrl\ConfigProvider::class,
         \Zend\HttpHandlerRunner\ConfigProvider::class,
         \Zend\Expressive\Router\ZendRouter\ConfigProvider::class,
         \Zend\Expressive\Helper\ConfigProvider::class,

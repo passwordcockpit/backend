@@ -73,6 +73,7 @@ class UserFacade
         $user->setEmail($payload['email']);
         $user->setLanguage($payload['language']);
         $user->setEnabled($payload['enabled']);
+        $user->setChangePassword(true);
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();
@@ -293,5 +294,17 @@ class UserFacade
         $securePass = $user->getPassword();
         $check = $bcrypt->verify($password, $securePass);
         return $check;
+    }
+
+    /**
+     * Change the value in the database that check is the user need to change his password to false
+     *
+     * @param User $user
+     */
+    public function userChangedPassword(User $user)
+    {
+        $user->setChangePassword(false);
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
     }
 }

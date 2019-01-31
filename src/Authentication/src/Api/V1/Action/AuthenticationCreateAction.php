@@ -124,6 +124,10 @@ class AuthenticationCreateAction implements RequestHandlerInterface
             $firstTimeLogin = true;
         } else {
             //user already logged in. Modify token and date.
+            if ($user->getChangePassword()) {
+                // also if the user has not changed his password still
+                $firstTimeLogin = true;
+            }
             // since the tokenUser are returned as array we just need the first.
             $this->tokenUserFacade->updateTokenUser($tokenUser[0], $token);
         }
@@ -165,7 +169,8 @@ class AuthenticationCreateAction implements RequestHandlerInterface
                 ->getTimestamp(),
             "data" => [
                 "language" => $user->getLanguage(),
-                "ldap" => $isLdap
+                "ldap" => $isLdap,
+                "change_password" => $user->getChangePassword()
             ],
             "sub" => $user->getUserId()
         ];
@@ -197,11 +202,15 @@ class AuthenticationCreateAction implements RequestHandlerInterface
             $username,
             $timeAgo
         );
+
         if (sizeof($attempts) > $this->config['max_requests_per_hour']) {
             throw new ProblemDetailsException(
                 429,
                 $this->translator->translate('Too many failed login attempts'),
-                $this->translator->translate('Please wait 1 hour'),
+                sprintf(
+                    $this->translator->translate('Please wait %s hour'),
+                    $this->config['max_requests_per_hour']
+                ),
                 'https://httpstatus.es/429'
             );
         }
@@ -246,6 +255,8 @@ class AuthenticationCreateAction implements RequestHandlerInterface
 
             case Result::SUCCESS:
                 $user = $result->getIdentity();
+
+                // create token
                 $token = $this->createToken($user);
 
                 // update the UserToken table, where user_id and token are stored.

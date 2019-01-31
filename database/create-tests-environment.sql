@@ -3,9 +3,9 @@
 -- admin : Admin123!
 -- user : User123!
 -- user2 : User123!
-INSERT INTO user VALUES('1', 'admin', '$2y$10$NpW4tA8NVA68HDXO.p.lFutTbfD1G5Lw9GeR0S3sBuAY3TQ9t4FUO', 'Admin', 'Admin', 'it', '0911234567', 'email@domain.com', '1');
-INSERT INTO user VALUES('2', 'user', '$2y$10$dg4hLL5gBt44OFHtNhnfM.4gpcNUkrZI3r3POfC1Un4w9mAbZaWG6', 'User', 'User', 'it', '0911111111', 'changed@blackpoints.ch', '1');
-INSERT INTO user VALUES('3', 'user2', '$2y$10$dg4hLL5gBt44OFHtNhnfM.4gpcNUkrZI3r3POfC1Un4w9mAbZaWG6', 'User2', 'User2', 'it', '0919998877', 'email@domain2.net', '1');
+INSERT INTO user VALUES('1', 'admin', '$2y$10$NpW4tA8NVA68HDXO.p.lFutTbfD1G5Lw9GeR0S3sBuAY3TQ9t4FUO', 'Admin', 'Admin', 'it', '0911234567', 'email@domain.com', '1','0');
+INSERT INTO user VALUES('2', 'user', '$2y$10$dg4hLL5gBt44OFHtNhnfM.4gpcNUkrZI3r3POfC1Un4w9mAbZaWG6', 'User', 'User', 'it', '0911111111', 'changed@blackpoints.ch', '1','0');
+INSERT INTO user VALUES('3', 'user2', '$2y$10$dg4hLL5gBt44OFHtNhnfM.4gpcNUkrZI3r3POfC1Un4w9mAbZaWG6', 'User2', 'User2', 'it', '0919998877', 'email@domain2.net', '1','0');
 -- PERMISSIONS
 INSERT INTO permission VALUES('1', '1', '1', '1', '1');
 INSERT INTO permission VALUES('2', '0', '0', '0', '0');

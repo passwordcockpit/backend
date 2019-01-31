@@ -103,6 +103,14 @@ class User
     private $enabled;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="change_password", type="boolean", precision=0, scale=0, nullable=false, unique=false)
+     * @SWG\Property(property="change_password", type="boolean", description="Whether a user need to change his password (true) or not (false)")
+     */
+    private $changePassword;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\OneToMany(targetEntity="Folder\Api\V1\Entity\FolderUser", mappedBy="user")
@@ -148,11 +156,21 @@ class User
         $this->folder = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+    /**
+     * Getter for language
+     *
+     * @return string
+     */
     function getLanguage()
     {
         return $this->language;
     }
 
+    /**
+     * Setter for language
+     *
+     * @param string $language
+     */
     function setLanguage($language)
     {
         $this->language = $language;
@@ -375,5 +393,25 @@ class User
     public function getFolder()
     {
         return $this->folder;
+    }
+
+    /**
+     * Getter for changePassword
+     *
+     * @return bool
+     */
+    function getChangePassword()
+    {
+        return $this->changePassword;
+    }
+
+    /**
+     * Setter for changePassword
+     *
+     * @param bool $value
+     */
+    function setChangePassword($value)
+    {
+        $this->changePassword = $value;
     }
 }

@@ -130,7 +130,7 @@ class UpdateUserAction implements RequestHandlerInterface
     // return a new token with the language changed
     // if language is changed, return updated token
     // if language is not changed, return normal token
-    private function updateTokenSpecifics($request, $resource)
+    private function updateTokenSpecifics($request, $resource, $user)
     {
         $token1 = $request->getHeader("Authorization")[0];
         $token = substr($token1, 7);
@@ -157,6 +157,9 @@ class UpdateUserAction implements RequestHandlerInterface
 
         if (isset($specifics['actual_password'])) {
             $this->tokenUserFacade->deleteToken($tokenUser);
+            if ($payLoad->data->change_password == true) {
+                $this->userFacade->userChangedPassword($user);
+            }
             $resource = $resource->withElement("forceLogin", "true");
             return $resource;
         }
@@ -181,7 +184,7 @@ class UpdateUserAction implements RequestHandlerInterface
             ->get(User::class)
             ->setRouteParams(['id' => $user->getUserId()]);
         $resource = $this->halResourceGenerator->fromObject($user, $request);
-        $resource = $this->updateTokenSpecifics($request, $resource);
+        $resource = $this->updateTokenSpecifics($request, $resource, $user);
 
         return $this->halResponseFactory->createResponse($request, $resource);
     }

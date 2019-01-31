@@ -55,6 +55,27 @@ class AuthenticationMiddleware implements MiddlewareInterface
     }
 
     /**
+     * Return true if it's a valid update user request to change password
+     *
+     * @param ServerRequestInterface $request
+     * @param int $userId
+     *
+     * @return bool
+     */
+    public function checkUpdateCall($request, $userId)
+    {
+        if (
+            ($request->getMethod() == 'PUT' ||
+                $request->getMethod() == 'PATCH') &&
+            $request->getRequestTarget() == '/api/v1/users/' . $userId &&
+            isset($request->getParsedBody()['actual_password'])
+        ) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      *
      * @param ServerRequestInterface $request
      * @param RequestHandlerInterface $handler
@@ -83,6 +104,28 @@ class AuthenticationMiddleware implements MiddlewareInterface
                 401,
                 $this->translator->translate('Token is not valid'),
                 $this->translator->translate("Invalid token"),
+                'https://httpstatus.es/401'
+            );
+        }
+        // check if user has still to change his password
+        $changePass = $user->getChangePassword();
+
+        // if user has still to change his password he cannot make request on endpoints
+        // other than the one to update himself.
+        if (
+            $changePass &&
+            //it's not a valid request to change password
+            !$this->checkUpdateCall($request, $userId)
+        ) {
+            throw new ProblemDetailsException(
+                401,
+                sprintf(
+                    $this->translator->translate(
+                        'User %s has not changed his password'
+                    ),
+                    $user->getUsername()
+                ),
+                $this->translator->translate('User not authorized'),
                 'https://httpstatus.es/401'
             );
         }

@@ -60,6 +60,7 @@ use Zend\Expressive\Hal\ResourceGenerator;
  *		@SWG\Property(property="phone", type="string", description="User's phone number"),
  *		@SWG\Property(property="email", type="string", description="User's email"),
  *		@SWG\Property(property="enabled", type="boolean", description="Whether a user is enabled (true) or not (false)")
+ *      @SWG\Property(property="change_password, type="boolean", description="Whether a user needs to change his password (true) or not (false)")
  * )
  */
 class CreateUserAction implements RequestHandlerInterface

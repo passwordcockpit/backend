@@ -34,6 +34,7 @@ class UserHydrator extends AbstractHydrator
             $data['phone'] = $user->getPhone();
             $data['email'] = $user->getEmail();
             $data['language'] = $user->getLanguage();
+            $data['change_password'] = $user->getChangePassword();
         }
         if (!is_null($user->getAccess())) {
             $data['access'] = $user->getAccess();
@@ -78,6 +79,9 @@ class UserHydrator extends AbstractHydrator
         }
         if ($this->isPropertyAvailable('enabled', $data)) {
             $user->setEnabled($data['enabled']);
+        }
+        if ($this->isPropertyAvailable('change_password', $data)) {
+            $user->setChangePassword($data['change_password']);
         }
         return $user;
     }
