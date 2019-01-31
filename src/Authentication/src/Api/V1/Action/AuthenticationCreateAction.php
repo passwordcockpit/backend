@@ -84,6 +84,7 @@ class AuthenticationCreateAction implements RequestHandlerInterface
     /**
      *
      * @param array $config
+     * @param Translator $translator
      * @param AdapterInterface $adapterInterface
      * @param TokenUserFacade $tokenUserFacade
      * @param LoginRequestFacade $loginRequestFacade
