@@ -190,12 +190,12 @@ class AuthenticationCreateAction implements RequestHandlerInterface
         $password = $payload["password"];
 
         // -- IP CHECK FOR REQUESTS ---
-        $timeAgo = new \DateTime("NOW");
-        $timeAgo->modify('- ' . $this->config['attempt_timespan'] . ' hour');
-        $timeAgo = \App\Service\DateConverter::formatDateTime(
-            $timeAgo,
-            'outputDate'
-        );
+        $timeAgo = new \DateTime("NOW", new \DateTimeZone('Europe/Zurich'));
+
+        $timeAgo->modify('- ' . $this->config['attempt_timespan'] . ' minutes');
+
+        $timeAgo = $timeAgo->format('Y-m-d H:i:s');
+
         // get how many failed attempts the ip did on the user the last hour
         $attempts = $this->loginRequestFacade->getLastAttempts(
             $_SERVER['REMOTE_ADDR'],
@@ -203,13 +203,13 @@ class AuthenticationCreateAction implements RequestHandlerInterface
             $timeAgo
         );
 
-        if (sizeof($attempts) > $this->config['max_requests_per_hour']) {
+        if (sizeof($attempts) > $this->config['max_requests_per_timespan']) {
             throw new ProblemDetailsException(
                 429,
                 $this->translator->translate('Too many failed login attempts'),
                 sprintf(
-                    $this->translator->translate('Please wait %s hour'),
-                    $this->config['max_requests_per_hour']
+                    $this->translator->translate('Please wait %s minutes'),
+                    $this->config['attempt_timespan']
                 ),
                 'https://httpstatus.es/429'
             );
