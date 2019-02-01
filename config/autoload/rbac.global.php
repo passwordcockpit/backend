@@ -83,6 +83,7 @@ return [
                 'api.v1.passwords.delete',
                 'api.v1.files.get',
                 'api.v1.upload.files.get',
+                'api.v1.authentication.logout',
                 'api.v1.files.list',
                 'api.v1.authorization.logout',
                 'api.v1.authorization.update',

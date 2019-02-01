@@ -178,13 +178,20 @@ class UpdateUserAction implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $userId = $request->getAttribute('id');
+
         $user = $this->userFacade->update($userId, $request);
         $this->halResourceGenerator
             ->getMetadataMap()
             ->get(User::class)
             ->setRouteParams(['id' => $user->getUserId()]);
         $resource = $this->halResourceGenerator->fromObject($user, $request);
-        $resource = $this->updateTokenSpecifics($request, $resource, $user);
+
+        // if it's an admin that makes the changes, no need to updateTokenSpecifics.
+        $token = $request->getAttribute("token", false);
+        $userCalling = $token['sub'];
+        if ($userCalling == $userId) {
+            $resource = $this->updateTokenSpecifics($request, $resource, $user);
+        }
 
         return $this->halResponseFactory->createResponse($request, $resource);
     }
