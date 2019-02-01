@@ -62,13 +62,17 @@ class AuthenticationMiddleware implements MiddlewareInterface
      *
      * @return bool
      */
-    public function checkUpdateCall($request, $userId)
+    public function isAllowedCall($request, $userId)
     {
         if (
-            ($request->getMethod() == 'PUT' ||
+            //update himself request
+            (($request->getMethod() == 'PUT' ||
                 $request->getMethod() == 'PATCH') &&
-            $request->getRequestTarget() == '/api/v1/users/' . $userId &&
-            isset($request->getParsedBody()['actual_password'])
+                $request->getRequestTarget() == '/api/v1/users/' . $userId &&
+                isset($request->getParsedBody()['actual_password'])) ||
+            //get himself request
+            ($request->getMethod() == 'GET' &&
+                $request->getRequestTarget() == '/api/v1/users/' . $userId)
         ) {
             return true;
         }
@@ -115,7 +119,7 @@ class AuthenticationMiddleware implements MiddlewareInterface
         if (
             $changePass &&
             //it's not a valid request to change password
-            !$this->checkUpdateCall($request, $userId)
+            !$this->isAllowedCall($request, $userId)
         ) {
             throw new ProblemDetailsException(
                 401,
