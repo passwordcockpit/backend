@@ -134,7 +134,7 @@ class UserValidationMiddleware implements MiddlewareInterface
             ],
             [
                 'name' => 'password',
-                'required' => false,
+                'required' => !$this->update,
                 'continue_if_empty' => true,
                 'filters' => [
                     ['name' => \Zend\Filter\StringTrim::class],
