@@ -66,13 +66,15 @@ class AuthenticationMiddleware implements MiddlewareInterface
     {
         if (
             //update himself request
+            //get himself request
             (($request->getMethod() == 'PUT' ||
                 $request->getMethod() == 'PATCH') &&
                 $request->getRequestTarget() == '/api/v1/users/' . $userId &&
                 isset($request->getParsedBody()['actual_password'])) ||
-            //get himself request
             ($request->getMethod() == 'GET' &&
-                $request->getRequestTarget() == '/api/v1/users/' . $userId)
+                $request->getRequestTarget() == '/api/v1/users/' . $userId) ||
+            ($request->getMethod() == 'DELETE' &&
+                $request->getRequestTarget() == '/api/v1/token/logout')
         ) {
             return true;
         }
