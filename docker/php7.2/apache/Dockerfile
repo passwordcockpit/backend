@@ -5,6 +5,7 @@ FROM php:7.2-apache
 ARG PASSWORDCOCKPIT_BACKEND_DEVELOPMENTMODE
 ARG PASSWORDCOCKPIT_BACKEND_VERSION
 # for the container
+ENV PASSWORDCOCKPIT_BACKEND_DEVELOPMENTMODE_FOR_ENTRYPOINT $PASSWORDCOCKPIT_BACKEND_DEVELOPMENTMODE
 ENV PASSWORDCOCKPIT_BACKEND_DATABASE_USERNAME root
 ENV PASSWORDCOCKPIT_BACKEND_DATABASE_PASSWORD password
 ENV PASSWORDCOCKPIT_BACKEND_DATABASE_HOSTNAME 127.0.0.1:3306
@@ -46,15 +47,19 @@ RUN set -ex; \
     libldap2-dev \
     curl \
     ssh-client \
+    libicu-dev \
     git \
+    libzip-dev \
     ; \
     \
     docker-php-ext-configure ldap --with-libdir="lib/$debMultiarch"; \
     # install the PHP extensions we need
     docker-php-ext-install \
     ldap \
+    intl \
     opcache \
     pdo_mysql \
+    zip \
     ; \
     \
     # install composer
