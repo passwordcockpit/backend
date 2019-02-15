@@ -48,6 +48,7 @@ RUN set -ex; \
     ssh-client \
     libicu-dev \
     git \
+    libzip-dev \
     ; \
     \
     docker-php-ext-configure ldap --with-libdir="lib/$debMultiarch"; \
@@ -57,6 +58,7 @@ RUN set -ex; \
     intl \
     opcache \
     pdo_mysql \
+    zip \
     ; \
     \
     # install composer
