@@ -121,7 +121,11 @@ class AuthenticationCreateAction implements RequestHandlerInterface
         // FIRST TIME LOGIN, entry in the table does not exist!
         if ($tokenUser == null) {
             $this->tokenUserFacade->create($user, $token);
-            $firstTimeLogin = true;
+            if(get_class($this->authAdapter) ==
+            'Authentication\Api\V1\Adapter\DoctrineAdapter'){
+                $firstTimeLogin = true;
+            }
+            
         } else {
             //user already logged in. Modify token and date.
             if ($user->getChangePassword()) {
