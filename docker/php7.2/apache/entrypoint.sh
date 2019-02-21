@@ -66,7 +66,7 @@ else
         } >> $filename
     fi
 
-    if [ "${PASSWORDCOCKPIT_BACKEND_AUTHENTICATION_TYPE}" -eq "ldap" ]; then
+    if [ "${PASSWORDCOCKPIT_BACKEND_AUTHENTICATION_TYPE}" == "ldap" ]; then
         filename=config/autoload/authentication.local.php
         if [ ! -e $filename ]; then
             {
