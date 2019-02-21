@@ -66,17 +66,57 @@ else
         } >> $filename
     fi
 
-    filename=config/autoload/authentication.local.php
-    if [ ! -e $filename ]; then
-        {
-            echo "<?php"
-            echo "return ["
-            echo "    'authentication' => ["
-            echo "        'secret_key' => '${PASSWORDCOCKPIT_BACKEND_AUTHENTICATION_SECRET_KEY}'"
-            echo "    ]" 
-            echo "];"
-        } >> $filename
+    if [ "${PASSWORDCOCKPIT_BACKEND_AUTHENTICATION_TYPE}" -eq "ldap" ]; then
+        filename=config/autoload/authentication.local.php
+        if [ ! -e $filename ]; then
+            {
+                echo "<?php"
+                echo "return ["
+                echo "    'authentication' => ["
+                echo "        'secret_key' => '${PASSWORDCOCKPIT_BACKEND_AUTHENTICATION_SECRET_KEY}'"
+                echo "    ]," 
+                echo "    'dependencies' => ["
+                echo "        'factories' => ["
+                echo "            Zend\Authentication\Adapter\AdapterInterface::class =>"
+                echo "                Authentication\Api\V1\Factory\Adapter\LdapAdapterFactory::class"
+                echo "        ]"
+                echo "    ]"
+                echo "];"
+            } >> $filename
+        fi
+
+        filename=config/autoload/ldap.local.php
+        if [ ! -e $filename ]; then
+            {
+                echo "<?php"
+                echo "return ["
+                echo "    'ldap' => ["
+                echo "        'host' => '${PASSWORDCOCKPIT_BACKEND_LDAP_HOST}',"
+                echo "        'port' => ${PASSWORDCOCKPIT_BACKEND_LDAP_PORT},"
+                echo "        'username' => '${PASSWORDCOCKPIT_BACKEND_LDAP_USERNAME}',"
+                echo "        'password' => '${PASSWORDCOCKPIT_BACKEND_LDAP_PASSWORD}',"
+                echo "        'baseDn' => '${PASSWORDCOCKPIT_BACKEND_LDAP_BASEDN}',"
+                echo "        'accountFilterFormat' => '${PASSWORDCOCKPIT_BACKEND_LDAP_ACCOUNTFILTERFORMAT}',"
+                echo "        'bindRequiresDn' => ${PASSWORDCOCKPIT_BACKEND_LDAP_BINDREQUIRESDN}"
+                echo "    ]" 
+                echo "];"
+            } >> $filename
+        fi
+    else
+        filename=config/autoload/authentication.local.php
+        if [ ! -e $filename ]; then
+            {
+                echo "<?php"
+                echo "return ["
+                echo "    'authentication' => ["
+                echo "        'secret_key' => '${PASSWORDCOCKPIT_BACKEND_AUTHENTICATION_SECRET_KEY}'"
+                echo "    ]" 
+                echo "];"
+            } >> $filename
+        fi
     fi
+
+    
 
     filename=config/constants.local.php
     if [ ! -e $filename ]; then
