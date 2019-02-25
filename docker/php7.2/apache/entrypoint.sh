@@ -90,7 +90,7 @@ else
             {
                 echo "<?php"
                 echo "return ["
-                echo "    'ldap' => ["
+                echo "    'ldap' => [["
                 echo "        'host' => '${PASSWORDCOCKPIT_BACKEND_LDAP_HOST}',"
                 echo "        'port' => ${PASSWORDCOCKPIT_BACKEND_LDAP_PORT},"
                 echo "        'username' => '${PASSWORDCOCKPIT_BACKEND_LDAP_USERNAME}',"
@@ -98,7 +98,7 @@ else
                 echo "        'baseDn' => '${PASSWORDCOCKPIT_BACKEND_LDAP_BASEDN}',"
                 echo "        'accountFilterFormat' => '${PASSWORDCOCKPIT_BACKEND_LDAP_ACCOUNTFILTERFORMAT}',"
                 echo "        'bindRequiresDn' => ${PASSWORDCOCKPIT_BACKEND_LDAP_BINDREQUIRESDN}"
-                echo "    ]" 
+                echo "    ]]" 
                 echo "];"
             } >> $filename
         fi
