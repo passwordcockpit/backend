@@ -121,14 +121,24 @@ class AuthenticationCreateAction implements RequestHandlerInterface
         // FIRST TIME LOGIN, entry in the table does not exist!
         if ($tokenUser == null) {
             $this->tokenUserFacade->create($user, $token);
-            if(get_class($this->authAdapter) ==
-            'Authentication\Api\V1\Adapter\DoctrineAdapter'){
+            if (
+                get_class($this->authAdapter) ==
+                'Authentication\Api\V1\Adapter\DoctrineAdapter'
+            ) {
                 $firstTimeLogin = true;
+            } elseif (
+                get_class($this->authAdapter) ==
+                'Authentication\Api\V1\Adapter\LdapAdapter'
+            ) {
+                $firstTimeLogin = false;
             }
-            
         } else {
             //user already logged in. Modify token and date.
-            if ($user->getChangePassword()) {
+            if (
+                $user->getChangePassword() &&
+                get_class($this->authAdapter) !=
+                    'Authentication\Api\V1\Adapter\LdapAdapter'
+            ) {
                 // also if the user has not changed his password still
                 $firstTimeLogin = true;
             }
@@ -157,13 +167,17 @@ class AuthenticationCreateAction implements RequestHandlerInterface
         if (isset($this->config['secret_key'])) {
             $secretKey = $this->config['secret_key'];
         }
+
+        $userChangePassword = $user->getChangePassword();
         // Is it an ldap authentication?
         $isLdap = false;
         if (
             get_class($this->authAdapter) ==
             'Authentication\Api\V1\Adapter\LdapAdapter'
         ) {
+            //with ldap active there is no need change password
             $isLdap = true;
+            $userChangePassword = false;
         }
 
         $tokenPayload = [
@@ -174,7 +188,7 @@ class AuthenticationCreateAction implements RequestHandlerInterface
             "data" => [
                 "language" => $user->getLanguage(),
                 "ldap" => $isLdap,
-                "change_password" => $user->getChangePassword()
+                "change_password" => $userChangePassword
             ],
             "sub" => $user->getUserId()
         ];

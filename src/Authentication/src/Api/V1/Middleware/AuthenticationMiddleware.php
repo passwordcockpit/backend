@@ -16,6 +16,7 @@ use Psr\Http\Message\ResponseInterface;
 use Zend\I18n\Translator\Translator;
 use User\Api\V1\Facade\UserFacade;
 use Authentication\Api\V1\Facade\TokenUserFacade;
+use Zend\Authentication\Adapter\AdapterInterface;
 
 class AuthenticationMiddleware implements MiddlewareInterface
 {
@@ -38,20 +39,29 @@ class AuthenticationMiddleware implements MiddlewareInterface
     private $tokenUserFacade;
 
     /**
+     *
+     * @var AdapterInterface
+     */
+    private $authAdapter;
+
+    /**
      * Constructor
      *
      * @param Translator $translator
      * @param UserFacade $userFacade
+     * @param AdapterInterface $authAdapter
      * @param TokenUserFacade $tokenUserFacade
      */
     public function __construct(
         Translator $translator,
         UserFacade $userFacade,
-        TokenUserFacade $tokenUserFacade
+        TokenUserFacade $tokenUserFacade,
+        AdapterInterface $authAdapter
     ) {
         $this->translator = $translator;
         $this->userFacade = $userFacade;
         $this->tokenUserFacade = $tokenUserFacade;
+        $this->authAdapter = $authAdapter;
     }
 
     /**
@@ -119,9 +129,12 @@ class AuthenticationMiddleware implements MiddlewareInterface
         // if user has still to change his password he cannot make request on endpoints
         // other than the one to update himself.
         if (
-            $changePass &&
             //it's not a valid request to change password
-            !$this->isAllowedCall($request, $userId)
+            $changePass &&
+            !$this->isAllowedCall($request, $userId) &&
+            //it's not an ldap
+            get_class($this->authAdapter) !=
+                'Authentication\Api\V1\Adapter\LdapAdapter'
         ) {
             throw new ProblemDetailsException(
                 401,

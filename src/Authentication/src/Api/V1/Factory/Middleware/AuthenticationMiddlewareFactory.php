@@ -28,7 +28,10 @@ class AuthenticationMiddlewareFactory
         return new AuthenticationMiddleware(
             $container->get(Translator::class),
             $container->get(UserFacade::class),
-            $container->get(TokenUserFacade::class)
+            $container->get(TokenUserFacade::class),
+            $container->get(
+                \Zend\Authentication\Adapter\AdapterInterface::class
+            )
         );
     }
 }
