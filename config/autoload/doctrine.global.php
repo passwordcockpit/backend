@@ -37,6 +37,11 @@ return [
             'types' => [
                 'enum' => 'string'
             ]
+        ],
+        'configuration' => [
+            'orm_default' => [
+                'auto_generate_proxy_classes' => false
+            ]
         ]
     ]
 ];

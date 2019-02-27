@@ -129,6 +129,7 @@ else
 
     # database schema
     vendor/bin/doctrine orm:schema-tool:create
+    vendor/bin/doctrine orm:generate-proxies
     echo >&2 "DB schema created"
 
     if [ "${PASSWORDCOCKPIT_BACKEND_DEVELOPMENTMODE_FOR_ENTRYPOINT}" -eq "1" ]; then
