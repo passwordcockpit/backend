@@ -111,8 +111,9 @@ class AuthenticationMiddleware implements MiddlewareInterface
         $user = $this->userFacade->get($userId);
 
         $tokenUser = $this->tokenUserFacade->getByUserId($userId)[0];
+        //Get token from header because it's encoded
         $token1 = $request->getHeader("Authorization")[0];
-
+        // Remove Bearer
         $tok = substr($token1, 7);
         // check if the token on the tokenUser table matches the one sent.
         if ($tokenUser == null || $tokenUser->getToken() != $tok) {
