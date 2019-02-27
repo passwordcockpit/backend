@@ -198,6 +198,20 @@ class UserFacade
                 $user->setUsername($payload['username']);
             }
             if (isset($payload['password'])) {
+                // checking ldap info. If active user can't change password.
+                $token = $request->getAttribute("token", false);
+                $authType = $token["data"]["ldap"];
+
+                if ($authType) {
+                    throw new ProblemDetailsException(
+                        400,
+                        'Ldap is active, it is not possible to change password',
+                        $this->translator->translate('Bad Request'),
+                        'https://httpstatus.es/400'
+                    );
+                    return $response;
+                }
+
                 // Bcrypt della password ---
                 $bcrypt = new \Zend\Crypt\Password\Bcrypt();
                 $bcryptedPassword = $bcrypt->create($payload['password']);
@@ -228,6 +242,7 @@ class UserFacade
                             'https://httpstatus.es/400'
                         );
                     }
+                    //here
                     // check actual password
                     if (
                         $this->checkPassword($user, $payload['actual_password'])

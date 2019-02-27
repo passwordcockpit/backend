@@ -25,6 +25,7 @@ use Zend\Expressive\Router\Middleware\DispatchMiddleware;
 use Tuupola\Middleware\JwtAuthentication;
 use App\Middleware\I18nMiddleware;
 use App\Middleware\CorsMiddleware;
+use App\Middleware\TokenArrayMiddleware;
 use App\Middleware\StrictTransportSecurityMiddleware;
 use Blast\BaseUrl\BaseUrlMiddleware;
 use App\Middleware\ContentSecurityMiddleware;
@@ -66,6 +67,7 @@ class ApplicationDelegatorFactory
         $app->pipe(UrlHelperMiddleware::class);
 
         $app->pipe(JwtAuthentication::class);
+        $app->pipe(TokenArrayMiddleware::class);
 
         $app->pipe(AuthenticationMiddleware::class);
         // Translator
