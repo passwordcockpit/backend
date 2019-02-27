@@ -170,19 +170,6 @@ class UpdatePasswordAction implements RequestHandlerInterface
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        // checking ldap info
-        $token = $request->getAttribute("token", false);
-        $authType = $token->data->ldap;
-
-        if ($authType) {
-            $response = $this->problemDetailsFactory->createResponse(
-                $request,
-                400,
-                'Ldap is active, it is not possible to change password'
-            );
-            return $response;
-        }
-
         $this->passwordFacade->setUserId(
             $request->getAttribute("token", false)['sub']
         );
