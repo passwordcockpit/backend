@@ -27,7 +27,7 @@ class ConfigProvider
      *
      * @return array
      */
-    public function __invoke() : array
+    public function __invoke(): array
     {
         return [
             'dependencies' => $this->getDependencies(),
@@ -37,7 +37,7 @@ class ConfigProvider
         ];
     }
 
-    public function getDoctrine() : array
+    public function getDoctrine(): array
     {
         return [
             'driver' => [
@@ -61,7 +61,7 @@ class ConfigProvider
      *
      * @return array
      */
-    public function getDependencies() : array
+    public function getDependencies(): array
     {
         return [
             'invokables' => [],
@@ -74,6 +74,8 @@ class ConfigProvider
                     Factory\Action\CreatePasswordFactory::class,
                 Action\UpdatePasswordAction::class =>
                     Factory\Action\UpdatePasswordFactory::class,
+                Action\MovePasswordAction::class =>
+                    Factory\Action\MovePasswordFactory::class,
                 Facade\PasswordFacade::class =>
                     Factory\Facade\PasswordFacadeFactory::class,
                 Action\DeletePasswordAction::class =>
@@ -93,7 +95,7 @@ class ConfigProvider
      *
      * @return array
      */
-    public function getMetadataMap() : array
+    public function getMetadataMap(): array
     {
         return [
             [
@@ -118,7 +120,7 @@ class ConfigProvider
      *
      * @return array
      */
-    public function getRoutes() : array
+    public function getRoutes(): array
     {
         return [
             [
@@ -147,6 +149,12 @@ class ConfigProvider
                     Action\CreatePasswordAction::class
                 ],
                 'allowed_methods' => ['POST']
+            ],
+            [
+                'name' => 'api.v1.passwords.move',
+                'path' => '/api/v1/passwords',
+                'middleware' => [Action\MovePasswordAction::class],
+                'allowed_methods' => ['PATCH']
             ],
             [
                 'name' => 'api.v1.passwords.update',

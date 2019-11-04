@@ -205,6 +205,39 @@ class PasswordFacade
     }
 
     /**
+     * Move a password into another folder
+     *
+     * @param $passwordId
+     * @param $folderId
+     *
+     */
+    public function movePassword($passwordId, $folderId)
+    {
+        $password = $this->entityManager
+            ->getRepository(Password::class)
+            ->find($passwordId);
+
+        $folder = $this->entityManager
+            ->getRepository(Folder::class)
+            ->find($folderId);
+
+        if ($password && $folder) {
+            $password->setFolder($folder);
+            $this->entityManager->persist($password);
+            $this->entityManager->flush();
+
+            return $password;
+        } else {
+            throw new ProblemDetailsException(
+                404,
+                $this->translator->translate('Resource not found'),
+                $this->translator->translate('Resource not found'),
+                'https://httpstatus.es/404'
+            );
+        }
+    }
+
+    /**
      * Update a password
      *
      * @param int $id
