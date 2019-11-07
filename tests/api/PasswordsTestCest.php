@@ -120,27 +120,6 @@ class PasswordsTestCest
         $resp = $resp->toArray();
         $this->pwIdToElim = $resp['password_id'];
 
-        // wrong password data
-        $I->sendPOST('/api/v1/passwords', [
-            'title' => 'testPass',
-            'icon' => 'icon',
-            'description' => 'thiswasthetest',
-            'username' => 'admin',
-            'password' => 'testipass',
-            'url' => 'nope',
-            'tags' => 'zag1',
-            'folder_id' => 2
-        ]);
-        $I->seeResponseCodeIs(\Codeception\Util\HttpCode::BAD_REQUEST); // 400
-        $I->seeResponseIsJson();
-        $I->seeResponseMatchesJsonType([
-            'errors' => 'array'
-        ]);
-        $I->seeResponseContainsJson(array(
-            'title' => 'Bad Request',
-            'status' => 400
-        ));
-
         //get this new password
         $I->sendGET('/api/v1/passwords/' . $this->pwIdToElim);
         $I->seeResponseCodeIs(\Codeception\Util\HttpCode::OK); // 200
@@ -187,15 +166,8 @@ class PasswordsTestCest
             'url' => 'reddit.com/r/ProgrammerHumor',
             'folder_id' => 2
         ]);
-        $I->seeResponseCodeIs(\Codeception\Util\HttpCode::BAD_REQUEST); // 400
+        $I->seeResponseCodeIs(\Codeception\Util\HttpCode::OK); // 200
         $I->seeResponseIsJson();
-        $I->seeResponseMatchesJsonType([
-            'errors' => 'array'
-        ]);
-        $I->seeResponseContainsJson(array(
-            'title' => 'Bad Request',
-            'status' => 400
-        ));
 
         // delete password
         $I->sendDELETE('/api/v1/passwords/' . $this->pwIdToElim);
@@ -322,7 +294,7 @@ class PasswordsTestCest
             "tags" => "zag1"
         ));
 
-        // send update with wrong data
+        // send update with correct data
         $I->sendPATCH('/api/v1/passwords/' . $this->pwIdToElim, [
             'title' => 'testPass11',
             'description' => 'thiswasthetest11',
@@ -331,15 +303,8 @@ class PasswordsTestCest
             'url' => 'reddit.com/r/ProgrammerHumor',
             'folder_id' => 1
         ]);
-        $I->seeResponseCodeIs(\Codeception\Util\HttpCode::BAD_REQUEST); // 400
+        $I->seeResponseCodeIs(\Codeception\Util\HttpCode::OK); // 200
         $I->seeResponseIsJson();
-        $I->seeResponseMatchesJsonType([
-            'errors' => 'array'
-        ]);
-        $I->seeResponseContainsJson(array(
-            'title' => 'Bad Request',
-            'status' => 400
-        ));
 
         // delete password
         $I->sendDELETE('/api/v1/passwords/' . $this->pwIdToElim);
@@ -467,7 +432,7 @@ class PasswordsTestCest
             "tags" => "zag1"
         ));
 
-        // send update with wrong data
+        // send update
         $I->sendPUT('/api/v1/passwords/' . $this->pwIdToElim, [
             'title' => 'testPass11',
             'description' => 'thiswasthetest11',
@@ -476,15 +441,8 @@ class PasswordsTestCest
             'url' => 'reddit.com/r/ProgrammerHumor',
             'folder_id' => 3
         ]);
-        $I->seeResponseCodeIs(\Codeception\Util\HttpCode::BAD_REQUEST); // 400
+        $I->seeResponseCodeIs(\Codeception\Util\HttpCode::OK); // 200
         $I->seeResponseIsJson();
-        $I->seeResponseMatchesJsonType([
-            'errors' => 'array'
-        ]);
-        $I->seeResponseContainsJson(array(
-            'title' => 'Bad Request',
-            'status' => 400
-        ));
 
         // delete password
         $I->sendDELETE('/api/v1/passwords/' . $this->pwIdToElim);
@@ -565,27 +523,6 @@ class PasswordsTestCest
         $resp = $resp->toArray();
         $this->pwIdToElim = $resp['password_id'];
 
-        // wrong password data
-        $I->sendPOST('/api/v1/passwords', [
-            'title' => 'testPass',
-            'icon' => 'icon',
-            'description' => 'thiswasthetest',
-            'username' => 'admin',
-            'password' => 'testipass',
-            'url' => 'nope',
-            'tags' => 'zag1',
-            'folder_id' => 3
-        ]);
-        $I->seeResponseCodeIs(\Codeception\Util\HttpCode::BAD_REQUEST); // 400
-        $I->seeResponseIsJson();
-        $I->seeResponseMatchesJsonType([
-            'errors' => 'array'
-        ]);
-        $I->seeResponseContainsJson(array(
-            'title' => 'Bad Request',
-            'status' => 400
-        ));
-
         //get this new password
         $I->sendGET('/api/v1/passwords/' . $this->pwIdToElim);
         $I->seeResponseCodeIs(\Codeception\Util\HttpCode::OK); // 200
@@ -621,25 +558,6 @@ class PasswordsTestCest
             "password" => "testipass",
             "url" => "http://www.reddit.com/r/ProgrammerHumor",
             "tags" => "zag1"
-        ));
-
-        // send update with wrong data
-        $I->sendPATCH('/api/v1/passwords/' . $this->pwIdToElim, [
-            'title' => 'testPass11',
-            'description' => 'thiswasthetest11',
-            'username' => 'admin',
-            'password' => 'testipass',
-            'url' => 'reddit.com/r/ProgrammerHumor',
-            'folder_id' => 3
-        ]);
-        $I->seeResponseCodeIs(\Codeception\Util\HttpCode::BAD_REQUEST); // 400
-        $I->seeResponseIsJson();
-        $I->seeResponseMatchesJsonType([
-            'errors' => 'array'
-        ]);
-        $I->seeResponseContainsJson(array(
-            'title' => 'Bad Request',
-            'status' => 400
         ));
 
         // delete password
