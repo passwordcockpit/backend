@@ -119,7 +119,7 @@ class CreateUserAction implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         // create user
-        $user = $this->userFacade->create($request);
+        $user = $this->userFacade->createUser($request);
 
         if ($user) {
             // create user permission  - set to false

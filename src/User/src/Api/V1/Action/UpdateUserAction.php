@@ -179,7 +179,7 @@ class UpdateUserAction implements RequestHandlerInterface
     {
         $userId = $request->getAttribute('id');
 
-        $user = $this->userFacade->update($userId, $request);
+        $user = $this->userFacade->updateUser($userId, $request);
         $this->halResourceGenerator
             ->getMetadataMap()
             ->get(User::class)

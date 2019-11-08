@@ -78,9 +78,11 @@ class DeleteFolderAction implements RequestHandlerInterface
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $result = $this->folderFacade->delete($request->getAttribute('id'));
+        $result = $this->folderFacade->deleteFolder(
+            $request->getAttribute('id')
+        );
         if ($result) {
             return new \Zend\Diactoros\Response\EmptyResponse();
         }

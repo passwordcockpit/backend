@@ -25,20 +25,21 @@ use Log\Api\V1\Entity\Log;
 use User\Api\V1\Entity\User;
 use Log\Api\V1\Facade\LogFacade;
 use File\Api\V1\Entity\File;
+use App\Abstracts\AbstractFacade;
 
-class PasswordFacade
+class PasswordFacade extends AbstractFacade
 {
     /**
      *
      * @var EntityManager
      */
-    private $entityManager;
+    protected $entityManager;
 
     /**
      *
      * @var Translator
      */
-    private $translator;
+    protected $translator;
 
     /**
      *
@@ -121,6 +122,8 @@ class PasswordFacade
         $this->logFacade = $logFacade;
         $this->fileFacade = $fileFacade;
         $this->uploadConfig = $uploadConfig;
+
+        parent::__construct($translator, $entityManager, Password::class);
     }
 
     /**
@@ -142,13 +145,56 @@ class PasswordFacade
     }
 
     /**
+     *
+     * @param string $id
+     * @param array $filter
+     */
+    public function fetch($id, $filter)
+    {
+        throw new Exception("Method not implemented");
+    }
+
+    /**
+     *
+     * @param array $filter
+     */
+    public function fetchAll($filter)
+    {
+        throw new Exception("Method not implemented");
+    }
+
+    /**
+     *
+     * @param type $id
+     * @param type $filter
+     */
+    public function delete($id, $filter)
+    {
+        throw new Exception("Method not implemented");
+    }
+
+    /**
+     * Create new instance of Password
+     *
+     * @param array $data
+     * @return Password
+     */
+    public function create($data)
+    {
+        $password = $this->reflectionHydrator->hydrate($data, new Password());
+        $this->persist($password);
+
+        return $password;
+    }
+
+    /**
      * Create a new password
      *
      * @param ServerRequestInterface $request
      * @return Password
      * @throws ProblemDetailsException
      */
-    public function create(ServerRequestInterface $request)
+    public function createPassword(ServerRequestInterface $request)
     {
         $payload = $request->getParsedBody();
         $password = new Password();
@@ -238,6 +284,16 @@ class PasswordFacade
     }
 
     /**
+     *
+     * @param string $id
+     * @param array $data
+     */
+    public function update($id, $data)
+    {
+        throw new Exception("Method not implemented");
+    }
+
+    /**
      * Update a password
      *
      * @param int $id
@@ -245,7 +301,7 @@ class PasswordFacade
      * @return Password
      * @throws ProblemDetailsException
      */
-    public function update($id, ServerRequestInterface $request)
+    public function updatePassword($id, ServerRequestInterface $request)
     {
         $password = $this->entityManager
             ->getRepository(Password::class)
@@ -305,7 +361,7 @@ class PasswordFacade
      * @return boolean
      * @throws ProblemDetailsException
      */
-    public function delete($id, $userId)
+    public function deletePassword($id, $userId)
     {
         $password = $this->entityManager
             ->getRepository(Password::class)

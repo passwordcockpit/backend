@@ -12,6 +12,7 @@
 
 namespace Folder\Api\V1\Facade;
 
+use App\Abstracts\AbstractFacade;
 use Folder\Api\V1\Entity\Folder;
 use Folder\Api\V1\Entity\FolderUser;
 use User\Api\V1\Entity\User;
@@ -21,33 +22,26 @@ use Zend\I18n\Translator\Translator;
 use Psr\Http\Message\ServerRequestInterface;
 use App\Service\ProblemDetailsException;
 use Password\Api\V1\Entity\Password;
-use Folder\Api\V1\Facade\FolderUserFacade;
 
-class FolderFacade
+class FolderFacade extends AbstractFacade
 {
     /**
      *
      * @var EntityManager
      */
-    private $entityManager;
+    protected $entityManager;
 
     /**
      *
      * @var Translator
      */
-    private $translator;
+    protected $translator;
 
     /**
      *
      * @var UserFacade
      */
     private $userFacade;
-
-    /**
-     *
-     * @var FolderUserFacade
-     */
-    private $folderUserFacade;
 
     /**
      * Constructor
@@ -61,10 +55,58 @@ class FolderFacade
         Translator $translator,
         UserFacade $userFacade
     ) {
-        //FolderUserFacade $folderUserFacade
         $this->entityManager = $entityManager;
         $this->translator = $translator;
         $this->userFacade = $userFacade;
+        parent::__construct($translator, $entityManager, Folder::class);
+    }
+
+    /**
+     *
+     * @param array $data
+     */
+    public function create($data)
+    {
+        throw new Exception("Method not implemented");
+    }
+
+    /**
+     *
+     * @param string $id
+     * @param array $filter
+     */
+    public function fetch($id, $filter)
+    {
+        throw new Exception("Method not implemented");
+    }
+
+    /**
+     *
+     * @param array $filter
+     */
+    public function fetchAll($filter)
+    {
+        throw new Exception("Method not implemented");
+    }
+
+    /**
+     *
+     * @param string $id
+     * @param array $data
+     */
+    public function update($id, $data)
+    {
+        throw new Exception("Method not implemented");
+    }
+
+    /**
+     *
+     * @param type $id
+     * @param type $filter
+     */
+    public function delete($id, $filter)
+    {
+        throw new Exception("Method not implemented");
     }
 
     /**
@@ -73,7 +115,7 @@ class FolderFacade
      * @param ServerRequestInterface $request
      * @return User
      */
-    public function create(ServerRequestInterface $request)
+    public function createFolder(ServerRequestInterface $request)
     {
         $payload = $request->getParsedBody();
         $folder = new Folder();
@@ -114,7 +156,7 @@ class FolderFacade
      * @return boolean
      * @throws ProblemDetailsException
      */
-    public function delete($id)
+    public function deleteFolder($id)
     {
         $folder = $this->entityManager->getRepository(Folder::class)->find($id);
         if ($folder) {
@@ -344,7 +386,7 @@ class FolderFacade
      * @return Folder
      * @throws ProblemDetailsException
      */
-    public function update($id, ServerRequestInterface $request)
+    public function updateFolder($id, ServerRequestInterface $request)
     {
         $folder = $this->entityManager->getRepository(Folder::class)->find($id);
         if ($folder) {

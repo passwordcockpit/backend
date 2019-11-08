@@ -114,10 +114,10 @@ class UpdateFolderAction implements RequestHandlerInterface
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $folderId = $request->getAttribute('id');
-        $folder = $this->folderFacade->update($folderId, $request);
+        $folder = $this->folderFacade->updateFolder($folderId, $request);
         $user = $request->getAttribute('Authentication\User');
         $folderUser = $this->folderUserFacade->getFolderUsers($folder, $user);
         if ($folderUser) {

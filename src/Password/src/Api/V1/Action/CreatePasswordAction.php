@@ -151,7 +151,7 @@ class CreatePasswordAction implements RequestHandlerInterface
         $this->passwordFacade->setUserId(
             $request->getAttribute("token", false)['sub']
         );
-        $password = $this->passwordFacade->create($request);
+        $password = $this->passwordFacade->createPassword($request);
         $this->halResourceGenerator
             ->getMetadataMap()
             ->get(Password::class)

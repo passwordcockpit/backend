@@ -11,6 +11,7 @@
 
 namespace Folder\Api\V1\Facade;
 
+use App\Abstracts\AbstractFacade;
 use App\Service\ProblemDetailsException;
 use Doctrine\ORM\EntityManager;
 use Zend\I18n\Translator\Translator;
@@ -18,23 +19,22 @@ use User\Api\V1\Facade\UserFacade;
 use Folder\Api\V1\Facade\FolderFacade;
 use Folder\Api\V1\Entity\FolderUser;
 use User\Api\V1\Hydrator\UserHydrator;
-use Folder\Api\V1\Hydrator\FolderUserHydrator;
 use User\Api\V1\Entity\User;
 use Folder\Api\V1\Entity\Folder;
 
-class FolderUserFacade
+class FolderUserFacade extends AbstractFacade
 {
     /**
      *
      * @var EntityManager
      */
-    private $entityManager;
+    protected $entityManager;
 
     /**
      *
      * @var Translator
      */
-    private $translator;
+    protected $translator;
 
     /**
      *
@@ -66,6 +66,55 @@ class FolderUserFacade
         $this->translator = $translator;
         $this->userFacade = $userFacade;
         $this->folderFacade = $folderFacade;
+        parent::__construct($translator, $entityManager, FolderUser::class);
+    }
+
+    /**
+     *
+     * @param array $data
+     */
+    public function create($data)
+    {
+        throw new Exception("Method not implemented");
+    }
+
+    /**
+     *
+     * @param string $id
+     * @param array $filter
+     */
+    public function fetch($id, $filter)
+    {
+        throw new Exception("Method not implemented");
+    }
+
+    /**
+     *
+     * @param array $filter
+     */
+    public function fetchAll($filter)
+    {
+        throw new Exception("Method not implemented");
+    }
+
+    /**
+     *
+     * @param string $id
+     * @param array $data
+     */
+    public function update($id, $data)
+    {
+        throw new Exception("Method not implemented");
+    }
+
+    /**
+     *
+     * @param type $id
+     * @param type $filter
+     */
+    public function delete($id, $filter)
+    {
+        throw new Exception("Method not implemented");
     }
 
     /**

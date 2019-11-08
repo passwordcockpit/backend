@@ -11,6 +11,7 @@ namespace Authentication\Api\V1\Factory\Facade;
 
 use Authentication\Api\V1\Facade\TokenUserFacade;
 use Doctrine\ORM\EntityManagerInterface;
+use Zend\I18n\Translator\Translator;
 use Psr\Container\ContainerInterface;
 
 class TokenUserFacadeFactory
@@ -24,6 +25,7 @@ class TokenUserFacadeFactory
     public function __invoke(ContainerInterface $container)
     {
         return new TokenUserFacade(
+            $container->get(Translator::class),
             $container->get(EntityManagerInterface::class)
         );
     }
