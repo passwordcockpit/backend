@@ -12,6 +12,7 @@
         "acelaya/ze-content-based-error-handler": "^2.1",
         "codeception/codeception": "^2.3",
         "dasprid/container-interop-doctrine": "^1.0",
+        "doctrine/migrations": "^2.1",
         "doctrine/orm": "^2.5",
         "firebase/php-jwt": "^5.0",
         "mtymek/blast-base-url": "^1.0.0",

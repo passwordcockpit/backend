@@ -42,6 +42,9 @@ return [
             'orm_default' => [
                 'auto_generate_proxy_classes' => false
             ]
+        ],
+        'migrations' => [
+            'migrations_directory' => '/docs/generated/doctrine/migrations'
         ]
     ]
 ];
