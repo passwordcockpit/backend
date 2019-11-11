@@ -128,7 +128,6 @@ class PasswordValidationUpdateMiddlewareFactory
                 'name' => 'password',
                 'required' => false,
                 'filters' => [
-                    ['name' => \Zend\Filter\StripTags::class],
                     ['name' => \Zend\Filter\StringTrim::class],
                     ['name' => \Zend\Filter\StripNewlines::class]
                 ],
