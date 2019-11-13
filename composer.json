@@ -91,7 +91,7 @@
             "@test-clear"
         ],
         "swagger": [
-            "./vendor/bin/swagger -o ./docs/swagger/swagger.json -e vendor src/"
+            "./vendor/bin/swagger -o ./swagger/swagger.json -e vendor src/"
         ]
     }
 }
