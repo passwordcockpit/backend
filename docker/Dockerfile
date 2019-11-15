@@ -21,6 +21,8 @@ ENV PASSWORDCOCKPIT_LDAP_ACCOUNTFILTERFORMAT (&(memberOf=cn=groups,cn=users,dc=d
 ENV PASSWORDCOCKPIT_LDAP_BINDREQUIRESDN 'true'
 # true or false
 
+WORKDIR /usr/src/passwordcockpit
+
 RUN set -ex; \
     apt-get update; \
     apt-get install -y --no-install-recommends git
@@ -52,8 +54,7 @@ RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
 
 # clone the source of the backend
 RUN set -ex; \
-git clone -v git://github.com/passwordcockpit/backend.git /usr/src/passwordcockpit; \
-cd /usr/src/passwordcockpit; \
+git clone -v git://github.com/passwordcockpit/backend.git .; \
 git checkout develop; \
 git pull origin develop
 
