@@ -14,12 +14,12 @@ fi
 
 # install passwordcockpit only if the volume is empty
 if [ $count -gt "2" ]; then
-        echo >&2 "WARNING: $PWD is not empty! Passwordcockpit will not be installed"
+        echo -e "\e[31mWARNING: $PWD is not empty! Passwordcockpit will not be installed\e[0m"
 else
     # move passwordcockpit source in container
     shopt -s dotglob
     mv /usr/src/passwordcockpit/* ./
-    echo >&2 "Source copied in $PWD"
+    echo -e "\e[32mSource copied in $PWD\e[0m"
 
     ##############################################
     # Configuration files
@@ -130,7 +130,13 @@ else
     
     sed -ri -e 's!PASSWORDCOCKPIT_BASEHOST!'${PASSWORDCOCKPIT_SWAGGER_API_HOST}'!g' swagger/swagger.json
     
-    echo >&2 "Configuration files created and modified"
+    echo -e "\e[32mConfiguration files created and modified\e[0m"
+
+    ##############################################
+    # SSL
+    ##############################################
+	mv /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-enabled/default-ssl.conf
+    echo -e "\e[32mSSL ok\e[0m"
 
     ##############################################
     # Database
