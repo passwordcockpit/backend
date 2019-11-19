@@ -57,8 +57,8 @@ RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
 # clone the source of the backend
 RUN set -ex; \
 git clone -v git://github.com/passwordcockpit/backend.git .; \
-git checkout 1.0.0-dev; \
-git pull origin 1.0.0-dev
+git checkout develop; \
+git pull origin develop
 
 # install and build
 RUN composer install
