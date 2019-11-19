@@ -89,6 +89,9 @@ RUN { \
 # enable development mode
 RUN composer development-enable
 
+# copy apache ssl configuration
+RUN cp /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-enabled/default-ssl.conf
+
 VOLUME /var/www/html
 WORKDIR /var/www/html
 

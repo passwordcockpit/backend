@@ -145,12 +145,6 @@ else
     echo -e "\e[32mConfiguration files created and modified\e[0m"
 
     ##############################################
-    # SSL
-    ##############################################
-	mv /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-enabled/default-ssl.conf
-    echo -e "\e[32mSSL ok\e[0m"
-
-    ##############################################
     # Database
     ##############################################
     echo -e "\e[31mCheck database connection\e[0m"
