@@ -63,6 +63,10 @@ git pull origin 1.0.0-dev
 # install and build
 RUN composer install
 
+# fix timezone
+RUN rm -rf /etc/localtime \
+ && ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
+
 # generate swagger documentation
 # create constants.local.php
 RUN { \
@@ -81,6 +85,9 @@ RUN { \
     echo 'opcache.fast_shutdown=1'; \
     echo 'opcache.enable_cli=1'; \
     } > /usr/local/etc/php/conf.d/opcache-recommended.ini
+
+# enable development mode
+RUN composer development-enable
 
 VOLUME /var/www/html
 WORKDIR /var/www/html
