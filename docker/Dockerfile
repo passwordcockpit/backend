@@ -7,8 +7,8 @@ ENV PASSWORDCOCKPIT_DATABASE_HOSTNAME 127.0.0.1:3306
 ENV PASSWORDCOCKPIT_DATABASE_DATABASE passwordcockpit 
 ENV PASSWORDCOCKPIT_BLOCK_CIPHER_KEY cipher_key
 ENV PASSWORDCOCKPIT_AUTHENTICATION_SECRET_KEY auth_secret_key
-ENV PASSWORDCOCKPIT_SWAGGER_API_HOST 127.0.0.1:8080
-ENV PASSWORDCOCKPIT_CLIENT_ADDRESS 127.0.0.1:4200
+ENV PASSWORDCOCKPIT_SWAGGER_API_HOST 10.0.3.150:8080
+ENV PASSWORDCOCKPIT_CLIENT_ADDRESS http://10.0.3.150:4200
 ENV PASSWORDCOCKPIT_AUTHENTICATION_TYPE db
 # ldap or db
 # ldap configuration
@@ -25,7 +25,9 @@ WORKDIR /usr/src/passwordcockpit
 
 RUN set -ex; \
     apt-get update; \
-    apt-get install -y --no-install-recommends git
+    apt-get install -y --no-install-recommends \
+    git \
+    ssl-cert
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN set -ex; \
     apt-get update; \
@@ -55,8 +57,8 @@ RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
 # clone the source of the backend
 RUN set -ex; \
 git clone -v git://github.com/passwordcockpit/backend.git .; \
-git checkout develop; \
-git pull origin develop
+git checkout 1.0.0-dev; \
+git pull origin 1.0.0-dev
 
 # install and build
 RUN composer install

@@ -39,6 +39,18 @@ else
         } >> $filename
     fi
 
+    filename=config/autoload/client.local.php
+    if [ ! -e $filename ]; then
+        {
+            echo "<?php"
+            echo "return ["
+            echo "    'client_address' => ["
+            echo "        'address' => '${PASSWORDCOCKPIT_CLIENT_ADDRESS}'"
+            echo "    ]"
+            echo "];"
+        } >> $filename
+    fi
+
     filename=config/autoload/doctrine.local.php
     if [ ! -e $filename ]; then
         {
@@ -141,7 +153,7 @@ else
     ##############################################
     # Database
     ##############################################
-    echo -e "\e[31Check database connection\e[0m"
+    echo -e "\e[31mCheck database connection\e[0m"
     max_retries=10
     try=0
 
