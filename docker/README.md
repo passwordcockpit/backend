@@ -6,4 +6,4 @@ docker build -t passwordcockpit/backend:dev-1.0.0 .
 
 ## Push
 docker login docker.io
-docker push passwordcockpit/backend:dev-1.0
+docker push passwordcockpit/backend:dev-1.0.0
