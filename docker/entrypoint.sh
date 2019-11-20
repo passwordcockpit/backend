@@ -168,10 +168,13 @@ else
             echo -e "\e[32mSchema already exist\e[0m"
             # Tables exists
             number_of_tables=$(vendor/bin/doctrine dbal:run-sql "SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '${PASSWORDCOCKPIT_DATABASE_DATABASE}'" | grep string | awk -F\" '{ print $2 }')
+            
+            # Execute database migration
+            vendor/bin/doctrine-migrations migrate
+            vendor/bin/doctrine orm:generate-proxies
+            
             if [ "$number_of_tables" == "0" ]; then
                 # Create the tables and popolate it
-                vendor/bin/doctrine orm:schema-tool:create
-                vendor/bin/doctrine orm:generate-proxies
                 echo -e "\e[32mDatabase created\e[0m"
                 vendor/bin/doctrine dbal:import database/create-tests-environment.sql
                 echo -e "\e[32mTest data installed\e[0m"
