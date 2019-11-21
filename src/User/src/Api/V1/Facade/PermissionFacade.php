@@ -13,6 +13,7 @@
 
 namespace User\Api\V1\Facade;
 
+use App\Abstracts\AbstractFacade;
 use User\Api\V1\Entity\User;
 use Doctrine\ORM\EntityManager;
 use Psr\Http\Message\ServerRequestInterface;
@@ -21,19 +22,19 @@ use Zend\I18n\Translator\Translator;
 use User\Api\V1\Entity\Permission;
 use User\Api\V1\Hydrator\UserPermissionHydrator;
 
-class PermissionFacade
+class PermissionFacade extends AbstractFacade
 {
     /**
      *
      * @var EntityManager
      */
-    private $entityManager;
+    protected $entityManager;
 
     /**
      *
      * @var Translator
      */
-    private $translator;
+    protected $translator;
 
     /**
      *
@@ -56,6 +57,59 @@ class PermissionFacade
         $this->entityManager = $entityManager;
         $this->translator = $translator;
         $this->userFacade = $useFacade;
+        parent::__construct(
+            $translator,
+            $entityManager,
+            PermissionFacade::class
+        );
+    }
+
+    /**
+     *
+     * @param array $data
+     */
+    public function create($data)
+    {
+        throw new Exception("Method not implemented");
+    }
+
+    /**
+     *
+     * @param string $id
+     * @param array $filter
+     */
+    public function fetch($id, $filter)
+    {
+        throw new Exception("Method not implemented");
+    }
+
+    /**
+     *
+     * @param array $filter
+     */
+    public function fetchAll($filter)
+    {
+        throw new Exception("Method not implemented");
+    }
+
+    /**
+     *
+     * @param string $id
+     * @param array $data
+     */
+    public function update($id, $data)
+    {
+        throw new Exception("Method not implemented");
+    }
+
+    /**
+     *
+     * @param type $id
+     * @param type $filter
+     */
+    public function delete($id, $filter)
+    {
+        throw new Exception("Method not implemented");
     }
 
     /**

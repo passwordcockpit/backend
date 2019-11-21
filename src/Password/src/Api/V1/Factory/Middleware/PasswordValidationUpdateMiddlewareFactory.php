@@ -128,7 +128,6 @@ class PasswordValidationUpdateMiddlewareFactory
                 'name' => 'password',
                 'required' => false,
                 'filters' => [
-                    ['name' => \Zend\Filter\StripTags::class],
                     ['name' => \Zend\Filter\StringTrim::class],
                     ['name' => \Zend\Filter\StripNewlines::class]
                 ],
@@ -155,13 +154,6 @@ class PasswordValidationUpdateMiddlewareFactory
                         'name' => \Zend\Validator\StringLength::class,
                         'options' => [
                             'max' => 100
-                        ]
-                    ],
-                    [
-                        'name' => \Zend\Validator\Uri::class,
-                        'options' => [
-                            'allowRelative' => false,
-                            'allowAbsolute' => true
                         ]
                     ]
                 ]

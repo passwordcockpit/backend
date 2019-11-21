@@ -9,6 +9,7 @@
 
 namespace Log\Api\V1\Facade;
 
+use App\Abstracts\AbstractFacade;
 use Doctrine\ORM\EntityManager;
 use Zend\I18n\Translator\Translator;
 use App\Service\ProblemDetailsException;
@@ -19,19 +20,19 @@ use Log\Api\V1\Entity\Log;
 /**
  * Description of LogFacade
  */
-class LogFacade
+class LogFacade extends AbstractFacade
 {
     /**
      *
      * @var EntityManager
      */
-    private $entityManager;
+    protected $entityManager;
 
     /**
      *
      * @var Translator
      */
-    private $translator;
+    protected $translator;
 
     /**
      * Contructor
@@ -45,6 +46,55 @@ class LogFacade
     ) {
         $this->entityManager = $entityManager;
         $this->translator = $translator;
+        parent::__construct($translator, $entityManager, Log::class);
+    }
+
+    /**
+     *
+     * @param array $data
+     */
+    public function create($data)
+    {
+        throw new Exception("Method not implemented");
+    }
+
+    /**
+     *
+     * @param string $id
+     * @param array $filter
+     */
+    public function fetch($id, $filter)
+    {
+        throw new Exception("Method not implemented");
+    }
+
+    /**
+     *
+     * @param array $filter
+     */
+    public function fetchAll($filter)
+    {
+        throw new Exception("Method not implemented");
+    }
+
+    /**
+     *
+     * @param string $id
+     * @param array $data
+     */
+    public function update($id, $data)
+    {
+        throw new Exception("Method not implemented");
+    }
+
+    /**
+     *
+     * @param type $id
+     * @param type $filter
+     */
+    public function delete($id, $filter)
+    {
+        throw new Exception("Method not implemented");
     }
 
     /**

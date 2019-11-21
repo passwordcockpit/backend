@@ -9,7 +9,7 @@ actor: ApiTester
 modules:
   enabled:
     - REST:
-        url: https://127.0.0.1:443/
+        url: https://127.0.0.1:4344/
         depends: PhpBrowser
         part: Json
 # For these tests to work:

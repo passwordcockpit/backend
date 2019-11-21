@@ -9,33 +9,36 @@
 
 namespace Password\Api\V1\Factory\Action;
 
+use Folder\Api\V1\Facade\FolderUserFacade;
 use Psr\Container\ContainerInterface;
 use Password\Api\V1\Facade\PasswordFacade;
 use Zend\Expressive\Hal\ResourceGeneratorFactory;
-use Password\Api\V1\Action\UpdatePasswordAction;
+use Password\Api\V1\Action\MovePasswordAction;
+use User\Api\V1\Facade\PermissionFacade;
+use User\Api\V1\Facade\UserFacade;
 use Zend\ProblemDetails\ProblemDetailsResponseFactory;
 
 /**
- * Description of UpdatePasswordFactory
+ * Description of MovePasswordFactory
  */
-class UpdatePasswordFactory
+class MovePasswordFactory
 {
     /**
-     * Invoke method, create instance of UpdatePasswordAction class
+     * Invoke method, create instance of MovePasswordAction class
      *
      * @param ContainerInterface $container
-     * @return UpdatePasswordAction
+     * @return MovePasswordAction
      */
     public function __invoke(ContainerInterface $container)
     {
         $halResourceGenerator = new ResourceGeneratorFactory();
 
-        return new UpdatePasswordAction(
+        return new MovePasswordAction(
             $container->get(PasswordFacade::class),
             $container->get(ProblemDetailsResponseFactory::class),
-            $container->get('config')['authentication'],
-            $halResourceGenerator($container),
-            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class)
+            $container->get(FolderUserFacade::class),
+            $container->get(UserFacade::class),
+            $container->get(PermissionFacade::class)
         );
     }
 }

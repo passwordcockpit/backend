@@ -10,16 +10,78 @@
 namespace Authentication\Api\V1\Facade;
 
 use Doctrine\ORM\EntityManager;
+use Zend\I18n\Translator\Translator;
 use Authentication\Api\V1\Entity\TokenUser;
+use App\Abstracts\AbstractFacade;
 use User\Api\V1\Entity\User;
 
-class TokenUserFacade
+class TokenUserFacade extends AbstractFacade
 {
-    private $entityManager;
+    protected $entityManager;
 
-    public function __construct(EntityManager $entityManager)
-    {
+    protected $translator;
+
+    /**
+     * Constructor
+     *
+     * @param Translator $translator
+     * @param EntityManager $entityManager
+     */
+    public function __construct(
+        Translator $translator,
+        EntityManager $entityManager
+    ) {
+        $this->translator = $translator;
         $this->entityManager = $entityManager;
+        parent::__construct($translator, $entityManager, TokenUser::class);
+    }
+
+    /**
+     *
+     * @param array $data
+     */
+    public function create($data)
+    {
+        throw new Exception("Method not implemented");
+    }
+
+    /**
+     *
+     * @param string $id
+     * @param array $filter
+     */
+    public function fetch($id, $filter)
+    {
+        throw new Exception("Method not implemented");
+    }
+
+    /**
+     *
+     * @param array $filter
+     */
+    public function fetchAll($filter)
+    {
+        throw new Exception("Method not implemented");
+    }
+
+    /**
+     *
+     * @param string $id
+     * @param array $data
+     */
+    public function update($id, $data)
+    {
+        throw new Exception("Method not implemented");
+    }
+
+    /**
+     *
+     * @param type $id
+     * @param type $filter
+     */
+    public function delete($id, $filter)
+    {
+        throw new Exception("Method not implemented");
     }
 
     /**
@@ -69,7 +131,7 @@ class TokenUserFacade
      * @return bool true
      *
      */
-    public function create($user, $token)
+    public function createTokenUser($user, $token)
     {
         $tokenUser = new TokenUser();
         $tokenUser->setUser($user);

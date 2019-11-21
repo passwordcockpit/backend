@@ -99,9 +99,9 @@ class CreateFolderAction implements RequestHandlerInterface
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $folder = $this->folderFacade->create($request);
+        $folder = $this->folderFacade->createFolder($request);
         $folderId = $folder->getFolderId();
         $this->halResourceGenerator
             ->getMetadataMap()

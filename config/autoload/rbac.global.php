@@ -49,6 +49,7 @@ return [
                 'api.v1.passwords.list',
                 'api.v1.passwords.get',
                 'api.v1.passwords.create',
+                'api.v1.passwords.move',
                 'api.v1.passwords.update',
                 'api.v1.passwords.delete',
                 'api.v1.files.get',
@@ -79,6 +80,7 @@ return [
                 'api.v1.passwords.list',
                 'api.v1.passwords.get',
                 'api.v1.passwords.create',
+                'api.v1.passwords.move',
                 'api.v1.passwords.update',
                 'api.v1.passwords.delete',
                 'api.v1.files.get',
@@ -157,6 +159,9 @@ return [
                     Authorization\Api\V1\Assertion\PasswordAssertion::class
                 ],
                 'api.v1.passwords.create' => [
+                    Authorization\Api\V1\Assertion\ManageFolderAssertion::class
+                ],
+                'api.v1.passwords.move' => [
                     Authorization\Api\V1\Assertion\ManageFolderAssertion::class
                 ],
                 'api.v1.passwords.update' => [

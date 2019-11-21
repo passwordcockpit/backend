@@ -13,6 +13,7 @@
 
 namespace User\Api\V1\Facade;
 
+use App\Abstracts\AbstractFacade;
 use User\Api\V1\Entity\User;
 use Doctrine\ORM\EntityManager;
 use Psr\Http\Message\ServerRequestInterface;
@@ -21,19 +22,19 @@ use Zend\Crypt\Password\Bcrypt;
 use Zend\I18n\Translator\Translator;
 use User\Api\V1\Entity\Permission;
 
-class UserFacade
+class UserFacade extends AbstractFacade
 {
     /**
      *
      * @var EntityManager
      */
-    private $entityManager;
+    protected $entityManager;
 
     /**
      *
      * @var Translator
      */
-    private $translator;
+    protected $translator;
 
     /**
      * Contructor
@@ -47,6 +48,55 @@ class UserFacade
     ) {
         $this->entityManager = $entityManager;
         $this->translator = $translator;
+        parent::__construct($translator, $entityManager, User::class);
+    }
+
+    /**
+     *
+     * @param array $data
+     */
+    public function create($data)
+    {
+        throw new Exception("Method not implemented");
+    }
+
+    /**
+     *
+     * @param string $id
+     * @param array $filter
+     */
+    public function fetch($id, $filter)
+    {
+        throw new Exception("Method not implemented");
+    }
+
+    /**
+     *
+     * @param array $filter
+     */
+    public function fetchAll($filter)
+    {
+        throw new Exception("Method not implemented");
+    }
+
+    /**
+     *
+     * @param string $id
+     * @param array $data
+     */
+    public function update($id, $data)
+    {
+        throw new Exception("Method not implemented");
+    }
+
+    /**
+     *
+     * @param type $id
+     * @param type $filter
+     */
+    public function delete($id, $filter)
+    {
+        throw new Exception("Method not implemented");
     }
 
     /**
@@ -55,7 +105,7 @@ class UserFacade
      * @param ServerRequestInterface $request
      * @return User
      */
-    public function create(ServerRequestInterface $request)
+    public function createUser(ServerRequestInterface $request)
     {
         $payload = $request->getParsedBody(); // recupero il payload
         $user = new User(); // creo l'oggetto utente
@@ -87,7 +137,7 @@ class UserFacade
      * @return boolean
      * @throws ProblemDetailsException
      */
-    public function delete($id)
+    public function deleteUser($id)
     {
         $user = $this->entityManager->getRepository(User::class)->find($id);
         if ($user) {
@@ -189,7 +239,7 @@ class UserFacade
      * @return User
      * @throws ProblemDetailsException
      */
-    public function update($id, ServerRequestInterface $request)
+    public function updateUser($id, ServerRequestInterface $request)
     {
         $user = $this->entityManager->getRepository(User::class)->find($id);
         if ($user) {

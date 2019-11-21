@@ -76,10 +76,10 @@ class DeletePasswordAction implements RequestHandlerInterface
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $user = $request->getAttribute('Authentication\User');
-        $this->passwordFacade->delete(
+        $this->passwordFacade->deletePassword(
             $request->getAttribute('id'),
             $user->getUserId()
         );

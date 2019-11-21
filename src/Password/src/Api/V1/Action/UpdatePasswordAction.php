@@ -174,7 +174,10 @@ class UpdatePasswordAction implements RequestHandlerInterface
             $request->getAttribute("token", false)['sub']
         );
         $passwordId = $request->getAttribute('id');
-        $password = $this->passwordFacade->update($passwordId, $request);
+        $password = $this->passwordFacade->updatePassword(
+            $passwordId,
+            $request
+        );
         $this->halResourceGenerator
             ->getMetadataMap()
             ->get(Password::class)
