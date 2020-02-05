@@ -10,7 +10,7 @@
 namespace App\Factory;
 
 use App\Middleware\CorsMiddleware;
-use Zend\Diactoros\Response;
+use Laminas\Diactoros\Response;
 
 class CorsMiddlewareFactory
 {

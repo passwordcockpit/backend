@@ -11,11 +11,11 @@ namespace File\Api\V1\Factory\Action;
 use File\Api\V1\Facade\FileFacade;
 use Doctrine\ORM\EntityManagerInterface;
 use Password\Api\V1\Facade\PasswordFacade;
-use Zend\Expressive\Hal\ResourceGeneratorFactory;
+use Mezzio\Hal\ResourceGeneratorFactory;
 use Psr\Container\ContainerInterface;
 use File\Api\V1\Action\UpdateFileAction;
-use Zend\Crypt\FileCipher;
-use Zend\I18n\Translator\Translator;
+use Laminas\Crypt\FileCipher;
+use Laminas\I18n\Translator\Translator;
 
 class UpdateFileActionFactory
 {
@@ -38,7 +38,7 @@ class UpdateFileActionFactory
             new FileCipher(),
             $container->get("config")['block_cipher']['key'],
             $resourceGenerator($container),
-            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class)
+            $container->get(\Mezzio\Hal\HalResponseFactory::class)
         );
     }
 }

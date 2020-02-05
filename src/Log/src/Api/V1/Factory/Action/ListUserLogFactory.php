@@ -12,7 +12,7 @@ namespace Log\Api\V1\Factory\Action;
 use Log\Api\V1\Action\ListUserLogAction;
 use Psr\Container\ContainerInterface;
 use Log\Api\V1\Facade\LogFacade;
-use Zend\Expressive\Hal\ResourceGeneratorFactory;
+use Mezzio\Hal\ResourceGeneratorFactory;
 
 /**
  * Description of ListUserLogFactory
@@ -32,7 +32,7 @@ class ListUserLogFactory
         return new ListUserLogAction(
             $container->get(LogFacade::class),
             $halResourceGenerator($container),
-            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class),
+            $container->get(\Mezzio\Hal\HalResponseFactory::class),
             $container->get("config")['paginator_config']
         );
     }

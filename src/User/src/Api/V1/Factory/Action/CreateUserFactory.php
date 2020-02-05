@@ -13,7 +13,7 @@ use User\Api\V1\Action\CreateUserAction;
 use Psr\Container\ContainerInterface;
 use User\Api\V1\Facade\UserFacade;
 use User\Api\V1\Facade\PermissionFacade;
-use Zend\Expressive\Hal\ResourceGeneratorFactory;
+use Mezzio\Hal\ResourceGeneratorFactory;
 
 /**
  * Description of CreateUserFactory
@@ -34,7 +34,7 @@ class CreateUserFactory
             $container->get(UserFacade::class),
             $container->get(PermissionFacade::class),
             $halResourceGenerator($container),
-            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class)
+            $container->get(\Mezzio\Hal\HalResponseFactory::class)
         );
     }
 }

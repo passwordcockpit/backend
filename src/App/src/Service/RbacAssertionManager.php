@@ -1,8 +1,8 @@
 <?php
 namespace App\Service;
 
-use Zend\Permissions\Rbac\AssertionInterface;
-use Zend\Permissions\Rbac\Rbac;
+use Laminas\Permissions\Rbac\AssertionInterface;
+use Laminas\Permissions\Rbac\Rbac;
 
 /**
  * Description of RbacAssertionManager

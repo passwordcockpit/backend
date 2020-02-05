@@ -9,7 +9,7 @@
 
 namespace Log\Api\V1\Collection;
 
-use Zend\Paginator\Paginator;
+use Laminas\Paginator\Paginator;
 /**
  * Description of LogCollection$
  */

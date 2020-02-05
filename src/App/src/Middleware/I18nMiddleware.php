@@ -16,9 +16,9 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\I18n\Translator\Resources;
-use Zend\I18n\Translator\Translator;
-use Zend\Validator\AbstractValidator;
+use Laminas\I18n\Translator\Resources;
+use Laminas\I18n\Translator\Translator;
+use Laminas\Validator\AbstractValidator;
 
 class I18nMiddleware implements MiddlewareInterface
 {

@@ -12,7 +12,7 @@ namespace Authorization\Api\V1\Factory\Assertion;
 use Interop\Container\ContainerInterface;
 use Authorization\Api\V1\Assertion\UsernameListAssertion;
 use Folder\Api\V1\Facade\FolderUserFacade;
-use Zend\I18n\Translator\Translator;
+use Laminas\I18n\Translator\Translator;
 
 class UsernameListAssertionFactory
 {

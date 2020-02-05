@@ -13,8 +13,8 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use App\Service\ProblemDetailsException;
-use Zend\InputFilter\Factory;
-use Zend\InputFilter\InputFilter;
+use Laminas\InputFilter\Factory;
+use Laminas\InputFilter\InputFilter;
 
 class ValidationMiddleware implements MiddlewareInterface
 {

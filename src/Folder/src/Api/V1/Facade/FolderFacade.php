@@ -18,7 +18,7 @@ use Folder\Api\V1\Entity\FolderUser;
 use User\Api\V1\Entity\User;
 use User\Api\V1\Facade\UserFacade;
 use Doctrine\ORM\EntityManager;
-use Zend\I18n\Translator\Translator;
+use Laminas\I18n\Translator\Translator;
 use Psr\Http\Message\ServerRequestInterface;
 use App\Service\ProblemDetailsException;
 use Password\Api\V1\Entity\Password;

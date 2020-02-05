@@ -10,7 +10,7 @@ namespace Authentication\Api\V1\Factory\Middleware;
 
 use Psr\Container\ContainerInterface;
 use Tuupola\Middleware\JwtAuthentication;
-use Zend\Diactoros\Response\JsonResponse;
+use Laminas\Diactoros\Response\JsonResponse;
 
 class JwtAuthenticationFactory
 {

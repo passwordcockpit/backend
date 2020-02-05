@@ -9,7 +9,7 @@
 
 namespace User\Api\V1\Hydrator;
 
-use Zend\Hydrator\AbstractHydrator;
+use Laminas\Hydrator\AbstractHydrator;
 
 /**
  * Description of UserPermissionHydrator

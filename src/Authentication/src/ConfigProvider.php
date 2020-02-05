@@ -12,7 +12,7 @@
 
 namespace Authentication;
 
-use Zend\ConfigAggregator\ConfigAggregator;
+use Laminas\ConfigAggregator\ConfigAggregator;
 
 /**
  * The configuration provider for the App module

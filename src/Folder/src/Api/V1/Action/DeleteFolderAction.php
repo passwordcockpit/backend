@@ -15,7 +15,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Folder\Api\V1\Facade\FolderFacade;
-use Zend\Expressive\Hal\ResourceGenerator;
+use Mezzio\Hal\ResourceGenerator;
 
 /**
  * @SWG\Delete(
@@ -84,7 +84,7 @@ class DeleteFolderAction implements RequestHandlerInterface
             $request->getAttribute('id')
         );
         if ($result) {
-            return new \Zend\Diactoros\Response\EmptyResponse();
+            return new \Laminas\Diactoros\Response\EmptyResponse();
         }
     }
 }

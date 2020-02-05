@@ -16,9 +16,9 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Folder\Api\V1\Facade\FolderFacade;
 use Folder\Api\V1\Facade\FolderUserFacade;
-use Zend\Expressive\Hal\ResourceGenerator;
-use Zend\Expressive\Hal\HalResponseFactory;
-use Zend\Diactoros\Response\EmptyResponse;
+use Mezzio\Hal\ResourceGenerator;
+use Mezzio\Hal\HalResponseFactory;
+use Laminas\Diactoros\Response\EmptyResponse;
 
 /**
  * @SWG\Get(

@@ -8,7 +8,7 @@
 
 namespace File\Api\V1\Collection;
 
-use Zend\Paginator\Paginator;
+use Laminas\Paginator\Paginator;
 
 class FileCollection extends Paginator
 {

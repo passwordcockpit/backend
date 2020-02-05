@@ -11,7 +11,7 @@ namespace User\Api\V1\Factory\Action;
 
 use Psr\Container\ContainerInterface;
 use User\Api\V1\Facade\UserFacade;
-use Zend\Expressive\Hal\ResourceGeneratorFactory;
+use Mezzio\Hal\ResourceGeneratorFactory;
 use User\Api\V1\Action\UpdateUserAction;
 use Authentication\Api\V1\Facade\TokenUserFacade;
 
@@ -33,7 +33,7 @@ class UpdateUserFactory
         return new UpdateUserAction(
             $container->get(UserFacade::class),
             $halResourceGenerator($container),
-            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class),
+            $container->get(\Mezzio\Hal\HalResponseFactory::class),
             $container->get('config')['authentication'],
             $container->get(TokenUserFacade::class)
         );

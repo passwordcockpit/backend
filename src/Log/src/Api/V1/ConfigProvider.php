@@ -9,8 +9,8 @@
 
 namespace Log\Api\V1;
 
-use Zend\Expressive\Hal\Metadata\RouteBasedResourceMetadata;
-use Zend\Expressive\Hal\Metadata\RouteBasedCollectionMetadata;
+use Mezzio\Hal\Metadata\RouteBasedResourceMetadata;
+use Mezzio\Hal\Metadata\RouteBasedCollectionMetadata;
 use Log\Api\V1\Entity\Log;
 use Log\Api\V1\Hydrator\LogHydrator;
 use Log\Api\V1\Hydrator\LogHalHydrator;
@@ -35,7 +35,7 @@ class ConfigProvider
             'routes' => $this->getRoutes(),
             'hydrators' => $this->getHydratorPluginConfig(),
             'doctrine' => $this->getDoctrine(),
-            'Zend\Expressive\Hal\Metadata\MetadataMap' => $this->getMetadataMap()
+            'Mezzio\Hal\Metadata\MetadataMap' => $this->getMetadataMap()
         ];
     }
 

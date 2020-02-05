@@ -12,11 +12,11 @@ namespace Password\Api\V1\Factory\Action;
 use Folder\Api\V1\Facade\FolderUserFacade;
 use Psr\Container\ContainerInterface;
 use Password\Api\V1\Facade\PasswordFacade;
-use Zend\Expressive\Hal\ResourceGeneratorFactory;
+use Mezzio\Hal\ResourceGeneratorFactory;
 use Password\Api\V1\Action\MovePasswordAction;
 use User\Api\V1\Facade\PermissionFacade;
 use User\Api\V1\Facade\UserFacade;
-use Zend\ProblemDetails\ProblemDetailsResponseFactory;
+use Mezzio\ProblemDetails\ProblemDetailsResponseFactory;
 
 /**
  * Description of MovePasswordFactory

@@ -12,7 +12,7 @@ use Psr\Container\ContainerInterface;
 use Password\Api\V1\Action\SearchPasswordAction;
 use Password\Api\V1\Facade\PasswordFacade;
 use User\Api\V1\Facade\PermissionFacade;
-use Zend\Expressive\Hal\ResourceGeneratorFactory;
+use Mezzio\Hal\ResourceGeneratorFactory;
 use Password\Api\V1\Action\ListPasswordAction;
 
 class ListPasswordFactory
@@ -31,7 +31,7 @@ class ListPasswordFactory
             $container->get(PasswordFacade::class),
             $container->get(PermissionFacade::class),
             $halResourceGenerator($container),
-            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class)
+            $container->get(\Mezzio\Hal\HalResponseFactory::class)
         );
     }
 }

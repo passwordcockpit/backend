@@ -11,7 +11,7 @@
 
 namespace Authentication\Api\V1\Hydrator;
 
-use Zend\Hydrator\AbstractHydrator;
+use Laminas\Hydrator\AbstractHydrator;
 
 class TokenUserHydrator extends AbstractHydrator
 {

@@ -10,8 +10,8 @@
 namespace Password\Api\V1;
 
 use Password\Api\V1\Entity\Password;
-use Zend\Expressive\Hal\Metadata\RouteBasedResourceMetadata;
-use Zend\Expressive\Hal\Metadata\RouteBasedCollectionMetadata;
+use Mezzio\Hal\Metadata\RouteBasedResourceMetadata;
+use Mezzio\Hal\Metadata\RouteBasedCollectionMetadata;
 use Password\Api\V1\Hydrator\PasswordHydrator;
 
 /**
@@ -33,7 +33,7 @@ class ConfigProvider
             'dependencies' => $this->getDependencies(),
             'routes' => $this->getRoutes(),
             'doctrine' => $this->getDoctrine(),
-            'Zend\Expressive\Hal\Metadata\MetadataMap' => $this->getMetadataMap()
+            'Mezzio\Hal\Metadata\MetadataMap' => $this->getMetadataMap()
         ];
     }
 

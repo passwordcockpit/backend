@@ -10,7 +10,7 @@
 
 namespace User\Api\V1\Validator;
 
-use Zend\Validator\AbstractValidator;
+use Laminas\Validator\AbstractValidator;
 
 class PasswordStrength extends AbstractValidator
 {

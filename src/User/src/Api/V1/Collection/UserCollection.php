@@ -10,7 +10,7 @@
  */
 namespace User\Api\V1\Collection;
 
-use Zend\Paginator\Paginator;
+use Laminas\Paginator\Paginator;
 
 class UserCollection extends Paginator
 {

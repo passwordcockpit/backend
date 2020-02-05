@@ -93,7 +93,7 @@ else
                 echo "    ]," 
                 echo "    'dependencies' => ["
                 echo "        'factories' => ["
-                echo "            Zend\Authentication\Adapter\AdapterInterface::class =>"
+                echo "            Laminas\Authentication\Adapter\AdapterInterface::class =>"
                 echo "                Authentication\Api\V1\Factory\Adapter\LdapAdapterFactory::class"
                 echo "        ]"
                 echo "    ]"

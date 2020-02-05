@@ -10,7 +10,7 @@
 namespace Authorization\Api\V1\Factory\Middleware;
 
 use Interop\Container\ContainerInterface;
-use Zend\Permissions\Rbac\Rbac;
+use Laminas\Permissions\Rbac\Rbac;
 use Authorization\Api\V1\Middleware\AuthorizationMiddleware;
 use Exception;
 use Folder\Api\V1\Facade\FolderUserFacade;
@@ -19,7 +19,7 @@ use Password\Api\V1\Facade\PasswordFacade;
 use User\Api\V1\Facade\PermissionFacade;
 use Doctrine\ORM\EntityManagerInterface;
 use Authorization\Api\V1\AssertionPluginManager;
-use Zend\I18n\Translator\Translator;
+use Laminas\I18n\Translator\Translator;
 
 class AuthorizationMiddlewareFactory
 {

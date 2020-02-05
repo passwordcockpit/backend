@@ -12,7 +12,7 @@ namespace Folder\Api\V1\Factory\Action;
 use Psr\Container\ContainerInterface;
 use Folder\Api\V1\Facade\FolderUserFacade;
 use Folder\Api\V1\Facade\FolderFacade;
-use Zend\Expressive\Hal\ResourceGeneratorFactory;
+use Mezzio\Hal\ResourceGeneratorFactory;
 use Folder\Api\V1\Action\UpdateFolderAction;
 
 /**
@@ -34,7 +34,7 @@ class UpdateFolderFactory
             $container->get(FolderUserFacade::class),
             $container->get(FolderFacade::class),
             $halResourceGenerator($container),
-            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class)
+            $container->get(\Mezzio\Hal\HalResponseFactory::class)
         );
     }
 }

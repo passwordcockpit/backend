@@ -11,7 +11,7 @@
 
 namespace File;
 
-use Zend\ConfigAggregator\ConfigAggregator;
+use Laminas\ConfigAggregator\ConfigAggregator;
 
 class ConfigProvider
 {

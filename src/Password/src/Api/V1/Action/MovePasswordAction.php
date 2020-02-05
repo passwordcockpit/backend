@@ -16,13 +16,13 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Password\Api\V1\Facade\PasswordFacade;
-use Zend\Expressive\Hal\ResourceGenerator;
+use Mezzio\Hal\ResourceGenerator;
 use Password\Api\V1\Entity\Password;
 use User\Api\V1\Facade\PermissionFacade;
 use User\Api\V1\Facade\UserFacade;
-use Zend\Diactoros\Response\JsonResponse;
-use Zend\Expressive\Hal\HalResponseFactory;
-use Zend\ProblemDetails\ProblemDetailsResponseFactory;
+use Laminas\Diactoros\Response\JsonResponse;
+use Mezzio\Hal\HalResponseFactory;
+use Mezzio\ProblemDetails\ProblemDetailsResponseFactory;
 
 /**
  *

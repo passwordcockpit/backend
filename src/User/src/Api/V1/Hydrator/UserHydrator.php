@@ -11,7 +11,7 @@
 
 namespace User\Api\V1\Hydrator;
 
-use Zend\Hydrator\AbstractHydrator;
+use Laminas\Hydrator\AbstractHydrator;
 use User\Api\V1\Entity\User;
 
 class UserHydrator extends AbstractHydrator

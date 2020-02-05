@@ -9,9 +9,9 @@
 
 namespace Authentication\Api\V1\Adapter;
 
-use Zend\Authentication\Adapter\AdapterInterface;
-use Zend\Crypt\Password\Bcrypt;
-use Zend\Authentication\Result;
+use Laminas\Authentication\Adapter\AdapterInterface;
+use Laminas\Crypt\Password\Bcrypt;
+use Laminas\Authentication\Result;
 use User\Api\V1\Entity\User;
 use Doctrine\ORM\EntityManager;
 

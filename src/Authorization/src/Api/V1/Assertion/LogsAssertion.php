@@ -9,15 +9,15 @@
 
 namespace Authorization\Api\V1\Assertion;
 
-use Zend\Permissions\Rbac\AssertionInterface;
+use Laminas\Permissions\Rbac\AssertionInterface;
 use User\Api\V1\Facade\PermissionFacade;
 use Folder\Api\V1\Facade\FolderUserFacade;
 use Password\Api\V1\Facade\PasswordFacade;
 use Log\Api\V1\Facade\LogFacade;
-use Zend\Permissions\Rbac\RoleInterface;
+use Laminas\Permissions\Rbac\RoleInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Password\Api\V1\Entity\Password;
-use Zend\I18n\Translator\Translator;
+use Laminas\I18n\Translator\Translator;
 use App\Service\ProblemDetailsException;
 use Doctrine\ORM\EntityManagerInterface;
 use Log\Api\V1\Entity\Log;
@@ -188,7 +188,7 @@ class LogsAssertion implements AssertionInterface
      * @return bool
      */
     public function assert(
-        \Zend\Permissions\Rbac\Rbac $rbac,
+        \Laminas\Permissions\Rbac\Rbac $rbac,
         RoleInterface $role,
         string $permission
     ): bool {

@@ -13,7 +13,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Password\Api\V1\Facade\PasswordFacade;
-use Zend\Expressive\Hal\ResourceGenerator;
+use Mezzio\Hal\ResourceGenerator;
 
 /**
  * @SWG\Delete(
@@ -83,6 +83,6 @@ class DeletePasswordAction implements RequestHandlerInterface
             $request->getAttribute('id'),
             $user->getUserId()
         );
-        return new \Zend\Diactoros\Response\EmptyResponse();
+        return new \Laminas\Diactoros\Response\EmptyResponse();
     }
 }

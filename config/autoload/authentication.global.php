@@ -1,5 +1,5 @@
 <?php
-use Zend\Authentication\Adapter\AdapterInterface;
+use Laminas\Authentication\Adapter\AdapterInterface;
 
 /**
  * @see https://github.com/passwordcockpit/backend for the canonical source repository
@@ -16,7 +16,7 @@ return [
     ],
     'dependencies' => [
         'factories' => [
-            Zend\Authentication\Adapter\AdapterInterface::class =>
+            Laminas\Authentication\Adapter\AdapterInterface::class =>
                 Authentication\Api\V1\Factory\Adapter\DoctrineAdapterFactory::class //for LDAP Authentication\Api\V1\Factory\Adapter\LdapAdapterFactory::class
         ]
     ]

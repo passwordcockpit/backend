@@ -11,7 +11,7 @@ namespace Authentication\Api\V1\Factory\Facade;
 
 use Authentication\Api\V1\Facade\TokenUserFacade;
 use Doctrine\ORM\EntityManagerInterface;
-use Zend\I18n\Translator\Translator;
+use Laminas\I18n\Translator\Translator;
 use Psr\Container\ContainerInterface;
 
 class TokenUserFacadeFactory

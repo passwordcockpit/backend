@@ -11,7 +11,7 @@
 
 namespace Folder\Api\V1\Collection;
 
-use Zend\Paginator\Paginator;
+use Laminas\Paginator\Paginator;
 
 class FolderCollection extends Paginator
 {

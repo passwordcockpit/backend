@@ -72,7 +72,7 @@ class PasswordsTestCest
             ]
         ]);
 
-        // $fil = new Zend\Diactoros\UploadedFile(
+        // $fil = new Laminas\Diactoros\UploadedFile(
         //     codecept_data_dir('test.pdf'),
         //     filesize(codecept_data_dir('test.pdf')),
         //     0

@@ -10,18 +10,18 @@
 
 namespace App\Service;
 
-use Zend\Expressive\Helper\ServerUrlMiddleware;
-use Zend\Expressive\Helper\UrlHelperMiddleware;
+use Mezzio\Helper\ServerUrlMiddleware;
+use Mezzio\Helper\UrlHelperMiddleware;
 use App\Middleware\OptionsMiddleware;
-use Zend\Expressive\Middleware\ImplicitHeadMiddleware;
-use Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware;
-use Zend\Stratigility\Middleware\NotFoundHandler;
-use Zend\Stratigility\Middleware\ErrorHandler;
+use Mezzio\Middleware\ImplicitHeadMiddleware;
+use Mezzio\Helper\BodyParams\BodyParamsMiddleware;
+use Laminas\Stratigility\Middleware\NotFoundHandler;
+use Mezzio\ProblemDetails\ProblemDetailsMiddleware;
 use Psr\Container\ContainerInterface;
 use Authentication\Api\V1\Middleware\AuthenticationMiddleware;
 use Authorization\Api\V1\Middleware\AuthorizationMiddleware;
-use Zend\Expressive\Router\Middleware\RouteMiddleware;
-use Zend\Expressive\Router\Middleware\DispatchMiddleware;
+use Mezzio\Router\Middleware\RouteMiddleware;
+use Mezzio\Router\Middleware\DispatchMiddleware;
 use Tuupola\Middleware\JwtAuthentication;
 use App\Middleware\I18nMiddleware;
 use App\Middleware\CorsMiddleware;
@@ -56,7 +56,7 @@ class ApplicationDelegatorFactory
         $app->pipe(StrictTransportSecurityMiddleware::class);
         $app->pipe(ContentSecurityMiddleware::class);
 
-        $app->pipe(ErrorHandler::class);
+        $app->pipe(ProblemDetailsMiddleware::class);
         $app->pipe(ServerUrlMiddleware::class);
         $app->pipe(BodyParamsMiddleware::class);
 
@@ -78,7 +78,7 @@ class ApplicationDelegatorFactory
 
         $app->pipe(NotFoundHandler::class);
 
-        \Zend\Expressive\Container\ApplicationConfigInjectionDelegator::injectRoutesFromConfig(
+        \Mezzio\Container\ApplicationConfigInjectionDelegator::injectRoutesFromConfig(
             $app,
             $container->get('config')
         );

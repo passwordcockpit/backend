@@ -12,7 +12,7 @@ namespace Folder\Api\V1\Factory\Action;
 use Folder\Api\V1\Action\CreateFolderAction;
 use Psr\Container\ContainerInterface;
 use Folder\Api\V1\Facade\FolderFacade;
-use Zend\Expressive\Hal\ResourceGeneratorFactory;
+use Mezzio\Hal\ResourceGeneratorFactory;
 
 /**
  * Description of CreateFolderFactory
@@ -32,7 +32,7 @@ class CreateFolderFactory
         return new CreateFolderAction(
             $container->get(FolderFacade::class),
             $halResourceGenerator($container),
-            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class)
+            $container->get(\Mezzio\Hal\HalResponseFactory::class)
         );
     }
 }

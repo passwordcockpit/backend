@@ -1,6 +1,6 @@
 <?php
 
-use Zend\ConfigAggregator\ConfigAggregator;
+use Laminas\ConfigAggregator\ConfigAggregator;
 
 return [
     // Toggle the configuration cache. Set this to boolean false, or remove the
@@ -12,7 +12,7 @@ return [
     // Enable debugging; typically used to provide debugging information within templates.
     'debug' => false,
 
-    'zend-expressive' => [
+    'mezzio' => [
         // Enable programmatic pipeline: Any `middleware_pipeline` or `routes`
         // configuration will be ignored when creating the `Application` instance.
         'programmatic_pipeline' => true

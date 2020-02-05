@@ -31,7 +31,7 @@ class AuthenticationValidationMiddlewareFactory
                 'required' => true,
                 'validators' => [
                     [
-                        'name' => \Zend\Validator\NotEmpty::class
+                        'name' => \Laminas\Validator\NotEmpty::class
                     ]
                 ]
             ],
@@ -40,7 +40,7 @@ class AuthenticationValidationMiddlewareFactory
                 'required' => true,
                 'validators' => [
                     [
-                        'name' => \Zend\Validator\NotEmpty::class
+                        'name' => \Laminas\Validator\NotEmpty::class
                     ]
                 ]
             ]

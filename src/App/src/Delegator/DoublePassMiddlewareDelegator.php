@@ -10,7 +10,7 @@ namespace App\Delegator;
 
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
-use function Zend\Stratigility\doublePassMiddleware;
+use function Laminas\Stratigility\doublePassMiddleware;
 
 /*
  * Delegator to map to any services that continue to use the double-pass signature and it didn't support the new PSR-15 signature

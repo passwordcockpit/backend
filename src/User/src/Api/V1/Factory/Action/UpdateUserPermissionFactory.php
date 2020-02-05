@@ -13,7 +13,7 @@ use Psr\Container\ContainerInterface;
 use User\Api\V1\Action\UpdateUserPermissionAction;
 use User\Api\V1\Facade\UserFacade;
 use User\Api\V1\Facade\PermissionFacade;
-use Zend\Expressive\Hal\ResourceGeneratorFactory;
+use Mezzio\Hal\ResourceGeneratorFactory;
 
 /**
  * Description of UpdateUserPermissionFactory
@@ -34,7 +34,7 @@ class UpdateUserPermissionFactory
             $container->get(UserFacade::class),
             $container->get(PermissionFacade::class),
             $halResourceGenerator($container),
-            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class)
+            $container->get(\Mezzio\Hal\HalResponseFactory::class)
         );
     }
 }

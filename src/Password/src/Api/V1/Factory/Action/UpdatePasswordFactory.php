@@ -11,9 +11,9 @@ namespace Password\Api\V1\Factory\Action;
 
 use Psr\Container\ContainerInterface;
 use Password\Api\V1\Facade\PasswordFacade;
-use Zend\Expressive\Hal\ResourceGeneratorFactory;
+use Mezzio\Hal\ResourceGeneratorFactory;
 use Password\Api\V1\Action\UpdatePasswordAction;
-use Zend\ProblemDetails\ProblemDetailsResponseFactory;
+use Mezzio\ProblemDetails\ProblemDetailsResponseFactory;
 
 /**
  * Description of UpdatePasswordFactory
@@ -35,7 +35,7 @@ class UpdatePasswordFactory
             $container->get(ProblemDetailsResponseFactory::class),
             $container->get('config')['authentication'],
             $halResourceGenerator($container),
-            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class)
+            $container->get(\Mezzio\Hal\HalResponseFactory::class)
         );
     }
 }

@@ -35,6 +35,6 @@ class ListFileAction implements RequestHandlerInterface
      */
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
-        return new \Zend\Diactoros\Response\EmptyResponse();
+        return new \Laminas\Diactoros\Response\EmptyResponse();
     }
 }

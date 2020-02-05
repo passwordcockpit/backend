@@ -11,7 +11,7 @@ namespace Authentication\Api\V1\Factory\Facade;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Container\ContainerInterface;
-use Zend\I18n\Translator\Translator;
+use Laminas\I18n\Translator\Translator;
 use Authentication\Api\V1\Facade\LoginRequestFacade;
 
 class LoginRequestFacadeFactory

@@ -12,12 +12,12 @@ namespace Password\Api\V1\Factory\Facade;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Container\ContainerInterface;
 use Password\Api\V1\Facade\PasswordFacade;
-use Zend\Crypt\BlockCipher;
-use Zend\Crypt\FileCipher;
+use Laminas\Crypt\BlockCipher;
+use Laminas\Crypt\FileCipher;
 use Folder\Api\V1\Facade\FolderFacade;
 use Log\Api\V1\Facade\LogFacade;
 use File\Api\V1\Facade\FileFacade;
-use Zend\I18n\Translator\Translator;
+use Laminas\I18n\Translator\Translator;
 
 /**
  * Description of PasswordFacadeFactory

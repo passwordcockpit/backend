@@ -11,7 +11,7 @@ namespace Password\Api\V1\Factory\Action;
 
 use Psr\Container\ContainerInterface;
 use Password\Api\V1\Facade\PasswordFacade;
-use Zend\Expressive\Hal\ResourceGeneratorFactory;
+use Mezzio\Hal\ResourceGeneratorFactory;
 use Password\Api\V1\Action\CreatePasswordAction;
 
 /**
@@ -32,7 +32,7 @@ class CreatePasswordFactory
         return new CreatePasswordAction(
             $container->get(PasswordFacade::class),
             $halResourceGenerator($container),
-            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class)
+            $container->get(\Mezzio\Hal\HalResponseFactory::class)
         );
     }
 }

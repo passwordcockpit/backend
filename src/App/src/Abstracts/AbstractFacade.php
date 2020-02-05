@@ -10,8 +10,8 @@
 namespace App\Abstracts;
 
 use Doctrine\ORM\EntityManager;
-use Zend\Hydrator\Reflection;
-use Zend\I18n\Translator\Translator;
+use Laminas\Hydrator\Reflection;
+use Laminas\I18n\Translator\Translator;
 
 abstract class AbstractFacade implements FacadeInterface
 {

@@ -10,11 +10,11 @@
 namespace File\Api\V1\Factory\Action;
 
 use Interop\Container\ContainerInterface;
-use Zend\Expressive\Hal\ResourceGeneratorFactory;
+use Mezzio\Hal\ResourceGeneratorFactory;
 use File\Api\V1\Action\DownloadFileAction;
 use File\Api\V1\Facade\FileFacade;
-use Zend\Crypt\FileCipher;
-use Zend\I18n\Translator\Translator;
+use Laminas\Crypt\FileCipher;
+use Laminas\I18n\Translator\Translator;
 
 class DownloadFileFactory
 {
@@ -30,7 +30,7 @@ class DownloadFileFactory
 
         return new DownloadFileAction(
             $resourceGenerator($container),
-            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class),
+            $container->get(\Mezzio\Hal\HalResponseFactory::class),
             $container->get(FileFacade::class),
             $container->get(Translator::class),
             $container->get("config")['upload_config'],

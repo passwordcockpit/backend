@@ -13,8 +13,8 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Folder\Api\V1\Facade\FolderFacade;
-use Zend\Expressive\Hal\ResourceGenerator;
-use Zend\Expressive\Hal\HalResponseFactory;
+use Mezzio\Hal\ResourceGenerator;
+use Mezzio\Hal\HalResponseFactory;
 use Password\Api\V1\Collection\PasswordCollection;
 use Password\Api\V1\Facade\PasswordFacade;
 use File\Api\V1\Facade\FileFacade;
@@ -106,7 +106,7 @@ class ListPasswordFilesAction implements RequestHandlerInterface
     {
         $passwordId = $request->getAttribute('id');
         $files = $this->fileFacade->getFiles($passwordId);
-        $filesArrayAdapter = new \Zend\Paginator\Adapter\ArrayAdapter($files);
+        $filesArrayAdapter = new \Laminas\Paginator\Adapter\ArrayAdapter($files);
         $filesCollection = new PasswordCollection($filesArrayAdapter);
         $filesCollection->setDefaultItemCountPerPage(PHP_INT_MAX);
         $resource = $this->halResourceGenerator->fromObject(
