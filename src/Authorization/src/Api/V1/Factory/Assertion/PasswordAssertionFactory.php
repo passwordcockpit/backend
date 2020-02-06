@@ -13,7 +13,7 @@ use Interop\Container\ContainerInterface;
 use Authorization\Api\V1\Assertion\PasswordAssertion;
 use Doctrine\ORM\EntityManagerInterface;
 use Folder\Api\V1\Facade\FolderUserFacade;
-use Zend\I18n\Translator\Translator;
+use Laminas\I18n\Translator\Translator;
 
 class PasswordAssertionFactory
 {

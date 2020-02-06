@@ -13,7 +13,7 @@ use Authentication\Api\V1\Action\AuthenticationCreateAction;
 use Doctrine\ORM\EntityManagerInterface;
 use User\Api\V1\Facade\PermissionFacade;
 use Authentication\Api\V1\Facade\TokenUserFacade;
-use Zend\I18n\Translator\Translator;
+use Laminas\I18n\Translator\Translator;
 use Authentication\Api\V1\Facade\LoginRequestFacade;
 
 class AuthenticationCreateFactory
@@ -30,7 +30,7 @@ class AuthenticationCreateFactory
             $container->get('config')['authentication'],
             $container->get(Translator::class),
             $container->get(
-                \Zend\Authentication\Adapter\AdapterInterface::class
+                \Laminas\Authentication\Adapter\AdapterInterface::class
             ),
             $container->get(TokenUserFacade::class),
             $container->get(LoginRequestFacade::class)

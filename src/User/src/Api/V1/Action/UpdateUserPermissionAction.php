@@ -16,8 +16,8 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use User\Api\V1\Facade\UserFacade;
 use User\Api\V1\Facade\PermissionFacade;
-use Zend\Expressive\Hal\ResourceGenerator;
-use Zend\Expressive\Hal\HalResponseFactory;
+use Mezzio\Hal\ResourceGenerator;
+use Mezzio\Hal\HalResponseFactory;
 use User\Api\V1\Entity\Permission;
 
 /**

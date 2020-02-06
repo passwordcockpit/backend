@@ -18,7 +18,7 @@ use User\Api\V1\Entity\User;
 use Doctrine\ORM\EntityManager;
 use Psr\Http\Message\ServerRequestInterface;
 use App\Service\ProblemDetailsException;
-use Zend\I18n\Translator\Translator;
+use Laminas\I18n\Translator\Translator;
 use User\Api\V1\Entity\Permission;
 use User\Api\V1\Hydrator\UserPermissionHydrator;
 

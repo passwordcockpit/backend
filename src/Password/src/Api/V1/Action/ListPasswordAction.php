@@ -14,10 +14,10 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Password\Api\V1\Facade\PasswordFacade;
 use User\Api\V1\Facade\PermissionFacade;
-use Zend\Expressive\Hal\HalResponseFactory;
-use Zend\Expressive\Hal\ResourceGenerator;
+use Mezzio\Hal\HalResponseFactory;
+use Mezzio\Hal\ResourceGenerator;
 use Password\Api\V1\Collection\PasswordCollection;
-use Zend\Expressive\Hal\HalResource;
+use Mezzio\Hal\HalResource;
 
 /**
  * @SWG\Get(
@@ -134,7 +134,7 @@ class ListPasswordAction implements RequestHandlerInterface
 
         // transforming passwords to collection,
         // so we can create a HalResource
-        $passwordsArrayAdapter = new \Zend\Paginator\Adapter\ArrayAdapter(
+        $passwordsArrayAdapter = new \Laminas\Paginator\Adapter\ArrayAdapter(
             $passwords
         );
         $passwordsCollection = new PasswordCollection($passwordsArrayAdapter);

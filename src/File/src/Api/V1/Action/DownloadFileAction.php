@@ -12,14 +12,14 @@ namespace File\Api\V1\Action;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Expressive\Hal\ResourceGenerator;
-use Zend\Expressive\Hal\HalResponseFactory;
+use Mezzio\Hal\ResourceGenerator;
+use Mezzio\Hal\HalResponseFactory;
 use File\Api\V1\Facade\FileFacade;
 use App\Service\ProblemDetailsException;
-use Zend\I18n\Translator\Translator;
-use Zend\Diactoros\Stream;
-use Zend\Diactoros\Response;
-use Zend\Crypt\FileCipher;
+use Laminas\I18n\Translator\Translator;
+use Laminas\Diactoros\Stream;
+use Laminas\Diactoros\Response;
+use Laminas\Crypt\FileCipher;
 
 /**
  *

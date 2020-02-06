@@ -11,7 +11,7 @@ namespace Log\Api\V1\Factory\Action;
 
 use Psr\Container\ContainerInterface;
 use Log\Api\V1\Facade\LogFacade;
-use Zend\Expressive\Hal\ResourceGeneratorFactory;
+use Mezzio\Hal\ResourceGeneratorFactory;
 use Log\Api\V1\Action\GetLogAction;
 
 /**
@@ -32,7 +32,7 @@ class GetLogFactory
         return new GetLogAction(
             $container->get(LogFacade::class),
             $halResourceGenerator($container),
-            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class)
+            $container->get(\Mezzio\Hal\HalResponseFactory::class)
         );
     }
 }

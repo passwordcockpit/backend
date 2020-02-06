@@ -12,7 +12,7 @@ use Interop\Container\ContainerInterface;
 use Authentication\Api\V1\Middleware\AuthenticationMiddleware;
 use User\Api\V1\Facade\UserFacade;
 use Authentication\Api\V1\Facade\TokenUserFacade;
-use Zend\I18n\Translator\Translator;
+use Laminas\I18n\Translator\Translator;
 
 class AuthenticationMiddlewareFactory
 {
@@ -30,7 +30,7 @@ class AuthenticationMiddlewareFactory
             $container->get(UserFacade::class),
             $container->get(TokenUserFacade::class),
             $container->get(
-                \Zend\Authentication\Adapter\AdapterInterface::class
+                \Laminas\Authentication\Adapter\AdapterInterface::class
             )
         );
     }

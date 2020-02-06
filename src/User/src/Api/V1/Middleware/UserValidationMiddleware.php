@@ -18,8 +18,8 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use App\Service\ProblemDetailsException;
-use Zend\InputFilter\InputFilter;
-use Zend\InputFilter\Factory as InputFilterFactory;
+use Laminas\InputFilter\InputFilter;
+use Laminas\InputFilter\Factory as InputFilterFactory;
 use User\Api\V1\Entity\User;
 
 class UserValidationMiddleware implements MiddlewareInterface
@@ -102,21 +102,21 @@ class UserValidationMiddleware implements MiddlewareInterface
                 'continue_if_empty' => $this->update,
                 'filters' => [
                     [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                         'options' => [
                             'charlist' => ": "
                         ],
                         'charlist' => ' '
                     ],
-                    ['name' => \Zend\Filter\StripTags::class],
-                    ['name' => \Zend\Filter\StripNewlines::class]
+                    ['name' => \Laminas\Filter\StripTags::class],
+                    ['name' => \Laminas\Filter\StripNewlines::class]
                 ],
                 'validators' => [
                     [
-                        'name' => \Zend\Validator\NotEmpty::class
+                        'name' => \Laminas\Validator\NotEmpty::class
                     ],
                     [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 2,
                             'max' => 45
@@ -137,23 +137,23 @@ class UserValidationMiddleware implements MiddlewareInterface
                 'required' => !$this->update,
                 'continue_if_empty' => true,
                 'filters' => [
-                    ['name' => \Zend\Filter\StringTrim::class],
-                    ['name' => \Zend\Filter\StripTags::class],
-                    ['name' => \Zend\Filter\StripNewlines::class]
+                    ['name' => \Laminas\Filter\StringTrim::class],
+                    ['name' => \Laminas\Filter\StripTags::class],
+                    ['name' => \Laminas\Filter\StripNewlines::class]
                 ],
                 'validators' => [
                     [
-                        'name' => \Zend\Validator\NotEmpty::class
+                        'name' => \Laminas\Validator\NotEmpty::class
                     ],
                     [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 8,
                             'max' => 200
                         ]
                     ],
                     [
-                        'name' => \Zend\Validator\Regex::class,
+                        'name' => \Laminas\Validator\Regex::class,
                         'options' => [
                             'pattern' =>
                                 '/^\S*(?=\S*[\W])(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/'
@@ -166,16 +166,16 @@ class UserValidationMiddleware implements MiddlewareInterface
                 'required' => !$this->update,
                 'continue_if_empty' => true,
                 'filters' => [
-                    ['name' => \Zend\Filter\StringTrim::class],
-                    ['name' => \Zend\Filter\StripTags::class],
-                    ['name' => \Zend\Filter\StripNewlines::class]
+                    ['name' => \Laminas\Filter\StringTrim::class],
+                    ['name' => \Laminas\Filter\StripTags::class],
+                    ['name' => \Laminas\Filter\StripNewlines::class]
                 ],
                 'validators' => [
                     [
-                        'name' => \Zend\Validator\NotEmpty::class
+                        'name' => \Laminas\Validator\NotEmpty::class
                     ],
                     [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 45
@@ -188,16 +188,16 @@ class UserValidationMiddleware implements MiddlewareInterface
                 'required' => !$this->update,
                 'continue_if_empty' => true,
                 'filters' => [
-                    ['name' => \Zend\Filter\StringTrim::class],
-                    ['name' => \Zend\Filter\StripTags::class],
-                    ['name' => \Zend\Filter\StripNewlines::class]
+                    ['name' => \Laminas\Filter\StringTrim::class],
+                    ['name' => \Laminas\Filter\StripTags::class],
+                    ['name' => \Laminas\Filter\StripNewlines::class]
                 ],
                 'validators' => [
                     [
-                        'name' => \Zend\Validator\NotEmpty::class
+                        'name' => \Laminas\Validator\NotEmpty::class
                     ],
                     [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 45
@@ -210,22 +210,22 @@ class UserValidationMiddleware implements MiddlewareInterface
                 'required' => !$this->update,
                 'continue_if_empty' => $this->update,
                 'filters' => [
-                    ['name' => \Zend\Filter\StringTrim::class],
-                    ['name' => \Zend\Filter\StripTags::class],
-                    ['name' => \Zend\Filter\StripNewlines::class]
+                    ['name' => \Laminas\Filter\StringTrim::class],
+                    ['name' => \Laminas\Filter\StripTags::class],
+                    ['name' => \Laminas\Filter\StripNewlines::class]
                 ],
                 'validators' => [
                     [
-                        'name' => \Zend\Validator\NotEmpty::class
+                        'name' => \Laminas\Validator\NotEmpty::class
                     ],
                     [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'max' => 45
                         ]
                     ],
                     [
-                        'name' => \Zend\Validator\EmailAddress::class
+                        'name' => \Laminas\Validator\EmailAddress::class
                     ],
                     [
                         'name' => \App\Validator\NoEntityExists::class,
@@ -242,23 +242,23 @@ class UserValidationMiddleware implements MiddlewareInterface
                 'required' => !$this->update,
                 'continue_if_empty' => $this->update,
                 'filters' => [
-                    ['name' => \Zend\Filter\StringTrim::class],
-                    ['name' => \Zend\Filter\StripTags::class],
-                    ['name' => \Zend\Filter\StripNewlines::class]
+                    ['name' => \Laminas\Filter\StringTrim::class],
+                    ['name' => \Laminas\Filter\StripTags::class],
+                    ['name' => \Laminas\Filter\StripNewlines::class]
                 ],
                 'validators' => [
                     [
-                        'name' => \Zend\Validator\NotEmpty::class
+                        'name' => \Laminas\Validator\NotEmpty::class
                     ],
                     [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 2,
                             'max' => 2
                         ]
                     ],
                     [
-                        'name' => \Zend\Validator\InArray::class,
+                        'name' => \Laminas\Validator\InArray::class,
                         'options' => [
                             'haystack' => $this->languages
                         ]
@@ -269,23 +269,23 @@ class UserValidationMiddleware implements MiddlewareInterface
                 'name' => 'phone',
                 'required' => false,
                 'filters' => [
-                    ['name' => \Zend\Filter\StringTrim::class],
-                    ['name' => \Zend\Filter\StripTags::class],
-                    ['name' => \Zend\Filter\StripNewlines::class]
+                    ['name' => \Laminas\Filter\StringTrim::class],
+                    ['name' => \Laminas\Filter\StripTags::class],
+                    ['name' => \Laminas\Filter\StripNewlines::class]
                 ],
                 'validators' => [
                     [
-                        'name' => \Zend\Validator\NotEmpty::class
+                        'name' => \Laminas\Validator\NotEmpty::class
                     ],
                     [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 45
                         ]
                     ],
                     [
-                        'name' => \Zend\Validator\Regex::class,
+                        'name' => \Laminas\Validator\Regex::class,
                         'options' => [
                             'pattern' => '/^[\d-]+$/'
                         ]
@@ -299,20 +299,20 @@ class UserValidationMiddleware implements MiddlewareInterface
                 'continue_if_empty' => true,
                 'filters' => [
                     [
-                        'name' => \Zend\Filter\Boolean::class,
+                        'name' => \Laminas\Filter\Boolean::class,
                         'options' => [
                             'casting' => false,
                             'type' => [
-                                \Zend\Filter\Boolean::TYPE_NULL,
-                                \Zend\Filter\Boolean::TYPE_BOOLEAN,
-                                \Zend\Filter\Boolean::TYPE_INTEGER
+                                \Laminas\Filter\Boolean::TYPE_NULL,
+                                \Laminas\Filter\Boolean::TYPE_BOOLEAN,
+                                \Laminas\Filter\Boolean::TYPE_INTEGER
                             ]
                         ]
                     ]
                 ],
                 'validators' => [
                     [
-                        'name' => \Zend\Validator\Callback::class,
+                        'name' => \Laminas\Validator\Callback::class,
                         'options' => [
                             'callback' => function ($value) {
                                 return is_bool($value);

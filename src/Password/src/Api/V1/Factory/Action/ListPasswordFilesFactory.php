@@ -12,7 +12,7 @@ namespace Password\Api\V1\Factory\Action;
 use Password\Api\V1\Action\ListPasswordFilesAction;
 use Psr\Container\ContainerInterface;
 use File\Api\V1\Facade\FileFacade;
-use Zend\Expressive\Hal\ResourceGeneratorFactory;
+use Mezzio\Hal\ResourceGeneratorFactory;
 use Password\Api\V1\Facade\PasswordFacade;
 
 /**
@@ -34,7 +34,7 @@ class ListPasswordFilesFactory
             $container->get(FileFacade::class),
             $container->get(PasswordFacade::class),
             $halResourceGenerator($container),
-            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class)
+            $container->get(\Mezzio\Hal\HalResponseFactory::class)
         );
     }
 }

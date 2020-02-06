@@ -13,9 +13,9 @@ use Psr\Container\ContainerInterface;
 use Folder\Api\V1\Facade\FolderUserFacade;
 use Folder\Api\V1\Facade\FolderFacade;
 use User\Api\V1\Facade\UserFacade;
-use Zend\Expressive\Hal\ResourceGeneratorFactory;
+use Mezzio\Hal\ResourceGeneratorFactory;
 use Folder\Api\V1\Action\GetFolderUserAction;
-use Zend\I18n\Translator\Translator;
+use Laminas\I18n\Translator\Translator;
 
 /**
  * Description of GetFolderUserFactory
@@ -38,7 +38,7 @@ class GetFolderUserFactory
             $container->get(UserFacade::class),
             $container->get(Translator::class),
             $halResourceGenerator($container),
-            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class)
+            $container->get(\Mezzio\Hal\HalResponseFactory::class)
         );
     }
 }

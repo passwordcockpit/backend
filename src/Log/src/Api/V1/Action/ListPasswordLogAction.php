@@ -12,9 +12,9 @@ namespace Log\Api\V1\Action;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Expressive\Hal\HalResponseFactory;
+use Mezzio\Hal\HalResponseFactory;
 use Log\Api\V1\Facade\LogFacade;
-use Zend\Expressive\Hal\ResourceGenerator;
+use Mezzio\Hal\ResourceGenerator;
 use Log\Api\V1\Collection\PasswordLogCollection;
 
 /**
@@ -106,7 +106,7 @@ class ListPasswordLogAction implements RequestHandlerInterface
             return $b->getActionDate()->getTimestamp() -
                 $a->getActionDate()->getTimestamp();
         });
-        $logsArrayAdapter = new \Zend\Paginator\Adapter\ArrayAdapter($logs);
+        $logsArrayAdapter = new \Laminas\Paginator\Adapter\ArrayAdapter($logs);
         $logsCollection = new PasswordLogCollection($logsArrayAdapter);
         $logsCollection->setDefaultItemCountPerPage(
             $this->paginatorConfig['small']

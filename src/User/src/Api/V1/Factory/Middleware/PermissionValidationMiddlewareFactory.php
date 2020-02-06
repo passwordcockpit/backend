@@ -31,7 +31,7 @@ class PermissionValidationMiddlewareFactory
                 'required' => false,
                 'validators' => [
                     [
-                        'name' => \Zend\Validator\Digits::class
+                        'name' => \Laminas\Validator\Digits::class
                     ]
                 ]
             ],
@@ -41,19 +41,19 @@ class PermissionValidationMiddlewareFactory
                 'allow_empty' => true,
                 'filters' => [
                     [
-                        'name' => \Zend\Filter\Boolean::class,
+                        'name' => \Laminas\Filter\Boolean::class,
                         'options' => [
                             'casting' => false,
                             'type' => [
-                                \Zend\Filter\Boolean::TYPE_BOOLEAN,
-                                \Zend\Filter\Boolean::TYPE_INTEGER
+                                \Laminas\Filter\Boolean::TYPE_BOOLEAN,
+                                \Laminas\Filter\Boolean::TYPE_INTEGER
                             ]
                         ]
                     ]
                 ],
                 'validators' => [
                     [
-                        'name' => \Zend\Validator\Callback::class,
+                        'name' => \Laminas\Validator\Callback::class,
                         'options' => [
                             'callback' => function ($value) {
                                 return is_bool($value);
@@ -68,19 +68,19 @@ class PermissionValidationMiddlewareFactory
                 'allow_empty' => true,
                 'filters' => [
                     [
-                        'name' => \Zend\Filter\Boolean::class,
+                        'name' => \Laminas\Filter\Boolean::class,
                         'options' => [
                             'casting' => false,
                             'type' => [
-                                \Zend\Filter\Boolean::TYPE_BOOLEAN,
-                                \Zend\Filter\Boolean::TYPE_INTEGER
+                                \Laminas\Filter\Boolean::TYPE_BOOLEAN,
+                                \Laminas\Filter\Boolean::TYPE_INTEGER
                             ]
                         ]
                     ]
                 ],
                 'validators' => [
                     [
-                        'name' => \Zend\Validator\Callback::class,
+                        'name' => \Laminas\Validator\Callback::class,
                         'options' => [
                             'callback' => function ($value) {
                                 return is_bool($value);
@@ -95,19 +95,19 @@ class PermissionValidationMiddlewareFactory
                 'allow_empty' => true,
                 'filters' => [
                     [
-                        'name' => \Zend\Filter\Boolean::class,
+                        'name' => \Laminas\Filter\Boolean::class,
                         'options' => [
                             'casting' => false,
                             'type' => [
-                                \Zend\Filter\Boolean::TYPE_BOOLEAN,
-                                \Zend\Filter\Boolean::TYPE_INTEGER
+                                \Laminas\Filter\Boolean::TYPE_BOOLEAN,
+                                \Laminas\Filter\Boolean::TYPE_INTEGER
                             ]
                         ]
                     ]
                 ],
                 'validators' => [
                     [
-                        'name' => \Zend\Validator\Callback::class,
+                        'name' => \Laminas\Validator\Callback::class,
                         'options' => [
                             'callback' => function ($value) {
                                 return is_bool($value);
@@ -122,19 +122,19 @@ class PermissionValidationMiddlewareFactory
                 'allow_empty' => true,
                 'filters' => [
                     [
-                        'name' => \Zend\Filter\Boolean::class,
+                        'name' => \Laminas\Filter\Boolean::class,
                         'options' => [
                             'casting' => false,
                             'type' => [
-                                \Zend\Filter\Boolean::TYPE_BOOLEAN,
-                                \Zend\Filter\Boolean::TYPE_INTEGER
+                                \Laminas\Filter\Boolean::TYPE_BOOLEAN,
+                                \Laminas\Filter\Boolean::TYPE_INTEGER
                             ]
                         ]
                     ]
                 ],
                 'validators' => [
                     [
-                        'name' => \Zend\Validator\Callback::class,
+                        'name' => \Laminas\Validator\Callback::class,
                         'options' => [
                             'callback' => function ($value) {
                                 return is_bool($value);

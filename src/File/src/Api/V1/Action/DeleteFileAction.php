@@ -12,7 +12,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 use File\Api\V1\Facade\FileFacade;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Expressive\Hal\ResourceGenerator;
+use Mezzio\Hal\ResourceGenerator;
 
 /**
  * @SWG\Delete(
@@ -80,7 +80,7 @@ class DeleteFileAction implements RequestHandlerInterface
     {
         $result = $this->fileFacade->delete($request->getAttribute('id'));
         if ($result) {
-            return new \Zend\Diactoros\Response\EmptyResponse();
+            return new \Laminas\Diactoros\Response\EmptyResponse();
         }
     }
 }

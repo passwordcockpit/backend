@@ -11,7 +11,7 @@ namespace Log\Api\V1\Factory\Hydrator;
 
 use Psr\Container\ContainerInterface;
 use Log\Api\V1\Hydrator\LogHydrator;
-use Zend\I18n\Translator\Translator;
+use Laminas\I18n\Translator\Translator;
 
 /**
  * Description of GetPasswordLogFactory

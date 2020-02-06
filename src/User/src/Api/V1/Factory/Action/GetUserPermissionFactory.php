@@ -13,7 +13,7 @@ use Psr\Container\ContainerInterface;
 use User\Api\V1\Action\GetUserPermissionAction;
 use User\Api\V1\Facade\UserFacade;
 use User\Api\V1\Facade\PermissionFacade;
-use Zend\Expressive\Hal\ResourceGeneratorFactory;
+use Mezzio\Hal\ResourceGeneratorFactory;
 
 /**
  * Description of GetUserRightFactory
@@ -33,7 +33,7 @@ class GetUserPermissionFactory
         return new GetUserPermissionAction(
             $container->get(UserFacade::class),
             $halResourceGenerator($container),
-            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class),
+            $container->get(\Mezzio\Hal\HalResponseFactory::class),
             $container->get(PermissionFacade::class)
         );
     }

@@ -15,8 +15,8 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Folder\Api\V1\Facade\FolderUserFacade;
-use Zend\Expressive\Hal\ResourceGenerator;
-use Zend\Expressive\Hal\HalResponseFactory;
+use Mezzio\Hal\ResourceGenerator;
+use Mezzio\Hal\HalResponseFactory;
 use User\Api\V1\Collection\UserCollection;
 
 /**
@@ -99,7 +99,7 @@ class ListFolderUserAction implements RequestHandlerInterface
         foreach ($users as $user) {
             $user->setCompleteUser();
         }
-        $usersArrayAdapter = new \Zend\Paginator\Adapter\ArrayAdapter($users);
+        $usersArrayAdapter = new \Laminas\Paginator\Adapter\ArrayAdapter($users);
         $usersCollection = new UserCollection($usersArrayAdapter);
         $usersCollection->setDefaultItemCountPerPage(PHP_INT_MAX);
         $resource = $this->halResourceGenerator->fromObject(

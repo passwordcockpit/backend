@@ -10,9 +10,9 @@
 namespace Log\Api\V1\Hydrator;
 
 use Log\Api\V1\Entity\Log;
-use Zend\Hydrator\AbstractHydrator;
+use Laminas\Hydrator\AbstractHydrator;
 use App\Service\DateConverter;
-use Zend\I18n\Translator\Translator;
+use Laminas\I18n\Translator\Translator;
 
 /**
  * Description of LogHydrator

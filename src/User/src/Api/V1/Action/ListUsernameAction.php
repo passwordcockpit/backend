@@ -12,9 +12,9 @@ namespace User\Api\V1\Action;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Expressive\Hal\HalResponseFactory;
+use Mezzio\Hal\HalResponseFactory;
 use User\Api\V1\Facade\UserFacade;
-use Zend\Expressive\Hal\ResourceGenerator;
+use Mezzio\Hal\ResourceGenerator;
 use User\Api\V1\Collection\UserCollection;
 
 /**
@@ -75,7 +75,7 @@ class ListUsernameAction implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $users = $this->userFacade->getAllUsernames(); // ottengo la lista users dalla userFacade
-        $usersArrayAdapter = new \Zend\Paginator\Adapter\ArrayAdapter($users);
+        $usersArrayAdapter = new \Laminas\Paginator\Adapter\ArrayAdapter($users);
         $usersCollection = new UserCollection($usersArrayAdapter);
         $usersCollection->setDefaultItemCountPerPage(PHP_INT_MAX); // setto al Paginator la dimensione uguale al MAX INT di PHP
         $resource = $this->halResourceGenerator->fromObject(

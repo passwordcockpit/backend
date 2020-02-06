@@ -14,7 +14,7 @@ namespace Folder\Api\V1\Facade;
 use App\Abstracts\AbstractFacade;
 use App\Service\ProblemDetailsException;
 use Doctrine\ORM\EntityManager;
-use Zend\I18n\Translator\Translator;
+use Laminas\I18n\Translator\Translator;
 use User\Api\V1\Facade\UserFacade;
 use Folder\Api\V1\Facade\FolderFacade;
 use Folder\Api\V1\Entity\FolderUser;

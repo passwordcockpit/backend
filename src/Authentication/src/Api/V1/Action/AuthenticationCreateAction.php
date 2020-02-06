@@ -11,13 +11,13 @@ namespace Authentication\Api\V1\Action;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Diactoros\Response\JsonResponse;
+use Laminas\Diactoros\Response\JsonResponse;
 use Firebase\JWT\JWT;
 use User\Api\V1\Entity\User;
 use App\Service\ProblemDetailsException;
-use Zend\I18n\Translator\Translator;
-use Zend\Authentication\Adapter\AdapterInterface;
-use Zend\Authentication\Result;
+use Laminas\I18n\Translator\Translator;
+use Laminas\Authentication\Adapter\AdapterInterface;
+use Laminas\Authentication\Result;
 use Authentication\Api\V1\Facade\TokenUserFacade;
 use Authentication\Api\V1\Facade\LoginRequestFacade;
 

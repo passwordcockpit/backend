@@ -14,7 +14,7 @@ namespace App\Service;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Zend\ProblemDetails\ProblemDetailsResponseFactory;
+use Mezzio\ProblemDetails\ProblemDetailsResponseFactory;
 
 class ErrorResponseGenerator
 {

@@ -31,10 +31,10 @@ class FolderUserValidationMiddlewareFactory
                 'required' => true,
                 'validators' => [
                     [
-                        'name' => \Zend\Validator\Digits::class
+                        'name' => \Laminas\Validator\Digits::class
                     ],
                     [
-                        'name' => \Zend\Validator\Between::class,
+                        'name' => \Laminas\Validator\Between::class,
                         'options' => [
                             'min' => 1,
                             'max' => 2

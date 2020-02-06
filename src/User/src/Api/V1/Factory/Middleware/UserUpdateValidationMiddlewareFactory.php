@@ -13,9 +13,9 @@ namespace User\Api\V1\Factory\Middleware;
 
 use Psr\Container\ContainerInterface;
 use User\Api\V1\Middleware\UserValidationMiddleware;
-use Zend\InputFilter\Factory as InputFilterFactory;
-use Zend\InputFilter\InputFilterPluginManager;
-use Zend\I18n\Translator\Translator;
+use Laminas\InputFilter\Factory as InputFilterFactory;
+use Laminas\InputFilter\InputFilterPluginManager;
+use Laminas\I18n\Translator\Translator;
 
 class UserUpdateValidationMiddlewareFactory
 {

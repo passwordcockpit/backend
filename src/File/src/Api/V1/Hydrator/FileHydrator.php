@@ -10,7 +10,7 @@ namespace File\Api\V1\Hydrator;
 
 use File\Api\V1\Entity\File;
 
-class FileHydrator extends \Zend\Hydrator\AbstractHydrator
+class FileHydrator extends \Laminas\Hydrator\AbstractHydrator
 {
     /**
      * @param MimeTypeRepository $mimeTypeRepository

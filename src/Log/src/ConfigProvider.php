@@ -9,7 +9,7 @@
 
 namespace Log;
 
-use Zend\ConfigAggregator\ConfigAggregator;
+use Laminas\ConfigAggregator\ConfigAggregator;
 
 /**
  * Description of ConfigProvider

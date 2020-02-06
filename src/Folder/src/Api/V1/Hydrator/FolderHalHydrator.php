@@ -13,7 +13,7 @@ namespace Folder\Api\V1\Hydrator;
  * Description of FolderHalHydrator
  */
 use Folder\Api\V1\Entity\Folder;
-use Zend\Hydrator\AbstractHydrator;
+use Laminas\Hydrator\AbstractHydrator;
 
 class FolderHalHydrator extends AbstractHydrator
 {

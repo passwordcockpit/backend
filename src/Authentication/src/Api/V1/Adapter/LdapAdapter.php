@@ -9,9 +9,9 @@
 
 namespace Authentication\Api\V1\Adapter;
 
-use Zend\Authentication\Adapter\AdapterInterface;
-use Zend\Authentication\Result;
-use Zend\Authentication\Adapter\Ldap;
+use Laminas\Authentication\Adapter\AdapterInterface;
+use Laminas\Authentication\Result;
+use Laminas\Authentication\Adapter\Ldap;
 use User\Api\V1\Facade\UserFacade;
 use User\Api\V1\Entity\User;
 use Doctrine\ORM\EntityManager;

@@ -12,7 +12,7 @@ namespace Folder\Api\V1\Factory\Action;
 use Folder\Api\V1\Action\ListFolderPasswordAction;
 use Psr\Container\ContainerInterface;
 use Folder\Api\V1\Facade\FolderFacade;
-use Zend\Expressive\Hal\ResourceGeneratorFactory;
+use Mezzio\Hal\ResourceGeneratorFactory;
 use Password\Api\V1\Facade\PasswordFacade;
 
 /**
@@ -34,7 +34,7 @@ class ListFolderPasswordFactory
             $container->get(FolderFacade::class),
             $container->get(PasswordFacade::class),
             $halResourceGenerator($container),
-            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class)
+            $container->get(\Mezzio\Hal\HalResponseFactory::class)
         );
     }
 }

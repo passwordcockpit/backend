@@ -13,11 +13,11 @@ namespace App\Service;
  * This class is responsible to resolve the namespace of the proxy object to get
  * the real one. In Doctrine when a fetch is executed all object retrieved with
  * a lazy-loading mode are incapsulated in a proxy object which cause some
- * problem when it's used with functionality of \Zend\Expressive\Hal\Metadata\MetadataMap
+ * problem when it's used with functionality of \Mezzio\Hal\Metadata\MetadataMap
  * that map the class name with the configuration of the response generator.
  *
  */
-class DoctrineMetadataMap extends \Zend\Expressive\Hal\Metadata\MetadataMap
+class DoctrineMetadataMap extends \Mezzio\Hal\Metadata\MetadataMap
 {
     /**
      *
@@ -31,7 +31,7 @@ class DoctrineMetadataMap extends \Zend\Expressive\Hal\Metadata\MetadataMap
 
     public function get(
         string $class
-    ) : \Zend\Expressive\Hal\Metadata\AbstractMetadata {
+    ) : \Mezzio\Hal\Metadata\AbstractMetadata {
         $class = \Doctrine\Common\Util\ClassUtils::getRealClass($class);
         return parent::get($class);
     }

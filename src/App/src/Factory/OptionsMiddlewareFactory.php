@@ -1,15 +1,15 @@
 <?php
 /**
- * @see       https://github.com/zendframework/zend-expressive-router for the canonical source repository
+ * @see       https://github.com/mezzio/mezzio-router for the canonical source repository
  * @copyright Copyright (c) 2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-expressive-router/blob/master/LICENSE.md New BSD License
+ * @license   https://github.com/mezzio/mezzio-router/blob/master/LICENSE.md New BSD License
  */
 
 namespace App\Factory;
 
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
-use Zend\Expressive\Router\Exception\MissingDependencyException;
+use Mezzio\Router\Exception\MissingDependencyException;
 use App\Middleware\OptionsMiddleware;
 /**
  * Create and return an ImplicitOptionsMiddleware instance.

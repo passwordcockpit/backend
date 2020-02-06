@@ -12,21 +12,21 @@ namespace Authentication\Api\V1\Action;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Diactoros\Response\JsonResponse;
+use Laminas\Diactoros\Response\JsonResponse;
 use Firebase\JWT\JWT;
-use Zend\Crypt\Password\Bcrypt;
+use Laminas\Crypt\Password\Bcrypt;
 use Doctrine\ORM\EntityManager;
 use User\Api\V1\Entity\User;
 use App\Service\ProblemDetailsException;
-use Zend\I18n\Translator\Translator;
+use Laminas\I18n\Translator\Translator;
 use User\Api\V1\Facade\UserFacade;
 use User\Api\V1\Facade\PermissionFacade;
 use User\Api\V1\Hydrator\UserPermissionHydrator;
-use Zend\Authentication\Adapter\Ldap;
+use Laminas\Authentication\Adapter\Ldap;
 use Firebase\JWT\BeforeValidException;
 use Firebase\JWT\ExpiredException;
 use Tuupola\Middleware\JwtAuthentication;
-use Zend\ProblemDetails\ProblemDetailsResponseFactory;
+use Mezzio\ProblemDetails\ProblemDetailsResponseFactory;
 use Authentication\Api\V1\Facade\TokenUserFacade;
 
 /**

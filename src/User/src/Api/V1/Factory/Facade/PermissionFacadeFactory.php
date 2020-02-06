@@ -15,7 +15,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Psr\Container\ContainerInterface;
 use User\Api\V1\Facade\PermissionFacade;
 use User\Api\V1\Facade\UserFacade;
-use Zend\I18n\Translator\Translator;
+use Laminas\I18n\Translator\Translator;
 
 class PermissionFacadeFactory
 {

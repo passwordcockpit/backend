@@ -9,9 +9,9 @@
 
 namespace Authorization\Api\V1;
 
-use Zend\ServiceManager\AbstractPluginManager;
-use Zend\Permissions\Rbac\AssertionInterface;
-use Zend\I18n\Translator\Translator;
+use Laminas\ServiceManager\AbstractPluginManager;
+use Laminas\Permissions\Rbac\AssertionInterface;
+use Laminas\I18n\Translator\Translator;
 use Folder\Api\V1\Facade\FolderUserFacade;
 use Doctrine\ORM\EntityManager;
 
@@ -64,7 +64,7 @@ class AssertionPluginManager extends AbstractPluginManager
      * @return bool true|false
      */
     public function assert(
-        \Zend\Permissions\Rbac\Rbac $rbac,
+        \Laminas\Permissions\Rbac\Rbac $rbac,
         $role,
         $permission,
         \Psr\Http\Message\ServerRequestInterface $request,

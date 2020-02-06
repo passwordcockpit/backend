@@ -1,8 +1,8 @@
 <?php
 
-use Zend\ConfigAggregator\ArrayProvider;
-use Zend\ConfigAggregator\ConfigAggregator;
-use Zend\ConfigAggregator\PhpFileProvider;
+use Laminas\ConfigAggregator\ArrayProvider;
+use Laminas\ConfigAggregator\ConfigAggregator;
+use Laminas\ConfigAggregator\PhpFileProvider;
 
 // To enable or disable caching, set the `ConfigAggregator::ENABLE_CACHE` boolean in
 // `config/autoload/local.php`.
@@ -13,22 +13,22 @@ $cacheConfig = [
 $aggregator = new ConfigAggregator(
     [
         \Blast\BaseUrl\ConfigProvider::class,
-        \Zend\HttpHandlerRunner\ConfigProvider::class,
-        \Zend\Expressive\Router\ZendRouter\ConfigProvider::class,
-        \Zend\Expressive\Helper\ConfigProvider::class,
-        \Zend\Db\ConfigProvider::class,
-        \Zend\Expressive\ConfigProvider::class,
-        \Zend\Expressive\Router\ConfigProvider::class,
-        \Zend\InputFilter\ConfigProvider::class,
-        \Zend\Filter\ConfigProvider::class,
+        \Laminas\HttpHandlerRunner\ConfigProvider::class,
+        \Mezzio\Router\LaminasRouter\ConfigProvider::class,
+        \Mezzio\Helper\ConfigProvider::class,
+        \Laminas\Db\ConfigProvider::class,
+        \Mezzio\ConfigProvider::class,
+        \Mezzio\Router\ConfigProvider::class,
+        \Laminas\InputFilter\ConfigProvider::class,
+        \Laminas\Filter\ConfigProvider::class,
         \Acelaya\ExpressiveErrorHandler\ConfigProvider::class,
-        \Zend\ProblemDetails\ConfigProvider::class,
-        \Zend\I18n\ConfigProvider::class,
-        \Zend\Paginator\ConfigProvider::class,
-        \Zend\Hydrator\ConfigProvider::class,
-        \Zend\Expressive\Hal\ConfigProvider::class,
-        \Zend\Router\ConfigProvider::class,
-        \Zend\Validator\ConfigProvider::class,
+        \Mezzio\ProblemDetails\ConfigProvider::class,
+        \Laminas\I18n\ConfigProvider::class,
+        \Laminas\Paginator\ConfigProvider::class,
+        \Laminas\Hydrator\ConfigProvider::class,
+        \Mezzio\Hal\ConfigProvider::class,
+        \Laminas\Router\ConfigProvider::class,
+        \Laminas\Validator\ConfigProvider::class,
         // Include cache configuration
         new ArrayProvider($cacheConfig),
         // Default App module config
@@ -51,7 +51,8 @@ $aggregator = new ConfigAggregator(
         // Load development config if it exists
         new PhpFileProvider('config/development.config.php')
     ],
-    $cacheConfig['config_cache_path']
+    $cacheConfig['config_cache_path'],
+    [\Laminas\ZendFrameworkBridge\ConfigPostProcessor::class]
 );
 
 return $aggregator->getMergedConfig();

@@ -13,7 +13,7 @@ use Interop\Container\ContainerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Folder\Api\V1\Facade\FolderUserFacade;
 use Authorization\Api\V1\Assertion\FolderAssertion;
-use Zend\I18n\Translator\Translator;
+use Laminas\I18n\Translator\Translator;
 
 class FolderAssertionFactory
 {

@@ -10,7 +10,7 @@
 namespace Password\Api\V1\Hydrator;
 
 use Password\Api\V1\Entity\Password;
-use Zend\Hydrator\AbstractHydrator;
+use Laminas\Hydrator\AbstractHydrator;
 use App\Service\DateConverter;
 
 /**

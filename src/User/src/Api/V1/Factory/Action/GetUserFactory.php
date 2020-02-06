@@ -15,7 +15,7 @@ namespace User\Api\V1\Factory\Action;
 use Psr\Container\ContainerInterface;
 use User\Api\V1\Action\GetUserAction;
 use User\Api\V1\Facade\UserFacade;
-use Zend\Expressive\Hal\ResourceGeneratorFactory;
+use Mezzio\Hal\ResourceGeneratorFactory;
 
 class GetUserFactory
 {
@@ -32,7 +32,7 @@ class GetUserFactory
         return new GetUserAction(
             $container->get(UserFacade::class),
             $halResourceGenerator($container),
-            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class)
+            $container->get(\Mezzio\Hal\HalResponseFactory::class)
         );
     }
 }

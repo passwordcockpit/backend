@@ -30,16 +30,16 @@ class FolderValidationMiddlewareFactory
                 'name' => 'name',
                 'required' => true,
                 'filters' => [
-                    ['name' => \Zend\Filter\StringTrim::class],
-                    ['name' => \Zend\Filter\StripTags::class],
-                    ['name' => \Zend\Filter\StripNewlines::class]
+                    ['name' => \Laminas\Filter\StringTrim::class],
+                    ['name' => \Laminas\Filter\StripTags::class],
+                    ['name' => \Laminas\Filter\StripNewlines::class]
                 ],
                 'validators' => [
                     [
-                        'name' => \Zend\Validator\NotEmpty::class
+                        'name' => \Laminas\Validator\NotEmpty::class
                     ],
                     [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 2,
                             'max' => 45
@@ -52,7 +52,7 @@ class FolderValidationMiddlewareFactory
                 'required' => false,
                 'validators' => [
                     [
-                        'name' => \Zend\Validator\Digits::class
+                        'name' => \Laminas\Validator\Digits::class
                     ]
                 ]
             ]

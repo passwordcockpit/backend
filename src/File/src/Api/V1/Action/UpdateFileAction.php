@@ -17,9 +17,9 @@ use Password\Api\V1\Facade\PasswordFacade;
 use App\Service\ProblemDetailsException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Expressive\Hal\ResourceGenerator;
-use Zend\Expressive\Hal\HalResponseFactory;
-use Zend\Crypt\FileCipher;
+use Mezzio\Hal\ResourceGenerator;
+use Mezzio\Hal\HalResponseFactory;
+use Laminas\Crypt\FileCipher;
 use File\Api\V1\Entity\File;
 
 /**

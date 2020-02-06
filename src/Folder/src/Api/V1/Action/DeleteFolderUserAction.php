@@ -16,7 +16,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Folder\Api\V1\Facade\FolderFacade;
 use User\Api\V1\Facade\UserFacade;
-use Zend\Expressive\Hal\ResourceGenerator;
+use Mezzio\Hal\ResourceGenerator;
 use Folder\Api\V1\Facade\FolderUserFacade;
 
 /**
@@ -112,6 +112,6 @@ class DeleteFolderUserAction implements RequestHandlerInterface
         $folder = $this->folderFacade->get($request->getAttribute('folderId'));
         $user = $this->userFacade->get($request->getAttribute('userId'));
         $this->folderUserFacade->deleteFolderUser($folder, $user);
-        return new \Zend\Diactoros\Response\EmptyResponse();
+        return new \Laminas\Diactoros\Response\EmptyResponse();
     }
 }

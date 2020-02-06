@@ -13,10 +13,10 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use App\Service\ProblemDetailsException;
 use Psr\Http\Message\ResponseInterface;
-use Zend\I18n\Translator\Translator;
+use Laminas\I18n\Translator\Translator;
 use User\Api\V1\Facade\UserFacade;
 use Authentication\Api\V1\Facade\TokenUserFacade;
-use Zend\Authentication\Adapter\AdapterInterface;
+use Laminas\Authentication\Adapter\AdapterInterface;
 
 class AuthenticationMiddleware implements MiddlewareInterface
 {

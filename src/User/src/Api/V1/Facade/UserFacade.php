@@ -18,8 +18,8 @@ use User\Api\V1\Entity\User;
 use Doctrine\ORM\EntityManager;
 use Psr\Http\Message\ServerRequestInterface;
 use App\Service\ProblemDetailsException;
-use Zend\Crypt\Password\Bcrypt;
-use Zend\I18n\Translator\Translator;
+use Laminas\Crypt\Password\Bcrypt;
+use Laminas\I18n\Translator\Translator;
 use User\Api\V1\Entity\Permission;
 
 class UserFacade extends AbstractFacade
@@ -263,7 +263,7 @@ class UserFacade extends AbstractFacade
                 }
 
                 // Bcrypt della password ---
-                $bcrypt = new \Zend\Crypt\Password\Bcrypt();
+                $bcrypt = new \Laminas\Crypt\Password\Bcrypt();
                 $bcryptedPassword = $bcrypt->create($payload['password']);
 
                 // checking who is making the request
@@ -355,7 +355,7 @@ class UserFacade extends AbstractFacade
     private function checkPassword($user, $password)
     {
         $check = false;
-        $bcrypt = new \Zend\Crypt\Password\Bcrypt();
+        $bcrypt = new \Laminas\Crypt\Password\Bcrypt();
         $securePass = $user->getPassword();
         $check = $bcrypt->verify($password, $securePass);
         return $check;

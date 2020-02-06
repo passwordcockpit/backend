@@ -15,7 +15,7 @@ use File\Api\V1\Entity\File;
 use App\Service\ProblemDetailsException;
 use File\Api\V1\Hydrator\FileHydrator;
 use Password\Api\V1\Entity\Password;
-use Zend\I18n\Translator\Translator;
+use Laminas\I18n\Translator\Translator;
 
 class FileFacade extends AbstractFacade
 {
@@ -27,7 +27,7 @@ class FileFacade extends AbstractFacade
     private $uploadConfig;
 
     /**
-     * @param \Zend\I18n\Translator\Translator $translator
+     * @param \Laminas\I18n\Translator\Translator $translator
      * @param \Doctrine\ORM\EntityManager $entityManager
      * @param type entityName
      * @param FileHydrator $fileHydrator

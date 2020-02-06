@@ -10,11 +10,11 @@
 namespace Password\Api\V1\Facade;
 
 use Doctrine\ORM\EntityManager;
-use Zend\I18n\Translator\Translator;
+use Laminas\I18n\Translator\Translator;
 use Password\Api\V1\Entity\Password;
 use App\Service\ProblemDetailsException;
-use Zend\Crypt\BlockCipher;
-use Zend\Crypt\FileCipher;
+use Laminas\Crypt\BlockCipher;
+use Laminas\Crypt\FileCipher;
 use Password\Api\V1\Hydrator\PasswordHydrator;
 use Psr\Http\Message\ServerRequestInterface;
 use Folder\Api\V1\Entity\Folder;

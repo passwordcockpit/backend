@@ -16,11 +16,11 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Folder\Api\V1\Facade\FolderFacade;
 use Folder\Api\V1\Collection\FolderCollection;
-use Zend\Expressive\Hal\ResourceGenerator;
-use Zend\Paginator\Adapter\ArrayAdapter;
+use Mezzio\Hal\ResourceGenerator;
+use Laminas\Paginator\Adapter\ArrayAdapter;
 use User\Api\V1\Facade\UserFacade;
 use User\Api\V1\Facade\PermissionFacade;
-use Zend\Expressive\Hal\HalResponseFactory;
+use Mezzio\Hal\HalResponseFactory;
 
 /**
  * @SWG\Get(

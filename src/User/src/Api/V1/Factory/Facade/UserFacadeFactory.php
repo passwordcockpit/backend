@@ -14,7 +14,7 @@ namespace User\Api\V1\Factory\Facade;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Container\ContainerInterface;
 use User\Api\V1\Facade\UserFacade;
-use Zend\I18n\Translator\Translator;
+use Laminas\I18n\Translator\Translator;
 
 class UserFacadeFactory
 {

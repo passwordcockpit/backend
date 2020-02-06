@@ -12,7 +12,7 @@ namespace Folder\Api\V1\Factory\Action;
 use Psr\Container\ContainerInterface;
 use Folder\Api\V1\Facade\FolderFacade;
 use User\Api\V1\Facade\UserFacade;
-use Zend\Expressive\Hal\ResourceGeneratorFactory;
+use Mezzio\Hal\ResourceGeneratorFactory;
 use Folder\Api\V1\Action\DeleteFolderUserAction;
 use Folder\Api\V1\Facade\FolderUserFacade;
 

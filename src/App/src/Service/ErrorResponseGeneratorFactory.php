@@ -13,7 +13,7 @@
 namespace App\Service;
 
 use Psr\Container\ContainerInterface;
-use Zend\ProblemDetails\ProblemDetailsResponseFactory;
+use Mezzio\ProblemDetails\ProblemDetailsResponseFactory;
 
 class ErrorResponseGeneratorFactory
 {

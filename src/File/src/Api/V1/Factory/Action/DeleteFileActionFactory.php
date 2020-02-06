@@ -9,7 +9,7 @@
 namespace File\Api\V1\Factory\Action;
 
 use File\Api\V1\Facade\FileFacade;
-use Zend\Expressive\Hal\ResourceGeneratorFactory;
+use Mezzio\Hal\ResourceGeneratorFactory;
 use Psr\Container\ContainerInterface;
 use File\Api\V1\Action\DeleteFileAction;
 

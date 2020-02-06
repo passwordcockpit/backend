@@ -12,7 +12,7 @@ namespace Folder\Api\V1\Factory\Action;
 use Folder\Api\V1\Action\ListFolderUserAction;
 use Psr\Container\ContainerInterface;
 use Folder\Api\V1\Facade\FolderUserFacade;
-use Zend\Expressive\Hal\ResourceGeneratorFactory;
+use Mezzio\Hal\ResourceGeneratorFactory;
 
 /**
  * Description of ListFolderUserFactory
@@ -32,7 +32,7 @@ class ListFolderUserFactory
         return new ListFolderUserAction(
             $container->get(FolderUserFacade::class),
             $halResourceGenerator($container),
-            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class)
+            $container->get(\Mezzio\Hal\HalResponseFactory::class)
         );
     }
 }

@@ -14,7 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use File\Api\V1\Facade\FileFacade;
 use File\Api\V1\Entity\File;
 use File\Api\V1\Hydrator\FileHydrator;
-use Zend\I18n\Translator\Translator;
+use Laminas\I18n\Translator\Translator;
 
 class FileFacadeFactory
 {

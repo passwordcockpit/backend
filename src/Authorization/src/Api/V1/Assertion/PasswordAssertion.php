@@ -9,14 +9,14 @@
 
 namespace Authorization\Api\V1\Assertion;
 
-use Zend\Permissions\Rbac\AssertionInterface;
+use Laminas\Permissions\Rbac\AssertionInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Password\Api\V1\Entity\Password;
 use App\Service\ProblemDetailsException;
 use Doctrine\ORM\EntityManager;
-use Zend\I18n\Translator\Translator;
+use Laminas\I18n\Translator\Translator;
 use Folder\Api\V1\Facade\FolderUserFacade;
-use Zend\Permissions\Rbac\RoleInterface;
+use Laminas\Permissions\Rbac\RoleInterface;
 
 class PasswordAssertion implements AssertionInterface
 {
@@ -103,7 +103,7 @@ class PasswordAssertion implements AssertionInterface
      * @return bool
      */
     public function assert(
-        \Zend\Permissions\Rbac\Rbac $rbac,
+        \Laminas\Permissions\Rbac\Rbac $rbac,
         RoleInterface $role,
         string $permission
     ): bool {

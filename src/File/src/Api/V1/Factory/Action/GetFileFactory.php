@@ -9,7 +9,7 @@
 namespace File\Api\V1\Factory\Action;
 
 use Interop\Container\ContainerInterface;
-use Zend\Expressive\Hal\ResourceGeneratorFactory;
+use Mezzio\Hal\ResourceGeneratorFactory;
 use File\Api\V1\Action\GetFileAction;
 use File\Api\V1\Facade\FileFacade;
 
@@ -27,7 +27,7 @@ class GetFileFactory
 
         return new GetFileAction(
             $resourceGenerator($container),
-            $container->get(\Zend\Expressive\Hal\HalResponseFactory::class),
+            $container->get(\Mezzio\Hal\HalResponseFactory::class),
             $container->get(FileFacade::class)
         );
     }

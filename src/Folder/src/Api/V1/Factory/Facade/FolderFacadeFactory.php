@@ -16,7 +16,7 @@ use Psr\Container\ContainerInterface;
 use Folder\Api\V1\Facade\FolderFacade;
 use Password\Api\V1\Facade\PasswordFacade;
 use User\Api\V1\Facade\UserFacade;
-use Zend\I18n\Translator\Translator;
+use Laminas\I18n\Translator\Translator;
 
 class FolderFacadeFactory
 {

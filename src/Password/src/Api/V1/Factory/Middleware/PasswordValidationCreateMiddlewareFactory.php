@@ -31,7 +31,7 @@ class PasswordValidationCreateMiddlewareFactory
                 'required' => true,
                 'validators' => [
                     [
-                        'name' => \Zend\Validator\Digits::class
+                        'name' => \Laminas\Validator\Digits::class
                     ]
                 ]
             ],
@@ -39,16 +39,16 @@ class PasswordValidationCreateMiddlewareFactory
                 'name' => 'title',
                 'required' => true,
                 'filters' => [
-                    ['name' => \Zend\Filter\StringTrim::class],
-                    ['name' => \Zend\Filter\StripTags::class],
-                    ['name' => \Zend\Filter\StripNewlines::class]
+                    ['name' => \Laminas\Filter\StringTrim::class],
+                    ['name' => \Laminas\Filter\StripTags::class],
+                    ['name' => \Laminas\Filter\StripNewlines::class]
                 ],
                 'validators' => [
                     [
-                        'name' => \Zend\Validator\NotEmpty::class
+                        'name' => \Laminas\Validator\NotEmpty::class
                     ],
                     [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 2,
                             'max' => 100
@@ -60,16 +60,16 @@ class PasswordValidationCreateMiddlewareFactory
                 'name' => 'icon',
                 'required' => false,
                 'filters' => [
-                    ['name' => \Zend\Filter\StringTrim::class],
-                    ['name' => \Zend\Filter\StripTags::class],
-                    ['name' => \Zend\Filter\StripNewlines::class]
+                    ['name' => \Laminas\Filter\StringTrim::class],
+                    ['name' => \Laminas\Filter\StripTags::class],
+                    ['name' => \Laminas\Filter\StripNewlines::class]
                 ],
                 'validators' => [
                     [
-                        'name' => \Zend\Validator\NotEmpty::class
+                        'name' => \Laminas\Validator\NotEmpty::class
                     ],
                     [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'max' => 45
                         ]
@@ -81,7 +81,7 @@ class PasswordValidationCreateMiddlewareFactory
                 'required' => false,
                 'filters' => [
                     [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                         'options' => [
                             'allowTags' => [
                                 'p',
@@ -94,11 +94,11 @@ class PasswordValidationCreateMiddlewareFactory
                             ]
                         ]
                     ],
-                    ['name' => \Zend\Filter\StringTrim::class]
+                    ['name' => \Laminas\Filter\StringTrim::class]
                 ],
                 'validators' => [
                     [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'max' => 4000
                         ]
@@ -109,14 +109,14 @@ class PasswordValidationCreateMiddlewareFactory
                 'name' => 'username',
                 'required' => false,
                 'filters' => [
-                    ['name' => \Zend\Filter\StripTags::class],
-                    ['name' => \Zend\Filter\StringTrim::class],
-                    ['name' => \Zend\Filter\StripNewlines::class]
+                    ['name' => \Laminas\Filter\StripTags::class],
+                    ['name' => \Laminas\Filter\StringTrim::class],
+                    ['name' => \Laminas\Filter\StripNewlines::class]
                 ],
                 'validators' => [
-                    ['name' => \Zend\Validator\NotEmpty::class],
+                    ['name' => \Laminas\Validator\NotEmpty::class],
                     [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'max' => 45
                         ]
@@ -127,13 +127,13 @@ class PasswordValidationCreateMiddlewareFactory
                 'name' => 'password',
                 'required' => false,
                 'filters' => [
-                    ['name' => \Zend\Filter\StringTrim::class],
-                    ['name' => \Zend\Filter\StripNewlines::class]
+                    ['name' => \Laminas\Filter\StringTrim::class],
+                    ['name' => \Laminas\Filter\StripNewlines::class]
                 ],
                 'validators' => [
-                    ['name' => \Zend\Validator\NotEmpty::class],
+                    ['name' => \Laminas\Validator\NotEmpty::class],
                     [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'max' => 500
                         ]
@@ -144,13 +144,13 @@ class PasswordValidationCreateMiddlewareFactory
                 'name' => 'url',
                 'required' => false,
                 'filters' => [
-                    ['name' => \Zend\Filter\StringTrim::class],
-                    ['name' => \Zend\Filter\StripTags::class],
-                    ['name' => \Zend\Filter\StripNewlines::class]
+                    ['name' => \Laminas\Filter\StringTrim::class],
+                    ['name' => \Laminas\Filter\StripTags::class],
+                    ['name' => \Laminas\Filter\StripNewlines::class]
                 ],
                 'validators' => [
                     [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'max' => 100
                         ]
@@ -161,12 +161,12 @@ class PasswordValidationCreateMiddlewareFactory
                 'name' => 'tags',
                 'required' => false,
                 'filters' => [
-                    ['name' => \Zend\Filter\StripTags::class],
-                    ['name' => \Zend\Filter\StripNewlines::class]
+                    ['name' => \Laminas\Filter\StripTags::class],
+                    ['name' => \Laminas\Filter\StripNewlines::class]
                 ],
                 'validators' => [
                     [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'max' => 400
                         ]

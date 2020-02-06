@@ -10,7 +10,7 @@
 namespace Authentication\Api\V1\Facade;
 
 use Doctrine\ORM\EntityManager;
-use Zend\I18n\Translator\Translator;
+use Laminas\I18n\Translator\Translator;
 use Authentication\Api\V1\Entity\TokenUser;
 use App\Abstracts\AbstractFacade;
 use User\Api\V1\Entity\User;

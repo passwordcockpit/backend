@@ -13,8 +13,8 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ResponseInterface;
-use Zend\InputFilter\Factory as InputFilterFactory;
-use Zend\InputFilter\InputFilter;
+use Laminas\InputFilter\Factory as InputFilterFactory;
+use Laminas\InputFilter\InputFilter;
 use App\Service\ProblemDetailsException;
 
 class StringParameterValidator implements MiddlewareInterface

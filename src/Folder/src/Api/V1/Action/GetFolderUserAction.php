@@ -17,9 +17,9 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Folder\Api\V1\Facade\FolderFacade;
 use User\Api\V1\Facade\UserFacade;
 use Folder\Api\V1\Facade\FolderUserFacade;
-use Zend\Expressive\Hal\ResourceGenerator;
-use Zend\I18n\Translator\Translator;
-use Zend\Expressive\Hal\HalResponseFactory;
+use Mezzio\Hal\ResourceGenerator;
+use Laminas\I18n\Translator\Translator;
+use Mezzio\Hal\HalResponseFactory;
 
 /**
  * @SWG\Get(

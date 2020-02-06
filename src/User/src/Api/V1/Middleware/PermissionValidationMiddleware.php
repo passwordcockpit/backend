@@ -16,9 +16,9 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use App\Service\ProblemDetailsException;
-use Zend\InputFilter\Factory;
-use Zend\InputFilter\InputFilter;
-use Zend\Db\Adapter\Adapter;
+use Laminas\InputFilter\Factory;
+use Laminas\InputFilter\InputFilter;
+use Laminas\Db\Adapter\Adapter;
 
 class PermissionValidationMiddleware implements MiddlewareInterface
 {
@@ -89,20 +89,20 @@ class PermissionValidationMiddleware implements MiddlewareInterface
                 'allow_empty' => true,
                 'filters' => [
                     [
-                        'name' => \Zend\Filter\Boolean::class,
+                        'name' => \Laminas\Filter\Boolean::class,
                         'options' => [
                             'casting' => false,
                             'type' => [
-                                \Zend\Filter\Boolean::TYPE_NULL,
-                                \Zend\Filter\Boolean::TYPE_BOOLEAN,
-                                \Zend\Filter\Boolean::TYPE_INTEGER
+                                \Laminas\Filter\Boolean::TYPE_NULL,
+                                \Laminas\Filter\Boolean::TYPE_BOOLEAN,
+                                \Laminas\Filter\Boolean::TYPE_INTEGER
                             ]
                         ]
                     ]
                 ],
                 'validators' => [
                     [
-                        'name' => \Zend\Validator\Callback::class,
+                        'name' => \Laminas\Validator\Callback::class,
                         'options' => [
                             'callback' => function ($value) {
                                 return is_bool($value);
@@ -117,20 +117,20 @@ class PermissionValidationMiddleware implements MiddlewareInterface
                 'allow_empty' => true,
                 'filters' => [
                     [
-                        'name' => \Zend\Filter\Boolean::class,
+                        'name' => \Laminas\Filter\Boolean::class,
                         'options' => [
                             'casting' => false,
                             'type' => [
-                                \Zend\Filter\Boolean::TYPE_NULL,
-                                \Zend\Filter\Boolean::TYPE_BOOLEAN,
-                                \Zend\Filter\Boolean::TYPE_INTEGER
+                                \Laminas\Filter\Boolean::TYPE_NULL,
+                                \Laminas\Filter\Boolean::TYPE_BOOLEAN,
+                                \Laminas\Filter\Boolean::TYPE_INTEGER
                             ]
                         ]
                     ]
                 ],
                 'validators' => [
                     [
-                        'name' => \Zend\Validator\Callback::class,
+                        'name' => \Laminas\Validator\Callback::class,
                         'options' => [
                             'callback' => function ($value) {
                                 return is_bool($value);
@@ -145,20 +145,20 @@ class PermissionValidationMiddleware implements MiddlewareInterface
                 'allow_empty' => true,
                 'filters' => [
                     [
-                        'name' => \Zend\Filter\Boolean::class,
+                        'name' => \Laminas\Filter\Boolean::class,
                         'options' => [
                             'casting' => false,
                             'type' => [
-                                \Zend\Filter\Boolean::TYPE_NULL,
-                                \Zend\Filter\Boolean::TYPE_BOOLEAN,
-                                \Zend\Filter\Boolean::TYPE_INTEGER
+                                \Laminas\Filter\Boolean::TYPE_NULL,
+                                \Laminas\Filter\Boolean::TYPE_BOOLEAN,
+                                \Laminas\Filter\Boolean::TYPE_INTEGER
                             ]
                         ]
                     ]
                 ],
                 'validators' => [
                     [
-                        'name' => \Zend\Validator\Callback::class,
+                        'name' => \Laminas\Validator\Callback::class,
                         'options' => [
                             'callback' => function ($value) {
                                 return is_bool($value);
@@ -173,20 +173,20 @@ class PermissionValidationMiddleware implements MiddlewareInterface
                 'allow_empty' => true,
                 'filters' => [
                     [
-                        'name' => \Zend\Filter\Boolean::class,
+                        'name' => \Laminas\Filter\Boolean::class,
                         'options' => [
                             'casting' => false,
                             'type' => [
-                                \Zend\Filter\Boolean::TYPE_NULL,
-                                \Zend\Filter\Boolean::TYPE_BOOLEAN,
-                                \Zend\Filter\Boolean::TYPE_INTEGER
+                                \Laminas\Filter\Boolean::TYPE_NULL,
+                                \Laminas\Filter\Boolean::TYPE_BOOLEAN,
+                                \Laminas\Filter\Boolean::TYPE_INTEGER
                             ]
                         ]
                     ]
                 ],
                 'validators' => [
                     [
-                        'name' => \Zend\Validator\Callback::class,
+                        'name' => \Laminas\Validator\Callback::class,
                         'options' => [
                             'callback' => function ($value) {
                                 return is_bool($value);

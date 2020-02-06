@@ -14,8 +14,8 @@ use Folder\Api\V1\Entity\FolderUser;
 use Folder\Api\V1\Hydrator\FolderHydrator;
 use Folder\Api\V1\Hydrator\FolderHalHydrator;
 use Folder\Api\V1\Hydrator\FolderUserHydrator;
-use Zend\Expressive\Hal\Metadata\RouteBasedResourceMetadata;
-use Zend\Expressive\Hal\Metadata\RouteBasedCollectionMetadata;
+use Mezzio\Hal\Metadata\RouteBasedResourceMetadata;
+use Mezzio\Hal\Metadata\RouteBasedCollectionMetadata;
 
 /**
  * Description of ConfigProvider
@@ -36,7 +36,7 @@ class ConfigProvider
             'dependencies' => $this->getDependencies(),
             'routes' => $this->getRoutes(),
             'doctrine' => $this->getDoctrine(),
-            'Zend\Expressive\Hal\Metadata\MetadataMap' => $this->getMetadataMap()
+            'Mezzio\Hal\Metadata\MetadataMap' => $this->getMetadataMap()
         ];
     }
 
