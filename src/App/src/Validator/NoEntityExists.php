@@ -11,10 +11,8 @@
 namespace App\Validator;
 
 use Laminas\Validator\AbstractValidator;
-use User\Api\V1\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Common\Collections\Criteria;
-use Doctrine\Common\Util\Debug;
 
 class NoEntityExists extends AbstractValidator
 {
@@ -52,8 +50,8 @@ class NoEntityExists extends AbstractValidator
     ];
 
     public function __construct(
+        EntityManagerInterface $entityManager,
         $options = [],
-        EntityManagerInterface $entityManager
     ) {
         $this->entity = $options['entity'];
         $this->field = $options['field'];
@@ -84,7 +82,7 @@ class NoEntityExists extends AbstractValidator
         $users = $this->entityManager
             ->getRepository($this->entity)
             ->matching($criteria);
-
+        
         if (count($users) > 0) {
             $this->error(self::RECORD_FOUND);
             return false;
