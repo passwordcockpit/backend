@@ -34,7 +34,7 @@ class LogHalHydrator extends AbstractHydrator
      * @param Log $log
      * @return array
      */
-    public function extract($log)
+    public function extract($log): array
     {
         $data = [];
         $data['log_id'] = $log->getLogId();

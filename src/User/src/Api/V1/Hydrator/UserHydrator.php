@@ -22,7 +22,7 @@ class UserHydrator extends AbstractHydrator
      * @param User $user
      * @return array
      */
-    public function extract($user)
+    public function extract($user): array
     {
         $data = [];
         $data['user_id'] = $user->getUserId();

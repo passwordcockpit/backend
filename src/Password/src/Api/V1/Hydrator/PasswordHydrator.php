@@ -24,7 +24,7 @@ class PasswordHydrator extends AbstractHydrator
      * @param Password $password
      * @return array
      */
-    public function extract($password)
+    public function extract($password): array
     {
         $data = [];
         $data['password_id'] = $password->getPasswordId();

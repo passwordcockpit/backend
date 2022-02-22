@@ -22,7 +22,7 @@ class FolderHydrator extends AbstractHydrator
      * @param Folder $folder
      * @return array
      */
-    public function extract($folder)
+    public function extract($folder): array
     {
         $data = [];
         $data['folder_id'] = $folder->getFolderId();
