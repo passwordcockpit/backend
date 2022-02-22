@@ -117,7 +117,9 @@ class ConfigProvider
                 'route' => 'api.v1.users.get',
                 'extractor' => UserHydrator::class,
                 'resource_identifier' => 'user_id',
-                'route_identifier_placeholder' => 'id'
+                'identifiers_to_placeholders_mapping' => [
+                  'user_id' => 'id',
+                ],
             ],
             [
                 '__class__' => RouteBasedResourceMetadata::class,
@@ -125,7 +127,9 @@ class ConfigProvider
                 'route' => 'api.v1.users.permissions.get',
                 'extractor' => UserPermissionHydrator::class,
                 'resource_identifier' => 'user_id',
-                'route_identifier_placeholder' => 'id'
+                'identifiers_to_placeholders_mapping' => [
+                  'user_id' => 'id',
+                ],
             ]
         ];
     }

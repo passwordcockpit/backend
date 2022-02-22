@@ -111,7 +111,9 @@ class ConfigProvider
                 'route' => 'api.v1.files.get',
                 'extractor' => FileHydrator::class,
                 'resource_identifier' => 'file_id',
-                'route_identifier_placeholder' => 'id'
+                'identifiers_to_placeholders_mapping' => [
+                  'file_id' => 'id',
+                ],
             ]
         ];
     }

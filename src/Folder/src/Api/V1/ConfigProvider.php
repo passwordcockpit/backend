@@ -130,7 +130,9 @@ class ConfigProvider
                 'route' => 'api.v1.folders.get',
                 'extractor' => FolderHalHydrator::class,
                 'resource_identifier' => 'folder_id',
-                'route_identifier_placeholder' => 'id'
+                'identifiers_to_placeholders_mapping' => [
+                  'folder_id' => 'id',
+                ],
             ],
             [
                 '__class__' => RouteBasedResourceMetadata::class,
