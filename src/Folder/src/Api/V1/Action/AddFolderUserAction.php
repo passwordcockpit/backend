@@ -27,50 +27,49 @@ use Folder\Api\V1\Facade\FolderUserFacade;
  *
  * @copyright 2018 Blackpoints SA
  *
- * @SWG\Post(
+ * @OA\Post(
  *     path="/v1/folders/{folderId}/users/{userId}",
  *     tags={"folders"},
  *     operationId="addUserAccessToFolder",
  *     summary="Add access on a Folder to a User",
  *     description="Add access on a Folder to a User",
- *     consumes={"application/json"},
- *     produces={"application/json"},
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="Folder id",
  *         in="path",
  *         name="folderId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="User id",
  *         in="path",
  *         name="userId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Parameter(
- *         name="body",
- *         in="body",
- *         description="Access right for user on folder",
- *         required=true,
- *		   @SWG\Schema(ref="#/definitions/AddFolderUserAction payload")
- *     ),
- *     @SWG\Response(
+ *     requestBody={"$ref": "#/components/requestBodies/AddFolderUserAction payload"},
+ *     @OA\Response(
  *         response=201,
  *         description="OK",
+ *         @OA\JsonContent()
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=404,
- *         description="Invalid input",
+ *         description="Invalid input"
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
  * )
- * @SWG\Definition(
- *		definition="AddFolderUserAction payload",
- * 		@SWG\Property(property="access", type="integer", description="1: Read or 2: Manage folder", example=1)
+ * @OA\RequestBody(
+ *    request="AddFolderUserAction payload",
+ *    description="Access right for user on folder",
+ *    required=true,
+ *    @OA\Property(property="access", type="integer", description="1: Read or 2: Manage folder", example=1)
  * )
  */
 class AddFolderUserAction implements RequestHandlerInterface

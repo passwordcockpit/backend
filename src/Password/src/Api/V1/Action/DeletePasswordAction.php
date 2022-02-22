@@ -16,30 +16,32 @@ use Password\Api\V1\Facade\PasswordFacade;
 use Mezzio\Hal\ResourceGenerator;
 
 /**
- * @SWG\Delete(
+ * @OA\Delete(
  *     path="/v1/passwords/{passwordId}",
  *     summary="Deletes a password",
  *     description="",
  *     operationId="deletePassword",
- *     produces={"application/json"},
  *     tags={"passwords"},
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="Password id to delete",
  *         in="path",
  *         name="passwordId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=200,
- *         description="OK"
+ *         description="OK",
+ *         @OA\JsonContent()
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=404,
  *         description="Dossier not found"
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
  * )
  */
 class DeletePasswordAction implements RequestHandlerInterface

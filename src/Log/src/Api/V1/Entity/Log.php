@@ -9,14 +9,14 @@
 namespace Log\Api\V1\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 
 /**
  * Log
  *
  * @ORM\Table(name="log")
  * @ORM\Entity
- * @SWG\Definition(definition="Log")
+ * @OA\Schema(description="Log")
  */
 class Log
 {
@@ -26,7 +26,7 @@ class Log
      * @ORM\Column(name="log_id", type="integer", precision=0, scale=0, nullable=false, unique=false)
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @SWG\Property
+     * @OA\Property
      */
     private $logId;
 
@@ -34,7 +34,7 @@ class Log
      * @var \DateTime|null
      *
      * @ORM\Column(name="action_date", type="datetime", precision=0, scale=0, nullable=true, unique=false)
-     * @SWG\Property
+     * @OA\Property
      */
     private $actionDate;
 
@@ -42,7 +42,7 @@ class Log
      * @var string|null
      *
      * @ORM\Column(name="action", type="string", length=4000, precision=0, scale=0, nullable=true, unique=false)
-     * @SWG\Property
+     * @OA\Property
      */
     private $action;
 
@@ -53,7 +53,7 @@ class Log
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="password_id", referencedColumnName="password_id", nullable=true)
      * })
-     * @SWG\Property
+     * @OA\Property
      */
     private $password;
 
@@ -64,7 +64,7 @@ class Log
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user_id", referencedColumnName="user_id", nullable=true)
      * })
-     * @SWG\Property
+     * @OA\Property
      */
     private $user;
 

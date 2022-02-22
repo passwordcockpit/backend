@@ -9,14 +9,14 @@
 namespace User\Api\V1\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 
 /**
  * User
  *
  * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="username_UNIQUE", columns={"username"})})
  * @ORM\Entity
- * @SWG\Definition(definition="User")
+ * @OA\Schema(description="User")
  */
 class User
 {
@@ -27,7 +27,7 @@ class User
      * @ORM\Id
      * @ORM\GeneratedValue
      *
-     * @SWG\Property
+     * @OA\Property
      */
     private $userId;
 
@@ -36,7 +36,7 @@ class User
      *
      * @ORM\Column(name="username", type="string", length=45, precision=0, scale=0, nullable=false, unique=true)
      *
-     * @SWG\Property(example="user")
+     * @OA\Property(example="user")
      */
     private $username;
 
@@ -45,7 +45,7 @@ class User
      *
      * @ORM\Column(name="password", type="string", length=200, precision=0, scale=0, nullable=true, unique=false)
      *
-     * @SWG\Property(property="password", type="string", description="User's password")
+     * @OA\Property(property="password", type="string", description="User's password")
      */
     private $password;
 
@@ -54,7 +54,7 @@ class User
      *
      * @ORM\Column(name="name", type="string", length=45, precision=0, scale=0, nullable=true, unique=false)
      *
-     * @SWG\Property(property="name", type="string", description="User's name")
+     * @OA\Property(property="name", type="string", description="User's name")
      */
     private $name;
 
@@ -63,7 +63,7 @@ class User
      *
      * @ORM\Column(name="surname", type="string", length=45, precision=0, scale=0, nullable=true, unique=false)
      *
-     * @SWG\Property(property="surname", type="string", description="User's surname")
+     * @OA\Property(property="surname", type="string", description="User's surname")
      */
     private $surname;
 
@@ -72,7 +72,7 @@ class User
      *
      * @ORM\Column(name="language", type="string", length=2, precision=0, scale=0, nullable=false, unique=false)
      *
-     * @SWG\Property(property="language", type="string", description="User's language", example="en")
+     * @OA\Property(property="language", type="string", description="User's language", example="en")
      */
     private $language;
 
@@ -81,7 +81,7 @@ class User
      *
      * @ORM\Column(name="phone", type="string", length=45, precision=0, scale=0, nullable=true, unique=false)
      *
-     * @SWG\Property(property="phone", type="string", description="User's phone number", example="+41 91 123 45 67")
+     * @OA\Property(property="phone", type="string", description="User's phone number", example="+41 91 123 45 67")
      */
     private $phone;
 
@@ -90,7 +90,7 @@ class User
      *
      * @ORM\Column(name="email", type="string", length=45, precision=0, scale=0, nullable=true, unique=true)
      *
-     * @SWG\Property(property="email", type="string", description="User's email", example="user@domain.com")
+     * @OA\Property(property="email", type="string", description="User's email", example="user@domain.com")
      */
     private $email;
 
@@ -98,7 +98,7 @@ class User
      * @var bool
      *
      * @ORM\Column(name="enabled", type="boolean", precision=0, scale=0, nullable=false, unique=false)
-     * @SWG\Property(property="enabled", type="boolean", description="Whether a user is enabled (true) or not (false)")
+     * @OA\Property(property="enabled", type="boolean", description="Whether a user is enabled (true) or not (false)")
      */
     private $enabled;
 
@@ -106,7 +106,7 @@ class User
      * @var bool
      *
      * @ORM\Column(name="change_password", type="boolean", precision=0, scale=0, nullable=false, unique=false)
-     * @SWG\Property(property="change_password", type="boolean", description="Whether a user need to change his password (true) or not (false)")
+     * @OA\Property(property="change_password", type="boolean", description="Whether a user need to change his password (true) or not (false)")
      */
     private $changePassword;
 
@@ -116,7 +116,7 @@ class User
      * @ORM\OneToMany(targetEntity="Folder\Api\V1\Entity\FolderUser", mappedBy="user")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="user_id", onDelete="CASCADE")
      *
-     * @SWG\Property
+     * @OA\Property
      */
     private $folder;
 

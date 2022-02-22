@@ -9,14 +9,14 @@
 namespace Folder\Api\V1\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 
 /**
  * Folder
  *
  * @ORM\Table(name="folder")
  * @ORM\Entity
- * @SWG\Definition(definition="Folder")
+ * @OA\Schema(description="Folder")
  */
 class Folder
 {
@@ -26,7 +26,7 @@ class Folder
      * @ORM\Column(name="folder_id", type="integer", precision=0, scale=0, nullable=false, unique=true)
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @SWG\Property
+     * @OA\Property
      */
     private $folderId;
 
@@ -34,7 +34,7 @@ class Folder
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=45, precision=0, scale=0, nullable=false, unique=false)
-     * @SWG\Property(example="folderName")
+     * @OA\Property(example="folderName")
      */
     private $name;
 
@@ -42,7 +42,7 @@ class Folder
      * @var int|null
      *
      * @ORM\Column(name="parent_id", type="integer", precision=0, scale=0, nullable=true, unique=false)
-     * @SWG\Property(property="parent_id", example=null)
+     * @OA\Property(property="parent_id", example=null)
      */
     private $parentId;
 
@@ -51,7 +51,7 @@ class Folder
      *
      * @ORM\OneToMany(targetEntity="Folder\Api\V1\Entity\FolderUser", mappedBy="folder")
      * @ORM\JoinColumn(name="folder_id", referencedColumnName="folder_id", onDelete="CASCADE")
-     * @SWG\Property
+     * @OA\Property
      */
     private $user;
 

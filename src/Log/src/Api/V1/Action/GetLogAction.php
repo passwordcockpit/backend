@@ -17,30 +17,32 @@ use Mezzio\Hal\ResourceGenerator;
 use Log\Api\V1\Facade\LogFacade;
 
 /**
- * @SWG\Get(
+ * @OA\Get(
  *     path="/v1/logs/{logId}",
  *     summary="Get log",
  *     description="Returns a log by its id",
  *     operationId="getLog",
- *     produces={"application/json"},
  *     tags={"logs"},
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="Log id to fetch",
  *         in="path",
  *         name="logId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=200,
- *         description="OK"
+ *         description="OK",
+ *         @OA\JsonContent()
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=204,
  *         description="No Content"
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
  * )
  */
 class GetLogAction implements RequestHandlerInterface

@@ -18,22 +18,22 @@ use Mezzio\Hal\ResourceGenerator;
 use User\Api\V1\Collection\UserCollection;
 
 /**
- * @SWG\Get(
+ * @OA\Get(
  *     path="/v1/users/usernames",
  *     summary="List users, but only id, username, surname, name, enabled status",
  *     description="Returns a public list of users",
  *     operationId="listUsernames",
- *     produces={"application/json"},
  *     tags={"users"},
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=200,
- *         description="OK"
+ *         description="OK",
+ *         @OA\JsonContent()
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=204,
  *         description="No Content"
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
  * )
  */
 class ListUsernameAction implements RequestHandlerInterface

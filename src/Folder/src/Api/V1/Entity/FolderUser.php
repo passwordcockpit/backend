@@ -9,14 +9,14 @@
 namespace Folder\Api\V1\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 
 /**
  * FolderUser
  *
  * @ORM\Table(name="folder_user")
  * @ORM\Entity
- * @SWG\Definition(definition="FolderUser")
+ * @OA\Schema(description="FolderUser")
  */
 class FolderUser
 {
@@ -33,7 +33,7 @@ class FolderUser
      * @var int
      *
      * @ORM\Column(name="access", type="smallint", precision=0, scale=0, nullable=true, unique=false)
-     * @SWG\Property
+     * @OA\Property
      */
     private $access;
 

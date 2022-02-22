@@ -24,30 +24,32 @@ use File\Api\V1\Facade\FileFacade;
  */
 
 /**
- * @SWG\Get(
+ * @OA\Get(
  *     path="/v1/passwords/{passwordId}/files",
  *     summary="Get files of specified password",
  *     description="Returns files of the specified password by its id",
  *     operationId="getPasswordFiles",
- *     produces={"application/json"},
  *     tags={"passwords"},
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="Password id where to get files",
  *         in="path",
  *         name="passwordId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=200,
- *         description="OK"
+ *         description="OK",
+ *         @OA\JsonContent()
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=404,
  *         description="Not Found"
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
  * )
  */
 class ListPasswordFilesAction implements RequestHandlerInterface

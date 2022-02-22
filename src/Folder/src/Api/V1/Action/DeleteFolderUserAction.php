@@ -20,39 +20,42 @@ use Mezzio\Hal\ResourceGenerator;
 use Folder\Api\V1\Facade\FolderUserFacade;
 
 /**
- * @SWG\Delete(
+ * @OA\Delete(
  *     path="/v1/folders/{folderId}/users/{userId}",
  *     tags={"folders"},
  *     operationId="deleteUserAccessToFolder",
  *     summary="Delete access on a Folder to a User",
  *     description="Delete access on a Folder to a User",
- *     consumes={"application/json"},
- *     produces={"application/json"},
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="Folder id",
  *         in="path",
  *         name="folderId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="User id",
  *         in="path",
  *         name="userId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=200,
  *         description="OK",
+ *         @OA\JsonContent()
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=404,
  *         description="Invalid input",
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
  * )
  */
 class DeleteFolderUserAction implements RequestHandlerInterface

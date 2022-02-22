@@ -24,42 +24,39 @@ use Mezzio\Hal\HalResponseFactory;
  *
  * @copyright 2018 Blackpoints SA
  *
- * @SWG\Patch(
+ * @OS\Patch(
  *     path="/v1/folders/{folderId}",
  *     tags={"folders"},
  *     operationId="updateFolder",
  *     summary="Update a new Folder",
  *     description="Update a new Folder",
- *     consumes={"application/json"},
- *     produces={"application/json"},
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="Folder id to fetch",
  *         in="path",
  *         name="folderId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Parameter(
- *         name="body",
- *         in="body",
- *         description="Folder object to update",
- *         required=true,
- *         @SWG\Schema(ref="#/definitions/UpdateFolderAction payload")
- *     ),
- *     @SWG\Response(
+ *     requestBody={"$ref": "#/components/requestBodies/UpdateFolderAction payload"},
+ *     @OA\Response(
  *         response=200,
  *         description="OK",
+ *         @OA\JsonContent()
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=404,
- *         description="Invalid input",
+ *         description="Invalid input"
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
  * )
- * @SWG\Definition(
- *		definition="UpdateFolderAction payload",
- * 		@SWG\Property(property="name", type="string", description="Name of the folder"),
+ * @OA\RequestBody(
+ *		request="UpdateFolderAction payload",
+ *    description="Folder object to update",
+ *    required=true,
+ * 		@OA\Property(property="name", type="string", description="Name of the folder"),
  * )
  */
 class UpdateFolderAction implements RequestHandlerInterface

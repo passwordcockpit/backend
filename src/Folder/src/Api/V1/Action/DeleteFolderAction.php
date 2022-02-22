@@ -18,30 +18,32 @@ use Folder\Api\V1\Facade\FolderFacade;
 use Mezzio\Hal\ResourceGenerator;
 
 /**
- * @SWG\Delete(
+ * @OA\Delete(
  *     path="/v1/folders/{folderId}",
  *     summary="Deletes a folder",
  *     description="",
  *     operationId="deleteFolder",
- *     produces={"application/json"},
  *     tags={"folders"},
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="Folder id to delete",
  *         in="path",
  *         name="folderId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=200,
- *         description="OK"
+ *         description="OK",
+ *         @OA\JsonContent()
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=404,
  *         description="Folder not found"
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
  * )
  */
 class DeleteFolderAction implements RequestHandlerInterface

@@ -21,90 +21,50 @@ use Mezzio\ProblemDetails\ProblemDetailsResponseFactory;
 
 /**
  *
- * @SWG\Put(
+ * @OA\Put(
  *     path="/v1/passwords/{passwordId}",
  *     tags={"passwords"},
  *     operationId="updatePassword",
  *     summary="Update password",
  *     description="Update password",
- *     consumes={"application/json"},
- *     produces={"application/json"},
- *	   @SWG\Parameter(
+ *	   @OA\Parameter(
  *         description="Password id to update",
  *         in="path",
  *         name="passwordId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- * 	   @SWG\Parameter(
- *        name="title",
- *        in="body",
- *        description="Password's title",
- *		  default="Title",
- * 		  type="string"
- *     ),
- *	   @SWG\Parameter(
- *        name="icon",
- *        in="body",
- *        description="Password's icon",
- *		  default="icon",
- * 		  type="string"
- *     ),
- *	   @SWG\Parameter(
- *        name="description",
- *        in="body",
- *        description="Password's description",
- *		  default="Description",
- * 		  type="string"
- *     ),
- * 	   @SWG\Parameter(
- *        name="username",
- *        in="body",
- *        description="Password's username",
- *		  default="username",
- * 		  type="string"
- *     ),
- *     @SWG\Parameter(
- *        name="password",
- *        in="body",
- *        description="Password's password",
- *		  default="password",
- * 		  type="string"
- *     ),
- *     @SWG\Parameter(
- *        name="url",
- *        in="body",
- *        description="Password's url",
- *		  default="http://www.ti.ch",
- * 		  type="string"
- *     ),
- *     @SWG\Parameter(
- *        name="tags",
- *        in="body",
- *        description="Password's tags",
- *		  default="tag1 tag2",
- * 		  type="string"
- *     ),
- *	   @SWG\Parameter(
- *        name="folder_id",
- *        in="body",
- *        description="Folder id where the password will be",
- * 		  type="integer"
- *     ),
- *     @SWG\Response(
+ *     requestBody={"$ref": "#/components/requestBodies/UpdatePasswordAction payload"},
+ *     @OA\Response(
  *         response=201,
  *         description="OK",
+ *         @OA\JsonContent()
  *     ),
- *	   @SWG\Response(
+ *	   @OA\Response(
  *         response="400",
  *         description="Mime type not allowed",
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=404,
  *         description="Invalid input",
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
+ * )
+ * @OA\RequestBody(
+ * 		 request="UpdatePasswordAction payload",
+ *     description="password object to create",
+ *     required=true,
+ *     @OA\Property(property="title", type="string", default="Title", description="Password's title"),
+ *     @OA\Property(property="icon", type="string", default="icon", description="Password's icon"),
+ *     @OA\Property(property="description", type="string", default="Description", description="Password's description"),
+ *     @OA\Property(property="username", type="string", default="username", description="Password's username"), 
+ *     @OA\Property(property="password", type="string", default="password", description="Password's password"), 
+ *     @OA\Property(property="url", type="string", default="http://www.ti.ch", description="Password's url"),
+ *     @OA\Property(property="tags", type="string", default="tag1 tag2", description="Password's tags"), 
+ *     @OA\Property(property="folder_id", type="string", description="Folder id where the password will be"), 
  * )
  */
 class UpdatePasswordAction implements RequestHandlerInterface

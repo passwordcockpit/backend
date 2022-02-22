@@ -26,50 +26,47 @@ use Authentication\Api\V1\Facade\TokenUserFacade;
  *
  * @copyright 2018 Blackpoints SA
  *
- * @SWG\Patch(
+ * @OA\Patch(
  *     path="/v1/users/{userId}",
  *     tags={"users"},
  *     operationId="updateUser",
  *     summary="Update an existing user",
  *     description="Update an existing user",
- *     consumes={"application/json"},
- *     produces={"application/json"},
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="User id to update",
  *         in="path",
  *         name="userId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Parameter(
- *         name="body",
- *         in="body",
- *         description="User object that needs to be updated",
- *         required=true,
- *         @SWG\Schema(ref="#/definitions/UpdateUserAction payload")
- *     ),
- *     @SWG\Response(
+ *     requestBody={"$ref": "#/components/requestBodies/UpdateUserAction payload"},
+ *     @OA\Response(
  *         response=200,
- *         description="OK"
+ *         description="OK",
+ *         @OA\JsonContent()
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=404,
  *         description="User not found"
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
  * )
- * @SWG\Definition(
- *		definition="UpdateUserAction payload",
- *		@SWG\Property(property="username", type="string", description="User's username"),
- *		@SWG\Property(property="password", type="string", description="User's password"),
- *		@SWG\Property(property="actual_password", type="string", description="User's actual password"),
- * 		@SWG\Property(property="name", type="string", description="User's name"),
- *		@SWG\Property(property="surname", type="string", description="User's surname"),
- *		@SWG\Property(property="language", type="string", description="User's language"),
- *		@SWG\Property(property="phone", type="string", description="User's phone number"),
- *		@SWG\Property(property="email", type="string", description="User's email"),
- *		@SWG\Property(property="enabled", type="boolean", description="Wether a user is enabled (true) or not (false)")
+ * @OA\RequestBody(
+ *		request="UpdateUserAction payload",
+ *    description="User object that needs to be updated",
+ *    required=true,
+ *		@OA\Property(property="username", type="string", description="User's username"),
+ *		@OA\Property(property="password", type="string", description="User's password"),
+ *		@OA\Property(property="actual_password", type="string", description="User's actual password"),
+ * 		@OA\Property(property="name", type="string", description="User's name"),
+ *		@OA\Property(property="surname", type="string", description="User's surname"),
+ *		@OA\Property(property="language", type="string", description="User's language"),
+ *		@OA\Property(property="phone", type="string", description="User's phone number"),
+ *		@OA\Property(property="email", type="string", description="User's email"),
+ *		@OA\Property(property="enabled", type="boolean", description="Wether a user is enabled (true) or not (false)")
  * )
  */
 class UpdateUserAction implements RequestHandlerInterface

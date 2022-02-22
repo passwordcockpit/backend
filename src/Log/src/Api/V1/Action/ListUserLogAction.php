@@ -18,30 +18,32 @@ use Mezzio\Hal\ResourceGenerator;
 use Log\Api\V1\Collection\UserLogCollection;
 
 /**
- * @SWG\Get(
+ * @OA\Get(
  *     path="/v1/users/{userId}/logs",
  *     summary="List logs for specified user",
  *     description="Returns list of logs for specified user",
  *     operationId="listLogsUser",
- *     produces={"application/json"},
  *     tags={"users"},
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="User id to fetch logs",
  *         in="path",
  *         name="userId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=200,
- *         description="OK"
+ *         description="OK",
+ *         @OA\JsonContent()
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=204,
  *         description="No Content"
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
  * )
  */
 class ListUserLogAction implements RequestHandlerInterface

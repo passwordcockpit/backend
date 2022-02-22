@@ -23,37 +23,39 @@ use Laminas\Crypt\FileCipher;
 use File\Api\V1\Entity\File;
 
 /**
- * @SWG\Post(
- *     path=" /v1/passwords/{passwordId}/files",
+ * @OA\Post(
+ *     path="/v1/passwords/{passwordId}/files",
  *     summary="Create a file for the specific password",
  *     description="",
  *     operationId="updateFile",
- *     produces={"application/json"},
  *     tags={"passwords"},
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="password id to which the file is associated",
  *         in="path",
  *         name="passwordId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Parameter(
- * 		   name="file",
+ *     @OA\RequestBody(
  *         description="file to upload",
- *         in="formData",
- *         type="file"
+ *         @OA\MediaType(
+ *             mediaType="multipart/form-data",
+ *             @OA\Schema(type="file")
+ *         )
  *     ),
-
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=200,
- *         description="OK"
+ *         description="OK",
+ *         @OA\JsonContent()
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=404,
  *         description="Password not found"
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
  * )
  */
 

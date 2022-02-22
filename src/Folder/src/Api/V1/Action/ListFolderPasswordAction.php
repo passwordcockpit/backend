@@ -21,30 +21,32 @@ use Password\Api\V1\Collection\PasswordCollection;
 use Password\Api\V1\Facade\PasswordFacade;
 
 /**
- * @SWG\Get(
+ * @OA\Get(
  *     path="/v1/folders/{folderId}/passwords",
  *     summary="Get passwords in specified folder",
  *     description="Returns passwords in the specified folder by its id",
  *     operationId="getFolderPassword",
- *     produces={"application/json"},
  *     tags={"folders"},
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="Folder id where to get passwords",
  *         in="path",
  *         name="folderId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=200,
- *         description="OK"
+ *         description="OK",
+ *         @OA\JsonContent()
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=404,
  *         description="Not Found"
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
  * )
  */
 class ListFolderPasswordAction implements RequestHandlerInterface

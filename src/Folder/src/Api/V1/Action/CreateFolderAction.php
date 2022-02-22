@@ -23,35 +23,30 @@ use Folder\Api\V1\Entity\Folder;
  *
  * @copyright 2018 Blackpoints SA
  *
- * @SWG\Post(
+ * @OA\Post(
  *     path="/v1/folders",
  *     tags={"folders"},
  *     operationId="createFolder",
  *     summary="Create a new Folder",
  *     description="Create a new Folder",
- *     consumes={"application/json"},
- *     produces={"application/json"},
- *     @SWG\Parameter(
- *         name="body",
- *         in="body",
- *         description="Folder object to create",
- *         required=true,
- *         @SWG\Schema(ref="#/definitions/CreateFolderAction payload")
- *     ),
- *     @SWG\Response(
+ *     requestBody={"$ref": "#/components/requestBodies/CreateFolderAction payload"},
+ *     @OA\Response(
  *         response=201,
  *         description="OK",
+ *         @OA\JsonContent()
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=404,
- *         description="Invalid input",
+ *         description="Invalid input"
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
  * )
- * @SWG\Definition(
- *		definition="CreateFolderAction payload",
- * 		@SWG\Property(property="name", type="string", description="Name of the folder"),
- *      @SWG\Property(property="folder_id", type="integer", description="Id of the parent folder"),
+ * @OA\RequestBody(
+ *     request="CreateFolderAction payload",
+ *     description="Folder object to create",
+ *     required=true,
+ *     @OA\Property(property="name", type="string", description="Name of the folder"),
+ *     @OA\Property(property="folder_id", type="integer", description="Id of the parent folder"),
  * )
  */
 class CreateFolderAction implements RequestHandlerInterface

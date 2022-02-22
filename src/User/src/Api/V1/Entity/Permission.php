@@ -9,14 +9,14 @@
 namespace User\Api\V1\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 
 /**
  * Permission
  *
  * @ORM\Table(name="permission")
  * @ORM\Entity
- * @SWG\Definition(definition="Permission")
+ * @OA\Schema(description="Permission")
  */
 class Permission
 {
@@ -25,7 +25,7 @@ class Permission
      *
      * @ORM\Column(name="manage_users", type="boolean", precision=0, scale=0, nullable=true, unique=false)
      *
-     * @SWG\Property(property="manage_users")
+     * @OA\Property(property="manage_users")
      */
     private $manageUsers;
 
@@ -34,7 +34,7 @@ class Permission
      *
      * @ORM\Column(name="create_folders", type="boolean", precision=0, scale=0, nullable=true, unique=false)
      *
-     * @SWG\Property(property="create_folders")
+     * @OA\Property(property="create_folders")
      */
     private $createFolders;
 
@@ -43,7 +43,7 @@ class Permission
      *
      * @ORM\Column(name="access_all_folders", type="boolean", precision=0, scale=0, nullable=true, unique=false)
      *
-     * @SWG\Property(property="access_all_folders")
+     * @OA\Property(property="access_all_folders")
      */
     private $accessAllFolders;
 
@@ -52,7 +52,7 @@ class Permission
      *
      * @ORM\Column(name="view_logs", type="boolean", precision=0, scale=0, nullable=true, unique=false)
      *
-     * @SWG\Property(property="view_logs")
+     * @OA\Property(property="view_logs")
      */
     private $viewLogs;
 

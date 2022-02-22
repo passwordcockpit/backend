@@ -23,31 +23,26 @@ use Authentication\Api\V1\Facade\LoginRequestFacade;
 
 /**
  *
- * @SWG\Post(
+ * @OA\Post(
  *     path="/auth",
  *     tags={"authentication"},
  *     operationId="AuthenticationCreateAction",
  *     summary="Create a new token",
  *     description="",
- *     consumes={"application/json"},
- *     produces={"application/json"},
- *     @SWG\Parameter(
- *         name="User credential",
- *         in="body",
- *         description="Credentials",
- *         required=true,
- *         @SWG\Schema(ref="#/definitions/AuthenticationCreateAction payload")
- *     ),
- *     @SWG\Response(
+ *     requestBody={"$ref": "#/components/requestBodies/AuthenticationCreateAction payload"},
+ *     @OA\Response(
  *         response=200,
  *         description="Ok",
+ *         @OA\JsonContent()
  *     )
  * )
- * @SWG\Definition(
- * 			definition="AuthenticationCreateAction payload",
- * 			@SWG\Property(property="username", type="string", description="User identifier"),
- * 			@SWG\Property(property="password", type="string", description="User password"),
- * 		),
+ * @OA\RequestBody(
+ * 			request="AuthenticationCreateAction payload",
+ *      description="Credentials",
+ *      required=true,
+ * 			@OA\Property(property="username", type="string", description="User identifier"),
+ * 			@OA\Property(property="password", type="string", description="User password")
+ * )
  */
 class AuthenticationCreateAction implements RequestHandlerInterface
 {

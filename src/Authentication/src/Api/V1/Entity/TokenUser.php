@@ -10,14 +10,14 @@
 namespace Authentication\Api\V1\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 
 /**
  * Permission
  *
  * @ORM\Table(name="token_user")
  * @ORM\Entity
- * @SWG\Definition(definition="Token table")
+ * @OA\Schema(description="Token table")
  */
 class TokenUser
 {
@@ -38,7 +38,7 @@ class TokenUser
      *
      * @ORM\Column(name="token", type="string", length=500, precision=0, scale=0, nullable=true, unique=true)
      *
-     * @SWG\Property(property="token", type="string", description="token value", example="ey.token")
+     * @OA\Property(property="token", type="string", description="token value", example="ey.token")
      */
     private $token;
 
@@ -47,7 +47,7 @@ class TokenUser
      *
      * @ORM\Column(name="last_login", type="datetime", precision=0, scale=0, nullable=true, unique=false)
      *
-     * @SWG\Property(property="last_login", type="datetime", description="Last login date", example="title")
+     * @OA\Property(property="last_login", type="datetime", description="Last login date", example="title")
      */
     private $lastLogin;
 

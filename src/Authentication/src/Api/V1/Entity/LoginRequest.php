@@ -10,14 +10,14 @@
 namespace Authentication\Api\V1\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 
 /**
  * Permission
  *
  * @ORM\Table(name="login_request")
  * @ORM\Entity
- * @SWG\Definition(definition="Login Requests table")
+ * @OA\Schema(description="Login Requests table")
  */
 class LoginRequest
 {
@@ -35,7 +35,7 @@ class LoginRequest
      *
      * @ORM\Column(name="ip", type="string", length=100, precision=0, scale=0, nullable=true, unique=false)
      *
-     * @SWG\Property(property="ip", type="string", description="ip making the request", example="256.240.20.111")
+     * @OA\Property(property="ip", type="string", description="ip making the request", example="256.240.20.111")
      */
     private $ip;
 
@@ -44,7 +44,7 @@ class LoginRequest
      *
      * @ORM\Column(name="attempt_date", type="datetime", precision=0, scale=0, nullable=true, unique=false)
      *
-     * @SWG\Property(property="dateTime", type="datetime", description="Login request date", example="2019-01-22 18:18:18")
+     * @OA\Property(property="dateTime", type="datetime", description="Login request date", example="2019-01-22 18:18:18")
      */
     private $attemptDate;
 
@@ -53,7 +53,7 @@ class LoginRequest
      *
      * @ORM\Column(name="username", type="string", length=100, precision=0, scale=0, nullable=true, unique=false)
      *
-     * @SWG\Property(property="username", type="string", description="username on which the request is made", example="admin")
+     * @OA\Property(property="username", type="string", description="username on which the request is made", example="admin")
      */
     private $username;
 

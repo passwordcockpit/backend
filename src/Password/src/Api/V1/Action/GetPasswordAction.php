@@ -21,30 +21,32 @@ use Mezzio\Hal\ResourceGenerator;
 use Mezzio\Hal\HalResponseFactory;
 
 /**
- * @SWG\Get(
+ * @OA\Get(
  *     path="/v1/passwords/{passwordId}",
  *     tags={"passwords"},
  *     operationId="getPassword",
  *     summary="Get a password",
  *     description="",
- *     produces={"application/json"},
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="Password id to fetch",
  *         in="path",
  *         name="passwordId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=204,
  *         description="Not found",
+ *         @OA\JsonContent()
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=200,
  *         description="Ok",
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
  * )
  */
 class GetPasswordAction implements RequestHandlerInterface

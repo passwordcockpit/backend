@@ -31,21 +31,18 @@ use Authentication\Api\V1\Facade\TokenUserFacade;
 
 /**
  *
- * @SWG\Post(
+ * @OA\Post(
  *     path="/api/v1/token/update",
  *     tags={"authentication"},
  *     operationId="UpdateToken",
  *     summary="Update Token",
  *     description="return an updated token if old token is valid",
- *     consumes={"application/json"},
- *     produces={"application/json"},
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=200,
- *         description="Ok"
+ *         description="Ok",
+ *         @OA\JsonContent()
  *     ),
- *     security={
- *       {"bearerAuth": {}}
- *     }
+ *     security={{"bearerAuth": {}}}
  * )
  *
  */

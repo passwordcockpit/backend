@@ -15,30 +15,32 @@ use Psr\Http\Message\ServerRequestInterface;
 use Mezzio\Hal\ResourceGenerator;
 
 /**
- * @SWG\Delete(
+ * @OA\Delete(
  *     path="/v1/files/{fileId}",
  *     summary="Deletes a file",
  *     description="",
  *     operationId="deleteFile",
- *     produces={"application/json"},
  *     tags={"File"},
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="Fileid to delete",
  *         in="path",
  *         name="fileId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=200,
- *         description="OK"
+ *         description="OK",
+ *         @OA\JsonContent()
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=404,
  *         description="File not found"
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
  * )
  */
 

@@ -18,28 +18,27 @@ use File\Api\V1\Facade\FileFacade;
 
 /**
  *
- * @SWG\Get(
+ * @OA\Get(
  *     path="/v1/files/{fileId}",
  *     tags={"File"},
  *     operationId="GetFileAction",
  *     summary="Get file",
  *     description="",
- *     consumes={"application/json"},
- *     produces={"application/json"},
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         name="fileId",
  *         in="path",
  *         description="File id",
  *         required=true,
- * 		   type="string"
+ *         @OA\Schema(
+ *             type="string",
+ *         ),
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=200,
- *         description="Ok"
+ *         description="Ok",
+ *         @OA\JsonContent(),
  *     ),
- *     security={
- *       {"bearerAuth": {}}
- *     }
+ *     security={{"bearerAuth": {}}}
  * )
  *
  */

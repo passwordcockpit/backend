@@ -22,38 +22,42 @@ use Laminas\I18n\Translator\Translator;
 use Mezzio\Hal\HalResponseFactory;
 
 /**
- * @SWG\Get(
+ * @OA\Get(
  *     path="/v1/folders/{folderId}/users/{userId}",
  *     summary="Get user access type to specified folder",
  *     description="Returns user access type on the specified folder by its id",
  *     operationId="getFolderUser",
- *     produces={"application/json"},
  *     tags={"folders"},
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="Folder id",
  *         in="path",
  *         name="folderId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="User id",
  *         in="path",
  *         name="userId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=200,
- *         description="OK"
+ *         description="OK",
+ *         @OA\JsonContent()
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=204,
  *         description="No Content"
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
  * )
  */
 class GetFolderUserAction implements RequestHandlerInterface

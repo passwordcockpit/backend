@@ -23,28 +23,25 @@ use Laminas\Crypt\FileCipher;
 
 /**
  *
- * @SWG\Get(
+ * @OA\Get(
  *     path="/v1/upload/files/{fileId}",
  *     tags={"File"},
  *     operationId="DownloadFileAction",
  *     summary="Download file",
  *     description="",
- *     consumes={"application/json"},
- *     produces={"application/json"},
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         name="fileId",
  *         in="path",
  *         description="File id",
  *         required=true,
- * 		   type="string"
+ *         @OA\Schema(type="string"),
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=200,
- *         description="Ok"
+ *         description="Ok",
+ *         @OA\JsonContent()
  *     ),
- *     security={
- *       {"bearerAuth": {}}
- *     }
+ *     security={{"bearerAuth": {}}}
  * )
  *
  */

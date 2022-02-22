@@ -16,23 +16,19 @@ use Authentication\Api\V1\Facade\TokenUserFacade;
 use Laminas\Diactoros\Response\JsonResponse;
 
 /**
- * @SWG\Delete(
+ * @OA\Delete(
  *     path="/api/v1/token/logout",
  *     tags={"authentication"},
  *     operationId="Logout",
  *     summary="Delete token in tokenUser table",
  *     description="When user logs out token is invalidated",
- *     consumes={"application/json"},
- *     produces={"application/json"},
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=200,
- *         description="Ok"
+ *         description="Ok",
+ *         @OA\JsonContent()
  *     ),
- *     security={
- *       {"bearerAuth": {}}
- *     }
+ *     security={{"bearerAuth": {}}}
  * )
- *
  */
 
 class AuthenticationLogout implements RequestHandlerInterface
