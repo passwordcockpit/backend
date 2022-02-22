@@ -1,4 +1,4 @@
-FROM php:7.3-apache
+FROM --platform=linux/amd64 php:8.1-apache-bullseye
 
 # passwordcockpit variables
 ENV PASSWORDCOCKPIT_DATABASE_USERNAME root

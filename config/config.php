@@ -21,7 +21,6 @@ $aggregator = new ConfigAggregator(
         \Mezzio\Router\ConfigProvider::class,
         \Laminas\InputFilter\ConfigProvider::class,
         \Laminas\Filter\ConfigProvider::class,
-        \Acelaya\ExpressiveErrorHandler\ConfigProvider::class,
         \Mezzio\ProblemDetails\ConfigProvider::class,
         \Laminas\I18n\ConfigProvider::class,
         \Laminas\Paginator\ConfigProvider::class,
@@ -51,8 +50,7 @@ $aggregator = new ConfigAggregator(
         // Load development config if it exists
         new PhpFileProvider('config/development.config.php')
     ],
-    $cacheConfig['config_cache_path'],
-    [\Laminas\ZendFrameworkBridge\ConfigPostProcessor::class]
+    $cacheConfig['config_cache_path']
 );
 
 return $aggregator->getMergedConfig();

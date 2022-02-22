@@ -8,7 +8,6 @@
 
 namespace App;
 
-use Tuupola\Middleware\JwtAuthentication;
 use Mezzio\Delegate;
 
 /**
@@ -62,11 +61,10 @@ class ConfigProvider
                 \Mezzio\Helper\UrlHelper::class => \Mezzio\Helper\UrlHelperFactory::class,
                 \Mezzio\Helper\UrlHelperMiddleware::class => \Mezzio\Helper\UrlHelperMiddlewareFactory::class,
                 \Laminas\Stratigility\Middleware\ErrorHandler::class => \Mezzio\Container\ErrorHandlerFactory::class,
-                \Laminas\Stratigility\Middleware\ErrorResponseGenerator::class => \Acelaya\ExpressiveErrorHandler\ErrorHandler\Factory\ContentBasedErrorResponseGeneratorFactory::class,
                 \Laminas\Stratigility\Middleware\NotFoundHandler::class => \Mezzio\ProblemDetails\ProblemDetailsNotFoundHandlerFactory::class,
                 Middleware\CorsMiddleware::class => Factory\CorsMiddlewareFactory::class,
                 //Doctrine factory
-                \Doctrine\ORM\EntityManagerInterface::class => \ContainerInteropDoctrine\EntityManagerFactory::class,
+                \Doctrine\ORM\EntityManagerInterface::class => \Roave\PsrContainerDoctrine\EntityManagerFactory::class,
                 \Mezzio\Hal\Metadata\MetadataMap::class => Factory\DoctrineMetadataMapFactory::class,
                 \Laminas\I18n\Translator\Translator::class => \Laminas\I18n\Translator\TranslatorServiceFactory::class
             ],
