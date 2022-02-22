@@ -11,8 +11,6 @@ namespace Authorization\Api\V1\Assertion;
 
 use Laminas\Permissions\Rbac\AssertionInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use App\Service\ProblemDetailsException;
-use Doctrine\ORM\EntityManager;
 use Laminas\I18n\Translator\Translator;
 use Folder\Api\V1\Facade\FolderUserFacade;
 use Laminas\Permissions\Rbac\RoleInterface;
@@ -20,10 +18,8 @@ use User\Api\V1\Entity\User;
 
 class UsernameListAssertion implements AssertionInterface
 {
-    protected $translator;
-    protected $folderUserFacade;
-    protected $request;
-    protected $user;
+    protected ServerRequestInterface $request;
+    protected User $user;
 
     /**
      * Constructor
@@ -31,24 +27,19 @@ class UsernameListAssertion implements AssertionInterface
      * @param Translator $translator
      * @param FolderUserFacade $folderUserFacade
      */
-    public function __construct(
-        Translator $translator,
-        FolderUserFacade $folderUserFacade
-    ) {
-        $this->translator = $translator;
-        $this->folderUserFacade = $folderUserFacade;
+    public function __construct(protected Translator $translator, protected FolderUserFacade $folderUserFacade)
+    {
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setRequest(
-        \Psr\Http\Message\ServerRequestInterface $request
-    ) {
+    public function setRequest(ServerRequestInterface $request)
+    {
         $this->request = $request;
     }
 
-    public function setUser($user)
+    public function setUser(User $user)
     {
         $this->user = $user;
     }

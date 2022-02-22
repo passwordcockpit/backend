@@ -52,30 +52,6 @@ use Laminas\Diactoros\Response\EmptyResponse;
 class GetFolderAction implements RequestHandlerInterface
 {
     /**
-     *
-     * @var FolderUserFacade
-     */
-    protected $folderUserFacade;
-
-    /**
-     *
-     * @var FolderFacade
-     */
-    protected $folderFacade; //oggetto della classe FolderFacade
-
-    /**
-     *
-     * @var ResourceGenerator
-     */
-    protected $halResourceGenerator;
-
-    /**
-     *
-     * @var HalResponseFactory
-     */
-    private $halResponseFactory;
-
-    /**
      * Constructor
      *
      * @param FolderUserFacade $foldrUserFacade
@@ -84,16 +60,11 @@ class GetFolderAction implements RequestHandlerInterface
      * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
-        FolderUserFacade $folderUserFacade,
-        FolderFacade $folderFacade,
-        ResourceGenerator $halResourceGenerator,
-        HalResponseFactory $halResponseFactory
-    ) {
-        $this->folderUserFacade = $folderUserFacade;
-        $this->halResourceGenerator = $halResourceGenerator;
-        $this->folderFacade = $folderFacade;
-        $this->halResponseFactory = $halResponseFactory;
-    }
+        protected FolderUserFacade $folderUserFacade,
+        protected FolderFacade $folderFacade,
+        protected ResourceGenerator $halResourceGenerator,
+        private readonly HalResponseFactory $halResponseFactory
+    ){}
 
     /**
      *

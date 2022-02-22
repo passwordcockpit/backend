@@ -13,6 +13,7 @@ use Exception;
 use App\Abstracts\AbstractFacade;
 use File\Api\V1\Entity\File;
 use App\Service\ProblemDetailsException;
+use Doctrine\ORM\EntityManager;
 use File\Api\V1\Hydrator\FileHydrator;
 use Password\Api\V1\Entity\Password;
 use Laminas\I18n\Translator\Translator;
@@ -20,28 +21,19 @@ use Laminas\I18n\Translator\Translator;
 class FileFacade extends AbstractFacade
 {
     /**
-     * @var FileHydrator
-     */
-    private $fileHydrator;
-
-    private $uploadConfig;
-
-    /**
-     * @param \Laminas\I18n\Translator\Translator $translator
-     * @param \Doctrine\ORM\EntityManager $entityManager
+     * @param Translator $translator
+     * @param EntityManager $entityManager
      * @param type entityName
      * @param FileHydrator $fileHydrator
      * @param array $uploadConfig
      */
     public function __construct(
         Translator $translator,
-        \Doctrine\ORM\EntityManager $entityManager,
-        $entityName,
-        FileHydrator $fileHydrator,
-        $uploadConfig
+        EntityManager $entityManager,
+        string $entityName,
+        private readonly FileHydrator $fileHydrator,
+        private array $uploadConfig
     ) {
-        $this->fileHydrator = $fileHydrator;
-        $this->uploadConfig = $uploadConfig;
         parent::__construct($translator, $entityManager, $entityName);
     }
     /**
@@ -56,7 +48,7 @@ class FileFacade extends AbstractFacade
             $file = $this->fileHydrator->hydrate($data, new File());
             $file->setCreationDate(new \DateTime());
             $this->persist($file);
-        } catch (Exception $ex) {
+        } catch (Exception) {
             throw new ProblemDetailsException(
                 403,
                 $this->translator->translate(
@@ -72,8 +64,8 @@ class FileFacade extends AbstractFacade
     /**
      * Handles check,moving and encrypting files
      *
-     * @param File $file
-     * @param string $uploadConfig
+     * @param \Laminas\Diactoros\UploadedFile $file
+     * @param array $uploadConfig
      * @param FileCipher $fileCipher
      * @param string $encriptionkey
      * @param Password $password

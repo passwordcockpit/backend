@@ -12,6 +12,7 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use App\Service\ProblemDetailsException;
+use Authentication\Api\V1\Adapter\LdapAdapter;
 use Psr\Http\Message\ResponseInterface;
 use Laminas\I18n\Translator\Translator;
 use User\Api\V1\Facade\UserFacade;
@@ -21,48 +22,19 @@ use Laminas\Authentication\Adapter\AdapterInterface;
 class AuthenticationMiddleware implements MiddlewareInterface
 {
     /**
-     *
-     * @var UserFacade
-     */
-    private $userFacade;
-
-    /**
-     *
-     * @var Translator
-     */
-    private $translator;
-
-    /**
-     *
-     * @var TokenUserFacade
-     */
-    private $tokenUserFacade;
-
-    /**
-     *
-     * @var AdapterInterface
-     */
-    private $authAdapter;
-
-    /**
      * Constructor
      *
      * @param Translator $translator
      * @param UserFacade $userFacade
-     * @param AdapterInterface $authAdapter
      * @param TokenUserFacade $tokenUserFacade
+     * @param AdapterInterface $authAdapter
      */
     public function __construct(
-        Translator $translator,
-        UserFacade $userFacade,
-        TokenUserFacade $tokenUserFacade,
-        AdapterInterface $authAdapter
-    ) {
-        $this->translator = $translator;
-        $this->userFacade = $userFacade;
-        $this->tokenUserFacade = $tokenUserFacade;
-        $this->authAdapter = $authAdapter;
-    }
+        private readonly Translator $translator,
+        private readonly UserFacade $userFacade,
+        private readonly TokenUserFacade $tokenUserFacade,
+        private readonly AdapterInterface $authAdapter
+    ){}
 
     /**
      * Return true if it's a valid update user request to change password
@@ -134,8 +106,7 @@ class AuthenticationMiddleware implements MiddlewareInterface
             $changePass &&
             !$this->isAllowedCall($request, $userId) &&
             //it's not an ldap
-            get_class($this->authAdapter) !=
-                'Authentication\Api\V1\Adapter\LdapAdapter'
+            $this->authAdapter::class != LdapAdapter::class
         ) {
             throw new ProblemDetailsException(
                 401,

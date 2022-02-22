@@ -12,6 +12,7 @@ namespace Password\Api\V1\Hydrator;
 use Password\Api\V1\Entity\Password;
 use Laminas\Hydrator\AbstractHydrator;
 use App\Service\DateConverter;
+use Laminas\Db\Sql\Ddl\Column\Datetime;
 
 /**
  * Description of FolderHydrator
@@ -89,7 +90,7 @@ class PasswordHydrator extends AbstractHydrator
             $password->setfrontendCrypted(false);
         }
         if ($this->isPropertyAvailable('last_modification_date', $data)) {
-            $password->setLastModificationDate($data['last_modification_date']);
+            $password->setLastModificationDate(new Datetime($data['last_modification_date']));
         }
         return $password;
     }

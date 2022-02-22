@@ -48,24 +48,6 @@ use Log\Api\V1\Facade\LogFacade;
 class GetLogAction implements RequestHandlerInterface
 {
     /**
-     *
-     * @var LogFacade
-     */
-    protected $logFacade;
-
-    /**
-     *
-     * @var ResourceGenerator
-     */
-    protected $halResourceGenerator;
-
-    /**
-     *
-     * @var HalResponseFactory
-     */
-    protected $halResponseFactory;
-
-    /**
      * Constructor
      *
      * @param PasswordFacade $passwordFacade
@@ -73,14 +55,10 @@ class GetLogAction implements RequestHandlerInterface
      * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
-        LogFacade $logFacade,
-        ResourceGenerator $halResourceGenerator,
-        HalResponseFactory $halResponseFactory
-    ) {
-        $this->logFacade = $logFacade;
-        $this->halResourceGenerator = $halResourceGenerator;
-        $this->halResponseFactory = $halResponseFactory;
-    }
+        protected LogFacade $logFacade,
+        protected ResourceGenerator $halResourceGenerator,
+        protected HalResponseFactory $halResponseFactory
+    ){}
 
     /**
      * MiddlewareInterface handler

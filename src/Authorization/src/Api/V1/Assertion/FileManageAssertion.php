@@ -22,27 +22,6 @@ class FileManageAssertion implements AssertionInterface
 {
     /**
      *
-     * @var EntityManager
-     *
-     */
-    protected $entityManager;
-
-    /**
-     *
-     * @var Translator
-     *
-     */
-    protected $translator;
-
-    /**
-     *
-     * @var FolderUserFacade
-     *
-     */
-    protected $folderUserFacade;
-
-    /**
-     *
      * @var ServerRequestInterface
      *
      */
@@ -58,14 +37,10 @@ class FileManageAssertion implements AssertionInterface
      * @param FolderUserFacade $folderUserFacade
      */
     public function __construct(
-        EntityManager $entityManager,
-        Translator $translator,
-        FolderUserFacade $folderUserFacade
-    ) {
-        $this->entityManager = $entityManager;
-        $this->translator = $translator;
-        $this->folderUserFacade = $folderUserFacade;
-    }
+        protected EntityManager $entityManager,
+        protected Translator $translator,
+        protected FolderUserFacade $folderUserFacade
+    ){}
 
     /**
      * {@inheritDoc}

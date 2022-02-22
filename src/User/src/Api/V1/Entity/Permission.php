@@ -21,43 +21,32 @@ use OpenApi\Annotations as OA;
 class Permission
 {
     /**
-     * @var bool
      *
      * @ORM\Column(name="manage_users", type="boolean", precision=0, scale=0, nullable=true, unique=false)
-     *
      * @OA\Property(property="manage_users")
      */
-    private $manageUsers;
+    private bool $manageUsers;
 
     /**
-     * @var bool
      *
      * @ORM\Column(name="create_folders", type="boolean", precision=0, scale=0, nullable=true, unique=false)
-     *
      * @OA\Property(property="create_folders")
      */
-    private $createFolders;
-
+    private bool $createFolders;
     /**
-     * @var bool
      *
      * @ORM\Column(name="access_all_folders", type="boolean", precision=0, scale=0, nullable=true, unique=false)
-     *
      * @OA\Property(property="access_all_folders")
      */
-    private $accessAllFolders;
-
+    private bool $accessAllFolders;
     /**
-     * @var bool
      *
      * @ORM\Column(name="view_logs", type="boolean", precision=0, scale=0, nullable=true, unique=false)
-     *
      * @OA\Property(property="view_logs")
      */
-    private $viewLogs;
+    private bool $viewLogs;
 
     /**
-     * @var \User\Api\V1\Entity\User
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
@@ -66,15 +55,16 @@ class Permission
      *   @ORM\JoinColumn(name="user_id", referencedColumnName="user_id", nullable=true)
      * })
      */
-    private $user;
+    private User $user;
+
 
     public function __construct(
-        $manageUsers,
-        $createFolders,
-        $accessAllFolders,
-        $viewLogs,
-        $user
-    ) {
+        bool $manageUsers,
+        bool $createFolders,
+        bool $accessAllFolders,
+        bool $viewLogs,
+        User $user
+    ){
         $this->manageUsers = $manageUsers;
         $this->createFolders = $createFolders;
         $this->accessAllFolders = $accessAllFolders;

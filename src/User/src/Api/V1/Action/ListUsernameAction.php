@@ -39,24 +39,6 @@ use User\Api\V1\Collection\UserCollection;
 class ListUsernameAction implements RequestHandlerInterface
 {
     /**
-     *
-     * @var UserFacade
-     */
-    protected $userFacade;
-
-    /**
-     *
-     * @var ResourceGenerator
-     */
-    private $halResourceGenerator;
-
-    /**
-     *
-     * @var HalResponseFactory
-     */
-    protected $halResponseFactory;
-
-    /**
      * Constructor
      *
      * @param UserFacade $userFacade
@@ -64,14 +46,11 @@ class ListUsernameAction implements RequestHandlerInterface
      * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
-        UserFacade $userFacade,
-        ResourceGenerator $halResourceGenerator,
-        HalResponseFactory $halResponseFactory
-    ) {
-        $this->userFacade = $userFacade;
-        $this->halResourceGenerator = $halResourceGenerator;
-        $this->halResponseFactory = $halResponseFactory;
-    }
+        protected UserFacade $userFacade,
+        private readonly ResourceGenerator $halResourceGenerator,
+        protected HalResponseFactory $halResponseFactory
+    ){}
+    
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $users = $this->userFacade->getAllUsernames(); // ottengo la lista users dalla userFacade

@@ -29,65 +29,7 @@ use App\Abstracts\AbstractFacade;
 
 class PasswordFacade extends AbstractFacade
 {
-    /**
-     *
-     * @var EntityManager
-     */
-    protected $entityManager;
-
-    /**
-     *
-     * @var Translator
-     */
-    protected $translator;
-
-    /**
-     *
-     * @var BlockCipher
-     */
-    private $blockCipher;
-
-    /**
-     *
-     * @var FileCipher
-     */
-    private $fileCipher;
-
-    /**
-     *
-     * @var string
-     */
-    private $encriptionKey;
-
-    /**
-     *
-     * @var int
-     */
-    private $userId;
-
-    /**
-     *
-     * @var FolderFacade
-     */
-    private $folderFacade;
-
-    /**
-     *
-     * @var LogFacade
-     */
-    private $logFacade;
-
-    /**
-     *
-     * @var FileFacade
-     */
-    private $fileFacade;
-
-    /**
-     *
-     * @var array
-     */
-    private $uploadConfig;
+    private int $userId;
 
     /**
      * Constructor
@@ -103,26 +45,16 @@ class PasswordFacade extends AbstractFacade
      * @param array $uploadConfig
      */
     public function __construct(
-        EntityManager $entityManager,
-        Translator $translator,
-        BlockCipher $blockCipher,
-        FileCipher $fileCipher,
-        $encriptionKey,
-        FolderFacade $folderFacade,
-        LogFacade $logFacade,
-        FileFacade $fileFacade,
-        $uploadConfig
+        protected EntityManager $entityManager,
+        protected Translator $translator,
+        private readonly BlockCipher $blockCipher,
+        private readonly FileCipher $fileCipher,
+        private $encriptionKey,
+        private readonly FolderFacade $folderFacade,
+        private readonly LogFacade $logFacade,
+        private readonly FileFacade $fileFacade,
+        private $uploadConfig
     ) {
-        $this->entityManager = $entityManager;
-        $this->translator = $translator;
-        $this->blockCipher = $blockCipher;
-        $this->fileCipher = $fileCipher;
-        $this->encriptionKey = $encriptionKey;
-        $this->folderFacade = $folderFacade;
-        $this->logFacade = $logFacade;
-        $this->fileFacade = $fileFacade;
-        $this->uploadConfig = $uploadConfig;
-
         parent::__construct($translator, $entityManager, Password::class);
     }
 
@@ -149,7 +81,7 @@ class PasswordFacade extends AbstractFacade
      * @param string $id
      * @param array $filter
      */
-    public function fetch($id, $filter)
+    public function fetch($id, $filter): never
     {
         throw new Exception("Method not implemented");
     }
@@ -158,7 +90,7 @@ class PasswordFacade extends AbstractFacade
      *
      * @param array $filter
      */
-    public function fetchAll($filter)
+    public function fetchAll($filter): never
     {
         throw new Exception("Method not implemented");
     }
@@ -168,7 +100,7 @@ class PasswordFacade extends AbstractFacade
      * @param type $id
      * @param type $filter
      */
-    public function delete($id, $filter)
+    public function delete($id, $filter): never
     {
         throw new Exception("Method not implemented");
     }
@@ -288,7 +220,7 @@ class PasswordFacade extends AbstractFacade
      * @param string $id
      * @param array $data
      */
-    public function update($id, $data)
+    public function update($id, $data): never
     {
         throw new Exception("Method not implemented");
     }

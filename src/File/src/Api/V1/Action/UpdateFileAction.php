@@ -62,53 +62,6 @@ use File\Api\V1\Entity\File;
 class UpdateFileAction implements RequestHandlerInterface
 {
     /**
-     *
-     * @var FileFacade
-     */
-    protected $fileFacade;
-
-    /**
-     *
-     * @var PasswordFacade
-     */
-    protected $passwordFacade;
-
-    /**
-     *
-     * @var EntityManager
-     */
-    private $entityManager;
-
-    /**
-     *
-     * @var FileCipher
-     */
-    private $fileCipher;
-
-    /**
-     *
-     * @var string
-     */
-    private $encriptionKey;
-
-    /**
-     *
-     * @var array
-     */
-    private $uploadConfig;
-
-    private $translator;
-    /**
-     * @var ResourceGenerator
-     */
-    private $resourceGenerator;
-
-    /**
-     * @var HalResponseFactory
-     */
-    private $halResponseFactory;
-
-    /**
      * Constructor
      *
      * @param FileFacade $fileFacade
@@ -118,30 +71,19 @@ class UpdateFileAction implements RequestHandlerInterface
      * @param EntityManager $entityManager
      * @param FileCipher $fileCipher
      * @param string $encriptionkey
-     * @param ResourceGenerator $resourceGeneratorInstance
+     * @param ResourceGenerator $resourceGenerator
      * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
-        FileFacade $fileFacade,
-        PasswordFacade $passwordFacade,
-        $uploadConfig,
-        $translator,
-        $entityManager,
-        FileCipher $fileCipher,
-        $encriptionKey,
-        ResourceGenerator $resourceGeneratorInstance,
-        HalResponseFactory $halResponseFactory
-    ) {
-        $this->fileFacade = $fileFacade;
-        $this->passwordFacade = $passwordFacade;
-        $this->uploadConfig = $uploadConfig;
-        $this->translator = $translator;
-        $this->entityManager = $entityManager;
-        $this->fileCipher = $fileCipher;
-        $this->encriptionKey = $encriptionKey;
-        $this->resourceGenerator = $resourceGeneratorInstance;
-        $this->halResponseFactory = $halResponseFactory;
-    }
+        protected FileFacade $fileFacade,
+        protected PasswordFacade $passwordFacade,
+        private array $uploadConfig,
+        private $translator, private $entityManager,
+        private readonly FileCipher $fileCipher,
+        private string $encriptionKey,
+        private readonly ResourceGenerator $resourceGenerator,
+        private readonly HalResponseFactory $halResponseFactory
+    ){}
 
     /**
      * MiddlewareInterface handler

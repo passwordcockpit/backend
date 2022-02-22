@@ -13,51 +13,26 @@ use Laminas\Authentication\Adapter\AdapterInterface;
 use Laminas\Authentication\Result;
 use Laminas\Authentication\Adapter\Ldap;
 use User\Api\V1\Facade\UserFacade;
-use User\Api\V1\Entity\User;
 use Doctrine\ORM\EntityManager;
 
 class LdapAdapter implements AdapterInterface
 {
-    /**
-     * @var UserFacade $userFacade
-     */
-    private $userFacade;
+    private string $username;
 
-    /**
-     * @var string $username
-     */
-    private $username;
-
-    /**
-     * @var string $password
-     */
-    private $password;
-
-    /**
-     * @var array $ldapConfig
-     */
-    private $ldapConfig;
-
-    /**
-     * @var EntityManager $entitymanager
-     */
-    private $entityManager;
+    private string $password;
 
     /**
      * Constructor
      *
      * @param UserFacade $userFacade
      * @param array $ldapConfig
+     * @param EntityManager $entityManager
      */
     public function __construct(
-        UserFacade $userFacade,
-        $ldapConfig,
-        $entityManager
-    ) {
-        $this->userFacade = $userFacade;
-        $this->ldapConfig = $ldapConfig;
-        $this->entityManager = $entityManager;
-    }
+      private readonly UserFacade $userFacade,
+      private array $ldapConfig,
+      private EntityManager $entityManager
+    ){}
 
     public function setPassword($password)
     {

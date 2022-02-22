@@ -36,30 +36,6 @@ use Password\Api\V1\Collection\PasswordCollection;
 class ListPasswordAction implements RequestHandlerInterface
 {
     /**
-     *
-     * @var PasswordFacade
-     */
-    protected $passwordFacade;
-
-    /**
-     *
-     * @var PermissionFacade
-     */
-    protected $permissionFacade;
-
-    /**
-     *
-     * @var ResourceGenerator
-     */
-    protected $halResourceGenerator;
-
-    /**
-     *
-     * @var HalResponseFactory
-     */
-    protected $halResponseFactory;
-
-    /**
      * Constructor
      *
      * @param PasswordFacade $passwordFacade
@@ -68,16 +44,11 @@ class ListPasswordAction implements RequestHandlerInterface
      * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
-        PasswordFacade $passwordFacade,
-        PermissionFacade $permissionFacade,
-        ResourceGenerator $halResourceGenerator,
-        HalResponseFactory $halResponseFactory
-    ) {
-        $this->passwordFacade = $passwordFacade;
-        $this->permissionFacade = $permissionFacade;
-        $this->halResourceGenerator = $halResourceGenerator;
-        $this->halResponseFactory = $halResponseFactory;
-    }
+        protected PasswordFacade $passwordFacade,
+        protected PermissionFacade $permissionFacade,
+        protected ResourceGenerator $halResourceGenerator,
+        protected HalResponseFactory $halResponseFactory
+    ){}
 
     /**
      * MiddlewareInterface handler

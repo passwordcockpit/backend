@@ -63,42 +63,6 @@ use Mezzio\Hal\HalResponseFactory;
 class GetFolderUserAction implements RequestHandlerInterface
 {
     /**
-     *
-     * @var FolderUserFacade
-     */
-    protected $folderUserFacade;
-
-    /**
-     *
-     * @var FolderFacade
-     */
-    protected $folderFacade;
-
-    /**
-     *
-     * @var UserFacade
-     */
-    protected $userFacade;
-
-    /**
-     *
-     * @var Translator
-     */
-    protected $translator;
-
-    /**
-     *
-     * @var ResourceGenerator
-     */
-    protected $halResourceGenerator;
-
-    /**
-     *
-     * @var HalResponseFactory
-     */
-    protected $halResponseFactory;
-
-    /**
      * Constructor
      *
      * @param FolderUserFacade $folderUserFacade
@@ -109,20 +73,13 @@ class GetFolderUserAction implements RequestHandlerInterface
      * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
-        FolderUserFacade $folderUserFacade,
-        FolderFacade $folderFacade,
-        UserFacade $userFacade,
-        Translator $translator,
-        ResourceGenerator $halResourceGenerator,
-        HalResponseFactory $halResponseFactory
-    ) {
-        $this->folderUserFacade = $folderUserFacade;
-        $this->folderFacade = $folderFacade;
-        $this->userFacade = $userFacade;
-        $this->translator = $translator;
-        $this->halResourceGenerator = $halResourceGenerator;
-        $this->halResponseFactory = $halResponseFactory;
-    }
+        protected FolderUserFacade $folderUserFacade,
+        protected FolderFacade $folderFacade,
+        protected UserFacade $userFacade,
+        protected Translator $translator, 
+        protected ResourceGenerator $halResourceGenerator,
+        protected HalResponseFactory $halResponseFactory
+    ){}
 
     /**
      * MiddlewareInterface handler

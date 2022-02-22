@@ -18,12 +18,10 @@ use Psr\Http\Server\RequestHandlerInterface;
  */
 class CorsMiddleware implements MiddlewareInterface
 {
-    private $clientAddress;
-
-    public function __construct($clientAddress)
+    public function __construct(private array $clientAddress)
     {
-        $this->clientAddress = $clientAddress;
     }
+
     /**
      * Handle an implicit OPTIONS request.
      *

@@ -18,18 +18,14 @@ use Mezzio\ProblemDetails\ProblemDetailsResponseFactory;
 
 class ErrorResponseGenerator
 {
-    private $problemDetailsFactory;
-
-    public function __construct(
-        ProblemDetailsResponseFactory $problemDetailsFactory
-    ) {
-        $this->problemDetailsFactory = $problemDetailsFactory;
+    public function __construct(private readonly ProblemDetailsResponseFactory $problemDetailsFactory)
+    {
     }
 
     /**
      * Final handler for an application.
      *
-     * @param Request $request
+     * @param ServerRequestInterface $request
      * @param Response $response
      * @return Response
      */

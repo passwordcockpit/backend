@@ -12,18 +12,14 @@ namespace Authorization\Api\V1\Assertion;
 use Laminas\Permissions\Rbac\AssertionInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use User\Api\V1\Entity\User;
-use App\Service\ProblemDetailsException;
-use Doctrine\ORM\EntityManager;
 use Laminas\I18n\Translator\Translator;
 use Folder\Api\V1\Facade\FolderUserFacade;
 use Laminas\Permissions\Rbac\RoleInterface;
 
 class UserAssertion implements AssertionInterface
 {
-    protected $translator;
-    protected $folderUserFacade;
-    protected $request;
-    protected $user;
+    protected ServerRequestInterface $request;
+    protected User $user;
 
     /**
      * Constructor
@@ -32,23 +28,19 @@ class UserAssertion implements AssertionInterface
      * @param FolderUserFacade $folderUserFacade
      */
     public function __construct(
-        Translator $translator,
-        FolderUserFacade $folderUserFacade
-    ) {
-        $this->translator = $translator;
-        $this->folderUserFacade = $folderUserFacade;
-    }
+        protected Translator $translator,
+        protected FolderUserFacade $folderUserFacade
+    ){}
 
     /**
      * {@inheritDoc}
      */
-    public function setRequest(
-        \Psr\Http\Message\ServerRequestInterface $request
-    ) {
+    public function setRequest(ServerRequestInterface $request)
+    {
         $this->request = $request;
     }
 
-    public function setUser($user)
+    public function setUser(User $user)
     {
         $this->user = $user;
     }
@@ -56,8 +48,8 @@ class UserAssertion implements AssertionInterface
     /**
      * Returns userId from Request attributes
      *
-     * @param type $request
-     * @return type
+     * @param ServerRequestInterface $request
+     * @return mixed
      */
     private function getUserId($request)
     {

@@ -17,34 +17,12 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use App\Service\ProblemDetailsException;
 use Laminas\InputFilter\Factory;
-use Laminas\InputFilter\InputFilter;
 use Laminas\Db\Adapter\Adapter;
+use Laminas\I18n\Translator\Translator;
 
 class PermissionValidationMiddleware implements MiddlewareInterface
 {
-    /**
-     *
-     * @var Factory
-     */
-    private $inputFilterFactory;
-
-    /**
-     *
-     * @var Adapter
-     */
-    private $adapter;
-
-    /**
-     *
-     * @var array
-     */
-    private $languages;
-
-    /**
-     *
-     * @var type
-     */
-    private $translator;
+    private readonly \Laminas\InputFilter\Factory $inputFilterFactory;
 
     /**
      * Constructor
@@ -53,12 +31,12 @@ class PermissionValidationMiddleware implements MiddlewareInterface
      * @param array $languages
      * @param Translator $translator
      */
-    public function __construct(Adapter $adapter, $languages, $translator)
-    {
+    public function __construct(
+        private readonly Adapter $adapter, 
+        private array $languages,
+        private Translator $translator
+    ) {
         $this->inputFilterFactory = new Factory();
-        $this->adapter = $adapter;
-        $this->languages = $languages;
-        $this->translator = $translator;
     }
 
     /**
@@ -71,6 +49,7 @@ class PermissionValidationMiddleware implements MiddlewareInterface
         ServerRequestInterface $request,
         RequestHandlerInterface $handler
     ): ResponseInterface {
+        $errors = [];
         $payload = $request->getParsedBody();
 
         $exclude = null;
@@ -104,9 +83,7 @@ class PermissionValidationMiddleware implements MiddlewareInterface
                     [
                         'name' => \Laminas\Validator\Callback::class,
                         'options' => [
-                            'callback' => function ($value) {
-                                return is_bool($value);
-                            }
+                            'callback' => fn($value) => is_bool($value)
                         ]
                     ]
                 ]
@@ -132,9 +109,7 @@ class PermissionValidationMiddleware implements MiddlewareInterface
                     [
                         'name' => \Laminas\Validator\Callback::class,
                         'options' => [
-                            'callback' => function ($value) {
-                                return is_bool($value);
-                            }
+                            'callback' => fn($value) => is_bool($value)
                         ]
                     ]
                 ]
@@ -160,9 +135,7 @@ class PermissionValidationMiddleware implements MiddlewareInterface
                     [
                         'name' => \Laminas\Validator\Callback::class,
                         'options' => [
-                            'callback' => function ($value) {
-                                return is_bool($value);
-                            }
+                            'callback' => fn($value) => is_bool($value)
                         ]
                     ]
                 ]
@@ -188,9 +161,7 @@ class PermissionValidationMiddleware implements MiddlewareInterface
                     [
                         'name' => \Laminas\Validator\Callback::class,
                         'options' => [
-                            'callback' => function ($value) {
-                                return is_bool($value);
-                            }
+                            'callback' => fn($value) => is_bool($value)
                         ]
                     ]
                 ]
@@ -219,5 +190,28 @@ class PermissionValidationMiddleware implements MiddlewareInterface
         $request = $request->withParsedBody($newPayload);
 
         return $handler->handle($request);
+    }
+
+    /**
+     * Extract errors from input filter
+     *
+     * @param InputFilter $inputFilter
+     * @return mixin
+     */
+    private function generateInputErrorMessages($inputFilter)
+    {
+        $errors = [];
+        foreach ($inputFilter->getInvalidInput() as $error) {
+            $msgs = [];
+            foreach ($error->getMessages() as $msg) {
+                $msgs[] = $msg;
+            }
+            $errors[] = [
+                "name" => $error->getName(),
+                "value" => $error->getValue(),
+                "messages" => $msgs
+            ];
+        }
+        return $errors;
     }
 }

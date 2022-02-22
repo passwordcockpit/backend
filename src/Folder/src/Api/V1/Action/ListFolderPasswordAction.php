@@ -52,30 +52,6 @@ use Password\Api\V1\Facade\PasswordFacade;
 class ListFolderPasswordAction implements RequestHandlerInterface
 {
     /**
-     *
-     * @var FolderFacade
-     */
-    protected $folderFacade;
-
-    /**
-     *
-     * @var PasswordFacade
-     */
-    protected $passwordFacade;
-
-    /**
-     *
-     * @var ResourceGenerator
-     */
-    protected $halResourceGenerator;
-
-    /**
-     *
-     * @var HalResponseFactory
-     */
-    protected $halResponseFactory;
-
-    /**
      * Constructor
      *
      * @param FolderFacade $folderFacade
@@ -84,16 +60,11 @@ class ListFolderPasswordAction implements RequestHandlerInterface
      * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
-        FolderFacade $folderFacade,
-        PasswordFacade $passwordFacade,
-        ResourceGenerator $halResourceGenerator,
-        HalResponseFactory $halResponseFactory
-    ) {
-        $this->folderFacade = $folderFacade;
-        $this->passwordFacade = $passwordFacade;
-        $this->halResourceGenerator = $halResourceGenerator;
-        $this->halResponseFactory = $halResponseFactory;
-    }
+        protected FolderFacade $folderFacade,
+        protected PasswordFacade $passwordFacade,
+        protected ResourceGenerator $halResourceGenerator,
+        protected HalResponseFactory $halResponseFactory
+    ){}
 
     /**
      * MiddlewareInterface handler

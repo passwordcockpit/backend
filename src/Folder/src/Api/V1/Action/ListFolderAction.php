@@ -40,36 +40,6 @@ use Mezzio\Hal\HalResponseFactory;
 class ListFolderAction implements RequestHandlerInterface
 {
     /**
-     *
-     * @var FolderFacade
-     */
-    protected $folderFacade; //oggetto della classe FolderFacade
-
-    /**
-     *
-     * @var UserFacade
-     */
-    protected $userFacade;
-
-    /**
-     *
-     * @var PermissionFacade
-     */
-    protected $permissionFacade;
-
-    /**
-     *
-     * @var ResourceGenerator
-     */
-    protected $halResourceGenerator;
-
-    /**
-     *
-     * @var HalResponseFactory
-     */
-    protected $halResponseFactory;
-
-    /**
      * Constructor
      *
      * @param FolderFacade $folderFacade
@@ -79,18 +49,12 @@ class ListFolderAction implements RequestHandlerInterface
      * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
-        FolderFacade $folderFacade,
-        UserFacade $userFacade,
-        PermissionFacade $permissionFacade,
-        ResourceGenerator $halResourceGenerator,
-        HalResponseFactory $halResponseFactory
-    ) {
-        $this->folderFacade = $folderFacade;
-        $this->userFacade = $userFacade;
-        $this->permissionFacade = $permissionFacade;
-        $this->halResourceGenerator = $halResourceGenerator;
-        $this->halResponseFactory = $halResponseFactory;
-    }
+        protected FolderFacade $folderFacade,
+        protected UserFacade $userFacade,
+        protected PermissionFacade $permissionFacade,
+        protected ResourceGenerator $halResourceGenerator,
+        protected HalResponseFactory $halResponseFactory
+    ){}
 
     /**
      * MiddlewareInterface handler
@@ -132,9 +96,7 @@ class ListFolderAction implements RequestHandlerInterface
                 $user->getUserId()
             );
             // order folders by name
-            usort($folders, function ($a, $b) {
-                return strcasecmp($a->getName(), $b->getName());
-            });
+            usort($folders, fn($a, $b) => strcasecmp($a->getName(), $b->getName()));
         }
         $foldersCollection = new FolderCollection(new ArrayAdapter($folders));
         $foldersCollection->setDefaultItemCountPerPage(PHP_INT_MAX);

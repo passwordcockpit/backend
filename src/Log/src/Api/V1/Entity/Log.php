@@ -10,6 +10,8 @@ namespace Log\Api\V1\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use OpenApi\Annotations as OA;
+use Password\Api\V1\Entity\Password;
+use User\Api\V1\Entity\User;
 
 /**
  * Log
@@ -21,33 +23,29 @@ use OpenApi\Annotations as OA;
 class Log
 {
     /**
-     * @var int
      *
      * @ORM\Column(name="log_id", type="integer", precision=0, scale=0, nullable=false, unique=false)
      * @ORM\Id
      * @ORM\GeneratedValue
      * @OA\Property
      */
-    private $logId;
+    private int $logId;
 
     /**
-     * @var \DateTime|null
      *
      * @ORM\Column(name="action_date", type="datetime", precision=0, scale=0, nullable=true, unique=false)
      * @OA\Property
      */
-    private $actionDate;
+    private ?\DateTime $actionDate = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="action", type="string", length=4000, precision=0, scale=0, nullable=true, unique=false)
      * @OA\Property
      */
-    private $action;
+    private ?string $action = null;
 
     /**
-     * @var \Password\Api\V1\Entity\Password
      *
      * @ORM\ManyToOne(targetEntity="Password\Api\V1\Entity\Password")
      * @ORM\JoinColumns({
@@ -55,10 +53,9 @@ class Log
      * })
      * @OA\Property
      */
-    private $password;
+    private ?Password $password = null;
 
     /**
-     * @var \User\Api\V1\Entity\User
      *
      * @ORM\ManyToOne(targetEntity="User\Api\V1\Entity\User")
      * @ORM\JoinColumns({
@@ -66,7 +63,7 @@ class Log
      * })
      * @OA\Property
      */
-    private $user;
+    private User $user;
 
     /**
      * Get logId.
@@ -129,13 +126,11 @@ class Log
     /**
      * Set password.
      *
-     * @param \Password\Api\V1\Entity\Password|null $password
+     * @param Password|null $password
      *
      * @return Log
      */
-    public function setPassword(
-        \Password\Api\V1\Entity\Password $password = null
-    ) {
+    public function setPassword(Password $password = null) {
         $this->password = $password;
 
         return $this;
@@ -144,7 +139,7 @@ class Log
     /**
      * Get password.
      *
-     * @return \Password\Api\V1\Entity\Password|null
+     * @return Password|null
      */
     public function getPassword()
     {
@@ -154,11 +149,11 @@ class Log
     /**
      * Set user.
      *
-     * @param \User\Api\V1\Entity\User|null $user
+     * @param User|null $user
      *
      * @return Log
      */
-    public function setUser(\User\Api\V1\Entity\User $user = null)
+    public function setUser(User $user = null)
     {
         $this->user = $user;
 
@@ -168,7 +163,7 @@ class Log
     /**
      * Get user.
      *
-     * @return \User\Api\V1\Entity\User|null
+     * @return User|null
      */
     public function getUser()
     {

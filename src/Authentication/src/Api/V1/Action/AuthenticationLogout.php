@@ -33,15 +33,8 @@ use Laminas\Diactoros\Response\JsonResponse;
 
 class AuthenticationLogout implements RequestHandlerInterface
 {
-    /**
-     *
-     * @var TokenUserFacade
-     */
-    private $tokenUserFacade;
-
-    public function __construct(TokenUserFacade $tokenUserFacade)
+    public function __construct(private readonly TokenUserFacade $tokenUserFacade)
     {
-        $this->tokenUserFacade = $tokenUserFacade;
     }
 
     /**

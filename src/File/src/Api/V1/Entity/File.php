@@ -20,51 +20,41 @@ use Password\Api\V1\Entity\Password;
 class File
 {
     /**
-     * @var int
      *
      * @ORM\Column(name="file_id", type="integer", precision=0, scale=0, nullable=false, unique=false)
      * @ORM\Id
      * @ORM\GeneratedValue
      */
-    private $fileId;
+    private int $fileId;
 
     /**
-     * @var string|null
-     *
      * @ORM\Column(name="name", type="string", length=100, precision=0, scale=0, nullable=true, unique=false)
      */
-    private $name;
+    private ?string $name = null;
 
     /**
-     * @var string|null
-     *
      * @ORM\Column(name="filename", type="string", length=1000, precision=0, scale=0, nullable=true, unique=false)
      */
-    private $filename;
+    private ?string $filename = null;
 
     /**
-     * @var string|null
-     *
      * @ORM\Column(name="extension", type="string", length=200, precision=0, scale=0, nullable=true, unique=false)
      */
-    private $extension;
+    private ?string $extension = null;
 
     /**
-     * @var \DateTime|null
-     *
      * @ORM\Column(name="creation_date", type="datetime", precision=0, scale=0, nullable=true, unique=false)
      */
-    private $creationDate;
+    private ?\DateTime $creationDate = null;
 
     /**
-     * @var \Password\Api\V1\Entity\Password
      *
      * @ORM\ManyToOne(targetEntity="Password\Api\V1\Entity\Password")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="password_id", referencedColumnName="password_id", nullable=true)
      * })
      */
-    private $password;
+    private Password $password;
 
     /**
      * Get fileId.

@@ -48,36 +48,6 @@ class AuthenticationCreateAction implements RequestHandlerInterface
 {
     /**
      *
-     * @var mixin
-     */
-    private $config;
-
-    /**
-     *
-     * @var Translator
-     */
-    private $translator;
-
-    /**
-     *
-     * @var AdapterInterface
-     */
-    private $authAdapter;
-
-    /**
-     *
-     * @var TokenUserFacade
-     */
-    private $tokenUserFacade;
-
-    /**
-     *
-     * @var LoginRequestFacade
-     */
-    private $loginRequestFacade;
-
-    /**
-     *
      * @param array $config
      * @param Translator $translator
      * @param AdapterInterface $adapterInterface
@@ -85,18 +55,12 @@ class AuthenticationCreateAction implements RequestHandlerInterface
      * @param LoginRequestFacade $loginRequestFacade
      */
     public function __construct(
-        $config,
-        Translator $translator,
-        AdapterInterface $authAdapter,
-        TokenUserFacade $tokenUserFacade,
-        LoginRequestFacade $loginRequestFacade
-    ) {
-        $this->config = $config;
-        $this->translator = $translator;
-        $this->authAdapter = $authAdapter;
-        $this->tokenUserFacade = $tokenUserFacade;
-        $this->loginRequestFacade = $loginRequestFacade;
-    }
+      private array $config,
+      private readonly Translator $translator,
+      private readonly AdapterInterface $authAdapter,
+      private readonly TokenUserFacade $tokenUserFacade,
+      private readonly LoginRequestFacade $loginRequestFacade
+    ){}
 
     /**
      * This function handles the TokenUserTable after a successful login.
@@ -117,13 +81,13 @@ class AuthenticationCreateAction implements RequestHandlerInterface
         if ($tokenUser == null) {
             $this->tokenUserFacade->createTokenUser($user, $token);
             if (
-                get_class($this->authAdapter) ==
-                'Authentication\Api\V1\Adapter\DoctrineAdapter'
+                $this->authAdapter::class ==
+                \Authentication\Api\V1\Adapter\DoctrineAdapter::class
             ) {
                 $firstTimeLogin = true;
             } elseif (
-                get_class($this->authAdapter) ==
-                'Authentication\Api\V1\Adapter\LdapAdapter'
+                $this->authAdapter::class ==
+                \Authentication\Api\V1\Adapter\LdapAdapter::class
             ) {
                 $firstTimeLogin = false;
             }
@@ -131,8 +95,8 @@ class AuthenticationCreateAction implements RequestHandlerInterface
             //user already logged in. Modify token and date.
             if (
                 $user->getChangePassword() &&
-                get_class($this->authAdapter) !=
-                    'Authentication\Api\V1\Adapter\LdapAdapter'
+                $this->authAdapter::class !=
+                    \Authentication\Api\V1\Adapter\LdapAdapter::class
             ) {
                 // also if the user has not changed his password still
                 $firstTimeLogin = true;
@@ -152,6 +116,8 @@ class AuthenticationCreateAction implements RequestHandlerInterface
      */
     private function createToken(User $user)
     {
+        $expirationTime = null;
+        $secretKey = null;
         // Current time for token
         $currentTime = new \DateTime();
         // Expiration time in minutes
@@ -167,8 +133,8 @@ class AuthenticationCreateAction implements RequestHandlerInterface
         // Is it an ldap authentication?
         $isLdap = false;
         if (
-            get_class($this->authAdapter) ==
-            'Authentication\Api\V1\Adapter\LdapAdapter'
+            $this->authAdapter::class ==
+            \Authentication\Api\V1\Adapter\LdapAdapter::class
         ) {
             //with ldap active there is no need change password
             $isLdap = true;

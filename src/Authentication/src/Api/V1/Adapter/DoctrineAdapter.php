@@ -17,30 +17,18 @@ use Doctrine\ORM\EntityManager;
 
 class DoctrineAdapter implements AdapterInterface
 {
-    /**
-     * @var string $username
-     */
-    private $username;
+    private ?string $username;
 
-    /**
-     * @var string $password
-     */
-    private $password;
-
-    /**
-     * @var $entityManager
-     */
-    private $entityManager;
+    private ?string $password;
 
     /**
      * Constructor
      * @param EntityManager $entityManager
      */
-    public function __construct($entityManager)
+    public function __construct(private EntityManager $entityManager)
     {
         $this->username = null;
         $this->password = null;
-        $this->entityManager = $entityManager;
     }
 
     /**

@@ -55,9 +55,7 @@ class PermissionValidationMiddlewareFactory
                     [
                         'name' => \Laminas\Validator\Callback::class,
                         'options' => [
-                            'callback' => function ($value) {
-                                return is_bool($value);
-                            }
+                            'callback' => fn($value) => is_bool($value)
                         ]
                     ]
                 ]
@@ -82,9 +80,7 @@ class PermissionValidationMiddlewareFactory
                     [
                         'name' => \Laminas\Validator\Callback::class,
                         'options' => [
-                            'callback' => function ($value) {
-                                return is_bool($value);
-                            }
+                            'callback' => fn($value) => is_bool($value)
                         ]
                     ]
                 ]
@@ -109,9 +105,7 @@ class PermissionValidationMiddlewareFactory
                     [
                         'name' => \Laminas\Validator\Callback::class,
                         'options' => [
-                            'callback' => function ($value) {
-                                return is_bool($value);
-                            }
+                            'callback' => fn($value) => is_bool($value)
                         ]
                     ]
                 ]
@@ -136,9 +130,7 @@ class PermissionValidationMiddlewareFactory
                     [
                         'name' => \Laminas\Validator\Callback::class,
                         'options' => [
-                            'callback' => function ($value) {
-                                return is_bool($value);
-                            }
+                            'callback' => fn($value) => is_bool($value)
                         ]
                     ]
                 ]

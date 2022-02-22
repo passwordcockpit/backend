@@ -16,33 +16,19 @@ use Psr\Http\Message\ResponseInterface;
 use Laminas\InputFilter\Factory as InputFilterFactory;
 use Laminas\InputFilter\InputFilter;
 use App\Service\ProblemDetailsException;
+use Laminas\I18n\Translator\Translator;
 
 class StringParameterValidator implements MiddlewareInterface
 {
-    /**
-     *
-     * @var InputFilterFactory
-     */
-    private $inputFilterFactory;
-
-    /**
-     *
-     * @var array
-     */
-    private $translator;
-
     /**
      *
      * @param Translator $translator
      * @param InputFilterFactory $inputFilterFactory
      */
     public function __construct(
-        InputFilterFactory $inputFilterFactory,
-        $translator
-    ) {
-        $this->inputFilterFactory = $inputFilterFactory;
-        $this->translator = $translator;
-    }
+      private readonly InputFilterFactory $inputFilterFactory,
+      private Translator $translator
+    ){}
 
     /**
      * MiddlewareInterface handler
@@ -56,6 +42,7 @@ class StringParameterValidator implements MiddlewareInterface
         ServerRequestInterface $request,
         RequestHandlerInterface $handler
     ) : ResponseInterface {
+        $errors = [];
         $queryParams = $request->getQueryParams();
         // if (sizeof($queryParams) == 0) {
         //     return $handler->handle($request);

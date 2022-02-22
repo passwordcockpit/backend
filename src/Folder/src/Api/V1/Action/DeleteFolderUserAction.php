@@ -61,30 +61,6 @@ use Folder\Api\V1\Facade\FolderUserFacade;
 class DeleteFolderUserAction implements RequestHandlerInterface
 {
     /**
-     *
-     * @var FolderFacade
-     */
-    protected $folderFacade;
-
-    /**
-     *
-     * @var UserFacade
-     */
-    protected $userFacade;
-
-    /**
-     *
-     * @var ResourceGenerator
-     */
-    protected $halResourceGenerator;
-
-    /**
-     *
-     * @var FolderUserFacade
-     */
-    protected $folderUserFacade;
-
-    /**
      * Constructor
      *
      * @param FolderFacade $folderFacade
@@ -93,16 +69,11 @@ class DeleteFolderUserAction implements RequestHandlerInterface
      * @param FolderUserFacade $folderUserFacade
      */
     public function __construct(
-        FolderFacade $folderFacade,
-        ResourceGenerator $halResourceGenerator,
-        UserFacade $userFacade,
-        FolderUserFacade $folderUserFacade
-    ) {
-        $this->halResourceGenerator = $halResourceGenerator;
-        $this->folderFacade = $folderFacade;
-        $this->userFacade = $userFacade;
-        $this->folderUserFacade = $folderUserFacade;
-    }
+        protected FolderFacade $folderFacade,
+        protected ResourceGenerator $halResourceGenerator,
+        protected UserFacade $userFacade,
+        protected FolderUserFacade $folderUserFacade
+    ){}
 
     /**
      * MiddlewareInterface handler

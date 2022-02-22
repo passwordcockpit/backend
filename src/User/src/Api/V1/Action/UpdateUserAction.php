@@ -19,7 +19,6 @@ use Mezzio\Hal\ResourceGenerator;
 use User\Api\V1\Entity\User;
 use Mezzio\Hal\HalResponseFactory;
 use Firebase\JWT\JWT;
-use Tuupola\Middleware\JwtAuthentication;
 use Authentication\Api\V1\Facade\TokenUserFacade;
 
 /**
@@ -72,36 +71,6 @@ use Authentication\Api\V1\Facade\TokenUserFacade;
 class UpdateUserAction implements RequestHandlerInterface
 {
     /**
-     *
-     * @var UserFacade
-     */
-    protected $userFacade;
-
-    /**
-     *
-     * @var ResourceGenerator
-     */
-    protected $halResourceGenerator;
-
-    /**
-     *
-     * @var HalResponseFactory
-     */
-    protected $halResponseFactory;
-
-    /**
-     *
-     * @var mixin
-     */
-    private $config;
-
-    /**
-     *
-     * @var TokenUserFacade
-     */
-    private $tokenUserFacade;
-
-    /**
      * Constructor
      *
      * @param UserFacade $userFacade
@@ -111,18 +80,12 @@ class UpdateUserAction implements RequestHandlerInterface
      * @param TokenUserFacade $tokenUserFacade
      */
     public function __construct(
-        UserFacade $userFacade,
-        ResourceGenerator $halResourceGenerator,
-        HalResponseFactory $halResponseFactory,
-        $config,
-        TokenUserFacade $tokenUserFacade
-    ) {
-        $this->userFacade = $userFacade;
-        $this->halResourceGenerator = $halResourceGenerator;
-        $this->halResponseFactory = $halResponseFactory;
-        $this->config = $config;
-        $this->tokenUserFacade = $tokenUserFacade;
-    }
+        protected UserFacade $userFacade,
+        protected ResourceGenerator $halResourceGenerator,
+        protected HalResponseFactory $halResponseFactory,
+        private array $config,
+        private readonly TokenUserFacade $tokenUserFacade
+    ){}
 
     // return a new token with the language changed
     // if language is changed, return updated token

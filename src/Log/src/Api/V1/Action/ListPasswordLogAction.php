@@ -49,30 +49,6 @@ use Log\Api\V1\Collection\PasswordLogCollection;
 class ListPasswordLogAction implements RequestHandlerInterface
 {
     /**
-     *
-     * @var LogFacade
-     */
-    protected $logFacade;
-
-    /**
-     *
-     * @var ResourceGenerator
-     */
-    protected $halResourceGenerator;
-
-    /**
-     *
-     * @var HalResponseFactory
-     */
-    protected $halResponseFactory;
-
-    /**
-     *
-     * @var array
-     */
-    protected $paginatorConfig;
-
-    /**
      * Constructor
      *
      * @param LogFacade $logFacade
@@ -81,16 +57,11 @@ class ListPasswordLogAction implements RequestHandlerInterface
      * @param array $paginatorCofig
      */
     public function __construct(
-        LogFacade $logFacade,
-        ResourceGenerator $halResourceGenerator,
-        HalResponseFactory $halResponseFactory,
-        $paginatorConfig
-    ) {
-        $this->halResourceGenerator = $halResourceGenerator;
-        $this->halResponseFactory = $halResponseFactory;
-        $this->logFacade = $logFacade;
-        $this->paginatorConfig = $paginatorConfig;
-    }
+        protected LogFacade $logFacade,
+        protected ResourceGenerator $halResourceGenerator,
+        protected HalResponseFactory $halResponseFactory,
+        protected $paginatorConfig
+    ){}
 
     /**
      * MiddlewareInterface handler
@@ -104,10 +75,8 @@ class ListPasswordLogAction implements RequestHandlerInterface
         $logs = $this->logFacade->getPasswordLog($passwordId);
         //most recent logs are shown
         // $logs = array_reverse($logs);
-        usort($logs, function ($a, $b) {
-            return $b->getActionDate()->getTimestamp() -
-                $a->getActionDate()->getTimestamp();
-        });
+        usort($logs, fn($a, $b) => $b->getActionDate()->getTimestamp() -
+            $a->getActionDate()->getTimestamp());
         $logsArrayAdapter = new \Laminas\Paginator\Adapter\ArrayAdapter($logs);
         $logsCollection = new PasswordLogCollection($logsArrayAdapter);
         $logsCollection->setDefaultItemCountPerPage(

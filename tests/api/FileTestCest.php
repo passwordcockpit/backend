@@ -146,13 +146,13 @@ class FileTestCest
 
         // check if the original file and the returned file are the same
         $fileData = md5(file_get_contents('tests/_data/test.pdf'));
-        $I->seeBinaryResponseEquals($fileData);
+        $I->seeBinaryResponseEquals($fileData, 'md5');
 
         // download file as user2
         $I->amBearerAuthenticated($this->user2Token);
         $I->sendGET('/api/v1/upload/files/' . $this->fileIdToElim);
         $I->seeResponseCodeIs(\Codeception\Util\HttpCode::OK); // 200
-        $I->seeBinaryResponseEquals($fileData);
+        $I->seeBinaryResponseEquals($fileData, 'md5');
 
         // download file as user
         $I->amBearerAuthenticated($this->userToken);
@@ -198,7 +198,7 @@ class FileTestCest
         $I->amBearerAuthenticated($this->adminToken);
         $I->sendPOST(
             '/api/v1/passwords/' . $this->pwIdToElim . '/files',
-            null,
+            [],
             [
                 'file' => codecept_data_dir('test.pdf')
             ]
@@ -225,7 +225,7 @@ class FileTestCest
         $I->amBearerAuthenticated($this->userToken);
         $I->sendPOST(
             '/api/v1/passwords/' . $this->pwIdToElim . '/files',
-            null,
+            [],
             [
                 'file' => codecept_data_dir('test.pdf')
             ]
@@ -248,7 +248,7 @@ class FileTestCest
         $I->amBearerAuthenticated($this->user2Token);
         $I->sendPOST(
             '/api/v1/passwords/' . $this->pwIdToElim . '/files',
-            null,
+            [],
             [
                 'file' => codecept_data_dir('test.pdf')
             ]

@@ -47,30 +47,15 @@ use Mezzio\Hal\ResourceGenerator;
 class DeleteFileAction implements RequestHandlerInterface
 {
     /**
-     *
-     * @var FileFacade
-     */
-    protected $fileFacade;
-
-    /**
-     *
-     * @var ResourceGenerator
-     */
-    protected $halResourceGenerator;
-
-    /**
      * Constructor
      *
-     * @param File $fileFacade
+     * @param FileFacade $fileFacade
      * @param ResourceGenerator $halResourceGenerator
      */
     public function __construct(
-        FileFacade $fileFacade,
-        ResourceGenerator $halResourceGenerator
-    ) {
-        $this->fileFacade = $fileFacade;
-        $this->halResourceGenerator = $halResourceGenerator;
-    }
+        protected FileFacade $fileFacade,
+        protected ResourceGenerator $halResourceGenerator
+    ){}
 
     /**
      * MiddlewareInterface handler

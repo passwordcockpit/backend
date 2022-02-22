@@ -17,38 +17,13 @@ use Doctrine\ORM\EntityManager;
 use Laminas\I18n\Translator\Translator;
 use Folder\Api\V1\Facade\FolderUserFacade;
 use Laminas\Permissions\Rbac\RoleInterface;
+use User\Api\V1\Entity\User;
 
 class PasswordAssertion implements AssertionInterface
 {
-    /**
-     *
-     * @var EntityManager
-     *
-     */
-    protected $entityManager;
+    protected ServerRequestInterface $request;
 
-    /**
-     *
-     * @var Translator
-     *
-     */
-    protected $translator;
-
-    /**
-     *
-     * @var FolderUserFacade
-     *
-     */
-    protected $folderUserFacade;
-
-    /**
-     *
-     * @var ServerRequestInterface
-     *
-     */
-    protected $request;
-
-    protected $user;
+    protected User $user;
 
     /**
      * Constructor
@@ -58,21 +33,17 @@ class PasswordAssertion implements AssertionInterface
      * @param FolderUserFacade $folderUserFacade
      */
     public function __construct(
-        EntityManager $entityManager,
-        Translator $translator,
-        FolderUserFacade $folderUserFacade
-    ) {
-        $this->entityManager = $entityManager;
-        $this->translator = $translator;
-        $this->folderUserFacade = $folderUserFacade;
-    }
+        protected EntityManager $entityManager,
+        protected Translator $translator,
+        protected FolderUserFacade $folderUserFacade
+    ){}
 
-    public function setRequest($request)
+    public function setRequest(ServerRequestInterface $request)
     {
         $this->request = $request;
     }
 
-    public function setUser($user)
+    public function setUser(User $user)
     {
         $this->user = $user;
     }
@@ -80,8 +51,8 @@ class PasswordAssertion implements AssertionInterface
     /**
      * Returns passwordId from Request - check Attributes and Body
      *
-     * @param type $request
-     * @return type
+     * @param ServerRequestInterface $request
+     * @return mixed
      */
     private function getPasswordId($request)
     {

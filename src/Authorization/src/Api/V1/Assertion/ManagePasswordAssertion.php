@@ -17,38 +17,14 @@ use Doctrine\ORM\EntityManager;
 use Laminas\I18n\Translator\Translator;
 use Folder\Api\V1\Facade\FolderUserFacade;
 use Laminas\Permissions\Rbac\RoleInterface;
+use User\Api\V1\Entity\User;
 
 class ManagePasswordAssertion implements AssertionInterface
 {
-    /**
-     *
-     * @var EntityManager
-     *
-     */
-    protected $entityManager;
 
-    /**
-     *
-     * @var Translator
-     *
-     */
-    protected $translator;
+    protected ServerRequestInterface $request;
 
-    /**
-     *
-     * @var FolderUserFacade
-     *
-     */
-    protected $folderUserFacade;
-
-    /**
-     *
-     * @var ServerRequestInterface
-     *
-     */
-    protected $request;
-
-    protected $user;
+    protected User $user;
 
     /**
      * Constructor
@@ -58,21 +34,17 @@ class ManagePasswordAssertion implements AssertionInterface
      * @param FolderUserFacade $folderUserFacade
      */
     public function __construct(
-        EntityManager $entityManager,
-        Translator $translator,
-        FolderUserFacade $folderUserFacade
-    ) {
-        $this->entityManager = $entityManager;
-        $this->translator = $translator;
-        $this->folderUserFacade = $folderUserFacade;
-    }
+        protected EntityManager $entityManager,
+        protected Translator $translator,
+        protected FolderUserFacade $folderUserFacade
+    ){}
 
-    public function setRequest($request)
+    public function setRequest(ServerRequestInterface $request)
     {
         $this->request = $request;
     }
 
-    public function setUser($user)
+    public function setUser(User $user)
     {
         $this->user = $user;
     }
@@ -80,10 +52,10 @@ class ManagePasswordAssertion implements AssertionInterface
     /**
      * Returns passwordId from Request - check Attributes and Body
      *
-     * @param type $request
+     * @param ServerRequestInterface $request
      * @return type
      */
-    private function getPasswordId($request)
+    private function getPasswordId(ServerRequestInterface $request)
     {
         $passwordId = $request->getAttribute('id');
 

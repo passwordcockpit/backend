@@ -75,36 +75,6 @@ use Folder\Api\V1\Facade\FolderUserFacade;
 class AddFolderUserAction implements RequestHandlerInterface
 {
     /**
-     *
-     * @var FolderFacade
-     */
-    protected $folderFacade;
-
-    /**
-     *
-     * @var UserFacade
-     */
-    protected $userFacade;
-
-    /**
-     *
-     * @var FolderUserFacade
-     */
-    protected $folderUserFacade;
-
-    /**
-     *
-     * @var ResourceGenerator
-     */
-    protected $halResourceGenerator;
-
-    /**
-     *
-     * @var HalResponseFactory
-     */
-    protected $halResponseFactory;
-
-    /**
      * Constructor
      *
      * @param FolderFacade $folderFacade
@@ -114,18 +84,12 @@ class AddFolderUserAction implements RequestHandlerInterface
      * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
-        FolderFacade $folderFacade,
-        UserFacade $userFacade,
-        FolderUserFacade $folderUserFacade,
-        ResourceGenerator $halResourceGenerator,
-        HalResponseFactory $halResponseFactory
-    ) {
-        $this->folderFacade = $folderFacade;
-        $this->userFacade = $userFacade;
-        $this->folderUserFacade = $folderUserFacade;
-        $this->halResourceGenerator = $halResourceGenerator;
-        $this->halResponseFactory = $halResponseFactory;
-    }
+        protected FolderFacade $folderFacade,
+        protected UserFacade $userFacade,
+        protected FolderUserFacade $folderUserFacade,
+        protected ResourceGenerator $halResourceGenerator,
+        protected HalResponseFactory $halResponseFactory
+    ){}
 
     /**
      * MiddlewareInterface handler

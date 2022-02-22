@@ -47,30 +47,15 @@ use Mezzio\Hal\ResourceGenerator;
 class DeletePasswordAction implements RequestHandlerInterface
 {
     /**
-     *
-     * @var PasswordFacade
-     */
-    protected $passwordFacade;
-
-    /**
-     *
-     * @var ResourceGenerator
-     */
-    protected $halResourceGenerator;
-
-    /**
      * Constructor
      *
      * @param PasswordFacade $passwordFacade
      * @param ResourceGenerator $halResourceGenerator
      */
     public function __construct(
-        PasswordFacade $passwordFacade,
-        ResourceGenerator $halResourceGenerator
-    ) {
-        $this->halResourceGenerator = $halResourceGenerator;
-        $this->passwordFacade = $passwordFacade;
-    }
+        protected PasswordFacade $passwordFacade,
+        protected ResourceGenerator $halResourceGenerator
+    ){}
 
     /**
      * MiddlewareInterface handler

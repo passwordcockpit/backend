@@ -70,36 +70,6 @@ use Mezzio\ProblemDetails\ProblemDetailsResponseFactory;
 class UpdatePasswordAction implements RequestHandlerInterface
 {
     /**
-     *
-     * @var PasswordFacade
-     */
-    protected $passwordFacade;
-
-    /**
-     *
-     * @var ResourceGenerator
-     */
-    protected $halResourceGenerator;
-
-    /**
-     *
-     * @var ProblemDetailsresponseFactory
-     */
-    protected $problemDetailsFactory;
-
-    /**
-     *
-     * @var array
-     */
-    private $config;
-
-    /**
-     *
-     * @var HalResponseFactory
-     */
-    protected $halResponseFactory;
-
-    /**
      * Constructor
      *
      * @param PasswordFacade $passwordFacade
@@ -109,18 +79,12 @@ class UpdatePasswordAction implements RequestHandlerInterface
      * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
-        PasswordFacade $passwordFacade,
-        ProblemDetailsResponseFactory $problemDetailsFactory,
-        $config,
-        ResourceGenerator $halResourceGenerator,
-        HalResponseFactory $halResponseFactory
-    ) {
-        $this->halResourceGenerator = $halResourceGenerator;
-        $this->problemDetailsFactory = $problemDetailsFactory;
-        $this->config = $config;
-        $this->passwordFacade = $passwordFacade;
-        $this->halResponseFactory = $halResponseFactory;
-    }
+        protected PasswordFacade $passwordFacade,
+        protected ProblemDetailsResponseFactory $problemDetailsFactory,
+        private array $config,
+        protected ResourceGenerator $halResourceGenerator,
+        protected HalResponseFactory $halResponseFactory
+    ){}
 
     /**
      * MiddlewareInterface handler

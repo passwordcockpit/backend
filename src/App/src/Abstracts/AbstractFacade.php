@@ -15,28 +15,7 @@ use Laminas\I18n\Translator\Translator;
 
 abstract class AbstractFacade implements FacadeInterface
 {
-    /**
-     *
-     * @var Translator
-     */
-    protected $translator;
-
-    /**
-     *
-     * @var EntityManager
-     */
-    protected $entityManager;
-
-    /**
-     * @var string
-     */
-    protected $entityName;
-
-    /**
-     *
-     * @var ReflectionHydrator
-     */
-    protected $reflectionHydrator;
+    protected ReflectionHydrator $reflectionHydrator;
 
     /**
      *
@@ -45,13 +24,10 @@ abstract class AbstractFacade implements FacadeInterface
      * @param string $entityName
      */
     public function __construct(
-        Translator $translator,
-        EntityManager $entityManager,
-        $entityName
+        protected Translator $translator,
+        protected EntityManager $entityManager,
+        protected string $entityName
     ) {
-        $this->translator = $translator;
-        $this->entityManager = $entityManager;
-        $this->entityName = $entityName;
         $this->reflectionHydrator = new ReflectionHydrator();
     }
 

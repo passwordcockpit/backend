@@ -11,44 +11,17 @@ namespace Authorization\Api\V1\Assertion;
 
 use Laminas\Permissions\Rbac\AssertionInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Folder\Api\V1\Entity\Folder;
-use App\Service\ProblemDetailsException;
 use Doctrine\ORM\EntityManager;
 use Laminas\I18n\Translator\Translator;
 use Folder\Api\V1\Facade\FolderUserFacade;
 use Laminas\Permissions\Rbac\RoleInterface;
+use User\Api\V1\Entity\User;
 
 class ManageFolderAssertion implements AssertionInterface
 {
-    /**
-     *
-     * @var EntityManager
-     *
-     */
-    protected $entityManager;
+    protected ServerRequestInterface $request;
 
-    /**
-     *
-     * @var Translator
-     *
-     */
-    protected $translator;
-
-    /**
-     *
-     * @var FolderUserFacade
-     *
-     */
-    protected $folderUserFacade;
-
-    /**
-     *
-     * @var ServerRequestInterface
-     *
-     */
-    protected $request;
-
-    protected $user;
+    protected User $user;
 
     /**
      * Constructor
@@ -58,58 +31,46 @@ class ManageFolderAssertion implements AssertionInterface
      * @param FolderUserFacade $folderUserFacade
      */
     public function __construct(
-        EntityManager $entityManager,
-        Translator $translator,
-        FolderUserFacade $folderUserFacade
-    ) {
-        $this->entityManager = $entityManager;
-        $this->translator = $translator;
-        $this->folderUserFacade = $folderUserFacade;
-    }
+        protected EntityManager $entityManager,
+        protected Translator $translator,
+        protected FolderUserFacade $folderUserFacade
+    ){}
 
     /**
      * {@inheritDoc}
      */
-    public function setRequest(
-        \Psr\Http\Message\ServerRequestInterface $request
-    ) {
+    public function setRequest(ServerRequestInterface $request) {
         $this->request = $request;
     }
 
     /**
      * Set user on this class
      *
-     * @param type $request
-     * @return type
+     * @param User $user
      */
-    public function setUser($user)
+    public function setUser(User $user)
     {
         $this->user = $user;
     }
 
     /**
-     * Returns folderId from Request - check Attributes and Body
+     * Returns parentId from Request - check Attributes and Body
      *
-     * @param type $request
-     * @return type
+     * @param ServerRequestInterface $request
+     * @return mixed
      */
     private function getParentId($request)
     {
-        if (isset($request->getParsedBody()['parent_id'])) {
-            $folderId = $request->getParsedBody()['parent_id'];
-        } else {
-            $folderId = null;
-        }
-        return $folderId;
+        return $request->getParsedBody()['parent_id'] ?? null;
     }
 
     /**
      * Returns folderId from Request - check Attributes and Body
      *
-     * @param type $request
-     * @return type
+     * @param ServerRequestInterface $request
+     * @return mixed
      */
-    private function getFolderId($request)
+    private function getFolderId(ServerRequestInterface $request)
     {
         if ($request->getAttribute('folderId')) {
             $folderId = $request->getAttribute('folderId');

@@ -16,12 +16,9 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Password\Api\V1\Facade\PasswordFacade;
-use Mezzio\Hal\ResourceGenerator;
-use Password\Api\V1\Entity\Password;
 use User\Api\V1\Facade\PermissionFacade;
 use User\Api\V1\Facade\UserFacade;
 use Laminas\Diactoros\Response\JsonResponse;
-use Mezzio\Hal\HalResponseFactory;
 use Mezzio\ProblemDetails\ProblemDetailsResponseFactory;
 
 /**
@@ -60,36 +57,6 @@ use Mezzio\ProblemDetails\ProblemDetailsResponseFactory;
 class MovePasswordAction implements RequestHandlerInterface
 {
     /**
-     *
-     * @var PasswordFacade
-     */
-    protected $passwordFacade;
-
-    /**
-     *
-     * @var ProblemDetailsresponseFactory
-     */
-    protected $problemDetailsFactory;
-
-    /**
-     *
-     * @var FolderUserFacade
-     */
-    protected $folderUserFacade;
-
-    /**
-     *
-     * @var userFacade
-     */
-    protected $userFacade;
-
-    /**
-     *
-     * @var permissionFacade
-     */
-    protected $permissionFacade;
-
-    /**
      * Constructor
      *
      * @param PasswordFacade $passwordFacade
@@ -98,18 +65,12 @@ class MovePasswordAction implements RequestHandlerInterface
      * @param UserFacade $userFacade
      */
     public function __construct(
-        PasswordFacade $passwordFacade,
-        ProblemDetailsResponseFactory $problemDetailsFactory,
-        FolderUserFacade $folderUserFacade,
-        UserFacade $userFacade,
-        PermissionFacade $permissionFacade
-    ) {
-        $this->problemDetailsFactory = $problemDetailsFactory;
-        $this->passwordFacade = $passwordFacade;
-        $this->folderUserFacade = $folderUserFacade;
-        $this->userFacade = $userFacade;
-        $this->permissionFacade = $permissionFacade;
-    }
+        protected PasswordFacade $passwordFacade,
+        protected ProblemDetailsResponseFactory $problemDetailsFactory,
+        protected FolderUserFacade $folderUserFacade,
+        protected UserFacade $userFacade,
+        protected PermissionFacade $permissionFacade
+    ){}
 
     /**
      * MiddlewareInterface handler
@@ -147,7 +108,7 @@ class MovePasswordAction implements RequestHandlerInterface
                 $body["passwordId"],
                 $body["destinationFolder"]
             );
-            return new JsonResponse(json_encode($password), 200);
+            return new JsonResponse(json_encode($password, JSON_THROW_ON_ERROR), 200);
         } else {
             throw new ProblemDetailsException(
                 401,

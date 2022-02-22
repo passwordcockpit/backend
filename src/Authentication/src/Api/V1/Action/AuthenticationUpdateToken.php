@@ -49,24 +49,6 @@ use Authentication\Api\V1\Facade\TokenUserFacade;
 class AuthenticationUpdateToken implements RequestHandlerInterface
 {
     /**
-     *
-     * @var ProblemDetailsresponseFactory
-     */
-    protected $problemDetailsFactory;
-
-    /**
-     *
-     * @var mixin
-     */
-    private $config;
-
-    /**
-     *
-     * @var TokenUserFacade
-     */
-    private $tokenUserFacade;
-
-    /**
      * Constructor
      *
      * @param ProblemDetailsFactory $problemDetailsFactory
@@ -74,14 +56,10 @@ class AuthenticationUpdateToken implements RequestHandlerInterface
      * @param TokenUserFacade $tokenUserFacade
      */
     public function __construct(
-        ProblemDetailsResponseFactory $problemDetailsFactory,
-        $config,
-        TokenUserFacade $tokenUserfacade
-    ) {
-        $this->problemDetailsFactory = $problemDetailsFactory;
-        $this->config = $config;
-        $this->tokenUserFacade = $tokenUserfacade;
-    }
+      protected ProblemDetailsResponseFactory $problemDetailsFactory,
+      private array $config,
+      private readonly TokenUserFacade $tokenUserFacade
+    ){}
 
     /**
      * Creates the updated JWT
@@ -128,7 +106,7 @@ class AuthenticationUpdateToken implements RequestHandlerInterface
             $oldPayLoad = JWT::decode($token, $this->config['secret_key'], [
                 "HS256"
             ]);
-        } catch (\Exception $ex) {
+        } catch (\Exception) {
             throw new ProblemDetailsException(
                 401,
                 'Token is not valid',

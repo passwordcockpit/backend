@@ -21,39 +21,35 @@ use OpenApi\Annotations as OA;
 class Folder
 {
     /**
-     * @var int
      *
      * @ORM\Column(name="folder_id", type="integer", precision=0, scale=0, nullable=false, unique=true)
      * @ORM\Id
      * @ORM\GeneratedValue
      * @OA\Property
      */
-    private $folderId;
+    private int $folderId;
 
     /**
-     * @var string
      *
      * @ORM\Column(name="name", type="string", length=45, precision=0, scale=0, nullable=false, unique=false)
      * @OA\Property(example="folderName")
      */
-    private $name;
+    private string $name;
 
     /**
-     * @var int|null
      *
      * @ORM\Column(name="parent_id", type="integer", precision=0, scale=0, nullable=true, unique=false)
      * @OA\Property(property="parent_id", example=null)
      */
-    private $parentId;
+    private ?int $parentId = null;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\OneToMany(targetEntity="Folder\Api\V1\Entity\FolderUser", mappedBy="folder")
      * @ORM\JoinColumn(name="folder_id", referencedColumnName="folder_id", onDelete="CASCADE")
      * @OA\Property
      */
-    private $user;
+    private \Doctrine\Common\Collections\Collection $user;
 
     private $access;
     public function setAccess($access = null)
@@ -147,11 +143,11 @@ class Folder
     /**
      * Add user.
      *
-     * @param \Folder\Api\V1\Entity\FolderUser $user
+     * @param FolderUser $user
      *
      * @return Folder
      */
-    public function addUser(\Folder\Api\V1\Entity\FolderUser $user)
+    public function addUser(FolderUser $user)
     {
         $this->user[] = $user;
 
@@ -161,11 +157,11 @@ class Folder
     /**
      * Remove user.
      *
-     * @param \Folder\Api\V1\Entity\FolderUser $user
+     * @param FolderUser $user
      *
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeUser(\Folder\Api\V1\Entity\FolderUser $user)
+    public function removeUser(FolderUser $user)
     {
         return $this->user->removeElement($user);
     }

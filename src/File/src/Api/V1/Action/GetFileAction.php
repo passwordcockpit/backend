@@ -45,36 +45,16 @@ use File\Api\V1\Facade\FileFacade;
 class GetFileAction implements RequestHandlerInterface
 {
     /**
-     * @var ResourceGenerator
-     */
-    private $resourceGenerator;
-
-    /**
-     * @var HalResponseFactory
-     */
-    private $halResponseFactory;
-
-    /**
      *
-     * @var FileFacade
-     */
-    private $fileFacade;
-
-    /**
-     *
-     * @param ResourceGenerator $resourceGeneratorInstance
+     * @param ResourceGenerator $resourceGenerator
      * @param HalResponseFactory $halResponseFactory
      * @param FileFacade $fileFacade
      */
     public function __construct(
-        ResourceGenerator $resourceGeneratorInstance,
-        HalResponseFactory $halResponseFactory,
-        FileFacade $fileFacade
-    ) {
-        $this->resourceGenerator = $resourceGeneratorInstance;
-        $this->halResponseFactory = $halResponseFactory;
-        $this->fileFacade = $fileFacade;
-    }
+        private readonly ResourceGenerator $resourceGenerator,
+        private readonly HalResponseFactory $halResponseFactory,
+        private readonly FileFacade $fileFacade
+    ){}
 
     /**
      *

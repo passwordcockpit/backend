@@ -12,7 +12,6 @@ namespace Password\Api\V1\Action;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Folder\Api\V1\Facade\FolderFacade;
 use Mezzio\Hal\ResourceGenerator;
 use Mezzio\Hal\HalResponseFactory;
 use Password\Api\V1\Collection\PasswordCollection;
@@ -55,30 +54,6 @@ use File\Api\V1\Facade\FileFacade;
 class ListPasswordFilesAction implements RequestHandlerInterface
 {
     /**
-     *
-     * @var FolderFacade
-     */
-    protected $fileFacade;
-
-    /**
-     *
-     * @var PasswordFacade
-     */
-    protected $passwordFacade;
-
-    /**
-     *
-     * @var ResourceGenerator
-     */
-    protected $halResourceGenerator;
-
-    /**
-     *
-     * @var HalResponseFactory
-     */
-    protected $halResponseFactory;
-
-    /**
      * Constructor
      *
      * @param FileFacade $fileFacade
@@ -87,16 +62,11 @@ class ListPasswordFilesAction implements RequestHandlerInterface
      * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
-        FileFacade $fileFacade,
-        PasswordFacade $passwordFacade,
-        ResourceGenerator $halResourceGenerator,
-        HalResponseFactory $halResponseFactory
-    ) {
-        $this->fileFacade = $fileFacade;
-        $this->passwordFacade = $passwordFacade;
-        $this->halResourceGenerator = $halResourceGenerator;
-        $this->halResponseFactory = $halResponseFactory;
-    }
+        protected FileFacade $fileFacade,
+        protected PasswordFacade $passwordFacade,
+        protected ResourceGenerator $halResourceGenerator,
+        protected HalResponseFactory $halResponseFactory
+    ){}
 
     /**
      * MiddlewareInterface handler

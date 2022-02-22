@@ -18,29 +18,11 @@ class NoEntityExists extends AbstractValidator
 {
     const RECORD_FOUND = 'record_found';
 
-    /**
-     *
-     * @var EntityManagerInterface
-     */
-    private $entityManager;
+    private readonly string $field;
 
-    /**
-     *
-     * @var string
-     */
-    private $field;
+    private readonly string $entity;
 
-    /**
-     *
-     * @var string
-     */
-    private $entity;
-
-    /**
-     *
-     * @var int
-     */
-    private $exclude;
+    private readonly array $exclude;
 
     /**
      * @var array Message templates
@@ -50,13 +32,12 @@ class NoEntityExists extends AbstractValidator
     ];
 
     public function __construct(
-        EntityManagerInterface $entityManager,
+        private readonly EntityManagerInterface $entityManager,
         $options = [],
     ) {
         $this->entity = $options['entity'];
         $this->field = $options['field'];
         $this->exclude = $options['exclude'];
-        $this->entityManager = $entityManager;
         parent::__construct($options);
     }
 

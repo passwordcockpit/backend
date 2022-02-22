@@ -48,48 +48,8 @@ use Laminas\Crypt\FileCipher;
 class DownloadFileAction implements RequestHandlerInterface
 {
     /**
-     * @var ResourceGenerator
-     */
-    private $resourceGenerator;
-
-    /**
-     * @var HalResponseFactory
-     */
-    private $halResponseFactory;
-
-    /**
      *
-     * @var FileFacade
-     */
-    private $fileFacade;
-
-    /**
-     *
-     * @var Translator
-     */
-    private $translator;
-
-    /**
-     *
-     * @var array
-     */
-    private $uploadConfig;
-
-    /**
-     *
-     * @var FileCipher
-     */
-    private $fileCipher;
-
-    /**
-     *
-     * @var string
-     */
-    private $encriptionKey;
-
-    /**
-     *
-     * @param ResourceGenerator $resourceGeneratorInstance
+     * @param ResourceGenerator $resourceGenerator
      * @param HalResponseFactory $halResponseFactory
      * @param FileFacade $fileFacade
      * @param Translator $translator
@@ -98,22 +58,14 @@ class DownloadFileAction implements RequestHandlerInterface
      * @param string $encriptionkey
      */
     public function __construct(
-        ResourceGenerator $resourceGeneratorInstance,
-        HalResponseFactory $halResponseFactory,
-        FileFacade $fileFacade,
-        Translator $translator,
-        $uploadConfig,
-        FileCipher $fileCipher,
-        $encriptionKey
-    ) {
-        $this->resourceGenerator = $resourceGeneratorInstance;
-        $this->halResponseFactory = $halResponseFactory;
-        $this->fileFacade = $fileFacade;
-        $this->translator = $translator;
-        $this->uploadConfig = $uploadConfig;
-        $this->fileCipher = $fileCipher;
-        $this->encriptionKey = $encriptionKey;
-    }
+        private readonly ResourceGenerator $resourceGenerator,
+        private readonly HalResponseFactory $halResponseFactory,
+        private readonly FileFacade $fileFacade,
+        private readonly Translator $translator,
+        private array $uploadConfig,
+        private readonly FileCipher $fileCipher,
+        private string $encriptionKey
+    ){}
 
     /**
      *
@@ -122,6 +74,7 @@ class DownloadFileAction implements RequestHandlerInterface
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
+        $stream = null;
         $file = $this->fileFacade->fetch($request->getAttribute("id"));
         $mimeTypeContentType = $file->getExtension();
         $mimeTypeExtension =

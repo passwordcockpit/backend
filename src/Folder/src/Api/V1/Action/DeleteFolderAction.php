@@ -49,30 +49,15 @@ use Mezzio\Hal\ResourceGenerator;
 class DeleteFolderAction implements RequestHandlerInterface
 {
     /**
-     *
-     * @var FolderFacade
-     */
-    protected $folderFacade;
-
-    /**
-     *
-     * @var ResourceGenerator
-     */
-    protected $halResourceGenerator;
-
-    /**
      * Constructor
      *
      * @param FolderFacade $folderFacade
      * @param ResourceGenerator $halResourceGenerator
      */
     public function __construct(
-        FolderFacade $folderFacade,
-        ResourceGenerator $halResourceGenerator
-    ) {
-        $this->folderFacade = $folderFacade;
-        $this->halResourceGenerator = $halResourceGenerator;
-    }
+        protected FolderFacade $folderFacade,
+        protected ResourceGenerator $halResourceGenerator
+    ){}
 
     /**
      * MiddlewareInterface handler

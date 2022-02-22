@@ -21,112 +21,88 @@ use OpenApi\Annotations as OA;
 class User
 {
     /**
-     * @var int
      *
      * @ORM\Column(name="user_id", type="integer", precision=0, scale=0, nullable=false, unique=false)
      * @ORM\Id
      * @ORM\GeneratedValue
-     *
      * @OA\Property
      */
-    private $userId;
+    private int $userId;
 
     /**
-     * @var string
      *
      * @ORM\Column(name="username", type="string", length=45, precision=0, scale=0, nullable=false, unique=true)
-     *
      * @OA\Property(example="user")
      */
-    private $username;
+    private string $username;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="password", type="string", length=200, precision=0, scale=0, nullable=true, unique=false)
-     *
      * @OA\Property(property="password", type="string", description="User's password")
      */
-    private $password;
+    private ?string $password = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="name", type="string", length=45, precision=0, scale=0, nullable=true, unique=false)
-     *
      * @OA\Property(property="name", type="string", description="User's name")
      */
-    private $name;
+    private ?string $name = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="surname", type="string", length=45, precision=0, scale=0, nullable=true, unique=false)
-     *
      * @OA\Property(property="surname", type="string", description="User's surname")
      */
-    private $surname;
+    private ?string $surname = null;
 
     /**
-     * @var string
      *
      * @ORM\Column(name="language", type="string", length=2, precision=0, scale=0, nullable=false, unique=false)
-     *
      * @OA\Property(property="language", type="string", description="User's language", example="en")
      */
-    private $language;
+    private string $language;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="phone", type="string", length=45, precision=0, scale=0, nullable=true, unique=false)
-     *
      * @OA\Property(property="phone", type="string", description="User's phone number", example="+41 91 123 45 67")
      */
-    private $phone;
+    private ?string $phone = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="email", type="string", length=45, precision=0, scale=0, nullable=true, unique=true)
-     *
      * @OA\Property(property="email", type="string", description="User's email", example="user@domain.com")
      */
-    private $email;
+    private ?string $email = null;
 
     /**
-     * @var bool
      *
      * @ORM\Column(name="enabled", type="boolean", precision=0, scale=0, nullable=false, unique=false)
      * @OA\Property(property="enabled", type="boolean", description="Whether a user is enabled (true) or not (false)")
      */
-    private $enabled;
+    private bool $enabled;
 
     /**
-     * @var bool
      *
      * @ORM\Column(name="change_password", type="boolean", precision=0, scale=0, nullable=false, unique=false)
      * @OA\Property(property="change_password", type="boolean", description="Whether a user need to change his password (true) or not (false)")
      */
-    private $changePassword;
+    private bool $changePassword;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\OneToMany(targetEntity="Folder\Api\V1\Entity\FolderUser", mappedBy="user")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="user_id", onDelete="CASCADE")
-     *
      * @OA\Property
      */
-    private $folder;
+    private \Doctrine\Common\Collections\Collection $folder;
 
     private $access;
 
-    /**
-     *
-     * @var boolean
-     */
-    private $completeUser = true;
+    private bool $completeUser = true;
 
     function getCompleteUser()
     {

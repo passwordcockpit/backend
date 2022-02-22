@@ -24,25 +24,11 @@ class I18nMiddleware implements MiddlewareInterface
 {
     /**
      *
-     * @var Translator
-     */
-    private $translator;
-
-    /**
-     *
-     * @var array
-     */
-    private $languages;
-
-    /**
-     *
      * @param Translator $translator
-     * @param string $languages
+     * @param array $languages
      */
-    public function __construct(Translator $translator, array $languages)
+    public function __construct(private readonly Translator $translator, private array $languages)
     {
-        $this->translator = $translator;
-        $this->languages = $languages;
     }
 
     /**

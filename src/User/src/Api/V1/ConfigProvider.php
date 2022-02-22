@@ -36,7 +36,7 @@ class ConfigProvider
             'dependencies' => $this->getDependencies(),
             'routes' => $this->getRoutes(),
             'doctrine' => $this->getDoctrine(),
-            'Mezzio\Hal\Metadata\MetadataMap' => $this->getMetadataMap()
+            \Mezzio\Hal\Metadata\MetadataMap::class => $this->getMetadataMap()
         ];
     }
 

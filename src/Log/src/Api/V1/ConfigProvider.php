@@ -35,7 +35,7 @@ class ConfigProvider
             'routes' => $this->getRoutes(),
             'hydrators' => $this->getHydratorPluginConfig(),
             'doctrine' => $this->getDoctrine(),
-            'Mezzio\Hal\Metadata\MetadataMap' => $this->getMetadataMap()
+            \Mezzio\Hal\Metadata\MetadataMap::class => $this->getMetadataMap()
         ];
     }
 

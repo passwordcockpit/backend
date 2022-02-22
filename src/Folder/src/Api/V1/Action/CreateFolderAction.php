@@ -52,24 +52,6 @@ use Folder\Api\V1\Entity\Folder;
 class CreateFolderAction implements RequestHandlerInterface
 {
     /**
-     *
-     * @var FolderFacade
-     */
-    protected $folderFacade;
-
-    /**
-     *
-     * @var ResourceGenerator
-     */
-    protected $halResourceGenerator;
-
-    /**
-     *
-     * @var HalResponseFactory
-     */
-    protected $halResponseFactory;
-
-    /**
      * Constructor
      *
      * @param FolderFacade $folderFacade
@@ -77,14 +59,10 @@ class CreateFolderAction implements RequestHandlerInterface
      * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
-        FolderFacade $folderFacade,
-        ResourceGenerator $halResourceGenerator,
-        HalResponseFactory $halResponseFactory
-    ) {
-        $this->halResourceGenerator = $halResourceGenerator;
-        $this->folderFacade = $folderFacade;
-        $this->halResponseFactory = $halResponseFactory;
-    }
+        protected FolderFacade $folderFacade,
+        protected ResourceGenerator $halResourceGenerator,
+        protected HalResponseFactory $halResponseFactory
+    ){}
 
     /**
      * MiddlewareInterface handler

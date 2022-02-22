@@ -17,10 +17,6 @@ use User\Api\V1\Entity\User;
 
 class TokenUserFacade extends AbstractFacade
 {
-    protected $entityManager;
-
-    protected $translator;
-
     /**
      * Constructor
      *
@@ -28,11 +24,9 @@ class TokenUserFacade extends AbstractFacade
      * @param EntityManager $entityManager
      */
     public function __construct(
-        Translator $translator,
-        EntityManager $entityManager
+        protected Translator $translator,
+        protected EntityManager $entityManager
     ) {
-        $this->translator = $translator;
-        $this->entityManager = $entityManager;
         parent::__construct($translator, $entityManager, TokenUser::class);
     }
 
@@ -40,9 +34,9 @@ class TokenUserFacade extends AbstractFacade
      *
      * @param array $data
      */
-    public function create($data)
+    public function create($data): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**
@@ -50,18 +44,18 @@ class TokenUserFacade extends AbstractFacade
      * @param string $id
      * @param array $filter
      */
-    public function fetch($id, $filter)
+    public function fetch($id, $filter): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**
      *
      * @param array $filter
      */
-    public function fetchAll($filter)
+    public function fetchAll($filter): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**
@@ -69,9 +63,9 @@ class TokenUserFacade extends AbstractFacade
      * @param string $id
      * @param array $data
      */
-    public function update($id, $data)
+    public function update($id, $data): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**
@@ -79,9 +73,9 @@ class TokenUserFacade extends AbstractFacade
      * @param type $id
      * @param type $filter
      */
-    public function delete($id, $filter)
+    public function delete($id, $filter): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**
