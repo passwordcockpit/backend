@@ -22,7 +22,7 @@ return [
         'driver' => [
             'orm_default' => [
                 'class' =>
-                    \Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain::class
+                    \Doctrine\Persistence\Mapping\Driver\MappingDriverChain::class
             ]
         ],
         'authentication' => [
