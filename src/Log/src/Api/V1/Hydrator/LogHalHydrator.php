@@ -41,9 +41,11 @@ class LogHalHydrator extends AbstractHydrator
         if ($log->getPassword() != null) {
             $data['password_id'] = $log->getPassword()->getPasswordId();
             $data['password_title'] = $log->getPassword()->getTitle();
+            $data['password_folder'] = $log->getPassword()->getFolder()->getName();
         } else {
             $data['password_id'] = null;
             $data['password_title'] = null;
+            $data['password_folder'] = null;
         }
         $data['user_id'] = $log->getUser()->getUserId();
         $data['username'] = $log->getUser()->getUsername();
