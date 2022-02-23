@@ -483,7 +483,7 @@ class PasswordFacade extends AbstractFacade
     public function decrypt($encrypted)
     {
         $this->blockCipher->setKey($this->encriptionKey);
-        if ($encrypted !== null) {
+        if ($encrypted) {
             $encrypted = $this->blockCipher->decrypt($encrypted);
         }
 
