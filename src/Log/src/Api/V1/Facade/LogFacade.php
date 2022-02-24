@@ -216,15 +216,18 @@ class LogFacade extends AbstractFacade
      *
      * Create a log that shows who deleted a password.
      *
-     * @param int $passwordId
+     * @param Password $passwordId
      * @param User $user
      *
      */
-    public function createDeletedLog($passwordId, $user)
+    public function createDeletedLog(Password $password, User $user)
     {
         $log = new Log();
 
-        $action = "Password " . $passwordId . " deleted";
+        $id = $password->getPasswordId();
+        $title = $password->getTitle();
+
+        $action = "Password " . $id . " (" . $title . ") deleted";
         $log->setAction($action);
         $log->setUser($user);
         $log->setPassword(null);

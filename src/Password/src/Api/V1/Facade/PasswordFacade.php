@@ -317,7 +317,7 @@ class PasswordFacade extends AbstractFacade
             $user = $this->entityManager
                 ->getRepository(User::class)
                 ->find($userId);
-            $this->logFacade->createDeletedLog($id, $user);
+            $this->logFacade->createDeletedLog($password, $user);
 
             $this->entityManager->remove($password);
             $this->entityManager->flush();

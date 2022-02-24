@@ -24,10 +24,10 @@ class LogHalHydrator extends AbstractHydrator
      *
      * @param Translator $translator
      */
-    function __construct(Translator $translator)
+    function __construct(private Translator $translator)
     {
-        $this->translator = $translator;
     }
+
     /**
      * Returns array based on Log's data
      *
@@ -53,11 +53,33 @@ class LogHalHydrator extends AbstractHydrator
             $log->getActionDate(),
             'outputDateTime'
         );
-        $data['action'] = $this->translator->translate($log->getAction());
+        $data['action'] = $this->translateAction($log->getAction());
         return $data;
     }
 
     public function hydrate(array $data, $object)
     {
+    }
+
+    /**
+     * Translate log action.
+     * 
+     * @param string
+     * @return string
+     */
+    private function translateAction(string $action)
+    {
+        if(str_ends_with($action, 'deleted')){
+            $segments = explode(' ', $action);
+            $hasTitle = strpos($segments[2], '(') === 0;
+
+            return sprintf(
+                $this->translator->translate('Password %d %s deleted'),
+                $segments[1],
+                $hasTitle ? $segments[2] : ''
+            );
+        }
+
+        return $this->translator->translate($action);
     }
 }
