@@ -161,19 +161,20 @@ else
             sleep 3s
             continue
         fi
-        schema_exist=$(echo $connection | grep array | awk -F"[()]" '{print $2}')
+        schema_exist=$(echo $connection | grep ${PASSWORDCOCKPIT_DATABASE_DATABASE} -c)
         # connection ok and schema exist
         if [ "$schema_exist" == "1" ]; then
             echo -e "\e[32mConnection ok\e[0m"
             echo -e "\e[32mSchema already exist\e[0m"
             # Tables exists
-            number_of_tables=$(vendor/bin/doctrine dbal:run-sql "SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '${PASSWORDCOCKPIT_DATABASE_DATABASE}'" | grep string | awk -F\" '{ print $2 }')
+            number_of_tables=$(vendor/bin/doctrine dbal:run-sql "SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '${PASSWORDCOCKPIT_DATABASE_DATABASE}'" | tr -d -c 0-9)
             if [ "$number_of_tables" == "0" ]; then
                 # Create the tables and popolate it
                 vendor/bin/doctrine orm:schema-tool:create
                 vendor/bin/doctrine orm:generate-proxies
                 echo -e "\e[32mDatabase created\e[0m"
-                vendor/bin/doctrine dbal:import database/create-tests-environment.sql
+                sql=$(cat database/create-tests-environment.sql | sed '/^--/d')
+                vendor/bin/doctrine dbal:run-sql "$sql"
                 echo -e "\e[32mTest data installed\e[0m"
             else
                 # Update scripts
