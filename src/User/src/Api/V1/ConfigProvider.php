@@ -79,6 +79,8 @@ class ConfigProvider
                     Factory\Action\ListUsernameFactory::class,
                 Action\GetUserAction::class =>
                     Factory\Action\GetUserFactory::class,
+                Action\GetUserFoldersPermissionAction::class =>
+                    Factory\Action\GetUserFoldersPermissionActionFactory::class,
                 Action\CreateUserAction::class =>
                     Factory\Action\CreateUserFactory::class,
                 Action\UpdateUserAction::class =>
@@ -162,6 +164,15 @@ class ConfigProvider
                 ],
                 'middleware' => [Action\GetUserAction::class],
                 'allowed_methods' => ['GET']
+            ],
+            [
+              'name' => 'api.v1.users.folders.permissions.get',
+              'path' => '/api/v1/users/:id/folders/permissions',
+              'options' => [
+                  'constraints' => ['id' => '\d+']
+              ],
+              'middleware' => [Action\GetUserFoldersPermissionAction::class],
+              'allowed_methods' => ['GET']
             ],
             [
                 'name' => 'api.v1.users.create',

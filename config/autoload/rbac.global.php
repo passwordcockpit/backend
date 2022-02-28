@@ -24,6 +24,7 @@ return [
                 'api.v1.users.create',
                 'api.v1.users.update',
                 'api.v1.users.permissions.get',
+                'api.v1.users.folders.permissions.get',
                 'api.v1.users.permissions.update'
             ],
             'create_folders' => ['api.v1.folders.create'],
@@ -181,6 +182,9 @@ return [
                 ],
                 'api.v1.users.permissions.get' => [
                     Authorization\Api\V1\Assertion\UserAssertion::class
+                ],
+                'api.v1.users.folders.permissions.get' => [
+                  Authorization\Api\V1\Assertion\UserAssertion::class
                 ],
                 'api.v1.files.get' => [
                     Authorization\Api\V1\Assertion\FileAssertion::class

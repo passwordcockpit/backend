@@ -11,7 +11,6 @@ namespace Folder\Api\V1;
 
 use Folder\Api\V1\Entity\Folder;
 use Folder\Api\V1\Entity\FolderUser;
-use Folder\Api\V1\Hydrator\FolderHydrator;
 use Folder\Api\V1\Hydrator\FolderHalHydrator;
 use Folder\Api\V1\Hydrator\FolderUserHydrator;
 use Mezzio\Hal\Metadata\RouteBasedResourceMetadata;
@@ -135,11 +134,21 @@ class ConfigProvider
                 ],
             ],
             [
+              '__class__' => RouteBasedCollectionMetadata::class,
+              'collection_class' => Collection\FolderUserCollection::class,
+              'collection_relation' => 'foldersuser',
+              'route' => 'api.v1.users.folders.permissions.get'
+            ],
+            [
                 '__class__' => RouteBasedResourceMetadata::class,
                 'resource_class' => FolderUser::class,
                 'route' => 'api.v1.folders.users.get',
                 'extractor' => FolderUserHydrator::class,
-                'resource_identifier' => 'folder_user_id'
+                'resource_identifier' => 'folder_user_id',
+                'identifiers_to_placeholders_mapping' => [
+                  'folder_id' => 'folderId',
+                  'user_id' => 'userId',
+                ],
             ]
         ];
     }

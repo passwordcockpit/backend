@@ -18,6 +18,8 @@ use User\Api\V1\Entity\User;
 use Doctrine\ORM\EntityManager;
 use Psr\Http\Message\ServerRequestInterface;
 use App\Service\ProblemDetailsException;
+use Folder\Api\V1\Entity\Folder;
+use Folder\Api\V1\Entity\FolderUser;
 use Laminas\Crypt\Password\Bcrypt;
 use Laminas\I18n\Translator\Translator;
 use User\Api\V1\Entity\Permission;
@@ -215,6 +217,29 @@ class UserFacade extends AbstractFacade
                 'https://httpstatus.es/404'
             );
         }
+    }
+
+    /**
+     * Return the FolderUser object given a folder and a user
+     *
+     * @param int $id
+     *
+     * @return FolderUser[]
+     */
+    public function listFoldersPermission(int $userId)
+    {
+        $queryBuilder = $this->entityManager->createQueryBuilder();
+
+        return $queryBuilder
+            ->select('fu')
+            // ->select('folder.name, fu.access')
+            ->from(FolderUser::class, 'fu')
+            ->join(Folder::class, 'folder', 'WITH', 'fu.folder=folder')
+            ->join('fu.user', 'user')
+            ->where('user.userId = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult();
     }
 
     /**
