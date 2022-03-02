@@ -232,7 +232,6 @@ class UserFacade extends AbstractFacade
 
         return $queryBuilder
             ->select('fu')
-            // ->select('folder.name, fu.access')
             ->from(FolderUser::class, 'fu')
             ->join(Folder::class, 'folder', 'WITH', 'fu.folder=folder')
             ->join('fu.user', 'user')

@@ -62,6 +62,7 @@ return [
             ],
             'user' => [
                 'api.v1.users.update',
+                'api.v1.users.language.update',
                 'api.v1.users.get',
                 'api.v1.users.permissions.get',
                 'api.v1.usernames.list',

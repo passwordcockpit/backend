@@ -87,6 +87,8 @@ class ConfigProvider
                     Factory\Action\UpdateUserFactory::class,
                 Action\GetUserPermissionAction::class =>
                     Factory\Action\GetUserPermissionFactory::class,
+                Action\UpdateUserLanguageAction::class =>
+                    Factory\Action\UpdateUserLanguageFactory::class,
                 Action\UpdateUserPermissionAction::class =>
                     Factory\Action\UpdateUserPermissionFactory::class,
                 "UserValidationMiddleware" =>
@@ -194,6 +196,18 @@ class ConfigProvider
                     Action\UpdateUserAction::class
                 ],
                 'allowed_methods' => ['PATCH', 'PUT']
+            ],
+            [
+              'name' => 'api.v1.users.language.update',
+              'path' => '/api/v1/users/:id/language',
+              'options' => [
+                  'constraints' => ['id' => '\d+']
+              ],
+              'middleware' => [
+                  "UserUpdateValidationMiddleware",
+                  Action\UpdateUserLanguageAction::class
+              ],
+              'allowed_methods' => ['PATCH']
             ],
             /**
              * Users' permissions routes
