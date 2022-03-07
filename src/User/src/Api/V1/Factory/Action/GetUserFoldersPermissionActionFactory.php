@@ -32,7 +32,8 @@ class GetUserFoldersPermissionActionFactory
         return new GetUserFoldersPermissionAction(
             $container->get(UserFacade::class),
             $halResourceGenerator($container),
-            $container->get(\Mezzio\Hal\HalResponseFactory::class)
+            $container->get(\Mezzio\Hal\HalResponseFactory::class),
+            $container->get("config")['paginator_config']
         );
     }
 }

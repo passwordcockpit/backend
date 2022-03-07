@@ -29,6 +29,8 @@ class FolderUserHydrator extends AbstractHydrator
         $data['user_id'] = $folderUser->getUser()->getUserId();
         $data['folder_id'] = $folderUser->getFolder()->getFolderId();
         $data['access'] = $folderUser->getAccess();
+        $data['folder_name'] = $folderUser->getFolder()->getName();
+
         return $data;
     }
 

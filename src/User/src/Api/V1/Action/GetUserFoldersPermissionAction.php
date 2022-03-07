@@ -10,14 +10,12 @@
 namespace User\Api\V1\Action;
 
 use Folder\Api\V1\Collection\FolderUserCollection;
-use Mezzio\Hal\HalResource;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Mezzio\Hal\HalResponseFactory;
 use User\Api\V1\Facade\UserFacade;
 use Mezzio\Hal\ResourceGenerator;
-use User\Api\V1\Collection\UserCollection;
 
 /**
  * @OA\Get(
@@ -46,11 +44,13 @@ class GetUserFoldersPermissionAction implements RequestHandlerInterface
      * @param UserFacade $userFacade
      * @param ResourceGenerator $halResourceGenerator
      * @param HalResponseFactory $halResponseFactory
+     * @param array $paginatorConfig
      */
     public function __construct(
         protected UserFacade $userFacade,
         private readonly ResourceGenerator $halResourceGenerator,
-        protected HalResponseFactory $halResponseFactory
+        protected HalResponseFactory $halResponseFactory,
+        protected array $paginatorConfig
     ){}
     
     public function handle(ServerRequestInterface $request): ResponseInterface
@@ -60,7 +60,7 @@ class GetUserFoldersPermissionAction implements RequestHandlerInterface
 
         $usersArrayAdapter = new \Laminas\Paginator\Adapter\ArrayAdapter($folders);
         $folderUserCollection = new FolderUserCollection($usersArrayAdapter);
-        $folderUserCollection->setDefaultItemCountPerPage(PHP_INT_MAX); // $this->paginatorConfig['small']
+        $folderUserCollection->setDefaultItemCountPerPage($this->paginatorConfig['small']);
 
         $this->halResourceGenerator->fromObject($folderUserCollection, $request);
 
@@ -69,7 +69,6 @@ class GetUserFoldersPermissionAction implements RequestHandlerInterface
             $request
         );
 
-        // $resource = new HalResource((array) $usersArrayAdapter);
         return $this->halResponseFactory->createResponse($request, $resource);
     }
 }
