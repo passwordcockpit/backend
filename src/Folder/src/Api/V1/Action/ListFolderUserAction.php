@@ -77,6 +77,7 @@ class ListFolderUserAction implements RequestHandlerInterface
             ? $this->folderUserFacade->getUsersWithoutRights($folderId)
             : $this->folderUserFacade->getUsers($folderId);
         foreach ($users as $user) {
+            $user->setFolderId($folderId);
             $user->setCompleteUser();
         }
         $usersArrayAdapter = new \Laminas\Paginator\Adapter\ArrayAdapter($users);

@@ -39,6 +39,9 @@ class UserHydrator extends AbstractHydrator
         if (!is_null($user->getAccess())) {
             $data['access'] = $user->getAccess();
         }
+        if (!is_null($user->getFolderId())) {
+            $data['folder_id'] = $user->getFolderId();
+        }
         return $data;
     }
 

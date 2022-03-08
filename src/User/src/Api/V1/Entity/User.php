@@ -124,6 +124,18 @@ class User
         return $this->access;
     }
 
+    private $folderId;
+
+    public function setFolderId($folderId = null)
+    {
+        $this->folderId = $folderId;
+    }
+
+    public function getFolderId()
+    {
+        return $this->folderId;
+    }
+
     /**
      * Constructor
      */
