@@ -145,7 +145,6 @@ class PasswordFacade extends AbstractFacade
             $password->setLastModificationDate(new \DateTime());
             $this->entityManager->persist($password);
             $this->entityManager->flush();
-            //$this->updateLog($password->getPasswordId(), "Password created");
             $this->logFacade->updateLog(
                 $password->getPasswordId(),
                 "Password created",
@@ -253,7 +252,6 @@ class PasswordFacade extends AbstractFacade
             $password = $this->entityManager
                 ->getRepository(Password::class)
                 ->find($password->getPasswordId());
-            //$this->updateLog($id, "Password modified");
             $this->logFacade->updateLog(
                 $id,
                 "Password modified",
@@ -350,7 +348,6 @@ class PasswordFacade extends AbstractFacade
                 $password->setPassword($this->decrypt($encryptedPassword));
             }
             $this->entityManager->detach($password);
-            //$this->updateLog($id, "Password viewed");
             $this->logFacade->updateLog(
                 $id,
                 "Password viewed",
@@ -500,32 +497,5 @@ class PasswordFacade extends AbstractFacade
     {
         $this->blockCipher->setKey($this->encriptionKey);
         return $this->blockCipher->encrypt($password);
-    }
-
-    /**
-     * Update the log for the specified password
-     *
-     * @param Password $password
-     * @param string $action
-     * @return boolean
-     */
-    public function updateLog($passwordId, $action)
-    {
-        $log = new Log();
-        $log->setAction($action);
-        $pass = $this->entityManager->getReference(
-            Password::class,
-            $passwordId
-        );
-        $log->setPassword($pass);
-        $log->setActionDate(new \DateTime());
-        $user = $this->entityManager
-            ->getRepository(User::class)
-            ->find($this->getUserId());
-        $log->setUser($user);
-        $this->entityManager->persist($log);
-        $this->entityManager->flush();
-
-        return true;
     }
 }
