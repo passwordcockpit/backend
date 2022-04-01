@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @see https://github.com/passwordcockpit/backend for the canonical source repository
+ * @copyright Copyright (c) 2018 Blackpoints AG (https://www.blackpoints.ch)
+ * @license https://github.com/passwordcockpit/backend/blob/master/LICENSE.md BSD 3-Clause License
+ */
+
+return [
+    'ldap' => [
+        [
+            'host' => getenv('PASSWORDCOCKPIT_LDAP_HOST'),
+            'port' => getenv('PASSWORDCOCKPIT_LDAP_PORT'),
+            'username' => getenv('PASSWORDCOCKPIT_LDAP_USERNAME'),
+            'password' => getenv('PASSWORDCOCKPIT_LDAP_PASSWORD'),
+            'baseDn' => getenv('PASSWORDCOCKPIT_LDAP_BASEDN'),
+            'accountFilterFormat' => getenv('PASSWORDCOCKPIT_LDAP_ACCOUNTFILTERFORMAT'),
+            'bindRequiresDn' => getenv('PASSWORDCOCKPIT_LDAP_BINDREQUIRESDN')
+        ]
+    ]
+];

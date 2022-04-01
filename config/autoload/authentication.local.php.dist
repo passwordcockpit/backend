@@ -1,0 +1,8 @@
+<?php
+
+return [
+    'authentication' => [
+        'secret_key' => getenv('PASSWORDCOCKPIT_AUTHENTICATION_SECRET_KEY'),
+        'secure' => false
+    ]
+];

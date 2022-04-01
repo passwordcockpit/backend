@@ -1,0 +1,6 @@
+<?php
+return [
+    'block_cipher' => [
+        'key' => getenv('PASSWORDCOCKPIT_BLOCK_CIPHER_KEY')
+    ]
+];
