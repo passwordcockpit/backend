@@ -18,8 +18,7 @@ if(getenv('PASSWORDCOCKPIT_AUTHENTICATION_TYPE')==='ldap'){
 
 if(getenv('PASSWORDCOCKPIT_SSL')==='disable'){
     if(getenv('PASSWORDCOCKPIT_SSL_RELAXED_IP')){
-        $authenticationConfig['relaxed']=explode(',',getenv('PASSWORDCOCKPIT_SSL_RELAXED_IP'));
+        $authenticationConfig['authentication']['relaxed']=explode(',',getenv('PASSWORDCOCKPIT_SSL_RELAXED_IP'));
     }
-    
 }
 return $authenticationConfig;
