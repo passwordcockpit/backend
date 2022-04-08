@@ -1,15 +1,6 @@
 #!/bin/bash
 
 ##############################################
-# Remove config cache
-##############################################
-filename=data/config-cache.php
-if [ -e $filename ]; then
-    rm -f $filename
-    echo -e "\e[32mConfig cache removed\e[0m"
-fi
-
-##############################################
 # Check volume
 ##############################################
 count=$(ls -f | wc -l)
