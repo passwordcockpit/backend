@@ -1,6 +1,15 @@
 #!/bin/bash
 
 ##############################################
+# Remove config cache
+##############################################
+filename=data/config-cache.php
+if [ -e $filename ]; then
+    rm -f $filename
+    echo -e "\e[32mConfig cache removed\e[0m"
+fi
+
+##############################################
 # Check volume
 ##############################################
 count=$(ls -f | wc -l)
@@ -28,12 +37,10 @@ else
     mv config/autoload/client.local.php.dist config/autoload/client.local.php
     mv config/autoload/doctrine.local.php.dist config/autoload/doctrine.local.php
     mv config/autoload/crypt.local.php.dist config/autoload/crypt.local.php
+    mv config/autoload/authentication.local.php.dist config/autoload/authentication.local.php
 
     if [ "${PASSWORDCOCKPIT_AUTHENTICATION_TYPE}" == "ldap" ]; then
-        mv config/autoload/authentication.ldap.local.php.dist config/autoload/authentication.ldap.local.php
         mv config/autoload/ldap.local.php.dist config/autoload/ldap.local.php
-    else
-        mv config/autoload/authentication.local.php.dist config/autoload/authentication.local.php
     fi
 
     mv config/constants.local.php.dist config/constants.local.php

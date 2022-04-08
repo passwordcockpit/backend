@@ -1,8 +1,25 @@
 <?php
 
-return [
+$authenticationConfig=[
     'authentication' => [
         'secret_key' => getenv('PASSWORDCOCKPIT_AUTHENTICATION_SECRET_KEY'),
-        'secure' => false
+        'secure' => false,
     ]
 ];
+
+if(getenv('PASSWORDCOCKPIT_AUTHENTICATION_TYPE')==='ldap'){
+    $authenticationConfig['dependencies']= [
+        'factories' => [
+            Laminas\Authentication\Adapter\AdapterInterface::class =>
+                Authentication\Api\V1\Factory\Adapter\LdapAdapterFactory::class
+        ]
+    ];
+}
+
+if(getenv('PASSWORDCOCKPIT_SSL')==='disable'){
+    if(getenv('PASSWORDCOCKPIT_SSL_RELAXED_IP')){
+        $authenticationConfig['relaxed']=explode(',',getenv('PASSWORDCOCKPIT_SSL_RELAXED_IP'));
+    }
+    
+}
+return $authenticationConfig;
