@@ -65,7 +65,7 @@ RUN set -ex; \
 
 # clone the source of the backend
 RUN set -ex; \
-git clone -v git@github.com/passwordcockpit/backend.git .; \
+git clone -v git@github.com:passwordcockpit/backend.git .; \
 git checkout 1.3.0-dev; \
 git pull origin 1.3.0-dev
 
