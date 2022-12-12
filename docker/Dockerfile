@@ -82,6 +82,7 @@ RUN { \
 	echo "<?php"; \
     echo "define('SWAGGER_API_HOST', 'PASSWORDCOCKPIT_BASEHOST');"; \
 } > config/constants.local.php
+ENV COMPOSER_ALLOW_SUPERUSER 1 
 RUN composer swagger
 
 # apache configurations
