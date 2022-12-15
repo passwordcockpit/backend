@@ -61,7 +61,9 @@ RUN set -ex; \
 RUN set -ex; \
     apt-get update; \
     apt-get install -y \
-    git
+    git; \
+    pecl install xdebug; \
+    docker-php-ext-enable xdebug
 
 # clone the source of the backend
 RUN set -ex; \
