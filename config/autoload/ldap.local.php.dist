@@ -15,11 +15,14 @@ return [
             'password' => getenv('PASSWORDCOCKPIT_LDAP_PASSWORD'),
             'baseDn' => getenv('PASSWORDCOCKPIT_LDAP_BASEDN'),
             'accountFilterFormat' => getenv('PASSWORDCOCKPIT_LDAP_ACCOUNTFILTERFORMAT'),
-            'bindRequiresDn' => getenv('PASSWORDCOCKPIT_LDAP_BINDREQUIRESDN'),
-            'userAttributeIdentifier'=> getenv('PASSWORDCOCKPIT_LDAP_USER_ATTR_UNIQUE_IDENTIFIER'),
-            'userAttributeName'=> getenv('PASSWORDCOCKPIT_LDAP_USER_ATTR_NAME'),
-            'userAttributeMail'=> getenv('PASSWORDCOCKPIT_LDAP_USER_ATTR_MAIL'),
-            'userAttributePhone'=> getenv('PASSWORDCOCKPIT_LDAP_USER_ATTR_PHONE'),
+            'bindRequiresDn' => getenv('PASSWORDCOCKPIT_LDAP_BINDREQUIRESDN')
         ]
+    ],
+    'ldapUserAttributes'=> [
+        'identifier'=> getenv('PASSWORDCOCKPIT_LDAP_USER_ATTR_UNIQUE_IDENTIFIER')?getenv('PASSWORDCOCKPIT_LDAP_USER_ATTR_UNIQUE_IDENTIFIER'):'uid',
+        'name'=> getenv('PASSWORDCOCKPIT_LDAP_USER_ATTR_NAME')?getenv('PASSWORDCOCKPIT_LDAP_USER_ATTR_NAME'):'givenname',
+        'surname'=> getenv('PASSWORDCOCKPIT_LDAP_USER_ATTR_SURNAME')?getenv('PASSWORDCOCKPIT_LDAP_USER_ATTR_SURNAME'):'sn',
+        'mail'=> getenv('PASSWORDCOCKPIT_LDAP_USER_ATTR_MAIL')?getenv('PASSWORDCOCKPIT_LDAP_USER_ATTR_MAIL'):'mail',
+        'phone'=> getenv('PASSWORDCOCKPIT_LDAP_USER_ATTR_PHONE')?getenv('PASSWORDCOCKPIT_LDAP_USER_ATTR_PHONE'):null
     ]
 ];
