@@ -26,8 +26,8 @@ class LdapAdapterFactory
     {
         return new LdapAdapter(
             $container->get(UserFacade::class),
-            $container->get('config')['ldap'],
-            $container->get('config')['ldapUserAttributes'],
+            $container->get('config')['ldap']['servers'],
+            $container->get('config')['ldap']['userAttributes'],
             $container->get(EntityManagerInterface::class)
         );
     }
