@@ -100,11 +100,13 @@ class UserFacade extends AbstractFacade
         // setto i campi
         $user->setUsername($payload['username']);
 
-        // Bcrypt della password ---
-        $bcrypt = new Bcrypt();
-        $bcryptedPassword = $bcrypt->create($payload['password']);
-
-        $user->setPassword($bcryptedPassword);
+        if(isset($payload['password'])){
+            // Bcrypt della password ---
+            $bcrypt = new Bcrypt();
+            $bcryptedPassword = $bcrypt->create($payload['password']);
+            $user->setPassword($bcryptedPassword);
+        }
+       
         $user->setName($payload['name']);
         $user->setSurname($payload['surname']);
         $user->setPhone($payload['phone']);

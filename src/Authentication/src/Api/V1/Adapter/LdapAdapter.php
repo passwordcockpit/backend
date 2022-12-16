@@ -26,11 +26,13 @@ class LdapAdapter implements AdapterInterface
      *
      * @param UserFacade $userFacade
      * @param array $ldapConfig
+     * @param array $ldapUserAttributesConfig
      * @param EntityManager $entityManager
      */
     public function __construct(
       private readonly UserFacade $userFacade,
       private array $ldapConfig,
+      private array $ldapUserAttributesConfig,
       private EntityManager $entityManager
     ){}
 
@@ -53,13 +55,17 @@ class LdapAdapter implements AdapterInterface
         if ($result->isValid()) {
             // match LDAP user with DB user
             $ldapUser = $ldap->getAccountObject();
-            $user = $this->userFacade->getUserByUsername($ldapUser->uid);
+            $user = $this->userFacade->getUserByUsername($ldapUser->{$this->ldapUserAttributesConfig['identifier']});
             if ($user && $user->getEnabled()) {
                 // update User in DB
-                $user->setName($ldapUser->givenname);
-                $user->setSurname($ldapUser->sn);
-                $user->setPhone();
-                $user->setEmail($ldapUser->mail);
+                $user->setName($ldapUser->{$this->ldapUserAttributesConfig['name']});
+                $user->setSurname($ldapUser->{$this->ldapUserAttributesConfig['surname']});
+                $user->setEmail($ldapUser->{$this->ldapUserAttributesConfig['mail']});
+                if($this->ldapUserAttributesConfig['phone']){
+                    $user->setPhone($ldapUser->{$this->ldapUserAttributesConfig['phone']});
+                }else{
+                    $user->setPhone();
+                }
                 $this->entityManager->persist($user);
                 $this->entityManager->flush();
 
