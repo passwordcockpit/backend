@@ -107,7 +107,7 @@ class UserValidationMiddleware implements MiddlewareInterface
             ],
             [
                 'name' => 'password',
-                'required' => !$this->update,
+                'required' =>!$this->update && getenv('PASSWORDCOCKPIT_AUTHENTICATION_TYPE')!=='ldap',
                 'continue_if_empty' => true,
                 'filters' => [
                     ['name' => \Laminas\Filter\StringTrim::class],
