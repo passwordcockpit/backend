@@ -298,12 +298,6 @@ class UserValidationMiddleware implements MiddlewareInterface
             $inputFilterSpecification
         );
 
-        if(getenv('PASSWORDCOCKPIT_AUTHENTICATION_TYPE')==='ldap'){
-            // Remove password field
-            unset($payload['password']);
-            $inputFilter->remove('password');
-        }
-
         $inputFilter->setData($payload);
 
         if (!$inputFilter->isValid()) {
