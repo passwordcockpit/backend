@@ -41,7 +41,7 @@ class LogFacade extends AbstractFacade
      */
     public function create($data): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**
@@ -51,7 +51,7 @@ class LogFacade extends AbstractFacade
      */
     public function fetch($id, $filter): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**
@@ -60,7 +60,7 @@ class LogFacade extends AbstractFacade
      */
     public function fetchAll($filter): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**
@@ -70,7 +70,7 @@ class LogFacade extends AbstractFacade
      */
     public function update($id, $data): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**
@@ -80,7 +80,7 @@ class LogFacade extends AbstractFacade
      */
     public function delete($id, $filter): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**
