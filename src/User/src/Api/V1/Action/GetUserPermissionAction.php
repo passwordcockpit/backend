@@ -20,58 +20,36 @@ use User\Api\V1\Facade\PermissionFacade;
 use Mezzio\Hal\ResourceGenerator;
 
 /**
- * @SWG\Get(
+ * @OA\Get(
  *     path="/v1/users/{userId}/permissions",
  *     summary="Get user's permissions",
  *     description="Returns permissions for user by its id",
  *     operationId="getUserPermissions",
- *     produces={"application/json"},
  *     tags={"users"},
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="User id to fetch",
  *         in="path",
  *         name="userId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=200,
- *         description="OK"
+ *         description="OK",
+ *         @OA\JsonContent()
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=404,
  *         description="Not Found"
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
  * )
  */
 class GetUserPermissionAction implements RequestHandlerInterface
 {
-    /**
-     *
-     * @var UserFacade
-     */
-    protected $userFacade;
-
-    /**
-     *
-     * @var PermissionFacade
-     */
-    protected $permissionFacade;
-
-    /**
-     *
-     * @var ResourceGenerator
-     */
-    private $halResourceGenerator;
-
-    /**
-     *
-     * @var HalResponseFactory
-     */
-    protected $halResponseFactory;
-
     /**
      * Constructor
      *
@@ -81,16 +59,11 @@ class GetUserPermissionAction implements RequestHandlerInterface
      * @param PermissionFacade $permissionFacade
      */
     public function __construct(
-        UserFacade $userFacade,
-        ResourceGenerator $halResourceGenerator,
-        HalResponseFactory $halResponseFactory,
-        PermissionFacade $permissionFacade
-    ) {
-        $this->userFacade = $userFacade;
-        $this->permissionFacade = $permissionFacade;
-        $this->halResourceGenerator = $halResourceGenerator;
-        $this->halResponseFactory = $halResponseFactory;
-    }
+        protected UserFacade $userFacade,
+        private readonly ResourceGenerator $halResourceGenerator,
+        protected HalResponseFactory $halResponseFactory,
+        protected PermissionFacade $permissionFacade
+    ){}
 
     /**
      * MiddlewareInterface handler

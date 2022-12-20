@@ -23,89 +23,44 @@ use Laminas\Crypt\FileCipher;
 use File\Api\V1\Entity\File;
 
 /**
- * @SWG\Post(
- *     path=" /v1/passwords/{passwordId}/files",
+ * @OA\Post(
+ *     path="/v1/passwords/{passwordId}/files",
  *     summary="Create a file for the specific password",
  *     description="",
  *     operationId="updateFile",
- *     produces={"application/json"},
  *     tags={"passwords"},
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="password id to which the file is associated",
  *         in="path",
  *         name="passwordId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Parameter(
- * 		   name="file",
+ *     @OA\RequestBody(
  *         description="file to upload",
- *         in="formData",
- *         type="file"
+ *         @OA\MediaType(
+ *             mediaType="multipart/form-data",
+ *             @OA\Schema(type="file")
+ *         )
  *     ),
-
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=200,
- *         description="OK"
+ *         description="OK",
+ *         @OA\JsonContent()
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=404,
  *         description="Password not found"
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
  * )
  */
 
 class UpdateFileAction implements RequestHandlerInterface
 {
-    /**
-     *
-     * @var FileFacade
-     */
-    protected $fileFacade;
-
-    /**
-     *
-     * @var PasswordFacade
-     */
-    protected $passwordFacade;
-
-    /**
-     *
-     * @var EntityManager
-     */
-    private $entityManager;
-
-    /**
-     *
-     * @var FileCipher
-     */
-    private $fileCipher;
-
-    /**
-     *
-     * @var string
-     */
-    private $encriptionKey;
-
-    /**
-     *
-     * @var array
-     */
-    private $uploadConfig;
-
-    private $translator;
-    /**
-     * @var ResourceGenerator
-     */
-    private $resourceGenerator;
-
-    /**
-     * @var HalResponseFactory
-     */
-    private $halResponseFactory;
-
     /**
      * Constructor
      *
@@ -116,30 +71,19 @@ class UpdateFileAction implements RequestHandlerInterface
      * @param EntityManager $entityManager
      * @param FileCipher $fileCipher
      * @param string $encriptionkey
-     * @param ResourceGenerator $resourceGeneratorInstance
+     * @param ResourceGenerator $resourceGenerator
      * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
-        FileFacade $fileFacade,
-        PasswordFacade $passwordFacade,
-        $uploadConfig,
-        $translator,
-        $entityManager,
-        FileCipher $fileCipher,
-        $encriptionKey,
-        ResourceGenerator $resourceGeneratorInstance,
-        HalResponseFactory $halResponseFactory
-    ) {
-        $this->fileFacade = $fileFacade;
-        $this->passwordFacade = $passwordFacade;
-        $this->uploadConfig = $uploadConfig;
-        $this->translator = $translator;
-        $this->entityManager = $entityManager;
-        $this->fileCipher = $fileCipher;
-        $this->encriptionKey = $encriptionKey;
-        $this->resourceGenerator = $resourceGeneratorInstance;
-        $this->halResponseFactory = $halResponseFactory;
-    }
+        protected FileFacade $fileFacade,
+        protected PasswordFacade $passwordFacade,
+        private array $uploadConfig,
+        private $translator, private $entityManager,
+        private readonly FileCipher $fileCipher,
+        private string $encriptionKey,
+        private readonly ResourceGenerator $resourceGenerator,
+        private readonly HalResponseFactory $halResponseFactory
+    ){}
 
     /**
      * MiddlewareInterface handler

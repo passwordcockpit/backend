@@ -29,65 +29,7 @@ use App\Abstracts\AbstractFacade;
 
 class PasswordFacade extends AbstractFacade
 {
-    /**
-     *
-     * @var EntityManager
-     */
-    protected $entityManager;
-
-    /**
-     *
-     * @var Translator
-     */
-    protected $translator;
-
-    /**
-     *
-     * @var BlockCipher
-     */
-    private $blockCipher;
-
-    /**
-     *
-     * @var FileCipher
-     */
-    private $fileCipher;
-
-    /**
-     *
-     * @var string
-     */
-    private $encriptionKey;
-
-    /**
-     *
-     * @var int
-     */
-    private $userId;
-
-    /**
-     *
-     * @var FolderFacade
-     */
-    private $folderFacade;
-
-    /**
-     *
-     * @var LogFacade
-     */
-    private $logFacade;
-
-    /**
-     *
-     * @var FileFacade
-     */
-    private $fileFacade;
-
-    /**
-     *
-     * @var array
-     */
-    private $uploadConfig;
+    private int $userId;
 
     /**
      * Constructor
@@ -103,26 +45,16 @@ class PasswordFacade extends AbstractFacade
      * @param array $uploadConfig
      */
     public function __construct(
-        EntityManager $entityManager,
-        Translator $translator,
-        BlockCipher $blockCipher,
-        FileCipher $fileCipher,
-        $encriptionKey,
-        FolderFacade $folderFacade,
-        LogFacade $logFacade,
-        FileFacade $fileFacade,
-        $uploadConfig
+        protected EntityManager $entityManager,
+        protected Translator $translator,
+        private readonly BlockCipher $blockCipher,
+        private readonly FileCipher $fileCipher,
+        private $encriptionKey,
+        private readonly FolderFacade $folderFacade,
+        private readonly LogFacade $logFacade,
+        private readonly FileFacade $fileFacade,
+        private $uploadConfig
     ) {
-        $this->entityManager = $entityManager;
-        $this->translator = $translator;
-        $this->blockCipher = $blockCipher;
-        $this->fileCipher = $fileCipher;
-        $this->encriptionKey = $encriptionKey;
-        $this->folderFacade = $folderFacade;
-        $this->logFacade = $logFacade;
-        $this->fileFacade = $fileFacade;
-        $this->uploadConfig = $uploadConfig;
-
         parent::__construct($translator, $entityManager, Password::class);
     }
 
@@ -149,7 +81,7 @@ class PasswordFacade extends AbstractFacade
      * @param string $id
      * @param array $filter
      */
-    public function fetch($id, $filter)
+    public function fetch($id, $filter): never
     {
         throw new Exception("Method not implemented");
     }
@@ -158,7 +90,7 @@ class PasswordFacade extends AbstractFacade
      *
      * @param array $filter
      */
-    public function fetchAll($filter)
+    public function fetchAll($filter): never
     {
         throw new Exception("Method not implemented");
     }
@@ -168,7 +100,7 @@ class PasswordFacade extends AbstractFacade
      * @param type $id
      * @param type $filter
      */
-    public function delete($id, $filter)
+    public function delete($id, $filter): never
     {
         throw new Exception("Method not implemented");
     }
@@ -213,7 +145,6 @@ class PasswordFacade extends AbstractFacade
             $password->setLastModificationDate(new \DateTime());
             $this->entityManager->persist($password);
             $this->entityManager->flush();
-            //$this->updateLog($password->getPasswordId(), "Password created");
             $this->logFacade->updateLog(
                 $password->getPasswordId(),
                 "Password created",
@@ -288,7 +219,7 @@ class PasswordFacade extends AbstractFacade
      * @param string $id
      * @param array $data
      */
-    public function update($id, $data)
+    public function update($id, $data): never
     {
         throw new Exception("Method not implemented");
     }
@@ -321,7 +252,6 @@ class PasswordFacade extends AbstractFacade
             $password = $this->entityManager
                 ->getRepository(Password::class)
                 ->find($password->getPasswordId());
-            //$this->updateLog($id, "Password modified");
             $this->logFacade->updateLog(
                 $id,
                 "Password modified",
@@ -385,7 +315,7 @@ class PasswordFacade extends AbstractFacade
             $user = $this->entityManager
                 ->getRepository(User::class)
                 ->find($userId);
-            $this->logFacade->createDeletedLog($id, $user);
+            $this->logFacade->createDeletedLog($password, $user);
 
             $this->entityManager->remove($password);
             $this->entityManager->flush();
@@ -418,7 +348,6 @@ class PasswordFacade extends AbstractFacade
                 $password->setPassword($this->decrypt($encryptedPassword));
             }
             $this->entityManager->detach($password);
-            //$this->updateLog($id, "Password viewed");
             $this->logFacade->updateLog(
                 $id,
                 "Password viewed",
@@ -551,7 +480,7 @@ class PasswordFacade extends AbstractFacade
     public function decrypt($encrypted)
     {
         $this->blockCipher->setKey($this->encriptionKey);
-        if ($encrypted !== null) {
+        if ($encrypted) {
             $encrypted = $this->blockCipher->decrypt($encrypted);
         }
 
@@ -568,32 +497,5 @@ class PasswordFacade extends AbstractFacade
     {
         $this->blockCipher->setKey($this->encriptionKey);
         return $this->blockCipher->encrypt($password);
-    }
-
-    /**
-     * Update the log for the specified password
-     *
-     * @param Password $password
-     * @param string $action
-     * @return boolean
-     */
-    public function updateLog($passwordId, $action)
-    {
-        $log = new Log();
-        $log->setAction($action);
-        $pass = $this->entityManager->getReference(
-            Password::class,
-            $passwordId
-        );
-        $log->setPassword($pass);
-        $log->setActionDate(new \DateTime());
-        $user = $this->entityManager
-            ->getRepository(User::class)
-            ->find($this->getUserId());
-        $log->setUser($user);
-        $this->entityManager->persist($log);
-        $this->entityManager->flush();
-
-        return true;
     }
 }

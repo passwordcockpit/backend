@@ -10,19 +10,19 @@
 namespace Authentication\Api\V1\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
+use User\Api\V1\Entity\User;
 
 /**
  * Permission
  *
  * @ORM\Table(name="token_user")
  * @ORM\Entity
- * @SWG\Definition(definition="Token table")
+ * @OA\Schema(description="Token table")
  */
 class TokenUser
 {
     /**
-     * @var \User\Api\V1\Entity\User
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
@@ -31,34 +31,29 @@ class TokenUser
      *   @ORM\JoinColumn(name="user_id", referencedColumnName="user_id", nullable=true)
      * })
      */
-    private $user;
+    private User $user;
 
     /**
-     * @var string
      *
      * @ORM\Column(name="token", type="string", length=500, precision=0, scale=0, nullable=true, unique=true)
-     *
-     * @SWG\Property(property="token", type="string", description="token value", example="ey.token")
+     * @OA\Property(property="token", type="string", description="token value", example="ey.token")
      */
-    private $token;
+    private ?string $token;
 
     /**
-     * @var \DateTime|null
      *
      * @ORM\Column(name="last_login", type="datetime", precision=0, scale=0, nullable=true, unique=false)
-     *
-     * @SWG\Property(property="last_login", type="datetime", description="Last login date", example="title")
+     * @OA\Property(property="last_login", type="datetime", description="Last login date", example="title")
      */
-    private $lastLogin;
+    private ?\DateTime $lastLogin = null;
 
     /**
      * Set User.
      *
      * @param User $user
-     *
      * @return TokenUser
      */
-    public function setUser(\User\Api\V1\Entity\User $user = null)
+    public function setUser(User $user = null)
     {
         $this->user = $user;
 

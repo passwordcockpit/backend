@@ -18,36 +18,13 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use App\Service\ProblemDetailsException;
+use Laminas\I18n\Translator\Translator;
 use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\Factory as InputFilterFactory;
 use User\Api\V1\Entity\User;
 
 class UserValidationMiddleware implements MiddlewareInterface
 {
-    /**
-     *
-     * @var Factory
-     */
-    private $inputFilterFactory;
-
-    /**
-     *
-     * @var array
-     */
-    private $languages;
-
-    /**
-     *
-     * @var array
-     */
-    private $translator;
-
-    /**
-     *
-     * @var boolean
-     */
-    private $update;
-
     /**
      * Constructor
      *
@@ -57,16 +34,11 @@ class UserValidationMiddleware implements MiddlewareInterface
      * @param bool $update
      */
     public function __construct(
-        InputFilterFactory $inputFilterFactory,
-        $languages,
-        $translator,
-        $update = false
-    ) {
-        $this->inputFilterFactory = $inputFilterFactory;
-        $this->languages = $languages;
-        $this->translator = $translator;
-        $this->update = $update;
-    }
+        private readonly InputFilterFactory $inputFilterFactory,
+        private array $languages,
+        private Translator $translator,
+        private bool $update = false
+    ){}
 
     /**
      *
@@ -78,6 +50,7 @@ class UserValidationMiddleware implements MiddlewareInterface
         ServerRequestInterface $request,
         RequestHandlerInterface $handler
     ): ResponseInterface {
+        $errors = [];
         $payload = $request->getParsedBody();
 
         // zend filter for booolean value does not allow NULL to go through, even with value.
@@ -86,7 +59,7 @@ class UserValidationMiddleware implements MiddlewareInterface
             $enabled = true;
         }
 
-        $exclude = null;
+        $exclude = [];
         if ($request->getAttribute('id')) {
             $userId = $request->getAttribute('id');
             $exclude = [
@@ -134,7 +107,7 @@ class UserValidationMiddleware implements MiddlewareInterface
             ],
             [
                 'name' => 'password',
-                'required' => !$this->update,
+                'required' =>!$this->update && getenv('PASSWORDCOCKPIT_AUTHENTICATION_TYPE')!=='ldap',
                 'continue_if_empty' => true,
                 'filters' => [
                     ['name' => \Laminas\Filter\StringTrim::class],
@@ -314,9 +287,7 @@ class UserValidationMiddleware implements MiddlewareInterface
                     [
                         'name' => \Laminas\Validator\Callback::class,
                         'options' => [
-                            'callback' => function ($value) {
-                                return is_bool($value);
-                            }
+                            'callback' => fn($value) => is_bool($value)
                         ]
                     ]
                 ]
@@ -326,6 +297,7 @@ class UserValidationMiddleware implements MiddlewareInterface
         $inputFilter = $this->inputFilterFactory->createInputFilter(
             $inputFilterSpecification
         );
+
         $inputFilter->setData($payload);
 
         if (!$inputFilter->isValid()) {

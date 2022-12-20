@@ -26,24 +26,6 @@ use Password\Api\V1\Entity\Password;
 class FolderFacade extends AbstractFacade
 {
     /**
-     *
-     * @var EntityManager
-     */
-    protected $entityManager;
-
-    /**
-     *
-     * @var Translator
-     */
-    protected $translator;
-
-    /**
-     *
-     * @var UserFacade
-     */
-    private $userFacade;
-
-    /**
      * Constructor
      *
      * @param EntityManager $entityManager
@@ -51,13 +33,10 @@ class FolderFacade extends AbstractFacade
      * @param UserFacade $userFacade
      */
     public function __construct(
-        EntityManager $entityManager,
-        Translator $translator,
-        UserFacade $userFacade
+        protected EntityManager $entityManager,
+        protected Translator $translator,
+        private readonly UserFacade $userFacade
     ) {
-        $this->entityManager = $entityManager;
-        $this->translator = $translator;
-        $this->userFacade = $userFacade;
         parent::__construct($translator, $entityManager, Folder::class);
     }
 
@@ -65,7 +44,7 @@ class FolderFacade extends AbstractFacade
      *
      * @param array $data
      */
-    public function create($data)
+    public function create($data): never
     {
         throw new Exception("Method not implemented");
     }
@@ -75,7 +54,7 @@ class FolderFacade extends AbstractFacade
      * @param string $id
      * @param array $filter
      */
-    public function fetch($id, $filter)
+    public function fetch($id, $filter): never
     {
         throw new Exception("Method not implemented");
     }
@@ -84,7 +63,7 @@ class FolderFacade extends AbstractFacade
      *
      * @param array $filter
      */
-    public function fetchAll($filter)
+    public function fetchAll($filter): never
     {
         throw new Exception("Method not implemented");
     }
@@ -94,7 +73,7 @@ class FolderFacade extends AbstractFacade
      * @param string $id
      * @param array $data
      */
-    public function update($id, $data)
+    public function update($id, $data): never
     {
         throw new Exception("Method not implemented");
     }
@@ -104,7 +83,7 @@ class FolderFacade extends AbstractFacade
      * @param type $id
      * @param type $filter
      */
-    public function delete($id, $filter)
+    public function delete($id, $filter): never
     {
         throw new Exception("Method not implemented");
     }

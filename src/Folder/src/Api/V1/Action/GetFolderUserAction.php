@@ -22,78 +22,46 @@ use Laminas\I18n\Translator\Translator;
 use Mezzio\Hal\HalResponseFactory;
 
 /**
- * @SWG\Get(
+ * @OA\Get(
  *     path="/v1/folders/{folderId}/users/{userId}",
  *     summary="Get user access type to specified folder",
  *     description="Returns user access type on the specified folder by its id",
  *     operationId="getFolderUser",
- *     produces={"application/json"},
  *     tags={"folders"},
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="Folder id",
  *         in="path",
  *         name="folderId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="User id",
  *         in="path",
  *         name="userId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=200,
- *         description="OK"
+ *         description="OK",
+ *         @OA\JsonContent()
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=204,
  *         description="No Content"
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
  * )
  */
 class GetFolderUserAction implements RequestHandlerInterface
 {
-    /**
-     *
-     * @var FolderUserFacade
-     */
-    protected $folderUserFacade;
-
-    /**
-     *
-     * @var FolderFacade
-     */
-    protected $folderFacade;
-
-    /**
-     *
-     * @var UserFacade
-     */
-    protected $userFacade;
-
-    /**
-     *
-     * @var Translator
-     */
-    protected $translator;
-
-    /**
-     *
-     * @var ResourceGenerator
-     */
-    protected $halResourceGenerator;
-
-    /**
-     *
-     * @var HalResponseFactory
-     */
-    protected $halResponseFactory;
-
     /**
      * Constructor
      *
@@ -105,20 +73,13 @@ class GetFolderUserAction implements RequestHandlerInterface
      * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
-        FolderUserFacade $folderUserFacade,
-        FolderFacade $folderFacade,
-        UserFacade $userFacade,
-        Translator $translator,
-        ResourceGenerator $halResourceGenerator,
-        HalResponseFactory $halResponseFactory
-    ) {
-        $this->folderUserFacade = $folderUserFacade;
-        $this->folderFacade = $folderFacade;
-        $this->userFacade = $userFacade;
-        $this->translator = $translator;
-        $this->halResourceGenerator = $halResourceGenerator;
-        $this->halResponseFactory = $halResponseFactory;
-    }
+        protected FolderUserFacade $folderUserFacade,
+        protected FolderFacade $folderFacade,
+        protected UserFacade $userFacade,
+        protected Translator $translator, 
+        protected ResourceGenerator $halResourceGenerator,
+        protected HalResponseFactory $halResponseFactory
+    ){}
 
     /**
      * MiddlewareInterface handler

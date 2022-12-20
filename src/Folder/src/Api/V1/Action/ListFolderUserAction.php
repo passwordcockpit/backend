@@ -20,52 +20,36 @@ use Mezzio\Hal\HalResponseFactory;
 use User\Api\V1\Collection\UserCollection;
 
 /**
- * @SWG\Get(
+ * @OA\Get(
  *     path="/v1/folders/{folderId}/users",
  *     summary="Get users that have access to specified folder",
  *     description="Returns users that have access in the specified folder by its id",
  *     operationId="getFolderUsers",
- *     produces={"application/json"},
  *     tags={"folders"},
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="Folder id where to get users with access",
  *         in="path",
  *         name="folderId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=200,
- *         description="OK"
+ *         description="OK",
+ *         @OA\JsonContent()
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=404,
  *         description="Not Found"
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
  * )
  */
 class ListFolderUserAction implements RequestHandlerInterface
 {
-    /**
-     *
-     * @var FolderUserFacade
-     */
-    protected $folderUserFacade;
-
-    /**
-     *
-     * @var ResourceGenerator
-     */
-    protected $halResourceGenerator;
-
-    /**
-     *
-     * @var HalResponseFactory
-     */
-    protected $halResponseFactory;
-
     /**
      * Constructor
      *
@@ -74,14 +58,10 @@ class ListFolderUserAction implements RequestHandlerInterface
      * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
-        FolderUserFacade $folderUserFacade,
-        ResourceGenerator $halResourceGenerator,
-        HalResponseFactory $halResponseFactory
-    ) {
-        $this->folderUserFacade = $folderUserFacade;
-        $this->halResourceGenerator = $halResourceGenerator;
-        $this->halResponseFactory = $halResponseFactory;
-    }
+        protected FolderUserFacade $folderUserFacade,
+        protected ResourceGenerator $halResourceGenerator,
+        protected HalResponseFactory $halResponseFactory
+    ){}
 
     /**
      * MiddlewareInterface handler
@@ -97,6 +77,7 @@ class ListFolderUserAction implements RequestHandlerInterface
             ? $this->folderUserFacade->getUsersWithoutRights($folderId)
             : $this->folderUserFacade->getUsers($folderId);
         foreach ($users as $user) {
+            $user->setFolderId($folderId);
             $user->setCompleteUser();
         }
         $usersArrayAdapter = new \Laminas\Paginator\Adapter\ArrayAdapter($users);

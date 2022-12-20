@@ -20,36 +20,25 @@ class AssertionPluginManager extends AbstractPluginManager
     protected $assertionsRegisteredByRoute;
     protected $instanceOf = AssertionInterface::class;
 
-    protected $translator;
-    protected $folderUserFacade;
-    private $entityManager;
-
-    protected $assertions;
-
     /**
      * Constructor
      *
-     * @param string $configIstanceOrParentLocator
-     * @param array $config
-     * @param array $assertionRegisteredByRoute
      * @param Translator $translator
      * @param FolderUserFacade $folderUserFacade
      * @param EntityManager $entityManager
+     * @param string $configIstanceOrParentLocator
+     * @param array $config
+     * @param array $assertions
      */
     public function __construct(
+        protected Translator $translator,
+        protected FolderUserFacade $folderUserFacade,
+        private readonly EntityManager $entityManager,
         $configInstanceOrParentLocator = null,
-        array $config = array(),
-        array $assertionRegisteredByRoute = array(),
-        Translator $translator,
-        FolderUserFacade $folderUserFacade,
-        EntityManager $entityManager
+        array $config = [],
+        protected array $assertions = [],
     ) {
         parent::__construct($configInstanceOrParentLocator, $config);
-
-        $this->assertions = $assertionRegisteredByRoute;
-        $this->translator = $translator;
-        $this->folderUserFacade = $folderUserFacade;
-        $this->entityManager = $entityManager;
     }
 
     /**

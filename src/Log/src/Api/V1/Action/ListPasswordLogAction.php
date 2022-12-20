@@ -18,58 +18,36 @@ use Mezzio\Hal\ResourceGenerator;
 use Log\Api\V1\Collection\PasswordLogCollection;
 
 /**
- * @SWG\Get(
+ * @OA\Get(
  *     path="/v1/passwords/{passwordId}/logs",
  *     summary="List logs for specified password",
  *     description="Returns list of logs for specified password",
  *     operationId="listLogsPassword",
- *     produces={"application/json"},
  *     tags={"passwords"},
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="Password id to fetch logs",
  *         in="path",
  *         name="passwordId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=200,
- *         description="OK"
+ *         description="OK",
+ *         @OA\JsonContent()
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=204,
  *         description="No Content"
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
  * )
  */
 class ListPasswordLogAction implements RequestHandlerInterface
 {
-    /**
-     *
-     * @var LogFacade
-     */
-    protected $logFacade;
-
-    /**
-     *
-     * @var ResourceGenerator
-     */
-    protected $halResourceGenerator;
-
-    /**
-     *
-     * @var HalResponseFactory
-     */
-    protected $halResponseFactory;
-
-    /**
-     *
-     * @var array
-     */
-    protected $paginatorConfig;
-
     /**
      * Constructor
      *
@@ -79,16 +57,11 @@ class ListPasswordLogAction implements RequestHandlerInterface
      * @param array $paginatorCofig
      */
     public function __construct(
-        LogFacade $logFacade,
-        ResourceGenerator $halResourceGenerator,
-        HalResponseFactory $halResponseFactory,
-        $paginatorConfig
-    ) {
-        $this->halResourceGenerator = $halResourceGenerator;
-        $this->halResponseFactory = $halResponseFactory;
-        $this->logFacade = $logFacade;
-        $this->paginatorConfig = $paginatorConfig;
-    }
+        protected LogFacade $logFacade,
+        protected ResourceGenerator $halResourceGenerator,
+        protected HalResponseFactory $halResponseFactory,
+        protected $paginatorConfig
+    ){}
 
     /**
      * MiddlewareInterface handler
@@ -102,10 +75,8 @@ class ListPasswordLogAction implements RequestHandlerInterface
         $logs = $this->logFacade->getPasswordLog($passwordId);
         //most recent logs are shown
         // $logs = array_reverse($logs);
-        usort($logs, function ($a, $b) {
-            return $b->getActionDate()->getTimestamp() -
-                $a->getActionDate()->getTimestamp();
-        });
+        usort($logs, fn($a, $b) => $b->getActionDate()->getTimestamp() -
+            $a->getActionDate()->getTimestamp());
         $logsArrayAdapter = new \Laminas\Paginator\Adapter\ArrayAdapter($logs);
         $logsCollection = new PasswordLogCollection($logsArrayAdapter);
         $logsCollection->setDefaultItemCountPerPage(

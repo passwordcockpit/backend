@@ -11,7 +11,6 @@ namespace Authorization\Api\V1\Assertion;
 
 use Laminas\Permissions\Rbac\AssertionInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Folder\Api\V1\Entity\Folder;
 use App\Service\ProblemDetailsException;
 use Doctrine\ORM\EntityManager;
 use Laminas\I18n\Translator\Translator;
@@ -20,33 +19,7 @@ use Laminas\Permissions\Rbac\RoleInterface;
 
 class FolderAssertion implements AssertionInterface
 {
-    /**
-     *
-     * @var EntityManager
-     *
-     */
-    protected $entityManager;
-
-    /**
-     *
-     * @var Translator
-     *
-     */
-    protected $translator;
-
-    /**
-     *
-     * @var FolderUserFacade
-     *
-     */
-    protected $folderUserFacade;
-
-    /**
-     *
-     * @var ServerRequestInterface
-     *
-     */
-    protected $request;
+    protected ServerRequestInterface $request;
 
     protected $user;
 
@@ -58,29 +31,22 @@ class FolderAssertion implements AssertionInterface
      * @param FolderUserFacade $folderUserFacade
      */
     public function __construct(
-        EntityManager $entityManager,
-        Translator $translator,
-        FolderUserFacade $folderUserFacade
-    ) {
-        $this->entityManager = $entityManager;
-        $this->translator = $translator;
-        $this->folderUserFacade = $folderUserFacade;
-    }
+        protected EntityManager $entityManager,
+        protected Translator $translator,
+        protected FolderUserFacade $folderUserFacade
+    ){}
 
     /**
      * {@inheritDoc}
      */
-    public function setRequest(
-        \Psr\Http\Message\ServerRequestInterface $request
-    ) {
+    public function setRequest(ServerRequestInterface $request) {
         $this->request = $request;
     }
 
     /**
      * Set user on this class
      *
-     * @param type $request
-     * @return type
+     * @param User $user
      */
     public function setUser($user)
     {
@@ -90,10 +56,10 @@ class FolderAssertion implements AssertionInterface
     /**
      * Returns folderId from Request - check Attributes and Body
      *
-     * @param type $request
-     * @return type
+     * @param ServerRequestInterface $request
+     * @return mixed
      */
-    private function getFolderId($request)
+    private function getFolderId(ServerRequestInterface $request)
     {
         if ($request->getAttribute('folderId')) {
             $folderId = $request->getAttribute('folderId');
@@ -128,7 +94,7 @@ class FolderAssertion implements AssertionInterface
                     $folderId,
                     $this->user
                 );
-            } catch (ProblemDetailsException $ex) {
+            } catch (ProblemDetailsException) {
                 // if we catch a 404 NOT FOUND exception, we need to return 401 instead (since this is an assertion)
                 $userId = $this->user->getUserId();
                 $method = $this->request->getMethod();

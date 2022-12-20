@@ -25,84 +25,53 @@ use Folder\Api\V1\Facade\FolderUserFacade;
  *
  * @copyright 2018 Blackpoints SA
  *
- * @SWG\Patch(
+ * @OA\Patch(
  *     path="/v1/folders/{folderId}/users/{userId}",
  *     tags={"folders"},
  *     operationId="updateUserAccessToFolder",
  *     summary="Update access on a Folder to a User",
  *     description="Update access on a Folder to a User",
- *     consumes={"application/json"},
- *     produces={"application/json"},
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="Folder id",
  *         in="path",
  *         name="folderId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="User id",
  *         in="path",
  *         name="userId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Parameter(
- *         name="body",
- *         in="body",
- *         description="Access right for user on folder",
- *         required=true,
- *         @SWG\Schema(ref="#/definitions/UpdateFolderUserAction payload")
- *     ),
- *     @SWG\Response(
+ *     requestBody={"$ref": "#/components/requestBodies/UpdateFolderUserAction payload"},
+ *     @OA\Response(
  *         response=201,
  *         description="OK",
+ *         @OA\JsonContent()
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=404,
  *         description="Invalid input",
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
  * )
- * @SWG\Definition(
- *		definition="UpdateFolderUserAction payload",
- * 		@SWG\Property(property="access", type="integer", description="1: Read or 2: Manage folder", example=1)
+ * @OA\RequestBody(
+ *		request="UpdateFolderUserAction payload",
+ *    description="Access right for user on folder",
+ *    required=true,
+ * 		@OA\Property(property="access", type="integer", description="1: Read or 2: Manage folder", example=1)
  * )
  */
 class UpdateFolderUserAction implements RequestHandlerInterface
 {
-    /**
-     *
-     * @var FolderFacade
-     */
-    protected $folderFacade;
-
-    /**
-     *
-     * @var UserFacade
-     */
-    protected $userFacade;
-
-    /**
-     *
-     * @var ResourceGenerator
-     */
-    protected $halResourceGenerator;
-
-    /**
-     *
-     * @var HalResponseFactory
-     */
-    protected $halResponseFactory;
-
-    /**
-     *
-     * @var FolderUserFacade
-     */
-    protected $folderUserFacade;
-
     /**
      * Constructor
      *
@@ -113,18 +82,12 @@ class UpdateFolderUserAction implements RequestHandlerInterface
      * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
-        FolderFacade $folderFacade,
-        UserFacade $userFacade,
-        FolderUserFacade $folderUserFacade,
-        ResourceGenerator $halResourceGenerator,
-        HalResponseFactory $halResponseFactory
-    ) {
-        $this->folderFacade = $folderFacade;
-        $this->userFacade = $userFacade;
-        $this->folderUserFacade = $folderUserFacade;
-        $this->halResourceGenerator = $halResourceGenerator;
-        $this->halResponseFactory = $halResponseFactory;
-    }
+        protected FolderFacade $folderFacade,
+        protected UserFacade $userFacade,
+        protected FolderUserFacade $folderUserFacade,
+        protected ResourceGenerator $halResourceGenerator,
+        protected HalResponseFactory $halResponseFactory
+    ){}
 
     /**
      * MiddlewareInterface handler

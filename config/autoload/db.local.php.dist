@@ -1,0 +1,9 @@
+<?php
+return [
+    'dbadapter' => [
+        'username' => getenv('PASSWORDCOCKPIT_DATABASE_USERNAME'),
+        'password' => getenv('PASSWORDCOCKPIT_DATABASE_PASSWORD'), 
+        'hostname' => getenv('PASSWORDCOCKPIT_DATABASE_HOSTNAME'),
+        'database' => getenv('PASSWORDCOCKPIT_DATABASE_DATABASE')
+    ]
+];

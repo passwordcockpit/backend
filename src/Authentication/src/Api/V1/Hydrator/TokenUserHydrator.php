@@ -34,4 +34,15 @@ class TokenUserHydrator extends AbstractHydrator
 
         return $data;
     }
+
+    /**
+     *
+     * @param array $data
+     * @param object $object
+     * @throws \Exception
+     */
+    public function hydrate(array $data, object $object)
+    {
+        throw new \Exception("Method not implemented");
+    }
 }

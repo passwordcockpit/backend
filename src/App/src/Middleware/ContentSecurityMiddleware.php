@@ -20,20 +20,12 @@ use Psr\Http\Message\ResponseInterface;
 class ContentSecurityMiddleware implements MiddlewareInterface
 {
     /**
-     * Set of directives
-     *
-     *@var string
-     */
-    private $directives;
-
-    /**
      * Constructor
      *
-     * @param string
+     * @param string Set of directives
      */
-    public function __construct($directives)
+    public function __construct(private $directives)
     {
-        $this->directives = $directives;
     }
 
     /**

@@ -21,52 +21,36 @@ use User\Api\V1\Facade\UserFacade;
 use Mezzio\Hal\ResourceGenerator;
 
 /**
- * @SWG\Get(
+ * @OA\Get(
  *     path="/v1/users/{userId}",
  *     summary="Get a user",
  *     description="Returns a user by its id",
  *     operationId="getUser",
- *     produces={"application/json"},
  *     tags={"users"},
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="User id to fetch",
  *         in="path",
  *         name="userId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=200,
- *         description="OK"
+ *         description="OK",
+ *         @OA\JsonContent()
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=404,
  *         description="Not Found"
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
  * )
  */
 class GetUserAction implements RequestHandlerInterface
 {
-    /**
-     *
-     * @var UserFacade
-     */
-    protected $userFacade;
-
-    /**
-     *
-     * @var ResourceGenerator
-     */
-    private $halResourceGenerator;
-
-    /**
-     *
-     * @var HalResponseFactory
-     */
-    protected $halResponseFactory;
-
     /**
      * Constructor
      *
@@ -76,14 +60,10 @@ class GetUserAction implements RequestHandlerInterface
      */
 
     public function __construct(
-        UserFacade $userFacade,
-        ResourceGenerator $halResourceGenerator,
-        HalResponseFactory $halResponseFactory
-    ) {
-        $this->userFacade = $userFacade;
-        $this->halResourceGenerator = $halResourceGenerator;
-        $this->halResponseFactory = $halResponseFactory;
-    }
+        protected UserFacade $userFacade,
+        private readonly ResourceGenerator $halResourceGenerator,
+        protected HalResponseFactory $halResponseFactory
+    ){}
 
     /**
      * MiddlewareInterface handler

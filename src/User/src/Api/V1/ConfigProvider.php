@@ -36,7 +36,7 @@ class ConfigProvider
             'dependencies' => $this->getDependencies(),
             'routes' => $this->getRoutes(),
             'doctrine' => $this->getDoctrine(),
-            'Mezzio\Hal\Metadata\MetadataMap' => $this->getMetadataMap()
+            \Mezzio\Hal\Metadata\MetadataMap::class => $this->getMetadataMap()
         ];
     }
 
@@ -79,12 +79,16 @@ class ConfigProvider
                     Factory\Action\ListUsernameFactory::class,
                 Action\GetUserAction::class =>
                     Factory\Action\GetUserFactory::class,
+                Action\GetUserFoldersPermissionAction::class =>
+                    Factory\Action\GetUserFoldersPermissionActionFactory::class,
                 Action\CreateUserAction::class =>
                     Factory\Action\CreateUserFactory::class,
                 Action\UpdateUserAction::class =>
                     Factory\Action\UpdateUserFactory::class,
                 Action\GetUserPermissionAction::class =>
                     Factory\Action\GetUserPermissionFactory::class,
+                Action\UpdateUserLanguageAction::class =>
+                    Factory\Action\UpdateUserLanguageFactory::class,
                 Action\UpdateUserPermissionAction::class =>
                     Factory\Action\UpdateUserPermissionFactory::class,
                 "UserValidationMiddleware" =>
@@ -117,7 +121,9 @@ class ConfigProvider
                 'route' => 'api.v1.users.get',
                 'extractor' => UserHydrator::class,
                 'resource_identifier' => 'user_id',
-                'route_identifier_placeholder' => 'id'
+                'identifiers_to_placeholders_mapping' => [
+                  'user_id' => 'id',
+                ],
             ],
             [
                 '__class__' => RouteBasedResourceMetadata::class,
@@ -125,7 +131,9 @@ class ConfigProvider
                 'route' => 'api.v1.users.permissions.get',
                 'extractor' => UserPermissionHydrator::class,
                 'resource_identifier' => 'user_id',
-                'route_identifier_placeholder' => 'id'
+                'identifiers_to_placeholders_mapping' => [
+                  'user_id' => 'id',
+                ],
             ]
         ];
     }
@@ -160,6 +168,15 @@ class ConfigProvider
                 'allowed_methods' => ['GET']
             ],
             [
+              'name' => 'api.v1.users.folders.permissions.get',
+              'path' => '/api/v1/users/:id/folders/permissions',
+              'options' => [
+                  'constraints' => ['id' => '\d+']
+              ],
+              'middleware' => [Action\GetUserFoldersPermissionAction::class],
+              'allowed_methods' => ['GET']
+            ],
+            [
                 'name' => 'api.v1.users.create',
                 'path' => '/api/v1/users',
                 'middleware' => [
@@ -179,6 +196,18 @@ class ConfigProvider
                     Action\UpdateUserAction::class
                 ],
                 'allowed_methods' => ['PATCH', 'PUT']
+            ],
+            [
+              'name' => 'api.v1.users.language.update',
+              'path' => '/api/v1/users/:id/language',
+              'options' => [
+                  'constraints' => ['id' => '\d+']
+              ],
+              'middleware' => [
+                  "UserUpdateValidationMiddleware",
+                  Action\UpdateUserLanguageAction::class
+              ],
+              'allowed_methods' => ['PATCH']
             ],
             /**
              * Users' permissions routes

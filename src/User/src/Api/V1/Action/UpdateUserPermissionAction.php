@@ -24,73 +24,46 @@ use User\Api\V1\Entity\Permission;
  *
  * @copyright 2018 Blackpoints SA
  *
- * @SWG\Patch(
+ * @OA\Patch(
  *     path="/v1/users/{userId}/permissions",
  *     tags={"users"},
  *     operationId="updateUserPermissions",
  *     summary="Update user's permissions",
  *     description="Update user's permissions",
- *     consumes={"application/json"},
- *     produces={"application/json"},
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="User id to update",
  *         in="path",
  *         name="userId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Parameter(
- *         name="body",
- *         in="body",
- *         description="User object that needs to be updated",
- *         required=true,
- *          @SWG\Schema(ref="#/definitions/UpdateUserPermissionAction payload")
- *     ),
- *     @SWG\Response(
+ *     requestBody={"$ref": "#/components/requestBodies/UpdateUserPermissionAction payload"},
+ *     @OA\Response(
  *         response=200,
- *         description="OK"
+ *         description="OK",
+ *         @OA\JsonContent()
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=404,
  *         description="User not found"
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
  * )
- * @SWG\Definition(
- *		definition="UpdateUserPermissionAction payload",
- *		@SWG\Property(property="manage_users", type="boolean", description="Wether a user can manage other user (true) or not (false)"),
- *		@SWG\Property(property="create_folders", type="boolean", description="Wether a user can create root folders (true) or not (false)"),
- *		@SWG\Property(property="access_all_folders", type="boolean", description="Wether a user can access all folders (true) or not (false)"),
- *		@SWG\Property(property="view_logs", type="boolean", description="Wether a user can view logs (true) or not (false)")
+ * @OA\RequestBody(
+ *		request="UpdateUserPermissionAction payload",
+ *    description="User object that needs to be updated",
+ *    required=true,
+ *		@OA\Property(property="manage_users", type="boolean", description="Wether a user can manage other user (true) or not (false)"),
+ *		@OA\Property(property="create_folders", type="boolean", description="Wether a user can create root folders (true) or not (false)"),
+ *		@OA\Property(property="access_all_folders", type="boolean", description="Wether a user can access all folders (true) or not (false)"),
+ *		@OA\Property(property="view_logs", type="boolean", description="Wether a user can view logs (true) or not (false)")
  * )
  */
 class UpdateUserPermissionAction implements RequestHandlerInterface
 {
-    /**
-     *
-     * @var UserFacade
-     */
-    protected $userFacade;
-
-    /**
-     *
-     * @var PermissionFacade
-     */
-    protected $permissionFacade;
-
-    /**
-     *
-     * @var ResourceGenerator
-     */
-    private $halResourceGenerator;
-
-    /**
-     *
-     * @var HalResponseFactory
-     */
-    protected $halResponseFactory;
-
     /**
      * Constructor
      *
@@ -100,16 +73,11 @@ class UpdateUserPermissionAction implements RequestHandlerInterface
      * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
-        UserFacade $userFacade,
-        PermissionFacade $permissionFacade,
-        ResourceGenerator $halResourceGenerator,
-        HalResponseFactory $halResponseFactory
-    ) {
-        $this->userFacade = $userFacade;
-        $this->permissionFacade = $permissionFacade;
-        $this->halResourceGenerator = $halResourceGenerator;
-        $this->halResponseFactory = $halResponseFactory;
-    }
+        protected UserFacade $userFacade,
+        protected PermissionFacade $permissionFacade,
+        private readonly ResourceGenerator $halResourceGenerator,
+        protected HalResponseFactory $halResponseFactory
+    ){}
 
     /**
      * MiddlewareInterface handler

@@ -10,33 +10,12 @@
 namespace App\Abstracts;
 
 use Doctrine\ORM\EntityManager;
-use Laminas\Hydrator\Reflection;
+use Laminas\Hydrator\ReflectionHydrator;
 use Laminas\I18n\Translator\Translator;
 
 abstract class AbstractFacade implements FacadeInterface
 {
-    /**
-     *
-     * @var Translator
-     */
-    protected $translator;
-
-    /**
-     *
-     * @var EntityManager
-     */
-    protected $entityManager;
-
-    /**
-     * @var string
-     */
-    protected $entityName;
-
-    /**
-     *
-     * @var Reflection
-     */
-    protected $reflectionHydrator;
+    protected ReflectionHydrator $reflectionHydrator;
 
     /**
      *
@@ -45,14 +24,11 @@ abstract class AbstractFacade implements FacadeInterface
      * @param string $entityName
      */
     public function __construct(
-        Translator $translator,
-        EntityManager $entityManager,
-        $entityName
+        protected Translator $translator,
+        protected EntityManager $entityManager,
+        protected string $entityName
     ) {
-        $this->translator = $translator;
-        $this->entityManager = $entityManager;
-        $this->entityName = $entityName;
-        $this->reflectionHydrator = new Reflection();
+        $this->reflectionHydrator = new ReflectionHydrator();
     }
 
     /**

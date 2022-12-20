@@ -9,55 +9,44 @@
 namespace User\Api\V1\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 
 /**
  * Permission
  *
  * @ORM\Table(name="permission")
  * @ORM\Entity
- * @SWG\Definition(definition="Permission")
+ * @OA\Schema(description="Permission")
  */
 class Permission
 {
     /**
-     * @var bool
      *
      * @ORM\Column(name="manage_users", type="boolean", precision=0, scale=0, nullable=true, unique=false)
-     *
-     * @SWG\Property(property="manage_users")
+     * @OA\Property(property="manage_users")
      */
-    private $manageUsers;
+    private bool $manageUsers;
 
     /**
-     * @var bool
      *
      * @ORM\Column(name="create_folders", type="boolean", precision=0, scale=0, nullable=true, unique=false)
-     *
-     * @SWG\Property(property="create_folders")
+     * @OA\Property(property="create_folders")
      */
-    private $createFolders;
-
+    private bool $createFolders;
     /**
-     * @var bool
      *
      * @ORM\Column(name="access_all_folders", type="boolean", precision=0, scale=0, nullable=true, unique=false)
-     *
-     * @SWG\Property(property="access_all_folders")
+     * @OA\Property(property="access_all_folders")
      */
-    private $accessAllFolders;
-
+    private bool $accessAllFolders;
     /**
-     * @var bool
      *
      * @ORM\Column(name="view_logs", type="boolean", precision=0, scale=0, nullable=true, unique=false)
-     *
-     * @SWG\Property(property="view_logs")
+     * @OA\Property(property="view_logs")
      */
-    private $viewLogs;
+    private bool $viewLogs;
 
     /**
-     * @var \User\Api\V1\Entity\User
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
@@ -66,15 +55,16 @@ class Permission
      *   @ORM\JoinColumn(name="user_id", referencedColumnName="user_id", nullable=true)
      * })
      */
-    private $user;
+    private User $user;
+
 
     public function __construct(
-        $manageUsers,
-        $createFolders,
-        $accessAllFolders,
-        $viewLogs,
-        $user
-    ) {
+        bool $manageUsers,
+        bool $createFolders,
+        bool $accessAllFolders,
+        bool $viewLogs,
+        User $user
+    ){
         $this->manageUsers = $manageUsers;
         $this->createFolders = $createFolders;
         $this->accessAllFolders = $accessAllFolders;

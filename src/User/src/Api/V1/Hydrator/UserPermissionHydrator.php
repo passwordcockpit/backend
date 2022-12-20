@@ -24,7 +24,7 @@ class UserPermissionHydrator extends AbstractHydrator
      * @return array
      *
      */
-    public function extract($userPermission)
+    public function extract($userPermission): array
     {
         $data = [];
         $data['user_id'] = $userPermission->getUser()->getUserId();

@@ -18,46 +18,36 @@ use Folder\Api\V1\Facade\FolderFacade;
 use Mezzio\Hal\ResourceGenerator;
 
 /**
- * @SWG\Delete(
+ * @OA\Delete(
  *     path="/v1/folders/{folderId}",
  *     summary="Deletes a folder",
  *     description="",
  *     operationId="deleteFolder",
- *     produces={"application/json"},
  *     tags={"folders"},
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="Folder id to delete",
  *         in="path",
  *         name="folderId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=200,
- *         description="OK"
+ *         description="OK",
+ *         @OA\JsonContent()
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=404,
  *         description="Folder not found"
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
  * )
  */
 class DeleteFolderAction implements RequestHandlerInterface
 {
-    /**
-     *
-     * @var FolderFacade
-     */
-    protected $folderFacade;
-
-    /**
-     *
-     * @var ResourceGenerator
-     */
-    protected $halResourceGenerator;
-
     /**
      * Constructor
      *
@@ -65,12 +55,9 @@ class DeleteFolderAction implements RequestHandlerInterface
      * @param ResourceGenerator $halResourceGenerator
      */
     public function __construct(
-        FolderFacade $folderFacade,
-        ResourceGenerator $halResourceGenerator
-    ) {
-        $this->folderFacade = $folderFacade;
-        $this->halResourceGenerator = $halResourceGenerator;
-    }
+        protected FolderFacade $folderFacade,
+        protected ResourceGenerator $halResourceGenerator
+    ){}
 
     /**
      * MiddlewareInterface handler

@@ -16,95 +16,46 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Password\Api\V1\Facade\PasswordFacade;
-use Mezzio\Hal\ResourceGenerator;
-use Password\Api\V1\Entity\Password;
 use User\Api\V1\Facade\PermissionFacade;
 use User\Api\V1\Facade\UserFacade;
 use Laminas\Diactoros\Response\JsonResponse;
-use Mezzio\Hal\HalResponseFactory;
 use Mezzio\ProblemDetails\ProblemDetailsResponseFactory;
 
 /**
  *
- * @SWG\Patch(
+ * @OA\Patch(
  *     path="/v1/passwords",
  *     tags={"passwords"},
  *     operationId="updatePassword",
  *     summary="Update password",
  *     description="Update password",
- *     consumes={"application/json"},
- *     produces={"application/json"},
- *	   @SWG\Parameter(
- *         description="Password id to move",
- *         in="body",
- *         name="passwordId",
- *         required=true,
- *         type="integer",
- *         format="int64"
- *     ),
- * 	   @SWG\Parameter(
- *         description="Original folder",
- *         in="body",
- *         name="originalFolder",
- *         required=true,
- *         type="integer",
- *         format="int64"
- *     ),
- *     @SWG\Parameter(
- *         description="Destination folder",
- *         in="body",
- *         name="destinationFolder",
- *         required=true,
- *         type="integer",
- *         format="int64"
- *     ),
- *     @SWG\Response(
+ *     requestBody={"$ref": "#/components/requestBodies/MovePasswordAction payload"},
+ *     @OA\Response(
  *         response=200,
  *         description="OK",
+ *         @OA\JsonContent()
  *     ),
- *	   @SWG\Response(
+ *	   @OA\Response(
  *         response="401",
- *         description="Unathorized",
+ *         description="Unathorized"
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=404,
  *         description="Invalid values",
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
+ * )
+ * @OA\RequestBody(
+ * 		 request="MovePasswordAction payload",
+ *     description="password and old/new directory ids",
+ *     required=true,
+ *     @OA\Property(property="passwordId", type="integer", format="int64", description="Password id to move"),
+ *     @OA\Property(property="originalFolder", type="integer", format="int64", description="Original folder"),
+ *     @OA\Property(property="destinationFolder", type="integer", format="int64", description="Destination folder"),
  * )
  */
 class MovePasswordAction implements RequestHandlerInterface
 {
-    /**
-     *
-     * @var PasswordFacade
-     */
-    protected $passwordFacade;
-
-    /**
-     *
-     * @var ProblemDetailsresponseFactory
-     */
-    protected $problemDetailsFactory;
-
-    /**
-     *
-     * @var FolderUserFacade
-     */
-    protected $folderUserFacade;
-
-    /**
-     *
-     * @var userFacade
-     */
-    protected $userFacade;
-
-    /**
-     *
-     * @var permissionFacade
-     */
-    protected $permissionFacade;
-
     /**
      * Constructor
      *
@@ -114,18 +65,12 @@ class MovePasswordAction implements RequestHandlerInterface
      * @param UserFacade $userFacade
      */
     public function __construct(
-        PasswordFacade $passwordFacade,
-        ProblemDetailsResponseFactory $problemDetailsFactory,
-        FolderUserFacade $folderUserFacade,
-        UserFacade $userFacade,
-        PermissionFacade $permissionFacade
-    ) {
-        $this->problemDetailsFactory = $problemDetailsFactory;
-        $this->passwordFacade = $passwordFacade;
-        $this->folderUserFacade = $folderUserFacade;
-        $this->userFacade = $userFacade;
-        $this->permissionFacade = $permissionFacade;
-    }
+        protected PasswordFacade $passwordFacade,
+        protected ProblemDetailsResponseFactory $problemDetailsFactory,
+        protected FolderUserFacade $folderUserFacade,
+        protected UserFacade $userFacade,
+        protected PermissionFacade $permissionFacade
+    ){}
 
     /**
      * MiddlewareInterface handler
@@ -163,7 +108,7 @@ class MovePasswordAction implements RequestHandlerInterface
                 $body["passwordId"],
                 $body["destinationFolder"]
             );
-            return new JsonResponse(json_encode($password), 200);
+            return new JsonResponse(json_encode($password, JSON_THROW_ON_ERROR), 200);
         } else {
             throw new ProblemDetailsException(
                 401,

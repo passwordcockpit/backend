@@ -22,13 +22,15 @@ class FolderUserHydrator extends AbstractHydrator
      * @param FolderUser $folderUser
      * @return array
      */
-    public function extract($folderUser)
+    public function extract($folderUser): array
     {
         $data = [];
         $data['folder_user_id'] = $folderUser->getFolderUserId();
         $data['user_id'] = $folderUser->getUser()->getUserId();
         $data['folder_id'] = $folderUser->getFolder()->getFolderId();
         $data['access'] = $folderUser->getAccess();
+        $data['folder_name'] = $folderUser->getFolder()->getName();
+
         return $data;
     }
 

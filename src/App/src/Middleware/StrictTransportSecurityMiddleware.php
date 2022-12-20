@@ -19,10 +19,7 @@ use Psr\Http\Message\ResponseInterface;
  */
 class StrictTransportSecurityMiddleware implements MiddlewareInterface
 {
-    /**
-     * @var int
-     */
-    private $maxAge;
+    private readonly int $maxAge;
 
     /**
      * Constructor

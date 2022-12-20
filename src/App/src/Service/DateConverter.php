@@ -163,25 +163,18 @@ class DateConverter
         if (!$date instanceof \DateTime) {
             throw new \Exception('Object given is not of type "DateTime"');
         }
-        switch ($format) {
-            case 'databaseDate':
-                return $date->format(self::$databaseDateFormat);
-            case 'databaseTime':
-                return $date->format(self::$databaseTimeFormat);
-            case 'databaseDateTime':
-                return $date->format(
-                    self::$databaseDateFormat . ' ' . self::$databaseTimeFormat
-                );
-            case 'outputDate':
-                return $date->format(self::$outputDateFormat);
-            case 'outputTime':
-                return $date->format(self::$outputTimeFormat);
-            case 'outputDateTime':
-                return $date->format(
-                    self::$outputDateFormat . ' ' . self::$outputTimeFormat
-                );
-            default:
-                return $date->format($format);
-        }
+        return match ($format) {
+            'databaseDate' => $date->format(self::$databaseDateFormat),
+            'databaseTime' => $date->format(self::$databaseTimeFormat),
+            'databaseDateTime' => $date->format(
+                self::$databaseDateFormat . ' ' . self::$databaseTimeFormat
+            ),
+            'outputDate' => $date->format(self::$outputDateFormat),
+            'outputTime' => $date->format(self::$outputTimeFormat),
+            'outputDateTime' => $date->format(
+                self::$outputDateFormat . ' ' . self::$outputTimeFormat
+            ),
+            default => $date->format($format),
+        };
     }
 }

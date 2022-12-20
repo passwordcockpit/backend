@@ -17,49 +17,24 @@ use User\Api\V1\Facade\PermissionFacade;
 use Mezzio\Hal\HalResponseFactory;
 use Mezzio\Hal\ResourceGenerator;
 use Password\Api\V1\Collection\PasswordCollection;
-use Mezzio\Hal\HalResource;
 
 /**
- * @SWG\Get(
+ * @OA\Get(
  *     path="/v1/passwords",
  *     tags={"passwords"},
  *     operationId="listPasswords",
  *     summary="Get a list of password",
  *     description="Get a list of passwords. Use ?q=... to search for specific passwords.",
- *     produces={"application/json"},
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=200,
  *         description="Ok",
+ *         @OA\JsonContent()
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
  * )
  */
 class ListPasswordAction implements RequestHandlerInterface
 {
-    /**
-     *
-     * @var PasswordFacade
-     */
-    protected $passwordFacade;
-
-    /**
-     *
-     * @var PermissionFacade
-     */
-    protected $permissionFacade;
-
-    /**
-     *
-     * @var ResourceGenerator
-     */
-    protected $halResourceGenerator;
-
-    /**
-     *
-     * @var HalResponseFactory
-     */
-    protected $halResponseFactory;
-
     /**
      * Constructor
      *
@@ -69,16 +44,11 @@ class ListPasswordAction implements RequestHandlerInterface
      * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
-        PasswordFacade $passwordFacade,
-        PermissionFacade $permissionFacade,
-        ResourceGenerator $halResourceGenerator,
-        HalResponseFactory $halResponseFactory
-    ) {
-        $this->passwordFacade = $passwordFacade;
-        $this->permissionFacade = $permissionFacade;
-        $this->halResourceGenerator = $halResourceGenerator;
-        $this->halResponseFactory = $halResponseFactory;
-    }
+        protected PasswordFacade $passwordFacade,
+        protected PermissionFacade $permissionFacade,
+        protected ResourceGenerator $halResourceGenerator,
+        protected HalResponseFactory $halResponseFactory
+    ){}
 
     /**
      * MiddlewareInterface handler

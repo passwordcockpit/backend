@@ -18,64 +18,43 @@ use File\Api\V1\Facade\FileFacade;
 
 /**
  *
- * @SWG\Get(
+ * @OA\Get(
  *     path="/v1/files/{fileId}",
  *     tags={"File"},
  *     operationId="GetFileAction",
  *     summary="Get file",
  *     description="",
- *     consumes={"application/json"},
- *     produces={"application/json"},
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         name="fileId",
  *         in="path",
  *         description="File id",
  *         required=true,
- * 		   type="string"
+ *         @OA\Schema(
+ *             type="string",
+ *         ),
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=200,
- *         description="Ok"
+ *         description="Ok",
+ *         @OA\JsonContent(),
  *     ),
- *     security={
- *       {"bearerAuth": {}}
- *     }
+ *     security={{"bearerAuth": {}}}
  * )
  *
  */
 class GetFileAction implements RequestHandlerInterface
 {
     /**
-     * @var ResourceGenerator
-     */
-    private $resourceGenerator;
-
-    /**
-     * @var HalResponseFactory
-     */
-    private $halResponseFactory;
-
-    /**
      *
-     * @var FileFacade
-     */
-    private $fileFacade;
-
-    /**
-     *
-     * @param ResourceGenerator $resourceGeneratorInstance
+     * @param ResourceGenerator $resourceGenerator
      * @param HalResponseFactory $halResponseFactory
      * @param FileFacade $fileFacade
      */
     public function __construct(
-        ResourceGenerator $resourceGeneratorInstance,
-        HalResponseFactory $halResponseFactory,
-        FileFacade $fileFacade
-    ) {
-        $this->resourceGenerator = $resourceGeneratorInstance;
-        $this->halResponseFactory = $halResponseFactory;
-        $this->fileFacade = $fileFacade;
-    }
+        private readonly ResourceGenerator $resourceGenerator,
+        private readonly HalResponseFactory $halResponseFactory,
+        private readonly FileFacade $fileFacade
+    ){}
 
     /**
      *

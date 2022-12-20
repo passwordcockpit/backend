@@ -19,8 +19,6 @@ use App\Service\ProblemDetailsException;
 use Folder\Api\V1\Facade\FolderUserFacade;
 use Doctrine\ORM\EntityManager;
 use Laminas\I18n\Translator\Translator;
-use Password\Api\V1\Entity\Password;
-use File\Api\V1\Entity\File;
 use User\Api\V1\Facade\UserFacade;
 use User\Api\V1\Facade\PermissionFacade;
 use Password\Api\V1\Facade\PasswordFacade;
@@ -28,54 +26,6 @@ use Authorization\Api\V1\AssertionPluginManager;
 
 class AuthorizationMiddleware implements MiddlewareInterface
 {
-    /**
-     *
-     * @var Rbac
-     */
-    private $rbac;
-
-    /**
-     *
-     * @var FolderUserFacade
-     */
-    private $folderUserFacade;
-
-    /**
-     *
-     * @var EntityManager
-     */
-    private $entityManager;
-
-    /**
-     *
-     * @var Translator
-     */
-    private $translator;
-
-    /**
-     *
-     * @var UserFacade
-     */
-    private $userFacade;
-
-    /**
-     *
-     * @var PermissionFacade
-     */
-    private $permissionFacade;
-
-    /**
-     *
-     * @var PasswordFacade
-     */
-    private $passwordFacade;
-
-    /**
-     *
-     * @var AssertionPluginManager
-     */
-    private $assertionPluginManager;
-
     /**
      * Constructor
      *
@@ -89,32 +39,23 @@ class AuthorizationMiddleware implements MiddlewareInterface
      * @param AssertionPluginManager $assertionPluginManager
      */
     public function __construct(
-        Rbac $rbac,
-        FolderUserFacade $folderUserFacade,
-        Translator $translator,
-        EntityManager $entityManager,
-        UserFacade $userFacade,
-        PasswordFacade $passwordFacade,
-        PermissionFacade $permissionFacade,
-        AssertionPluginManager $assertionPluginManager
-    ) {
-        $this->rbac = $rbac;
-        $this->folderUserFacade = $folderUserFacade;
-        $this->translator = $translator;
-        $this->entityManager = $entityManager;
-        $this->userFacade = $userFacade;
-        $this->passwordFacade = $passwordFacade;
-        $this->permissionFacade = $permissionFacade;
-        $this->assertionPluginManager = $assertionPluginManager;
-    }
+        private readonly Rbac $rbac,
+        private readonly FolderUserFacade $folderUserFacade,
+        private readonly Translator $translator,
+        private readonly EntityManager $entityManager,
+        private readonly UserFacade $userFacade,
+        private readonly PasswordFacade $passwordFacade,
+        private readonly PermissionFacade $permissionFacade,
+        private readonly AssertionPluginManager $assertionPluginManager
+    ){}
 
     /**
      * Returns folderId from Request - check Attributes and Body
      *
-     * @param Request $request
+     * @param ServerRequestInterface $request
      * @return int
      */
-    private function getFolderId($request)
+    private function getFolderId(ServerRequestInterface $request)
     {
         if ($request->getAttribute('folderId')) {
             $folderId = $request->getAttribute('folderId');

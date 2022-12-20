@@ -25,70 +25,41 @@ use Mezzio\Hal\ResourceGenerator;
  *
  * @copyright 2018 Blackpoints SA
  *
- * @SWG\Post(
+ * @OA\Post(
  *     path="/v1/users",
  *     tags={"users"},
  *     operationId="createUser",
  *     summary="Create a new user",
  *     description="",
- *     consumes={"application/json"},
- *     produces={"application/json"},
- *     @SWG\Parameter(
- *         name="body",
- *         in="body",
- *         description="User object to create",
- *         required=true,
- *         @SWG\Schema(ref="#/definitions/CreateUserAction payload")
- *     ),
- *     @SWG\Response(
+ *     requestBody={"$ref": "#/components/requestBodies/CreateUserAction payload"},
+ *     @OA\Response(
  *         response=201,
  *         description="OK",
+ *         @OA\JsonContent()
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=405,
  *         description="Invalid input",
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
  * )
- * @SWG\Definition(
- *		definition="CreateUserAction payload",
- *		@SWG\Property(property="username", type="string", description="User's username"),
- *		@SWG\Property(property="password", type="string", description="User's password"),
- * 		@SWG\Property(property="name", type="string", description="User's name"),
- *		@SWG\Property(property="surname", type="string", description="User's surname"),
- *		@SWG\Property(property="language", type="string", description="User's language"),
- *		@SWG\Property(property="phone", type="string", description="User's phone number"),
- *		@SWG\Property(property="email", type="string", description="User's email"),
- *		@SWG\Property(property="enabled", type="boolean", description="Whether a user is enabled (true) or not (false)")
- *      @SWG\Property(property="change_password, type="boolean", description="Whether a user needs to change his password (true) or not (false)")
+ * @OA\RequestBody(
+ *    request="CreateUserAction payload",
+ *    description="User object to create",
+ *    required=true,
+ *    @OA\Property(property="username", type="string", description="User's username"),
+ *    @OA\Property(property="password", type="string", description="User's password"),
+ *    @OA\Property(property="name", type="string", description="User's name"),
+ *    @OA\Property(property="surname", type="string", description="User's surname"),
+ *    @OA\Property(property="language", type="string", description="User's language"),
+ *    @OA\Property(property="phone", type="string", description="User's phone number"),
+ *    @OA\Property(property="email", type="string", description="User's email"),
+ *    @OA\Property(property="enabled", type="boolean", description="Whether a user is enabled (true) or not (false)"),
+ *    @OA\Property(property="change_password", type="boolean", description="Whether a user needs to change his password (true) or not (false)")
  * )
  */
 class CreateUserAction implements RequestHandlerInterface
 {
-    /**
-     *
-     * @var UserFacade
-     */
-    protected $userFacade;
-
-    /**
-     *
-     * @var PermissionFacade
-     */
-    protected $permissionFacade;
-
-    /**
-     *
-     * @var ResourceGenerator
-     */
-    protected $halResourceGenerator;
-
-    /**
-     *
-     * @var HalResponseFactory
-     */
-    protected $halResponseFactory;
-
     /**
      * Constructor
      *
@@ -98,16 +69,11 @@ class CreateUserAction implements RequestHandlerInterface
      * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
-        UserFacade $userFacade,
-        PermissionFacade $permissionFacade,
-        ResourceGenerator $halResourceGenerator,
-        HalResponseFactory $halResponseFactory
-    ) {
-        $this->userFacade = $userFacade;
-        $this->permissionFacade = $permissionFacade;
-        $this->halResourceGenerator = $halResourceGenerator;
-        $this->halResponseFactory = $halResponseFactory;
-    }
+        protected UserFacade $userFacade,
+        protected PermissionFacade $permissionFacade,
+        protected ResourceGenerator $halResourceGenerator,
+        protected HalResponseFactory $halResponseFactory
+    ){}
 
     /**
      * MiddlewareInterface handler

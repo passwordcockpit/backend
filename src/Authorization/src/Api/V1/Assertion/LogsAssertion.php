@@ -9,6 +9,7 @@
 
 namespace Authorization\Api\V1\Assertion;
 
+use Doctrine\ORM\EntityManager;
 use Laminas\Permissions\Rbac\AssertionInterface;
 use User\Api\V1\Facade\PermissionFacade;
 use Folder\Api\V1\Facade\FolderUserFacade;
@@ -18,20 +19,12 @@ use Laminas\Permissions\Rbac\RoleInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Password\Api\V1\Entity\Password;
 use Laminas\I18n\Translator\Translator;
-use App\Service\ProblemDetailsException;
-use Doctrine\ORM\EntityManagerInterface;
-use Log\Api\V1\Entity\Log;
+use User\Api\V1\Entity\User;
 
 class LogsAssertion implements AssertionInterface
 {
-    protected $translator;
-    protected $folderUserFacade;
-    protected $permissionFacade;
-    protected $passwordFacade;
-    protected $logFacade;
-    protected $entityManager;
-    protected $request;
-    protected $user;
+    protected ServerRequestInterface $request;
+    protected User $user;
 
     /**
      * Constructor
@@ -44,27 +37,18 @@ class LogsAssertion implements AssertionInterface
      * @param EntityManager $entityManager
      */
     public function __construct(
-        Translator $translator,
-        FolderUserFacade $folderUserFacade,
-        PermissionFacade $permissionFacade,
-        PasswordFacade $passwordFacade,
-        LogFacade $logFacade,
-        EntityManagerInterface $entityManager
-    ) {
-        $this->translator = $translator;
-        $this->folderUserFacade = $folderUserFacade;
-        $this->permissionFacade = $permissionFacade;
-        $this->passwordFacade = $passwordFacade;
-        $this->logFacade = $logFacade;
-        $this->entityManager = $entityManager;
-    }
+        protected Translator $translator,
+        protected FolderUserFacade $folderUserFacade,
+        protected PermissionFacade $permissionFacade,
+        protected PasswordFacade $passwordFacade,
+        protected LogFacade $logFacade,
+        protected EntityManager $entityManager
+    ){}
 
     /**
      * {@inheritDoc}
      */
-    public function setRequest(
-        \Psr\Http\Message\ServerRequestInterface $request
-    ) {
+    public function setRequest(ServerRequestInterface $request) {
         $this->request = $request;
     }
 
@@ -76,10 +60,10 @@ class LogsAssertion implements AssertionInterface
     /**
      * Returns passwordId from Request - check Attributes and Body
      *
-     * @param type $request
-     * @return type
+     * @param ServerRequestInterface $request
+     * @return mixed
      */
-    private function getPasswordId($request)
+    private function getPasswordId(ServerRequestInterface $request)
     {
         $passwordId = null;
         if ($request->getAttribute('passwordId')) {
@@ -93,10 +77,10 @@ class LogsAssertion implements AssertionInterface
     /**
      * Returns userId from Request attributes
      *
-     * @param type $request
-     * @return type
+     * @param ServerRequestInterface $request
+     * @return mixed
      */
-    private function getUserId($request)
+    private function getUserId(ServerRequestInterface $request)
     {
         if ($request->getAttribute('userId')) {
             $userId = $request->getAttribute('userId');
@@ -109,10 +93,10 @@ class LogsAssertion implements AssertionInterface
     /**
      * Returns logId from Request attributes
      *
-     * @param type $request
-     * @return type
+     * @param ServerRequestInterface $request
+     * @return mixed
      */
-    private function getLogId($request)
+    private function getLogId(ServerRequestInterface $request)
     {
         return $request->getAttribute('id');
     }

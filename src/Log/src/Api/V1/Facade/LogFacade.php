@@ -23,29 +23,15 @@ use Log\Api\V1\Entity\Log;
 class LogFacade extends AbstractFacade
 {
     /**
-     *
-     * @var EntityManager
-     */
-    protected $entityManager;
-
-    /**
-     *
-     * @var Translator
-     */
-    protected $translator;
-
-    /**
      * Contructor
      *
      * @param EntityManager $entityManager
      * @param Translator $translator
      */
     public function __construct(
-        EntityManager $entityManager,
-        Translator $translator
+        protected EntityManager $entityManager,
+        protected Translator $translator
     ) {
-        $this->entityManager = $entityManager;
-        $this->translator = $translator;
         parent::__construct($translator, $entityManager, Log::class);
     }
 
@@ -53,7 +39,7 @@ class LogFacade extends AbstractFacade
      *
      * @param array $data
      */
-    public function create($data)
+    public function create($data): never
     {
         throw new Exception("Method not implemented");
     }
@@ -63,7 +49,7 @@ class LogFacade extends AbstractFacade
      * @param string $id
      * @param array $filter
      */
-    public function fetch($id, $filter)
+    public function fetch($id, $filter): never
     {
         throw new Exception("Method not implemented");
     }
@@ -72,7 +58,7 @@ class LogFacade extends AbstractFacade
      *
      * @param array $filter
      */
-    public function fetchAll($filter)
+    public function fetchAll($filter): never
     {
         throw new Exception("Method not implemented");
     }
@@ -82,7 +68,7 @@ class LogFacade extends AbstractFacade
      * @param string $id
      * @param array $data
      */
-    public function update($id, $data)
+    public function update($id, $data): never
     {
         throw new Exception("Method not implemented");
     }
@@ -92,7 +78,7 @@ class LogFacade extends AbstractFacade
      * @param type $id
      * @param type $filter
      */
-    public function delete($id, $filter)
+    public function delete($id, $filter): never
     {
         throw new Exception("Method not implemented");
     }
@@ -230,15 +216,18 @@ class LogFacade extends AbstractFacade
      *
      * Create a log that shows who deleted a password.
      *
-     * @param int $passwordId
+     * @param Password $passwordId
      * @param User $user
      *
      */
-    public function createDeletedLog($passwordId, $user)
+    public function createDeletedLog(Password $password, User $user)
     {
         $log = new Log();
 
-        $action = "Password " . $passwordId . " deleted";
+        $id = $password->getPasswordId();
+        $title = $password->getTitle();
+
+        $action = "Password " . $id . " (" . $title . ") deleted";
         $log->setAction($action);
         $log->setUser($user);
         $log->setPassword(null);

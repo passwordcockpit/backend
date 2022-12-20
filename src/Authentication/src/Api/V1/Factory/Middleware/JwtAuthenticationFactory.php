@@ -32,7 +32,7 @@ class JwtAuthenticationFactory
             $secure = $config['authentication']['secure'];
         }
 
-        return new JwtAuthentication([
+        $options=[
             "secure" => $secure,
             "secret" => $config['authentication']['secret_key'],
             "path" => ["/api", "/"],
@@ -44,6 +44,12 @@ class JwtAuthenticationFactory
                 $data["detail"] = $arguments["message"];
                 return new JsonResponse($data);
             }
-        ]);
+        ];
+
+        if(isset($config['authentication']['relaxed'])){
+            $options['relaxed']=$config['authentication']['relaxed'];
+        }
+
+        return new JwtAuthentication($options);
     }
 }

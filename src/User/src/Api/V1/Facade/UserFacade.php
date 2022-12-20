@@ -18,6 +18,8 @@ use User\Api\V1\Entity\User;
 use Doctrine\ORM\EntityManager;
 use Psr\Http\Message\ServerRequestInterface;
 use App\Service\ProblemDetailsException;
+use Folder\Api\V1\Entity\Folder;
+use Folder\Api\V1\Entity\FolderUser;
 use Laminas\Crypt\Password\Bcrypt;
 use Laminas\I18n\Translator\Translator;
 use User\Api\V1\Entity\Permission;
@@ -25,29 +27,15 @@ use User\Api\V1\Entity\Permission;
 class UserFacade extends AbstractFacade
 {
     /**
-     *
-     * @var EntityManager
-     */
-    protected $entityManager;
-
-    /**
-     *
-     * @var Translator
-     */
-    protected $translator;
-
-    /**
      * Contructor
      *
      * @param EntityManager $entityManager
      * @param Translator $translator
      */
     public function __construct(
-        EntityManager $entityManager,
-        Translator $translator
+        protected EntityManager $entityManager,
+        protected Translator $translator
     ) {
-        $this->entityManager = $entityManager;
-        $this->translator = $translator;
         parent::__construct($translator, $entityManager, User::class);
     }
 
@@ -55,7 +43,7 @@ class UserFacade extends AbstractFacade
      *
      * @param array $data
      */
-    public function create($data)
+    public function create($data): never
     {
         throw new Exception("Method not implemented");
     }
@@ -65,7 +53,7 @@ class UserFacade extends AbstractFacade
      * @param string $id
      * @param array $filter
      */
-    public function fetch($id, $filter)
+    public function fetch($id, $filter): never
     {
         throw new Exception("Method not implemented");
     }
@@ -74,7 +62,7 @@ class UserFacade extends AbstractFacade
      *
      * @param array $filter
      */
-    public function fetchAll($filter)
+    public function fetchAll($filter): never
     {
         throw new Exception("Method not implemented");
     }
@@ -84,7 +72,7 @@ class UserFacade extends AbstractFacade
      * @param string $id
      * @param array $data
      */
-    public function update($id, $data)
+    public function update($id, $data): never
     {
         throw new Exception("Method not implemented");
     }
@@ -94,7 +82,7 @@ class UserFacade extends AbstractFacade
      * @param type $id
      * @param type $filter
      */
-    public function delete($id, $filter)
+    public function delete($id, $filter): never
     {
         throw new Exception("Method not implemented");
     }
@@ -112,11 +100,13 @@ class UserFacade extends AbstractFacade
         // setto i campi
         $user->setUsername($payload['username']);
 
-        // Bcrypt della password ---
-        $bcrypt = new Bcrypt();
-        $bcryptedPassword = $bcrypt->create($payload['password']);
-
-        $user->setPassword($bcryptedPassword);
+        if(isset($payload['password'])){
+            // Bcrypt della password ---
+            $bcrypt = new Bcrypt();
+            $bcryptedPassword = $bcrypt->create($payload['password']);
+            $user->setPassword($bcryptedPassword);
+        }
+       
         $user->setName($payload['name']);
         $user->setSurname($payload['surname']);
         $user->setPhone($payload['phone']);
@@ -229,6 +219,28 @@ class UserFacade extends AbstractFacade
                 'https://httpstatus.es/404'
             );
         }
+    }
+
+    /**
+     * Return the FolderUser object given a folder and a user
+     *
+     * @param int $id
+     *
+     * @return FolderUser[]
+     */
+    public function listFoldersPermission(int $userId)
+    {
+        $queryBuilder = $this->entityManager->createQueryBuilder();
+
+        return $queryBuilder
+            ->select('fu')
+            ->from(FolderUser::class, 'fu')
+            ->join(Folder::class, 'folder', 'WITH', 'fu.folder=folder')
+            ->join('fu.user', 'user')
+            ->where('user.userId = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult();
     }
 
     /**

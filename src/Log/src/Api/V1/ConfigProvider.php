@@ -35,7 +35,7 @@ class ConfigProvider
             'routes' => $this->getRoutes(),
             'hydrators' => $this->getHydratorPluginConfig(),
             'doctrine' => $this->getDoctrine(),
-            'Mezzio\Hal\Metadata\MetadataMap' => $this->getMetadataMap()
+            \Mezzio\Hal\Metadata\MetadataMap::class => $this->getMetadataMap()
         ];
     }
 
@@ -101,7 +101,9 @@ class ConfigProvider
                 'route' => 'api.v1.logs.get',
                 'extractor' => LogHalHydrator::class,
                 'resource_identifier' => 'log_id',
-                'route_identifier_placeholder' => 'id'
+                'identifiers_to_placeholders_mapping' => [
+                  'log_id' => 'id',
+                ],
             ]
         ];
     }

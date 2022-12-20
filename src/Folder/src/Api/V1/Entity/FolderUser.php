@@ -9,53 +9,50 @@
 namespace Folder\Api\V1\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
+use User\Api\V1\Entity\User;
 
 /**
  * FolderUser
  *
  * @ORM\Table(name="folder_user")
  * @ORM\Entity
- * @SWG\Definition(definition="FolderUser")
+ * @OA\Schema(description="FolderUser")
  */
 class FolderUser
 {
     /**
-     * @var int
      *
      * @ORM\Column(name="folder_user_id", type="integer", precision=0, scale=0, nullable=false, unique=true)
      * @ORM\Id
      * @ORM\GeneratedValue
      */
-    private $folderUserId;
+    private int $folderUserId;
 
     /**
-     * @var int
      *
      * @ORM\Column(name="access", type="smallint", precision=0, scale=0, nullable=true, unique=false)
-     * @SWG\Property
+     * @OA\Property
      */
-    private $access;
+    private int $access;
 
     /**
-     * @var \Folder\Api\V1\Entity\Folder
      *
      * @ORM\ManyToOne(targetEntity="Folder\Api\V1\Entity\Folder", inversedBy="user", fetch="EAGER")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="folder_id", referencedColumnName="folder_id", nullable=true)
      * })
      */
-    private $folder;
+    private Folder $folder;
 
     /**
-     * @var User\Api\V1\Entity\User
      *
      * @ORM\ManyToOne(targetEntity="User\Api\V1\Entity\User", inversedBy="folder", fetch="EAGER")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user_id", referencedColumnName="user_id", nullable=true)
      * })
      */
-    private $user;
+    private User $user;
 
     /**
      * Get folderUserId.
@@ -94,11 +91,11 @@ class FolderUser
     /**
      * Set folder.
      *
-     * @param \Folder\Api\V1\Entity\Folder|null $folder
+     * @param Folder|null $folder
      *
      * @return FolderUser
      */
-    public function setFolder(\Folder\Api\V1\Entity\Folder $folder = null)
+    public function setFolder(Folder $folder = null)
     {
         $this->folder = $folder;
 
@@ -108,7 +105,7 @@ class FolderUser
     /**
      * Get folder.
      *
-     * @return \Folder\Api\V1\Entity\Folder|null
+     * @return Folder|null
      */
     public function getFolder()
     {
@@ -119,11 +116,11 @@ class FolderUser
     /**
      * Set user.
      *
-     * @param \User\Api\V1\Entity\User|null $user
+     * @param User|null $user
      *
      * @return FolderUser
      */
-    public function setUser(\User\Api\V1\Entity\User $user = null)
+    public function setUser(User $user = null)
     {
         $this->user = $user;
 
@@ -133,7 +130,7 @@ class FolderUser
     /**
      * Get user.
      *
-     * @return User\Api\V1\Entity\User|null
+     * @return User|null
      */
     public function getUser()
     {

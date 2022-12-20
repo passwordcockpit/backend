@@ -9,31 +9,44 @@
  */
 
 /**
- * @SWG\Swagger(
- *     schemes={"http","https"},
- *     host=SWAGGER_API_HOST,
- *     basePath="/api",
- *     @SWG\Info(
+ * @OA\OpenApi(
+ *     @OA\Server(
+ *          url="{schema}://{host}{basepath}",
+ *          description="OpenApi parameters",
+ *          @OA\ServerVariable(
+ *               serverVariable="schema",
+ *               enum={"http", "https"},
+ *               default="https"
+ *          ),
+ *          @OA\ServerVariable(
+ *               serverVariable="host",
+ *               default=SWAGGER_API_HOST
+ *          ),
+ *          @OA\ServerVariable(
+ *               serverVariable="basepath",
+ *               default="/api"
+ *          )
+ *     ),
+ *     @OA\Info(
  *         version="1.0.0",
  *         title="Password Cockpit - RESTful API Server",
  *         description="This is a sample server.",
  *         termsOfService="http://swagger.io/terms/",
- *         @SWG\License(
+ *         @OA\License(
  *             name="Apache 2.0",
  *             url="http://www.apache.org/licenses/LICENSE-2.0.html"
  *         )
  *     ),
- *     @SWG\ExternalDocumentation(
+ *     @OA\ExternalDocumentation(
  *         description="Find out more about Swagger",
  *         url="http://swagger.io"
  *     ),
- *
  * )
  */
 
 /**
- * @SWG\SecurityScheme(
- *   securityDefinition="bearerAuth",
+ * @OA\SecurityScheme(
+ *   securityScheme="bearerAuth",
  *   type="apiKey",
  *   name="Authorization",
  *   in="header"

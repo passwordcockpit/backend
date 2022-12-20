@@ -13,51 +13,28 @@ use Laminas\Authentication\Adapter\AdapterInterface;
 use Laminas\Authentication\Result;
 use Laminas\Authentication\Adapter\Ldap;
 use User\Api\V1\Facade\UserFacade;
-use User\Api\V1\Entity\User;
 use Doctrine\ORM\EntityManager;
 
 class LdapAdapter implements AdapterInterface
 {
-    /**
-     * @var UserFacade $userFacade
-     */
-    private $userFacade;
+    private string $username;
 
-    /**
-     * @var string $username
-     */
-    private $username;
-
-    /**
-     * @var string $password
-     */
-    private $password;
-
-    /**
-     * @var array $ldapConfig
-     */
-    private $ldapConfig;
-
-    /**
-     * @var EntityManager $entitymanager
-     */
-    private $entityManager;
+    private string $password;
 
     /**
      * Constructor
      *
      * @param UserFacade $userFacade
      * @param array $ldapConfig
+     * @param array $ldapUserAttributesConfig
+     * @param EntityManager $entityManager
      */
     public function __construct(
-        UserFacade $userFacade,
-        $ldapConfig,
-        $entityManager
-    ) {
-        $this->userFacade = $userFacade;
-        $this->ldapConfig = $ldapConfig;
-        $this->entityManager = $entityManager;
-    }
+      private readonly UserFacade $userFacade,
+      private array $ldapConfig,
+      private array $ldapUserAttributesConfig,
+      private EntityManager $entityManager
+    ){}
 
     public function setPassword($password)
     {
@@ -78,13 +55,17 @@ class LdapAdapter implements AdapterInterface
         if ($result->isValid()) {
             // match LDAP user with DB user
             $ldapUser = $ldap->getAccountObject();
-            $user = $this->userFacade->getUserByUsername($ldapUser->uid);
+            $user = $this->userFacade->getUserByUsername($ldapUser->{$this->ldapUserAttributesConfig['identifier']});
             if ($user && $user->getEnabled()) {
                 // update User in DB
-                $user->setName($ldapUser->givenname);
-                $user->setSurname($ldapUser->sn);
-                $user->setPhone();
-                $user->setEmail($ldapUser->mail);
+                $user->setName($ldapUser->{$this->ldapUserAttributesConfig['name']});
+                $user->setSurname($ldapUser->{$this->ldapUserAttributesConfig['surname']});
+                $user->setEmail($ldapUser->{$this->ldapUserAttributesConfig['mail']});
+                if($this->ldapUserAttributesConfig['phone']){
+                    $user->setPhone($ldapUser->{$this->ldapUserAttributesConfig['phone']});
+                }else{
+                    $user->setPhone();
+                }
                 $this->entityManager->persist($user);
                 $this->entityManager->flush();
 

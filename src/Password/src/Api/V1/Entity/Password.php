@@ -9,138 +9,106 @@
 namespace Password\Api\V1\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Swagger\Annotations as SWG;
+use Folder\Api\V1\Entity\Folder;
+use OpenApi\Annotations as OA;
 
 /**
  * Password
  *
  * @ORM\Table(name="password")
  * @ORM\Entity
- * @SWG\Definition(definition="Password")
+ * @OA\Schema(description="Password")
  */
 class Password
 {
     /**
-     * @var int
      *
      * @ORM\Column(name="password_id", type="integer", precision=0, scale=0, nullable=false, unique=false)
      * @ORM\Id
      * @ORM\GeneratedValue
-     *
-     * @SWG\Property
+     * @OA\Property
      */
-    private $passwordId;
+    private int $passwordId;
 
     /**
-     * @var string
      *
      * @ORM\Column(name="title", type="string", length=100, precision=0, scale=0, nullable=false, unique=false)
-     *
-     * @SWG\Property(property="title", type="string", description="Password's title", example="title")
+     * @OA\Property(property="title", type="string", description="Password's title", example="title")
      */
-    private $title;
+    private string $title;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="icon", type="string", length=45, precision=0, scale=0, nullable=true, unique=false)
-     *
-     * @SWG\Property(property="icon", type="string", description="Password's icon", example="icon")
+     * @OA\Property(property="icon", type="string", description="Password's icon", example="icon")
      */
-    private $icon;
+    private ?string $icon = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="description", type="string", length=4000, precision=0, scale=0, nullable=true, unique=false)
-     *
-     * @SWG\Property(property="description", type="string", description="Password's description", example="description")
+     * @OA\Property(property="description", type="string", description="Password's description", example="description")
      */
-    private $description;
+    private ?string $description = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="username", type="string", length=100, precision=0, scale=0, nullable=true, unique=false)
-     *
-     * @SWG\Property(property="username", type="string", description="Password's username", example="username")
+     * @OA\Property(property="username", type="string", description="Password's username", example="username")
      */
-    private $username;
+    private ?string $username = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="password", type="string", length=1000, precision=0, scale=0, nullable=true, unique=false)
-     *
-     * @SWG\Property(property="password", type="string", description="Password's password", example="password")
+     * @OA\Property(property="password", type="string", description="Password's password", example="password")
      */
-    private $password;
+    private ?string $password = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="url", type="string", length=100, precision=0, scale=0, nullable=true, unique=false)
-     *
-     * @SWG\Property(property="url", type="string", description="Password's url", example="http://www.blackpoints.ch")
+     * @OA\Property(property="url", type="string", description="Password's url", example="http://www.blackpoints.ch")
      */
-    private $url;
+    private ?string $url = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="tags", type="string", length=400, precision=0, scale=0, nullable=true, unique=false)
-     *
-     * @SWG\Property(property="tags", type="string", description="Password's tags", example="tag1 tag2 tag3")
+     * @OA\Property(property="tags", type="string", description="Password's tags", example="tag1 tag2 tag3")
      */
-    private $tags;
+    private ?string $tags = null;
 
     /**
-     * @var \DateTime|null
      *
      * @ORM\Column(name="last_modification_date", type="datetime", precision=0, scale=0, nullable=true, unique=false)
-     *
-     * @SWG\Property
+     * @OA\Property
      */
-    private $lastModificationDate;
+    private ?\DateTime $lastModificationDate = null;
 
     /**
-     * @var Folder\Api\V1\Entity\Folder
      *
      * @ORM\ManyToOne(targetEntity="Folder\Api\V1\Entity\Folder", fetch="EAGER")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="folder_id", referencedColumnName="folder_id", nullable=true)
      * })
      *
-     * @SWG\Property(property="folder_id", example=4)
+     * @OA\Property(property="folder_id", example=4)
      */
-    private $folder;
-
-    /**
-     * @var bool
-     *
-     * * @ORM\Column(name="frontend_crypted", type="boolean", precision=0, scale=0, nullable=true, unique=false)
-     *
-     * * @SWG\Property
-     *
-     */
-    private $frontendCrypted;
+    private Folder $folder;
 
     /**
      *
-     *
-     * @var boolean
+     * @ORM\Column(name="frontend_crypted", type="boolean", precision=0, scale=0, nullable=true, unique=false)
+     * @OA\Property
      */
-    private $completePassword = true;
+    private bool $frontendCrypted;
 
-    /**
-     * @var int
-     */
-    private $fileId;
+    private bool $completePassword = true;
 
-    /**
-     * @var string
-     */
-    private $fileName;
+    private ?int $fileId = null;
+
+    private ?string $fileName = null;
 
     /**
      * @return bool
@@ -412,11 +380,11 @@ class Password
     /**
      * Set folder.
      *
-     * @param \Folder\Api\V1\Entity\Folder|null $folder
+     * @param Folder|null $folder
      *
      * @return Password
      */
-    public function setFolder(\Folder\Api\V1\Entity\Folder $folder = null)
+    public function setFolder(Folder $folder = null)
     {
         $this->folder = $folder;
 
@@ -426,7 +394,7 @@ class Password
     /**
      * Get folder.
      *
-     * @return \Folder\Api\V1\Entity\Folder|null
+     * @return Folder|null
      */
     public function getFolder()
     {

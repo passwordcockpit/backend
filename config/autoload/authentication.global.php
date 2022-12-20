@@ -8,7 +8,7 @@ use Laminas\Authentication\Adapter\AdapterInterface;
  */
 return [
     'authentication' => [
-        'secure' => true,
+        'secure' => false,
         'expiration_time' => 15, // minutes
         'hard_timeout' => 240, //minutes
         'max_requests_per_timespan' => 6, //maximum failed login requests in attempt_timespan

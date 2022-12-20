@@ -20,67 +20,46 @@ use Mezzio\Hal\ResourceGenerator;
 use Folder\Api\V1\Facade\FolderUserFacade;
 
 /**
- * @SWG\Delete(
+ * @OA\Delete(
  *     path="/v1/folders/{folderId}/users/{userId}",
  *     tags={"folders"},
  *     operationId="deleteUserAccessToFolder",
  *     summary="Delete access on a Folder to a User",
  *     description="Delete access on a Folder to a User",
- *     consumes={"application/json"},
- *     produces={"application/json"},
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="Folder id",
  *         in="path",
  *         name="folderId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="User id",
  *         in="path",
  *         name="userId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=200,
  *         description="OK",
+ *         @OA\JsonContent()
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=404,
  *         description="Invalid input",
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
  * )
  */
 class DeleteFolderUserAction implements RequestHandlerInterface
 {
-    /**
-     *
-     * @var FolderFacade
-     */
-    protected $folderFacade;
-
-    /**
-     *
-     * @var UserFacade
-     */
-    protected $userFacade;
-
-    /**
-     *
-     * @var ResourceGenerator
-     */
-    protected $halResourceGenerator;
-
-    /**
-     *
-     * @var FolderUserFacade
-     */
-    protected $folderUserFacade;
-
     /**
      * Constructor
      *
@@ -90,16 +69,11 @@ class DeleteFolderUserAction implements RequestHandlerInterface
      * @param FolderUserFacade $folderUserFacade
      */
     public function __construct(
-        FolderFacade $folderFacade,
-        ResourceGenerator $halResourceGenerator,
-        UserFacade $userFacade,
-        FolderUserFacade $folderUserFacade
-    ) {
-        $this->halResourceGenerator = $halResourceGenerator;
-        $this->folderFacade = $folderFacade;
-        $this->userFacade = $userFacade;
-        $this->folderUserFacade = $folderUserFacade;
-    }
+        protected FolderFacade $folderFacade,
+        protected ResourceGenerator $halResourceGenerator,
+        protected UserFacade $userFacade,
+        protected FolderUserFacade $folderUserFacade
+    ){}
 
     /**
      * MiddlewareInterface handler

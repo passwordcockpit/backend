@@ -5,48 +5,54 @@
     "homepage": "https://github.com/passwordcockpit/backend",
     "license": "BSD-3-Clause",
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "ocramius/package-versions": false,
+            "laminas/laminas-component-installer": false,
+            "laminas/laminas-dependency-plugin": false
+        }
     },
     "require": {
-        "php": "^7.0",
-        "acelaya/ze-content-based-error-handler": "^2.1",
-        "zircote/swagger-php": "^2.0",
-        "dasprid/container-interop-doctrine": "^1.0",
-        "doctrine/migrations": "^2.1",
-        "doctrine/orm": "^2.5",
+        "php": "^8.0",
+        "doctrine/migrations": "^3.4",
+        "doctrine/orm": "^2.11",
         "firebase/php-jwt": "^5.0",
-        "mtymek/blast-base-url": "^1.0.0",
-        "tuupola/cors-middleware": "^0.9.1",
-        "tuupola/slim-jwt-auth": "^3.1.1",
+        "guidofaecke/blast-base-url": "^2.1",
         "laminas/laminas-authentication": "^2.5",
         "laminas/laminas-component-installer": "^2.1.0",
         "laminas/laminas-config-aggregator": "^1.1.0",
         "laminas/laminas-crypt": "^3.2",
         "laminas/laminas-db": "^2.9",
-        "mezzio/mezzio": "^3.0",
-        "mezzio/mezzio-hal": "^1.0",
-        "mezzio/mezzio-helpers": "^5.0",
-        "mezzio/mezzio-router": "^3.0",
-        "mezzio/mezzio-laminasrouter": "^3.0",
-        "laminas/laminas-hydrator": "^2.3",
+        "laminas/laminas-dependency-plugin": "^2.2",
+        "laminas/laminas-hydrator": "^4.3",
         "laminas/laminas-i18n": "^2.7",
         "laminas/laminas-i18n-resources": "^2.5",
         "laminas/laminas-inputfilter": "^2.8",
-        "laminas/laminas-ldap": "^2.10",
+        "laminas/laminas-ldap": "^2.16",
         "laminas/laminas-paginator": "^2.8",
         "laminas/laminas-permissions-rbac": "^3.0",
-        "mezzio/mezzio-problem-details": "^1.0",
         "laminas/laminas-servicemanager": "^3.3",
         "laminas/laminas-stratigility": "^3.0",
-        "laminas/laminas-dependency-plugin": "^1.0"
+        "mezzio/mezzio": "^3.0",
+        "mezzio/mezzio-hal": "^2.4",
+        "mezzio/mezzio-helpers": "^5.0",
+        "mezzio/mezzio-laminasrouter": "^3.0",
+        "mezzio/mezzio-problem-details": "^1.0",
+        "mezzio/mezzio-router": "^3.0",
+        "roave/psr-container-doctrine": "^3.4",
+        "tuupola/cors-middleware": "^1.2",
+        "tuupola/slim-jwt-auth": "^3.1.1",
+        "zircote/swagger-php": "^4.2"
     },
     "require-dev": {
-        "phpunit/phpunit": "^7.5.2",
-        "roave/security-advisories": "dev-master",
-        "squizlabs/php_codesniffer": "^3.4.0",
+        "codeception/codeception": "^4.1",
+        "codeception/module-phpbrowser": "^2.0",
+        "codeception/module-rest": "^2.0",
         "laminas/laminas-development-mode": "^3.1",
-        "mezzio/mezzio-tooling": "^1.0",
-        "codeception/codeception": "^2.3"
+        "mezzio/mezzio-tooling": "^2.5",
+        "phpunit/phpunit": "^9.5",
+        "roave/security-advisories": "dev-master",
+        "squizlabs/php_codesniffer": "^3.4.0"
     },
     "autoload": {
         "psr-4": {
@@ -93,7 +99,7 @@
             "@test-clear"
         ],
         "swagger": [
-            "./vendor/bin/swagger -o ./swagger/swagger.json -e vendor src/"
+            "./vendor/bin/openapi -o ./swagger/swagger.json -e vendor src/ -l"
         ]
     }
 }

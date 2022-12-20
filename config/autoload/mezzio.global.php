@@ -2,6 +2,7 @@
 
 use Laminas\ConfigAggregator\ConfigAggregator;
 
+
 return [
     // Toggle the configuration cache. Set this to boolean false, or remove the
     // directive, to disable configuration caching. Toggling development mode
@@ -10,8 +11,7 @@ return [
     ConfigAggregator::ENABLE_CACHE => false,
 
     // Enable debugging; typically used to provide debugging information within templates.
-    'debug' => false,
-
+    'debug' => getenv('PASSWORDCOCKPIT_DEBUG')==='true' || getenv('PASSWORDCOCKPIT_DEBUG')===true,
     'mezzio' => [
         // Enable programmatic pipeline: Any `middleware_pipeline` or `routes`
         // configuration will be ignored when creating the `Application` instance.

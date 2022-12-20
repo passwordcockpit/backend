@@ -56,7 +56,7 @@ class LoginRequestFacade extends AbstractFacade
      * @param type $id
      * @param type $filter
      */
-    public function delete($id, $filter)
+    public function delete($id, $filter): never
     {
         throw new Exception("Method not implemented");
     }
@@ -66,7 +66,7 @@ class LoginRequestFacade extends AbstractFacade
      * @param string $id
      * @param array $filter
      */
-    public function fetch($id, $filter)
+    public function fetch($id, $filter): never
     {
         throw new Exception("Method not implemented");
     }
@@ -75,7 +75,7 @@ class LoginRequestFacade extends AbstractFacade
      *
      * @param array $filter
      */
-    public function fetchAll($filter)
+    public function fetchAll($filter): never
     {
         throw new Exception("Method not implemented");
     }
@@ -85,7 +85,7 @@ class LoginRequestFacade extends AbstractFacade
      * @param string $id
      * @param array $data
      */
-    public function update($id, $data)
+    public function update($id, $data): never
     {
         throw new Exception("Method not implemented");
     }

@@ -28,8 +28,8 @@ class NoEntityExistsFactory
         array $options = null
     ) {
         return new NoEntityExists(
+            $container->get(EntityManagerInterface::class),
             $options,
-            $container->get(EntityManagerInterface::class)
         );
     }
 }

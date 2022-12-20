@@ -28,17 +28,17 @@ class AssertionPluginManagerFactory
         $config = $container->get('config');
 
         $assertionConfig = $config['rbac']['assertions'] ?? null;
-        $assertionFactories = $assertionConfig['factories'] ?? array();
+        $assertionFactories = $assertionConfig['factories'] ?? [];
         $assertionRegisteredByRoute =
-            $assertionConfig['registeredByRoute'] ?? array();
+            $assertionConfig['registeredByRoute'] ?? [];
 
         return new AssertionPluginManager(
+            $container->get(Translator::class),
+            $container->get(FolderUserFacade::class),
+            $container->get(EntityManagerInterface::class),
             $container,
             ['factories' => $assertionFactories],
             $assertionRegisteredByRoute,
-            $container->get(Translator::class),
-            $container->get(FolderUserFacade::class),
-            $container->get(EntityManagerInterface::class)
         );
     }
 }

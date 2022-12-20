@@ -33,7 +33,7 @@ class ConfigProvider
             'dependencies' => $this->getDependencies(),
             'routes' => $this->getRoutes(),
             'doctrine' => $this->getDoctrine(),
-            'Mezzio\Hal\Metadata\MetadataMap' => $this->getMetadataMap()
+            \Mezzio\Hal\Metadata\MetadataMap::class => $this->getMetadataMap()
         ];
     }
 
@@ -110,7 +110,9 @@ class ConfigProvider
                 'route' => 'api.v1.passwords.get',
                 'extractor' => PasswordHydrator::class,
                 'resource_identifier' => 'password_id',
-                'route_identifier_placeholder' => 'id'
+                'identifiers_to_placeholders_mapping' => [
+                  'password_id' => 'id',
+                ],
             ]
         ];
     }

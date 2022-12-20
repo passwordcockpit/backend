@@ -31,44 +31,23 @@ use Authentication\Api\V1\Facade\TokenUserFacade;
 
 /**
  *
- * @SWG\Post(
+ * @OA\Post(
  *     path="/api/v1/token/update",
  *     tags={"authentication"},
  *     operationId="UpdateToken",
  *     summary="Update Token",
  *     description="return an updated token if old token is valid",
- *     consumes={"application/json"},
- *     produces={"application/json"},
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=200,
- *         description="Ok"
+ *         description="Ok",
+ *         @OA\JsonContent()
  *     ),
- *     security={
- *       {"bearerAuth": {}}
- *     }
+ *     security={{"bearerAuth": {}}}
  * )
  *
  */
 class AuthenticationUpdateToken implements RequestHandlerInterface
 {
-    /**
-     *
-     * @var ProblemDetailsresponseFactory
-     */
-    protected $problemDetailsFactory;
-
-    /**
-     *
-     * @var mixin
-     */
-    private $config;
-
-    /**
-     *
-     * @var TokenUserFacade
-     */
-    private $tokenUserFacade;
-
     /**
      * Constructor
      *
@@ -77,14 +56,10 @@ class AuthenticationUpdateToken implements RequestHandlerInterface
      * @param TokenUserFacade $tokenUserFacade
      */
     public function __construct(
-        ProblemDetailsResponseFactory $problemDetailsFactory,
-        $config,
-        TokenUserFacade $tokenUserfacade
-    ) {
-        $this->problemDetailsFactory = $problemDetailsFactory;
-        $this->config = $config;
-        $this->tokenUserFacade = $tokenUserfacade;
-    }
+      protected ProblemDetailsResponseFactory $problemDetailsFactory,
+      private array $config,
+      private readonly TokenUserFacade $tokenUserFacade
+    ){}
 
     /**
      * Creates the updated JWT
@@ -131,7 +106,7 @@ class AuthenticationUpdateToken implements RequestHandlerInterface
             $oldPayLoad = JWT::decode($token, $this->config['secret_key'], [
                 "HS256"
             ]);
-        } catch (\Exception $ex) {
+        } catch (\Exception) {
             throw new ProblemDetailsException(
                 401,
                 'Token is not valid',

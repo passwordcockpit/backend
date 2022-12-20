@@ -10,7 +10,6 @@
 namespace App\Factory;
 
 use App\Middleware\CorsMiddleware;
-use Laminas\Diactoros\Response;
 
 class CorsMiddlewareFactory
 {

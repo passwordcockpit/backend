@@ -18,17 +18,7 @@ use Laminas\InputFilter\InputFilter;
 
 class ValidationMiddleware implements MiddlewareInterface
 {
-    /**
-     *
-     * @var Factory
-     */
-    private $inputFilterFactory;
-
-    /**
-     *
-     * @var mixin
-     */
-    private $inputFilterSpecification;
+    private readonly \Laminas\InputFilter\Factory $inputFilterFactory;
 
     /**
      *
@@ -36,10 +26,9 @@ class ValidationMiddleware implements MiddlewareInterface
      *
      * @param mixin $inputFilterSpecification
      */
-    public function __construct($inputFilterSpecification)
+    public function __construct(private $inputFilterSpecification)
     {
         $this->inputFilterFactory = new Factory();
-        $this->inputFilterSpecification = $inputFilterSpecification;
     }
 
     /**
@@ -52,6 +41,7 @@ class ValidationMiddleware implements MiddlewareInterface
         ServerRequestInterface $request,
         RequestHandlerInterface $handler
     ): ResponseInterface {
+        $errors = [];
         $payload = $request->getParsedBody();
         $inputFilter = $this->inputFilterFactory->createInputFilter(
             $this->inputFilterSpecification

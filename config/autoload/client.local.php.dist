@@ -1,0 +1,6 @@
+<?php
+return [
+    'client_address' => [
+        'address' => getenv('PASSWORDCOCKPIT_CLIENT_ADDRESS')
+    ]
+];

@@ -21,58 +21,36 @@ use Mezzio\Hal\HalResponseFactory;
 use Laminas\Diactoros\Response\EmptyResponse;
 
 /**
- * @SWG\Get(
+ * @OA\Get(
  *     path="/v1/folders/{folderId}",
  *     summary="Get a folder",
  *     description="Returns a folder by its id",
  *     operationId="getFolder",
- *     produces={"application/json"},
  *     tags={"folders"},
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="Folder id to fetch",
  *         in="path",
  *         name="folderId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=200,
- *         description="OK"
+ *         description="OK",
+ *         @OA\JsonContent()
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=404,
  *         description="Not Found"
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
  * )
  */
 class GetFolderAction implements RequestHandlerInterface
 {
-    /**
-     *
-     * @var FolderUserFacade
-     */
-    protected $folderUserFacade;
-
-    /**
-     *
-     * @var FolderFacade
-     */
-    protected $folderFacade; //oggetto della classe FolderFacade
-
-    /**
-     *
-     * @var ResourceGenerator
-     */
-    protected $halResourceGenerator;
-
-    /**
-     *
-     * @var HalResponseFactory
-     */
-    private $halResponseFactory;
-
     /**
      * Constructor
      *
@@ -82,16 +60,11 @@ class GetFolderAction implements RequestHandlerInterface
      * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
-        FolderUserFacade $folderUserFacade,
-        FolderFacade $folderFacade,
-        ResourceGenerator $halResourceGenerator,
-        HalResponseFactory $halResponseFactory
-    ) {
-        $this->folderUserFacade = $folderUserFacade;
-        $this->halResourceGenerator = $halResourceGenerator;
-        $this->folderFacade = $folderFacade;
-        $this->halResponseFactory = $halResponseFactory;
-    }
+        protected FolderUserFacade $folderUserFacade,
+        protected FolderFacade $folderFacade,
+        protected ResourceGenerator $halResourceGenerator,
+        private readonly HalResponseFactory $halResponseFactory
+    ){}
 
     /**
      *

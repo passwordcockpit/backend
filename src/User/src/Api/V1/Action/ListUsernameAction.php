@@ -18,44 +18,26 @@ use Mezzio\Hal\ResourceGenerator;
 use User\Api\V1\Collection\UserCollection;
 
 /**
- * @SWG\Get(
+ * @OA\Get(
  *     path="/v1/users/usernames",
  *     summary="List users, but only id, username, surname, name, enabled status",
  *     description="Returns a public list of users",
  *     operationId="listUsernames",
- *     produces={"application/json"},
  *     tags={"users"},
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=200,
- *         description="OK"
+ *         description="OK",
+ *         @OA\JsonContent()
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=204,
  *         description="No Content"
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
  * )
  */
 class ListUsernameAction implements RequestHandlerInterface
 {
-    /**
-     *
-     * @var UserFacade
-     */
-    protected $userFacade;
-
-    /**
-     *
-     * @var ResourceGenerator
-     */
-    private $halResourceGenerator;
-
-    /**
-     *
-     * @var HalResponseFactory
-     */
-    protected $halResponseFactory;
-
     /**
      * Constructor
      *
@@ -64,14 +46,11 @@ class ListUsernameAction implements RequestHandlerInterface
      * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
-        UserFacade $userFacade,
-        ResourceGenerator $halResourceGenerator,
-        HalResponseFactory $halResponseFactory
-    ) {
-        $this->userFacade = $userFacade;
-        $this->halResourceGenerator = $halResourceGenerator;
-        $this->halResponseFactory = $halResponseFactory;
-    }
+        protected UserFacade $userFacade,
+        private readonly ResourceGenerator $halResourceGenerator,
+        protected HalResponseFactory $halResponseFactory
+    ){}
+    
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $users = $this->userFacade->getAllUsernames(); // ottengo la lista users dalla userFacade

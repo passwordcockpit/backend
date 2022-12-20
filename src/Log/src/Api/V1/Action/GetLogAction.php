@@ -17,52 +17,36 @@ use Mezzio\Hal\ResourceGenerator;
 use Log\Api\V1\Facade\LogFacade;
 
 /**
- * @SWG\Get(
+ * @OA\Get(
  *     path="/v1/logs/{logId}",
  *     summary="Get log",
  *     description="Returns a log by its id",
  *     operationId="getLog",
- *     produces={"application/json"},
  *     tags={"logs"},
- *     @SWG\Parameter(
+ *     @OA\Parameter(
  *         description="Log id to fetch",
  *         in="path",
  *         name="logId",
  *         required=true,
- *         type="integer",
- *         format="int64"
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=200,
- *         description="OK"
+ *         description="OK",
+ *         @OA\JsonContent()
  *     ),
- *     @SWG\Response(
+ *     @OA\Response(
  *         response=204,
  *         description="No Content"
  *     ),
- * security={{"bearerAuth": {}}}
+ *     security={{"bearerAuth": {}}}
  * )
  */
 class GetLogAction implements RequestHandlerInterface
 {
-    /**
-     *
-     * @var LogFacade
-     */
-    protected $logFacade;
-
-    /**
-     *
-     * @var ResourceGenerator
-     */
-    protected $halResourceGenerator;
-
-    /**
-     *
-     * @var HalResponseFactory
-     */
-    protected $halResponseFactory;
-
     /**
      * Constructor
      *
@@ -71,14 +55,10 @@ class GetLogAction implements RequestHandlerInterface
      * @param HalResponseFactory $halResponseFactory
      */
     public function __construct(
-        LogFacade $logFacade,
-        ResourceGenerator $halResourceGenerator,
-        HalResponseFactory $halResponseFactory
-    ) {
-        $this->logFacade = $logFacade;
-        $this->halResourceGenerator = $halResourceGenerator;
-        $this->halResponseFactory = $halResponseFactory;
-    }
+        protected LogFacade $logFacade,
+        protected ResourceGenerator $halResourceGenerator,
+        protected HalResponseFactory $halResponseFactory
+    ){}
 
     /**
      * MiddlewareInterface handler
