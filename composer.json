@@ -16,7 +16,7 @@
         "php": "^8.0",
         "doctrine/migrations": "^3.4",
         "doctrine/orm": "^2.11",
-        "firebase/php-jwt": "^5.0",
+        "firebase/php-jwt": "^6.0",
         "guidofaecke/blast-base-url": "^2.1",
         "laminas/laminas-authentication": "^2.5",
         "laminas/laminas-component-installer": "^2.1.0",
@@ -41,7 +41,7 @@
         "mezzio/mezzio-router": "^3.0",
         "roave/psr-container-doctrine": "^3.4",
         "tuupola/cors-middleware": "^1.2",
-        "tuupola/slim-jwt-auth": "^3.1.1",
+        "tuupola/slim-jwt-auth": "dev-php-jwt-6",
         "zircote/swagger-php": "^4.2"
     },
     "require-dev": {
