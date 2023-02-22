@@ -20,6 +20,7 @@ use User\Api\V1\Entity\User;
 use Mezzio\Hal\HalResponseFactory;
 use Firebase\JWT\JWT;
 use Authentication\Api\V1\Facade\TokenUserFacade;
+use Firebase\JWT\Key;
 
 /**
  *
@@ -94,7 +95,7 @@ class UpdateUserLanguageAction implements RequestHandlerInterface
         $token = substr($token1, 7);
         $tokenUser = $this->tokenUserFacade->getByToken($token)[0];
 
-        $payLoad = JWT::decode($token, $this->config['secret_key'], ["HS256"]);
+        $payLoad = JWT::decode($token, new Key($this->config['secret_key'], 'HS256'));
         $specifics = $request->getParsedBody();
 
         foreach ($specifics as $spec => $value) {
