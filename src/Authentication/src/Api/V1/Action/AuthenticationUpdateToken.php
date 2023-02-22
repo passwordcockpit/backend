@@ -14,6 +14,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Laminas\Diactoros\Response\JsonResponse;
 use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use Laminas\Crypt\Password\Bcrypt;
 use Doctrine\ORM\EntityManager;
 use User\Api\V1\Entity\User;
@@ -103,9 +104,7 @@ class AuthenticationUpdateToken implements RequestHandlerInterface
         $token = $request->getParsedBody()['token'];
 
         try {
-            $oldPayLoad = JWT::decode($token, $this->config['secret_key'], [
-                "HS256"
-            ]);
+            $oldPayLoad = JWT::decode($token, new Key($this->config['secret_key'], 'HS256'));
         } catch (\Exception) {
             throw new ProblemDetailsException(
                 401,

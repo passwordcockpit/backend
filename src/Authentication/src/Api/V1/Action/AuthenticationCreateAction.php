@@ -153,7 +153,7 @@ class AuthenticationCreateAction implements RequestHandlerInterface
             ],
             "sub" => $user->getUserId()
         ];
-        return JWT::encode($tokenPayload, $secretKey);
+        return JWT::encode($tokenPayload, $secretKey, 'HS256');
     }
 
     /**
