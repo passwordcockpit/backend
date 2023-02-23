@@ -1,6 +1,6 @@
 <?php
 return [
     'client_address' => [
-        'address' => getenv('PASSWORDCOCKPIT_CLIENT_ADDRESS')
+        'address' => (getenv('PASSWORDCOCKPIT_CLIENT_ADDRESS') === false ? getenv('PASSWORDCOCKPIT_BASEHOST') : getenv('PASSWORDCOCKPIT_CLIENT_ADDRESS'))
     ]
 ];
