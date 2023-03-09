@@ -101,11 +101,12 @@ class UpdateUserAction implements RequestHandlerInterface
 
         $specifics = $request->getParsedBody();
 
+        var_dump((array) $payLoad);
         foreach ($specifics as $spec => $value) {
             if ($spec === 'language' && $value != null) {
                 $payLoad->data->$spec = $value;
                 $token = JWT::encode(
-                    $payLoad,
+                    (array) $payLoad,
                     $this->config['secret_key'],
                     "HS256"
                 );
