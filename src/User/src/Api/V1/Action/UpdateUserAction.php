@@ -105,7 +105,7 @@ class UpdateUserAction implements RequestHandlerInterface
             if ($spec === 'language' && $value != null) {
                 $payLoad->data->$spec = $value;
                 $token = JWT::encode(
-                    $payLoad,
+                    (array) $payLoad,
                     $this->config['secret_key'],
                     "HS256"
                 );
