@@ -16,7 +16,9 @@ return [
                 'password' => getenv('PASSWORDCOCKPIT_LDAP_PASSWORD'),
                 'baseDn' => getenv('PASSWORDCOCKPIT_LDAP_BASEDN'),
                 'accountFilterFormat' => getenv('PASSWORDCOCKPIT_LDAP_ACCOUNTFILTERFORMAT'),
-                'bindRequiresDn' => getenv('PASSWORDCOCKPIT_LDAP_BINDREQUIRESDN')
+                'bindRequiresDn' => getenv('PASSWORDCOCKPIT_LDAP_BINDREQUIRESDN')==='true'? true:false,
+                'useStartTls' => getenv('PASSWORDCOCKPIT_LDAP_USESTARTTLS')==='true'? true:false,
+                'useSsl' => getenv('PASSWORDCOCKPIT_LDAP_USESSL')==='true'? true:false
             ]
         ],
         'userAttributes'=> [
