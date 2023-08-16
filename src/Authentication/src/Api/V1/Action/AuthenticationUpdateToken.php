@@ -81,7 +81,7 @@ class AuthenticationUpdateToken implements RequestHandlerInterface
         //$token->iat = $currentTime->getTimestamp();
         $token->exp = $future->getTimestamp();
 
-        return JWT::encode($token, $this->config['secret_key'], "HS256");
+        return JWT::encode((array) $token, $this->config['secret_key'], "HS256");
     }
 
     /**
