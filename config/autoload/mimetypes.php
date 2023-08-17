@@ -885,5 +885,6 @@ return [
 	'avi'=>'video/x-msvideo',
 	'movie'=>'video/x-sgi-movie',
 	'ice'=>'x-conference/x-cooltalk',
-	'sisx'=>'x-epoc/x-sisx-app'
+	'sisx'=>'x-epoc/x-sisx-app',
+	'xzip'=>'application/x-zip-compressed'
 ];
