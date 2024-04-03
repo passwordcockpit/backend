@@ -70,8 +70,8 @@ RUN set -ex; \
 mkdir /usr/src/passwordcockpit; \
 cd /usr/src/passwordcockpit; \
 git clone -v https://github.com/passwordcockpit/backend.git /usr/src/passwordcockpit; \
-git checkout 1.3.0-dev; \
-git pull origin 1.3.0-dev
+git checkout 1.4.0.dev; \
+git pull origin 1.4.0.dev
 
 WORKDIR /usr/src/passwordcockpit
 
