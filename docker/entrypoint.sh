@@ -24,7 +24,6 @@ else
     ##############################################
     # Configuration files
     ##############################################
-    mv config/autoload/db.local.php.dist config/autoload/db.local.php
     mv config/autoload/client.local.php.dist config/autoload/client.local.php
     mv config/autoload/doctrine.local.php.dist config/autoload/doctrine.local.php
     mv config/autoload/crypt.local.php.dist config/autoload/crypt.local.php
