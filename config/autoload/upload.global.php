@@ -11,12 +11,12 @@ $availableMimeTypes=require 'mimetypes.php';
 $acceptedMimeTypes=[
     'application/pdf' => 'pdf'
 ];
-if(getenv('PASSWORDCOCKPIT_UPLOAD_ACCEPTED_MIMETYPES')){
-    $desiredMimeTypes=explode(',',getenv('PASSWORDCOCKPIT_UPLOAD_ACCEPTED_MIMETYPES'));
+if (getenv('PASSWORDCOCKPIT_UPLOAD_ACCEPTED_MIMETYPES')) {
+    $desiredMimeTypes=explode(',', getenv('PASSWORDCOCKPIT_UPLOAD_ACCEPTED_MIMETYPES'));
     $acceptedMimeTypes=[];
-    foreach($desiredMimeTypes as $desiredMimeType){
+    foreach ($desiredMimeTypes as $desiredMimeType) {
         $desiredMimeType=trim($desiredMimeType);
-        if(isset($availableMimeTypes[$desiredMimeType])){
+        if (isset($availableMimeTypes[$desiredMimeType])) {
             $acceptedMimeTypes[$availableMimeTypes[$desiredMimeType]]=$desiredMimeType;
         }
     }
