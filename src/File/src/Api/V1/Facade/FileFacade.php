@@ -89,7 +89,7 @@ class FileFacade extends AbstractFacade
                 array_keys($uploadConfig['accepted_mime_types'])
             )
         ) {
-            $filename = md5($file->getClientFilename() . time() . rand());
+            $filename = md5($file->getClientFilename() . time() . random_int(0, mt_getrandmax()));
             $this->createUploadDirectoryStructure($uploadConfig['upload_path']);
 
             $path =

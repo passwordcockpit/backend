@@ -24,7 +24,7 @@ class LogHalHydrator extends AbstractHydrator
      *
      * @param Translator $translator
      */
-    function __construct(private Translator $translator)
+    function __construct(private readonly Translator $translator)
     {
     }
 
@@ -71,7 +71,7 @@ class LogHalHydrator extends AbstractHydrator
     {
         if(str_ends_with($action, 'deleted')){
             $segments = explode(' ', $action);
-            $hasTitle = strpos($segments[2], '(') === 0;
+            $hasTitle = str_starts_with($segments[2], '(');
 
             return sprintf(
                 $this->translator->translate('Password %d %s deleted'),

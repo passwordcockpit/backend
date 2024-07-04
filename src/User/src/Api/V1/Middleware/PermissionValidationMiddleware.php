@@ -33,8 +33,8 @@ class PermissionValidationMiddleware implements MiddlewareInterface
      */
     public function __construct(
         private readonly Adapter $adapter, 
-        private array $languages,
-        private Translator $translator
+        private readonly array $languages,
+        private readonly Translator $translator
     ) {
         $this->inputFilterFactory = new Factory();
     }

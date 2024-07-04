@@ -38,7 +38,7 @@ class TokenUser
      * @ORM\Column(name="token", type="string", length=500, precision=0, scale=0, nullable=true, unique=true)
      * @OA\Property(property="token", type="string", description="token value", example="ey.token")
      */
-    private ?string $token;
+    private ?string $token = null;
 
     /**
      *

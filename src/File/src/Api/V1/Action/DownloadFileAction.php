@@ -64,7 +64,7 @@ class DownloadFileAction implements RequestHandlerInterface
         private readonly Translator $translator,
         private array $uploadConfig,
         private readonly FileCipher $fileCipher,
-        private string $encriptionKey
+        private readonly string $encriptionKey
     ){}
 
     /**

@@ -94,7 +94,7 @@ class UpdateUserAction implements RequestHandlerInterface
     private function updateTokenSpecifics($request, $resource, $user)
     {
         $token1 = $request->getHeader("Authorization")[0];
-        $token = substr($token1, 7);
+        $token = substr((string) $token1, 7);
         $tokenUser = $this->tokenUserFacade->getByToken($token)[0];
 
         $payLoad = JWT::decode($token, new Key($this->config['secret_key'], "HS256"));

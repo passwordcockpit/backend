@@ -81,7 +81,7 @@ class UpdatePasswordAction implements RequestHandlerInterface
     public function __construct(
         protected PasswordFacade $passwordFacade,
         protected ProblemDetailsResponseFactory $problemDetailsFactory,
-        private array $config,
+        private readonly array $config,
         protected ResourceGenerator $halResourceGenerator,
         protected HalResponseFactory $halResponseFactory
     ){}
