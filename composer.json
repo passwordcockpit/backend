@@ -21,7 +21,6 @@
         "laminas/laminas-component-installer": "^3.4.0",
         "laminas/laminas-config-aggregator": "^1.1.0",
         "laminas/laminas-crypt": "^3.2",
-        "laminas/laminas-db": "^2.9",
         "laminas/laminas-hydrator": "^4.3",
         "laminas/laminas-i18n": "^2.7",
         "laminas/laminas-i18n-resources": "^2.5",
