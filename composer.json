@@ -7,8 +7,8 @@
     "config": {
         "sort-packages": true,
         "allow-plugins": {
-            "ocramius/package-versions": false,
-            "laminas/laminas-component-installer": false
+            "ocramius/package-versions": true,
+            "laminas/laminas-component-installer": true
         }
     },
     "require": {
