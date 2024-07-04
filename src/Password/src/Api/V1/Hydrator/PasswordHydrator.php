@@ -12,7 +12,6 @@ namespace Password\Api\V1\Hydrator;
 use Password\Api\V1\Entity\Password;
 use Laminas\Hydrator\AbstractHydrator;
 use App\Service\DateConverter;
-use Laminas\Db\Sql\Ddl\Column\Datetime;
 
 /**
  * Description of FolderHydrator
