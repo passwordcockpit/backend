@@ -65,7 +65,8 @@ class DownloadFileAction implements RequestHandlerInterface
         private array $uploadConfig,
         private readonly FileCipher $fileCipher,
         private readonly string $encriptionKey
-    ){}
+    ) {
+    }
 
     /**
      *
@@ -77,8 +78,6 @@ class DownloadFileAction implements RequestHandlerInterface
         $stream = null;
         $file = $this->fileFacade->fetch($request->getAttribute("id"));
         $mimeTypeContentType = $file->getExtension();
-        $mimeTypeExtension =
-            $this->uploadConfig['accepted_mime_types'][$mimeTypeContentType];
 
         $path =
             $this->uploadConfig['upload_path'] .
@@ -93,25 +92,21 @@ class DownloadFileAction implements RequestHandlerInterface
         }
 
         $this->fileCipher->setKey($this->encriptionKey);
-        if (
-            $this->fileCipher->decrypt(
-                $path . '.' . 'crypted',
-                $path . '.' . $mimeTypeExtension
-            )
+        $tempDestinationPath='tmp/'.md5($file->getFilename() . time() . random_int(0, mt_getrandmax()));
+        if ($this->fileCipher->decrypt(
+            $path . '.' . 'crypted',
+            $tempDestinationPath
+        )
         ) {
             $stream = new Stream(
-                $this->uploadConfig['upload_path'] .
-                    DIRECTORY_SEPARATOR .
-                    $file->getFileName() .
-                    "." .
-                    $mimeTypeExtension
+                $tempDestinationPath
             );
         }
 
         $response = new Response($stream);
 
         //can unlink the decrypted file
-        unlink($path . '.' . $mimeTypeExtension);
+        unlink($tempDestinationPath);
 
         $response = $response->withHeader("Content-Type", $mimeTypeContentType);
         $response = $response->withHeader("Content-Disposition", 'attachment');

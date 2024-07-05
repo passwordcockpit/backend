@@ -888,5 +888,6 @@ return [
     'sisx'=>'x-epoc/x-sisx-app',
     'xzip'=>'application/x-zip-compressed',
     'yml'=> 'application/x-yaml',
-    'yaml'=> 'application/x-yaml',
+    'xyaml'=> 'application/x-yaml',
+    'tyaml' =>'text/yaml'
 ];
