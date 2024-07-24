@@ -15,9 +15,9 @@ use Laminas\Validator\AbstractValidator;
 class PasswordStrength extends AbstractValidator
 {
     //const LENGTH = 'length';
-    const UPPER = 'upper';
-    const LOWER = 'lower';
-    const DIGIT = 'digit';
+    public const UPPER = 'upper';
+    public const LOWER = 'lower';
+    public const DIGIT = 'digit';
 
     /**
      * Constructor

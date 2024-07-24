@@ -26,7 +26,7 @@ use Mezzio\ProblemDetails\ProblemDetailsResponseFactory;
  * @OA\Patch(
  *     path="/v1/passwords",
  *     tags={"passwords"},
- *     operationId="updatePassword",
+ *     operationId="movePassword",
  *     summary="Update password",
  *     description="Update password",
  *     requestBody={"$ref": "#/components/requestBodies/MovePasswordAction payload"},
@@ -35,7 +35,7 @@ use Mezzio\ProblemDetails\ProblemDetailsResponseFactory;
  *         description="OK",
  *         @OA\JsonContent()
  *     ),
- *	   @OA\Response(
+ *     @OA\Response(
  *         response="401",
  *         description="Unathorized"
  *     ),
@@ -46,7 +46,7 @@ use Mezzio\ProblemDetails\ProblemDetailsResponseFactory;
  *     security={{"bearerAuth": {}}}
  * )
  * @OA\RequestBody(
- * 		 request="MovePasswordAction payload",
+ *       request="MovePasswordAction payload",
  *     description="password and old/new directory ids",
  *     required=true,
  *     @OA\Property(property="passwordId", type="integer", format="int64", description="Password id to move"),
@@ -70,7 +70,8 @@ class MovePasswordAction implements RequestHandlerInterface
         protected FolderUserFacade $folderUserFacade,
         protected UserFacade $userFacade,
         protected PermissionFacade $permissionFacade
-    ){}
+    ) {
+    }
 
     /**
      * MiddlewareInterface handler
@@ -85,8 +86,7 @@ class MovePasswordAction implements RequestHandlerInterface
 
         $body = $request->getParsedBody();
 
-        if (
-            !isset($body["passwordId"]) ||
+        if (!isset($body["passwordId"]) ||
             !isset($body["originalFolder"]) ||
             !isset($body["destinationFolder"])
         ) {

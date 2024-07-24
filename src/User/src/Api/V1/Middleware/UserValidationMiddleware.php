@@ -35,9 +35,9 @@ class UserValidationMiddleware implements MiddlewareInterface
      */
     public function __construct(
         private readonly InputFilterFactory $inputFilterFactory,
-        private array $languages,
-        private Translator $translator,
-        private bool $update = false
+        private readonly array $languages,
+        private readonly Translator $translator,
+        private readonly bool $update = false
     ){}
 
     /**

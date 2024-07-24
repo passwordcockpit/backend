@@ -77,10 +77,10 @@ class UpdateFileAction implements RequestHandlerInterface
     public function __construct(
         protected FileFacade $fileFacade,
         protected PasswordFacade $passwordFacade,
-        private array $uploadConfig,
+        private readonly array $uploadConfig,
         private $translator, private $entityManager,
         private readonly FileCipher $fileCipher,
-        private string $encriptionKey,
+        private readonly string $encriptionKey,
         private readonly ResourceGenerator $resourceGenerator,
         private readonly HalResponseFactory $halResponseFactory
     ){}

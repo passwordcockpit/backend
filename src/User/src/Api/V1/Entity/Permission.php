@@ -20,56 +20,43 @@ use OpenApi\Annotations as OA;
  */
 class Permission
 {
-    /**
-     *
-     * @ORM\Column(name="manage_users", type="boolean", precision=0, scale=0, nullable=true, unique=false)
-     * @OA\Property(property="manage_users")
-     */
-    private bool $manageUsers;
-
-    /**
-     *
-     * @ORM\Column(name="create_folders", type="boolean", precision=0, scale=0, nullable=true, unique=false)
-     * @OA\Property(property="create_folders")
-     */
-    private bool $createFolders;
-    /**
-     *
-     * @ORM\Column(name="access_all_folders", type="boolean", precision=0, scale=0, nullable=true, unique=false)
-     * @OA\Property(property="access_all_folders")
-     */
-    private bool $accessAllFolders;
-    /**
-     *
-     * @ORM\Column(name="view_logs", type="boolean", precision=0, scale=0, nullable=true, unique=false)
-     * @OA\Property(property="view_logs")
-     */
-    private bool $viewLogs;
-
-    /**
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="User\Api\V1\Entity\User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user_id", referencedColumnName="user_id", nullable=true)
-     * })
-     */
-    private User $user;
-
-
     public function __construct(
-        bool $manageUsers,
-        bool $createFolders,
-        bool $accessAllFolders,
-        bool $viewLogs,
-        User $user
-    ){
-        $this->manageUsers = $manageUsers;
-        $this->createFolders = $createFolders;
-        $this->accessAllFolders = $accessAllFolders;
-        $this->viewLogs = $viewLogs;
-        $this->user = $user;
+        /**
+         *
+         * @ORM\Column(name="manage_users", type="boolean", precision=0, scale=0, nullable=true, unique=false)
+         * @OA\Property(property="manage_users")
+         */
+        private bool $manageUsers,
+        /**
+         *
+         * @ORM\Column(name="create_folders", type="boolean", precision=0, scale=0, nullable=true, unique=false)
+         * @OA\Property(property="create_folders")
+         */
+        private bool $createFolders,
+        /**
+         *
+         * @ORM\Column(name="access_all_folders", type="boolean", precision=0, scale=0, nullable=true, unique=false)
+         * @OA\Property(property="access_all_folders")
+         */
+        private bool $accessAllFolders,
+        /**
+         *
+         * @ORM\Column(name="view_logs", type="boolean", precision=0, scale=0, nullable=true, unique=false)
+         * @OA\Property(property="view_logs")
+         */
+        private bool $viewLogs,
+        /**
+         *
+         * @ORM\Id
+         * @ORM\GeneratedValue(strategy="NONE")
+         * @ORM\OneToOne(targetEntity="User\Api\V1\Entity\User")
+         * @ORM\JoinColumns({
+         *   @ORM\JoinColumn(name="user_id", referencedColumnName="user_id", nullable=true)
+         * })
+         */
+        private User $user
+    )
+    {
     }
 
     /**

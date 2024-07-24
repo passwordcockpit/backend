@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 php:8.1-apache-bullseye
+FROM --platform=linux/amd64 php:8.2-apache-bullseye
 
 # passwordcockpit variables
 ENV PASSWORDCOCKPIT_DATABASE_USERNAME root
@@ -70,8 +70,8 @@ RUN set -ex; \
 mkdir /usr/src/passwordcockpit; \
 cd /usr/src/passwordcockpit; \
 git clone -v https://github.com/passwordcockpit/backend.git /usr/src/passwordcockpit; \
-git checkout 1.3.0-dev; \
-git pull origin 1.3.0-dev
+git checkout 1.4.0.dev; \
+git pull origin 1.4.0.dev
 
 WORKDIR /usr/src/passwordcockpit
 

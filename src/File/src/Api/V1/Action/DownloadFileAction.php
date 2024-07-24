@@ -64,8 +64,9 @@ class DownloadFileAction implements RequestHandlerInterface
         private readonly Translator $translator,
         private array $uploadConfig,
         private readonly FileCipher $fileCipher,
-        private string $encriptionKey
-    ){}
+        private readonly string $encriptionKey
+    ) {
+    }
 
     /**
      *
@@ -76,44 +77,42 @@ class DownloadFileAction implements RequestHandlerInterface
     {
         $stream = null;
         $file = $this->fileFacade->fetch($request->getAttribute("id"));
-        $mimeTypeContentType = $file->getExtension();
-        $mimeTypeExtension =
-            $this->uploadConfig['accepted_mime_types'][$mimeTypeContentType];
 
         $path =
             $this->uploadConfig['upload_path'] .
             DIRECTORY_SEPARATOR .
             $file->getFilename();
 
-        if (!file_exists($path . "." . "crypted")) {
-            throw new ProblemDetailsException(
-                404,
-                $this->translator->translate("File does not exists")
-            );
+        if (!file_exists($path)) {
+            if (file_exists($path.'.crypted')) {
+                // To be retrocompatible search for different path when file was named with the suffix `.crypted`
+                $path=$path.'.crypted';
+            } else {
+                throw new ProblemDetailsException(
+                    404,
+                    $this->translator->translate("File does not exists")
+                );
+            }
         }
 
         $this->fileCipher->setKey($this->encriptionKey);
-        if (
-            $this->fileCipher->decrypt(
-                $path . '.' . 'crypted',
-                $path . '.' . $mimeTypeExtension
-            )
+        $tempDestinationPath='tmp/'.md5($file->getFilename() . time() . random_int(0, mt_getrandmax()));
+        if ($this->fileCipher->decrypt(
+            $path,
+            $tempDestinationPath
+        )
         ) {
             $stream = new Stream(
-                $this->uploadConfig['upload_path'] .
-                    DIRECTORY_SEPARATOR .
-                    $file->getFileName() .
-                    "." .
-                    $mimeTypeExtension
+                $tempDestinationPath
             );
         }
 
         $response = new Response($stream);
 
         //can unlink the decrypted file
-        unlink($path . '.' . $mimeTypeExtension);
+        unlink($tempDestinationPath);
 
-        $response = $response->withHeader("Content-Type", $mimeTypeContentType);
+        $response = $response->withHeader("Content-Type", $file->getExtension());
         $response = $response->withHeader("Content-Disposition", 'attachment');
         $response = $response->withHeader("X-Content-Type-Option", "nosniff");
 

@@ -31,9 +31,9 @@ class LdapAdapter implements AdapterInterface
      */
     public function __construct(
       private readonly UserFacade $userFacade,
-      private array $ldapConfig,
+      private readonly array $ldapConfig,
       private array $ldapUserAttributesConfig,
-      private EntityManager $entityManager
+      private readonly EntityManager $entityManager
     ){}
 
     public function setPassword($password)

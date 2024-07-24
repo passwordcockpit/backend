@@ -25,7 +25,7 @@ class DoctrineAdapter implements AdapterInterface
      * Constructor
      * @param EntityManager $entityManager
      */
-    public function __construct(private EntityManager $entityManager)
+    public function __construct(private readonly EntityManager $entityManager)
     {
         $this->username = null;
         $this->password = null;

@@ -96,7 +96,7 @@ class ListFolderAction implements RequestHandlerInterface
                 $user->getUserId()
             );
             // order folders by name
-            usort($folders, fn($a, $b) => strcasecmp($a->getName(), $b->getName()));
+            usort($folders, fn($a, $b) => strcasecmp((string) $a->getName(), (string) $b->getName()));
         }
         $foldersCollection = new FolderCollection(new ArrayAdapter($folders));
         $foldersCollection->setDefaultItemCountPerPage(PHP_INT_MAX);

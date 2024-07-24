@@ -68,7 +68,7 @@ class I18nMiddleware implements MiddlewareInterface
         $response = $handler->handle($request);
         return $response->withHeader(
             'Content-Language',
-            $locale . "_" . strtoupper($locale)
+            $locale . "_" . strtoupper((string) $locale)
         );
     }
 }

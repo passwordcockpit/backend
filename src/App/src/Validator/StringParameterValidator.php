@@ -27,7 +27,7 @@ class StringParameterValidator implements MiddlewareInterface
      */
     public function __construct(
       private readonly InputFilterFactory $inputFilterFactory,
-      private Translator $translator
+      private readonly Translator $translator
     ){}
 
     /**

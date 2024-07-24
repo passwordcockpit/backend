@@ -83,47 +83,28 @@ class FileFacade extends AbstractFacade
         $realMime = mime_content_type($_FILES["file"]["tmp_name"]);
         $uploadedFileName = $_FILES["file"]["name"];
 
-        if (
-            in_array(
-                $realMime,
-                array_keys($uploadConfig['accepted_mime_types'])
-            )
+        if (in_array(
+            $realMime,
+            array_keys($uploadConfig['accepted_mime_types'])
+        )
         ) {
-            $filename = md5($file->getClientFilename() . time() . rand());
+            $filename = md5($file->getClientFilename() . time() . random_int(0, mt_getrandmax()));
             $this->createUploadDirectoryStructure($uploadConfig['upload_path']);
 
-            $path =
+            $destinationPath =
                 $uploadConfig['upload_path'] . DIRECTORY_SEPARATOR . $filename;
 
-            // move the file to directory
-            $file->moveTo(
-                $path .
-                    '.' .
-                    $uploadConfig['accepted_mime_types'][
-                        $file->getClientMediaType()
-                    ]
-            );
+            $tempPath='tmp/'.$filename;
+            $file->moveTo($tempPath);
 
             //encrypt file
             $fileCipher->setKey($encriptionKey);
-            if (
-                $fileCipher->encrypt(
-                    $path .
-                        '.' .
-                        $uploadConfig['accepted_mime_types'][
-                            $file->getClientMediaType()
-                        ],
-                    $path . '.' . 'crypted'
-                )
-            ) {
-                //remove non crypted file
-                unlink(
-                    $path .
-                        '.' .
-                        $uploadConfig['accepted_mime_types'][
-                            $file->getClientMediaType()
-                        ]
-                );
+            if ($fileCipher->encrypt(
+                $tempPath,
+                $destinationPath
+            )) {
+                //remove non encrypted file
+                unlink($tempPath);
             }
 
             $file = $this->create([

@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\Criteria;
 
 class NoEntityExists extends AbstractValidator
 {
-    const RECORD_FOUND = 'record_found';
+    public const RECORD_FOUND = 'record_found';
 
     private readonly string $field;
 
