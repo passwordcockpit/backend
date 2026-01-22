@@ -12,7 +12,7 @@
         }
     },
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "doctrine/migrations": "^3.4",
         "doctrine/orm": "^2.11",
         "firebase/php-jwt": "^6.0",
@@ -36,7 +36,8 @@
         "mezzio/mezzio-laminasrouter": "^3.9",
         "mezzio/mezzio-problem-details": "^1.14",
         "mezzio/mezzio-router": "^3.17",
-        "roave/psr-container-doctrine": "^3.4",
+        "roave/psr-container-doctrine": "^4.1",
+        "symfony/cache": "^7.4",
         "tuupola/cors-middleware": "^1.2",
         "tuupola/slim-jwt-auth": "dev-php-jwt-6",
         "zircote/swagger-php": "^4.2"

@@ -6,6 +6,8 @@
  * @license https://github.com/passwordcockpit/backend/blob/master/LICENSE.md BSD 3-Clause License
  */
 
+use Symfony\Component\Cache\Adapter\ArrayAdapter;
+
 return [
     'doctrine' => [
         'connection' => [
@@ -45,6 +47,11 @@ return [
         ],
         'migrations' => [
             'migrations_directory' => '/docs/generated/doctrine/migrations'
-        ]
+        ],
+        'cache' => [
+            'array' => [
+                'class' => ArrayAdapter::class,
+            ],
+        ],
     ]
 ];
