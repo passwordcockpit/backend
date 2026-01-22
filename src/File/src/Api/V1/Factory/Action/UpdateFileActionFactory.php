@@ -14,7 +14,6 @@ use Password\Api\V1\Facade\PasswordFacade;
 use Mezzio\Hal\ResourceGeneratorFactory;
 use Psr\Container\ContainerInterface;
 use File\Api\V1\Action\UpdateFileAction;
-use Laminas\Crypt\FileCipher;
 use Laminas\I18n\Translator\Translator;
 
 class UpdateFileActionFactory
@@ -35,7 +34,6 @@ class UpdateFileActionFactory
             $container->get("config")['upload_config'],
             $container->get(Translator::class),
             $container->get(EntityManagerInterface::class),
-            new FileCipher(),
             $container->get("config")['block_cipher']['key'],
             $resourceGenerator($container),
             $container->get(\Mezzio\Hal\HalResponseFactory::class)

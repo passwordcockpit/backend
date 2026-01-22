@@ -66,7 +66,6 @@ class FileFacade extends AbstractFacade
      *
      * @param \Laminas\Diactoros\UploadedFile $file
      * @param array $uploadConfig
-     * @param FileCipher $fileCipher
      * @param string $encriptionkey
      * @param Password $password
      *
@@ -76,7 +75,6 @@ class FileFacade extends AbstractFacade
     public function handleFile(
         $file,
         $uploadConfig,
-        $fileCipher,
         $encriptionKey,
         $password
     ) {
@@ -97,13 +95,15 @@ class FileFacade extends AbstractFacade
             $tempPath='tmp/'.$filename;
             $file->moveTo($tempPath);
 
-            //encrypt file
-            $fileCipher->setKey($encriptionKey);
-            if ($fileCipher->encrypt(
-                $tempPath,
-                $destinationPath
-            )) {
-                //remove non encrypted file
+            // Encrypt file
+            $key = hash('sha256', $encriptionKey, true);
+            $encryptedData = file_get_contents($tempPath);
+            $ivLength = openssl_cipher_iv_length('aes-256-cbc');
+            $iv = random_bytes($ivLength);
+            $ciphertext = openssl_encrypt($encryptedData, 'aes-256-cbc', $key, OPENSSL_RAW_DATA, $iv);
+            $encoded = base64_encode($iv . $ciphertext);
+            if (file_put_contents($destinationPath, $encoded) === false) {
+                // Remove non encrypted file
                 unlink($tempPath);
             }
 

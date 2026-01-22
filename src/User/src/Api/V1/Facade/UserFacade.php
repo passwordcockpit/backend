@@ -20,7 +20,6 @@ use Psr\Http\Message\ServerRequestInterface;
 use App\Service\ProblemDetailsException;
 use Folder\Api\V1\Entity\Folder;
 use Folder\Api\V1\Entity\FolderUser;
-use Laminas\Crypt\Password\Bcrypt;
 use Laminas\I18n\Translator\Translator;
 use User\Api\V1\Entity\Permission;
 
@@ -95,15 +94,12 @@ class UserFacade extends AbstractFacade
      */
     public function createUser(ServerRequestInterface $request)
     {
-        $payload = $request->getParsedBody(); // recupero il payload
-        $user = new User(); // creo l'oggetto utente
-        // setto i campi
+        $payload = $request->getParsedBody();
+        $user = new User();
         $user->setUsername($payload['username']);
 
         if(isset($payload['password'])){
-            // Bcrypt della password ---
-            $bcrypt = new Bcrypt();
-            $bcryptedPassword = $bcrypt->create($payload['password']);
+            $bcryptedPassword = password_hash($payload['password'], PASSWORD_BCRYPT);
             $user->setPassword($bcryptedPassword);
         }
        
@@ -260,7 +256,7 @@ class UserFacade extends AbstractFacade
                 $user->setUsername($payload['username']);
             }
             if (isset($payload['password'])) {
-                // checking ldap info. If active user can't change password.
+                // Checking ldap info. If active user can't change password.
                 $token = $request->getAttribute("token", false);
                 $authType = $token["data"]["ldap"];
 
@@ -274,18 +270,16 @@ class UserFacade extends AbstractFacade
                     return $response;
                 }
 
-                // Bcrypt della password ---
-                $bcrypt = new \Laminas\Crypt\Password\Bcrypt();
-                $bcryptedPassword = $bcrypt->create($payload['password']);
+                $bcryptedPassword = password_hash($payload['password'], PASSWORD_BCRYPT);
 
-                // checking who is making the request
+                // Checking who is making the request
                 // if the user has 'manage_users', we do not need to check the actual password.
                 $userRequest = $request->getAttribute('Authentication\User');
                 $perm = $this->entityManager
                     ->getRepository(Permission::class)
                     ->findOneBy(['user' => $userRequest]);
 
-                // if the user making the request does have 'manage_users'
+                // If the user making the request does have 'manage_users'
                 // we need to check for the actual_password field
                 if (
                     $perm->getManageUsers() &&
@@ -293,7 +287,7 @@ class UserFacade extends AbstractFacade
                 ) {
                     $user->setPassword($bcryptedPassword);
                 } else {
-                    //check if actual_password field exist
+                    // Check if actual_password field exist
                     if (!isset($payload['actual_password'])) {
                         throw new ProblemDetailsException(
                             400,
@@ -304,8 +298,7 @@ class UserFacade extends AbstractFacade
                             'https://httpstatus.es/400'
                         );
                     }
-                    //here
-                    // check actual password
+                    // Check actual password
                     if (
                         $this->checkPassword($user, $payload['actual_password'])
                     ) {
@@ -367,9 +360,8 @@ class UserFacade extends AbstractFacade
     private function checkPassword($user, $password)
     {
         $check = false;
-        $bcrypt = new \Laminas\Crypt\Password\Bcrypt();
         $securePass = $user->getPassword();
-        $check = $bcrypt->verify($password, $securePass);
+        $check = password_verify($password, $securePass);
         return $check;
     }
 
