@@ -54,7 +54,6 @@ class ConfigProvider
                 Middleware\StrictTransportSecurityMiddleware::class => Factory\StrictTransportSecurityFactory::class,
                 Middleware\ContentSecurityMiddleware::class => Factory\ContentSecurityFactory::class,
                 Middleware\OptionsMiddleware::class => Factory\OptionsMiddlewareFactory::class,
-                \Blast\BaseUrl\BaseUrlMiddleware::class => \Blast\BaseUrl\BaseUrlMiddlewareFactory::class,
                 \Mezzio\Application::class => \Mezzio\Container\ApplicationFactory::class,
                 \Mezzio\Delegate\NotFoundDelegate::class => \Mezzio\Container\NotFoundDelegateFactory::class,
                 \Mezzio\Helper\ServerUrlMiddleware::class => \Mezzio\Helper\ServerUrlMiddlewareFactory::class,

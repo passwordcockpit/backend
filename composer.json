@@ -16,7 +16,6 @@
         "doctrine/migrations": "^3.4",
         "doctrine/orm": "^2.11",
         "firebase/php-jwt": "^6.0",
-        "guidofaecke/blast-base-url": "^2.1",
         "laminas/laminas-authentication": "^2.5",
         "laminas/laminas-component-installer": "^3.4.0",
         "laminas/laminas-config-aggregator": "^1.1.0",
