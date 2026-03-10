@@ -10,8 +10,6 @@ namespace Authentication\Api\V1\Factory\Action;
 
 use Interop\Container\ContainerInterface;
 use Authentication\Api\V1\Action\AuthenticationCreateAction;
-use Doctrine\ORM\EntityManagerInterface;
-use User\Api\V1\Facade\PermissionFacade;
 use Authentication\Api\V1\Facade\TokenUserFacade;
 use Laminas\I18n\Translator\Translator;
 use Authentication\Api\V1\Facade\LoginRequestFacade;

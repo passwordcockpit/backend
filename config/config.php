@@ -32,7 +32,7 @@ $aggregator = new ConfigAggregator(
         new ArrayProvider($cacheConfig),
         // Default App module config
         App\ConfigProvider::class,
-        // --- Aggiungo le configurazioni dei miei moduli ----
+        // Other modules
         Authentication\ConfigProvider::class,
         Authorization\ConfigProvider::class,
         User\ConfigProvider::class,
