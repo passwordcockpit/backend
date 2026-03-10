@@ -13,15 +13,12 @@ use Doctrine\ORM\EntityManager;
 use Laminas\I18n\Translator\Translator;
 use Password\Api\V1\Entity\Password;
 use App\Service\ProblemDetailsException;
-use Laminas\Crypt\BlockCipher;
-use Laminas\Crypt\FileCipher;
 use Password\Api\V1\Hydrator\PasswordHydrator;
 use Psr\Http\Message\ServerRequestInterface;
 use Folder\Api\V1\Entity\Folder;
 use Folder\Api\V1\Entity\FolderUser;
 use Folder\Api\V1\Facade\FolderFacade;
 use File\Api\V1\Facade\FileFacade;
-use Log\Api\V1\Entity\Log;
 use User\Api\V1\Entity\User;
 use Log\Api\V1\Facade\LogFacade;
 use File\Api\V1\Entity\File;
@@ -36,8 +33,6 @@ class PasswordFacade extends AbstractFacade
      *
      * @param EntityManager $entityManager
      * @param Translator $translator
-     * @param BlockCipher $blockCipher
-     * @param FileCipher $fileCipher
      * @param string $encriptionKey
      * @param FolderFacade $folderFacade
      * @param LogFacade $logFacade
@@ -47,8 +42,6 @@ class PasswordFacade extends AbstractFacade
     public function __construct(
         protected EntityManager $entityManager,
         protected Translator $translator,
-        private readonly BlockCipher $blockCipher,
-        private readonly FileCipher $fileCipher,
         private $encriptionKey,
         private readonly FolderFacade $folderFacade,
         private readonly LogFacade $logFacade,
@@ -159,7 +152,6 @@ class PasswordFacade extends AbstractFacade
                 $file = $this->fileFacade->handleFile(
                     $file,
                     $this->uploadConfig,
-                    $this->fileCipher,
                     $this->encriptionKey,
                     $password
                 );
@@ -479,12 +471,13 @@ class PasswordFacade extends AbstractFacade
      */
     public function decrypt($encrypted)
     {
-        $this->blockCipher->setKey($this->encriptionKey);
-        if ($encrypted) {
-            $encrypted = $this->blockCipher->decrypt($encrypted);
-        }
-
-        return $encrypted;
+        $key = hash('sha256', $this->encriptionKey, true);
+        $decoded = base64_decode($encrypted, true);
+        $ivLength = openssl_cipher_iv_length('aes-256-cbc');
+        $iv = substr($decoded, 0, $ivLength);
+        $ciphertext = substr($decoded, $ivLength);
+        
+        return openssl_decrypt($ciphertext, 'aes-256-cbc', $key, OPENSSL_RAW_DATA, $iv);
     }
 
     /**
@@ -495,7 +488,11 @@ class PasswordFacade extends AbstractFacade
      */
     private function encrypt($password)
     {
-        $this->blockCipher->setKey($this->encriptionKey);
-        return $this->blockCipher->encrypt($password);
+        $key = hash('sha256', $this->encriptionKey, true); // 32-byte key
+        $ivLength = openssl_cipher_iv_length('aes-256-cbc');
+        $iv = random_bytes($ivLength);
+        $ciphertext = openssl_encrypt($password, 'aes-256-cbc', $key, OPENSSL_RAW_DATA, $iv);
+
+        return base64_encode($iv . $ciphertext);
     }
 }

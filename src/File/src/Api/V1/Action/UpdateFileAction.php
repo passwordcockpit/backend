@@ -19,7 +19,6 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Mezzio\Hal\ResourceGenerator;
 use Mezzio\Hal\HalResponseFactory;
-use Laminas\Crypt\FileCipher;
 use File\Api\V1\Entity\File;
 
 /**
@@ -69,7 +68,6 @@ class UpdateFileAction implements RequestHandlerInterface
      * @param array $uploadConfig
      * @param Translator $translator
      * @param EntityManager $entityManager
-     * @param FileCipher $fileCipher
      * @param string $encriptionkey
      * @param ResourceGenerator $resourceGenerator
      * @param HalResponseFactory $halResponseFactory
@@ -79,7 +77,6 @@ class UpdateFileAction implements RequestHandlerInterface
         protected PasswordFacade $passwordFacade,
         private readonly array $uploadConfig,
         private $translator, private $entityManager,
-        private readonly FileCipher $fileCipher,
         private readonly string $encriptionKey,
         private readonly ResourceGenerator $resourceGenerator,
         private readonly HalResponseFactory $halResponseFactory
@@ -120,11 +117,10 @@ class UpdateFileAction implements RequestHandlerInterface
         if (isset($request->getUploadedFiles()['file'])) {
             $file = $request->getUploadedFiles()['file'];
 
-            // handle physical file
+            // Handle physical file
             $file = $this->fileFacade->handleFile(
                 $file,
                 $this->uploadConfig,
-                $this->fileCipher,
                 $this->encriptionKey,
                 $password
             );

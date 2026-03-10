@@ -18,7 +18,6 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Laminas\I18n\Translator\Resources;
 use Laminas\I18n\Translator\Translator;
-use Laminas\Validator\AbstractValidator;
 
 class I18nMiddleware implements MiddlewareInterface
 {

@@ -12,14 +12,11 @@ namespace File\Api\V1\Action;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Mezzio\Hal\ResourceGenerator;
-use Mezzio\Hal\HalResponseFactory;
 use File\Api\V1\Facade\FileFacade;
 use App\Service\ProblemDetailsException;
 use Laminas\I18n\Translator\Translator;
 use Laminas\Diactoros\Stream;
 use Laminas\Diactoros\Response;
-use Laminas\Crypt\FileCipher;
 
 /**
  *
@@ -48,22 +45,15 @@ use Laminas\Crypt\FileCipher;
 class DownloadFileAction implements RequestHandlerInterface
 {
     /**
-     *
-     * @param ResourceGenerator $resourceGenerator
-     * @param HalResponseFactory $halResponseFactory
      * @param FileFacade $fileFacade
      * @param Translator $translator
      * @param array $uploadconfig
-     * @param FileCipher $fileCipher
      * @param string $encriptionkey
      */
     public function __construct(
-        private readonly ResourceGenerator $resourceGenerator,
-        private readonly HalResponseFactory $halResponseFactory,
         private readonly FileFacade $fileFacade,
         private readonly Translator $translator,
         private array $uploadConfig,
-        private readonly FileCipher $fileCipher,
         private readonly string $encriptionKey
     ) {
     }
@@ -95,13 +85,17 @@ class DownloadFileAction implements RequestHandlerInterface
             }
         }
 
-        $this->fileCipher->setKey($this->encriptionKey);
+        // Decrypt file
+        $key = hash('sha256', $this->encriptionKey, true);
         $tempDestinationPath='tmp/'.md5($file->getFilename() . time() . random_int(0, mt_getrandmax()));
-        if ($this->fileCipher->decrypt(
-            $path,
-            $tempDestinationPath
-        )
-        ) {
+        $encryptedData = file_get_contents($path);
+        $decoded = base64_decode($encryptedData, true);
+        $ivLength = openssl_cipher_iv_length('aes-256-cbc');
+        $iv = substr($decoded, 0, $ivLength);
+        $ciphertext = substr($decoded, $ivLength);
+        $decryptedData = openssl_decrypt($ciphertext, 'aes-256-cbc', $key, OPENSSL_RAW_DATA, $iv);
+
+        if (file_put_contents($tempDestinationPath, $decryptedData)) {
             $stream = new Stream(
                 $tempDestinationPath
             );
@@ -109,14 +103,14 @@ class DownloadFileAction implements RequestHandlerInterface
 
         $response = new Response($stream);
 
-        //can unlink the decrypted file
+        // Can unlink the decrypted file
         unlink($tempDestinationPath);
 
         $response = $response->withHeader("Content-Type", $file->getExtension());
         $response = $response->withHeader("Content-Disposition", 'attachment');
         $response = $response->withHeader("X-Content-Type-Option", "nosniff");
 
-        // no need for the SapiStreamEmitter, Response already emits the file.
+        // No need for the SapiStreamEmitter, Response already emits the file.
         return $response;
     }
 }

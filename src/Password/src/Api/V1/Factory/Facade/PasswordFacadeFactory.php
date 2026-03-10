@@ -12,8 +12,6 @@ namespace Password\Api\V1\Factory\Facade;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Container\ContainerInterface;
 use Password\Api\V1\Facade\PasswordFacade;
-use Laminas\Crypt\BlockCipher;
-use Laminas\Crypt\FileCipher;
 use Folder\Api\V1\Facade\FolderFacade;
 use Log\Api\V1\Facade\LogFacade;
 use File\Api\V1\Facade\FileFacade;
@@ -35,11 +33,6 @@ class PasswordFacadeFactory
         return new PasswordFacade(
             $container->get(EntityManagerInterface::class),
             $container->get(Translator::class),
-            BlockCipher::factory(
-                $container->get("config")['block_cipher']['encryption_library'],
-                $container->get("config")['block_cipher']['algorithms']
-            ),
-            new FileCipher(),
             $container->get("config")['block_cipher']['key'],
             $container->get(FolderFacade::class),
             $container->get(LogFacade::class),

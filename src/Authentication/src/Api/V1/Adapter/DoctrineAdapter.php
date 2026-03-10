@@ -10,7 +10,6 @@
 namespace Authentication\Api\V1\Adapter;
 
 use Laminas\Authentication\Adapter\AdapterInterface;
-use Laminas\Crypt\Password\Bcrypt;
 use Laminas\Authentication\Result;
 use User\Api\V1\Entity\User;
 use Doctrine\ORM\EntityManager;
@@ -62,9 +61,8 @@ class DoctrineAdapter implements AdapterInterface
             ->getRepository(User::class)
             ->findOneBy(['username' => $this->username]);
         if ($user) {
-            $bcrypt = new Bcrypt();
             $securePass = $user->getPassword();
-            if ($bcrypt->verify($this->password, $securePass)) {
+            if (password_verify($this->password, $securePass)) {
                 //check if user is enabled
                 if (!$user->getEnabled()) {
                     $result = new Result(-2, $user, []);
