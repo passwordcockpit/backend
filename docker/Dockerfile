@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 php:8.3-apache-bookworm
+FROM --platform=linux/amd64 php:8.4-apache-bookworm
 
 # passwordcockpit variables
 ENV PASSWORDCOCKPIT_DATABASE_USERNAME root
