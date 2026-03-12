@@ -16,9 +16,6 @@ use Mezzio\Hal\ResourceGeneratorFactory;
 use Folder\Api\V1\Action\AddFolderUserAction;
 use Folder\Api\V1\Facade\FolderUserFacade;
 
-/**
- * Description of AddFolderUserFactory
- */
 class AddFolderUserFactory
 {
     /**

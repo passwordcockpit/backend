@@ -48,12 +48,12 @@ class TokenUser
     private ?\DateTime $lastLogin = null;
 
     /**
-     * Set User.
+     * Set user
      *
      * @param User $user
      * @return TokenUser
      */
-    public function setUser(User $user = null)
+    public function setUser(?User $user)
     {
         $this->user = $user;
 
@@ -61,7 +61,7 @@ class TokenUser
     }
 
     /**
-     * Get User.
+     * Get user
      *
      * @return User
      */
@@ -71,10 +71,9 @@ class TokenUser
     }
 
     /**
-     * Set Token
+     * Set token
      *
      * @param string $token
-     *
      * @return TokenUser
      */
     public function setToken($token = null)
@@ -95,10 +94,9 @@ class TokenUser
     }
 
     /**
-     * Set last_login
+     * Set lastLogin
      *
-     * @param datetime $lastLogin
-     *
+     * @param ?DateTime $lastLogin
      * @return TokenUser
      */
     public function setLastLogin($lastLogin = null)
@@ -109,10 +107,9 @@ class TokenUser
     }
 
     /**
-     * Get last_login
+     * Get lastLogin
      *
      * @param \Datetime $lastLogin
-     *
      * @return \Datetime|null
      */
     public function getLastLogin()

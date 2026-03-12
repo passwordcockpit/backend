@@ -14,9 +14,6 @@ use User\Api\V1\Facade\UserFacade;
 use Mezzio\Hal\ResourceGeneratorFactory;
 use User\Api\V1\Action\GetUserFoldersPermissionAction;
 
-/**
- * Description of GetUserFoldersPermissionActionFactory
- */
 class GetUserFoldersPermissionActionFactory
 {
     /**

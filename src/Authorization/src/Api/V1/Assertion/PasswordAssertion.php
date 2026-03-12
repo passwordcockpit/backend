@@ -80,7 +80,6 @@ class PasswordAssertion implements AssertionInterface
     ): bool {
         $passwordId = $this->getPasswordId($this->request);
 
-        $userId = $this->user->getUserId();
         $method = $this->request->getMethod();
 
         if ($passwordId) {

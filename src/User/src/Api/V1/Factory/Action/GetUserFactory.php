@@ -9,9 +9,6 @@
 
 namespace User\Api\V1\Factory\Action;
 
-/**
- * Description of GetUserFactory
- */
 use Psr\Container\ContainerInterface;
 use User\Api\V1\Action\GetUserAction;
 use User\Api\V1\Facade\UserFacade;

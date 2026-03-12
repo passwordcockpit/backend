@@ -63,21 +63,21 @@ class DoctrineAdapter implements AdapterInterface
         if ($user) {
             $securePass = $user->getPassword();
             if (password_verify($this->password, $securePass)) {
-                //check if user is enabled
+                // Check if user is enabled
                 if (!$user->getEnabled()) {
                     $result = new Result(-2, $user, []);
                     return $result;
                 }
-                // user information are correct
+                // User information are correct
                 $result = new Result(1, $user, []);
                 return $result;
             } else {
-                // wrong pass
+                // Wrong pass
                 $result = new Result(-3, $user, []);
                 return $result;
             }
         } else {
-            // user does not exist
+            // User does not exist
             $result = new Result(0, null, []);
             return $result;
         }

@@ -47,17 +47,17 @@ class FolderUserFacade extends AbstractFacade
      */
     public function create($data): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**
      *
-     * @param string $id
+     * @param int $id
      * @param array $filter
      */
     public function fetch($id, $filter): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**
@@ -66,27 +66,27 @@ class FolderUserFacade extends AbstractFacade
      */
     public function fetchAll($filter): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**
      *
-     * @param string $id
+     * @param int $id
      * @param array $data
      */
     public function update($id, $data): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**
      *
-     * @param type $id
-     * @param type $filter
+     * @param int $id
+     * @param array $filter
      */
     public function delete($id, $filter): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**
@@ -148,12 +148,7 @@ class FolderUserFacade extends AbstractFacade
             $users = [];
             foreach ($folderUsers as $permessiUserFolder) {
                 $realUser = new User();
-                if (
-                    !(
-                        $permessiUserFolder->getUser() instanceof
-                        User\Api\V1\Entity\User
-                    )
-                ) {
+                if (!($permessiUserFolder->getUser() instanceof User)) {
                     $userData = $userHydrator->extract(
                         $permessiUserFolder->getUser()
                     );
@@ -173,7 +168,7 @@ class FolderUserFacade extends AbstractFacade
     /**
      * Returns users without access on specified folder
      *
-     * @param type $folderId
+     * @param int $folderId
      * @return array of User
      */
     public function getUsersWithoutRights($folderId)
@@ -226,7 +221,7 @@ class FolderUserFacade extends AbstractFacade
         $folderUser = new FolderUser();
         $folderUser->setFolder($folder);
         $folderUser->setUser($user);
-        // verifico se esite già un record
+        // Check if a record already exists
         $rights = $this->entityManager
             ->getRepository(FolderUser::class)
             ->findBy(["folder" => $folder, "user" => $user]);
@@ -321,7 +316,7 @@ class FolderUserFacade extends AbstractFacade
     }
 
     /**
-     * Check wheter access value is accepted
+     * Check whether access value is accepted
      *
      * @param string $access
      * @return boolean

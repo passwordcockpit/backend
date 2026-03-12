@@ -14,9 +14,6 @@ use Log\Api\V1\Facade\LogFacade;
 use Mezzio\Hal\ResourceGeneratorFactory;
 use Log\Api\V1\Action\GetLogAction;
 
-/**
- * Description of GetPasswordLogFactory
- */
 class GetLogFactory
 {
     /**

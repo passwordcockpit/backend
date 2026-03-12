@@ -13,11 +13,6 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-/**
- * Description of ListFileAction
- *
- * @author Giona Guidotti <giona.guidotti@blackpoints.ch>
- */
 class ListFileAction implements RequestHandlerInterface
 {
     /**

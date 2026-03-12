@@ -14,9 +14,6 @@ use Psr\Container\ContainerInterface;
 use Log\Api\V1\Facade\LogFacade;
 use Mezzio\Hal\ResourceGeneratorFactory;
 
-/**
- * Description of ListUserLogFactory
- */
 class ListUserLogFactory
 {
     /**

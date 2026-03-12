@@ -26,7 +26,7 @@ class ErrorResponseGenerator
      * Final handler for an application.
      *
      * @param ServerRequestInterface $request
-     * @param Response $response
+     * @param ResponseInterface $response
      * @return Response
      */
     public function __invoke(

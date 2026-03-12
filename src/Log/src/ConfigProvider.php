@@ -11,9 +11,6 @@ namespace Log;
 
 use Laminas\ConfigAggregator\ConfigAggregator;
 
-/**
- * Description of ConfigProvider
- */
 class ConfigProvider
 {
     /**

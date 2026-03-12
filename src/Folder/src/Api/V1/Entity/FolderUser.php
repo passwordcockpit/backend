@@ -55,7 +55,7 @@ class FolderUser
     private User $user;
 
     /**
-     * Get folderUserId.
+     * Get folderUserId
      *
      * @return int
      */
@@ -65,10 +65,9 @@ class FolderUser
     }
 
     /**
-     * Set access.
+     * Set access
      *
      * @param string|null $access
-     *
      * @return FolderUser
      */
     public function setAccess($access = null)
@@ -79,7 +78,7 @@ class FolderUser
     }
 
     /**
-     * Get access.
+     * Get access
      *
      * @return string|null
      */
@@ -89,13 +88,12 @@ class FolderUser
     }
 
     /**
-     * Set folder.
+     * Set folder
      *
      * @param Folder|null $folder
-     *
      * @return FolderUser
      */
-    public function setFolder(Folder $folder = null)
+    public function setFolder(?Folder $folder)
     {
         $this->folder = $folder;
 
@@ -103,8 +101,7 @@ class FolderUser
     }
 
     /**
-     * Get folder.
-     *
+     * Get folder
      * @return Folder|null
      */
     public function getFolder()
@@ -114,13 +111,12 @@ class FolderUser
     }
 
     /**
-     * Set user.
+     * Set user
      *
      * @param User|null $user
-     *
      * @return FolderUser
      */
-    public function setUser(User $user = null)
+    public function setUser(?User $user)
     {
         $this->user = $user;
 
@@ -128,7 +124,7 @@ class FolderUser
     }
 
     /**
-     * Get user.
+     * Get user
      *
      * @return User|null
      */

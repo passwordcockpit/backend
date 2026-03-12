@@ -77,7 +77,7 @@ class AuthenticationCreateAction implements RequestHandlerInterface
         $tokenUser = $this->tokenUserFacade->getByUserId($userId);
 
         $firstTimeLogin = false;
-        // FIRST TIME LOGIN, entry in the table does not exist!
+        // First time login, entry in the table does not exist!
         if ($tokenUser == null) {
             $this->tokenUserFacade->createTokenUser($user, $token);
             if (
@@ -92,16 +92,16 @@ class AuthenticationCreateAction implements RequestHandlerInterface
                 $firstTimeLogin = false;
             }
         } else {
-            //user already logged in. Modify token and date.
+            // User already logged in. Modify token and date.
             if (
                 $user->getChangePassword() &&
                 $this->authAdapter::class !=
                     \Authentication\Api\V1\Adapter\LdapAdapter::class
             ) {
-                // also if the user has not changed his password still
+                // Also if the user has not changed his password still
                 $firstTimeLogin = true;
             }
-            // since the tokenUser are returned as array we just need the first.
+            // Since the tokenUser are returned as array we just need the first.
             $this->tokenUserFacade->updateTokenUser($tokenUser[0], $token);
         }
         return $firstTimeLogin;
@@ -136,7 +136,7 @@ class AuthenticationCreateAction implements RequestHandlerInterface
             $this->authAdapter::class ==
             \Authentication\Api\V1\Adapter\LdapAdapter::class
         ) {
-            //with ldap active there is no need change password
+            // With ldap active there is no need change password
             $isLdap = true;
             $userChangePassword = false;
         }
@@ -175,7 +175,7 @@ class AuthenticationCreateAction implements RequestHandlerInterface
 
         $timeAgo = $timeAgo->format('Y-m-d H:i:s');
 
-        // get how many failed attempts the ip did on the user the last hour
+        // Get how many failed attempts the ip did on the user the last hour
         $attempts = $this->loginRequestFacade->getLastAttempts(
             $_SERVER['REMOTE_ADDR'],
             $username,
@@ -201,8 +201,8 @@ class AuthenticationCreateAction implements RequestHandlerInterface
 
         switch ($result->getCode()) {
             case Result::FAILURE_CREDENTIAL_INVALID:
-                //need to log failed attempt
-                $loginRequest = $this->loginRequestFacade->create([
+                // Need to log failed attempt
+                $this->loginRequestFacade->create([
                     "ip" => $_SERVER['REMOTE_ADDR'],
                     "username" => $username,
                     "attemptDate" => new \Datetime(
@@ -219,7 +219,7 @@ class AuthenticationCreateAction implements RequestHandlerInterface
                 break;
 
             case Result::FAILURE_IDENTITY_AMBIGUOUS:
-                //USER NOT ENABLED
+                // User not enabled
                 $user = $result->getIdentity();
                 throw new ProblemDetailsException(
                     401,
@@ -235,10 +235,10 @@ class AuthenticationCreateAction implements RequestHandlerInterface
             case Result::SUCCESS:
                 $user = $result->getIdentity();
 
-                // create token
+                // Create token
                 $token = $this->createToken($user);
 
-                // update the UserToken table, where user_id and token are stored.
+                // Update the UserToken table, where user_id and token are stored.
                 $firstTimeLogin = $this->updateTokenUserTable($user, $token);
 
                 if ($firstTimeLogin) {
@@ -252,7 +252,7 @@ class AuthenticationCreateAction implements RequestHandlerInterface
                 break;
 
             default:
-                // other failures
+                // Other failures
                 throw new ProblemDetailsException(
                     401,
                     $this->translator->translate('Wrong username or password'),

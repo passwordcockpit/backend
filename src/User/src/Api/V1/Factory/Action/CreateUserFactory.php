@@ -15,9 +15,6 @@ use User\Api\V1\Facade\UserFacade;
 use User\Api\V1\Facade\PermissionFacade;
 use Mezzio\Hal\ResourceGeneratorFactory;
 
-/**
- * Description of CreateUserFactory
- */
 class CreateUserFactory
 {
     /**

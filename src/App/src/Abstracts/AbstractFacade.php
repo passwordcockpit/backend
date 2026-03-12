@@ -33,7 +33,7 @@ abstract class AbstractFacade implements FacadeInterface
 
     /**
      *
-     * @param type $entity
+     * @param object $entity
      * @return null
      */
     public function persist($entity)
@@ -44,7 +44,7 @@ abstract class AbstractFacade implements FacadeInterface
 
     /**
      *
-     * @param type $entity
+     * @param object $entity
      * @return null
      */
     public function remove($entity)
@@ -55,7 +55,7 @@ abstract class AbstractFacade implements FacadeInterface
 
     /**
      *
-     * @return type
+     * @return object
      */
     public function getRepository()
     {
@@ -65,8 +65,8 @@ abstract class AbstractFacade implements FacadeInterface
     /**
      * Return object reference
      *
-     * @param type $id
-     * @return type
+     * @param int $id
+     * @return object
      */
     public function getReference($id)
     {

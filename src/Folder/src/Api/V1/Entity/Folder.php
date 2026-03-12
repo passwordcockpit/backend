@@ -70,7 +70,7 @@ class Folder
     }
 
     /**
-     * Get folderId.
+     * Get folderId
      *
      * @return int
      */
@@ -93,10 +93,9 @@ class Folder
     }
 
     /**
-     * Set name.
+     * Set name
      *
      * @param string $name
-     *
      * @return Folder
      */
     public function setName($name)
@@ -107,7 +106,7 @@ class Folder
     }
 
     /**
-     * Get name.
+     * Get name
      *
      * @return string
      */
@@ -117,10 +116,9 @@ class Folder
     }
 
     /**
-     * Set parentId.
+     * Set parentId
      *
      * @param int|null $parentId
-     *
      * @return Folder
      */
     public function setParentId($parentId = null)
@@ -131,7 +129,7 @@ class Folder
     }
 
     /**
-     * Get parentId.
+     * Get parentId
      *
      * @return int|null
      */
@@ -141,10 +139,9 @@ class Folder
     }
 
     /**
-     * Add user.
+     * Add user
      *
      * @param FolderUser $user
-     *
      * @return Folder
      */
     public function addUser(FolderUser $user)
@@ -155,10 +152,9 @@ class Folder
     }
 
     /**
-     * Remove user.
+     * Remove user
      *
      * @param FolderUser $user
-     *
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
     public function removeUser(FolderUser $user)
@@ -167,7 +163,7 @@ class Folder
     }
 
     /**
-     * Get user.
+     * Get user
      *
      * @return \Doctrine\Common\Collections\Collection
      */

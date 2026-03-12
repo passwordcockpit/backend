@@ -51,7 +51,7 @@ class LoginRequest
     private string $username;
 
     /**
-     * Set User.
+     * Set ip
      *
      * @param string $ip
      *
@@ -65,7 +65,7 @@ class LoginRequest
     }
 
     /**
-     * Get Ip.
+     * Get Ip
      *
      * @return string
      */
@@ -106,7 +106,7 @@ class LoginRequest
     /**
      * Set attemptDate
      *
-     * @param datetime $attemptDate
+     * @param ?DateTime $attemptDate
      *
      * @return LoginRequest
      */

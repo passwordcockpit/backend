@@ -73,7 +73,7 @@ class ListUserLogAction implements RequestHandlerInterface
     {
         $userId = $request->getAttribute('id');
         $logs = $this->logFacade->getUserLog($userId);
-        //most recent logs are shown
+        // Most recent logs are shown
         // $logs = array_reverse($logs);
         usort($logs, fn($a, $b) => $b->getActionDate()->getTimestamp() -
             $a->getActionDate()->getTimestamp());

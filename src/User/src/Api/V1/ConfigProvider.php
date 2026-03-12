@@ -180,7 +180,7 @@ class ConfigProvider
                 'name' => 'api.v1.users.create',
                 'path' => '/api/v1/users',
                 'middleware' => [
-                    "UserValidationMiddleware", // validator
+                    "UserValidationMiddleware",
                     Action\CreateUserAction::class
                 ],
                 'allowed_methods' => ['POST']
@@ -192,7 +192,7 @@ class ConfigProvider
                     'constraints' => ['id' => '\d+']
                 ],
                 'middleware' => [
-                    "UserUpdateValidationMiddleware", // validator
+                    "UserUpdateValidationMiddleware",
                     Action\UpdateUserAction::class
                 ],
                 'allowed_methods' => ['PATCH', 'PUT']
@@ -209,9 +209,6 @@ class ConfigProvider
               ],
               'allowed_methods' => ['PATCH']
             ],
-            /**
-             * Users' permissions routes
-             */
             [
                 'name' => 'api.v1.users.permissions.get',
                 'path' => '/api/v1/users/:id/permissions',

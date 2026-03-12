@@ -109,19 +109,19 @@ class LogsAssertion implements AssertionInterface
             $userIdLog = $log->getUser()->getUserId();
             $userIdrequest = $this->user->getUserId();
 
-            // if the user making the request is the same user specified in the log
+            // If the user making the request is the same user specified in the log
             if ($userIdLog == $userIdrequest) {
                 return true;
             }
 
-            // we can reuse the function below to check if the password
+            // We can reuse the function below to check if the password
             // that is linked to the log is available to the user making the request
             $passwordId = $log->getPassword()->getPasswordId();
             if ($this->checkPasswordId($passwordId)) {
                 return true;
             }
         }
-        // user is not related to the log
+        // User is not related to the log
         return false;
     }
 
@@ -132,9 +132,9 @@ class LogsAssertion implements AssertionInterface
                 ->getRepository(Password::class)
                 ->find($passwordId);
             if ($password) {
-                // getting folderId of password
+                // Getting folderId of password
                 $folderId = $password->getFolder()->getFolderId();
-                //need to check now that user has 'read' or 'manage' on folder.
+                // Need to check now that user has 'read' or 'manage' on folder.
 
                 $access = $this->folderUserFacade->checkUser(
                     $folderId,
@@ -145,7 +145,7 @@ class LogsAssertion implements AssertionInterface
                     return true;
                 }
             } else {
-                // password not found
+                // Password not found
                 return false;
             }
         }
@@ -168,7 +168,6 @@ class LogsAssertion implements AssertionInterface
      * @param Rbac $rbac
      * @param RoleInterface $role
      * @param string $permission
-     *
      * @return bool
      */
     public function assert(
@@ -176,7 +175,7 @@ class LogsAssertion implements AssertionInterface
         RoleInterface $role,
         string $permission
     ): bool {
-        // need to check if the user has manage_user or access_all_folders  --> return true
+        // Need to check if the user has manage_user or access_all_folders  --> return true
         $roles = $this->permissionFacade->getUserPermissionArray($this->user);
 
         if (
@@ -185,8 +184,7 @@ class LogsAssertion implements AssertionInterface
         ) {
             return true;
         }
-        // else need to check if password id or user id are compatible with the user making the request (e.g. same ID). --> true/false
-
+        // Else need to check if password id or user id are compatible with the user making the request (e.g. same ID). --> true/false
         $allowUser = false;
 
         switch ($permission) {

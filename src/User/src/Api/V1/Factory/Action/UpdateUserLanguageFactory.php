@@ -16,9 +16,6 @@ use User\Api\V1\Action\UpdateUserAction;
 use Authentication\Api\V1\Facade\TokenUserFacade;
 use User\Api\V1\Action\UpdateUserLanguageAction;
 
-/**
- * Description of UpdateUserLanguageFactory
- */
 class UpdateUserLanguageFactory
 {
     /**

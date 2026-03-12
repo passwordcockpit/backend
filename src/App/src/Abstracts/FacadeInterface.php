@@ -18,14 +18,14 @@ interface FacadeInterface
 
     /**
      *
-     * @param type $id
-     * @param type $filter
+     * @param int $id
+     * @param array $filter
      */
     public function delete($id, $filter);
 
     /**
      *
-     * @param string $id
+     * @param int $id
      * @param array $filter
      */
     public function fetch($id, $filter);
@@ -38,7 +38,7 @@ interface FacadeInterface
 
     /**
      *
-     * @param string $id
+     * @param int $id
      * @param array $data
      */
     public function update($id, $data);

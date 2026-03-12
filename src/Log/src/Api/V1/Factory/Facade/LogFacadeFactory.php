@@ -14,9 +14,6 @@ use Psr\Container\ContainerInterface;
 use Log\Api\V1\Facade\LogFacade;
 use Laminas\I18n\Translator\Translator;
 
-/**
- * Description of LogFacadeFactory
- */
 class LogFacadeFactory
 {
     /**

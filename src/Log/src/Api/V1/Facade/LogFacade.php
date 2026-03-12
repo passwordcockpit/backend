@@ -17,9 +17,6 @@ use Password\Api\V1\Entity\Password;
 use User\Api\V1\Entity\User;
 use Log\Api\V1\Entity\Log;
 
-/**
- * Description of LogFacade
- */
 class LogFacade extends AbstractFacade
 {
     /**
@@ -46,7 +43,7 @@ class LogFacade extends AbstractFacade
 
     /**
      *
-     * @param string $id
+     * @param int $id
      * @param array $filter
      */
     public function fetch($id, $filter): never
@@ -65,7 +62,7 @@ class LogFacade extends AbstractFacade
 
     /**
      *
-     * @param string $id
+     * @param int $id
      * @param array $data
      */
     public function update($id, $data): never
@@ -75,8 +72,8 @@ class LogFacade extends AbstractFacade
 
     /**
      *
-     * @param type $id
-     * @param type $filter
+     * @param int $id
+     * @param array $filter
      */
     public function delete($id, $filter): never
     {
@@ -164,8 +161,8 @@ class LogFacade extends AbstractFacade
 
     /**
      *
-     * @param type $id
-     * @return type
+     * @param int $id
+     * @return Log[]
      * @throws ProblemDetailsException
      */
     public function getUserLog($id)
@@ -213,7 +210,6 @@ class LogFacade extends AbstractFacade
     }
 
     /**
-     *
      * Create a log that shows who deleted a password.
      *
      * @param Password $passwordId

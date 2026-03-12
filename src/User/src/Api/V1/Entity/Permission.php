@@ -60,21 +60,19 @@ class Permission
     }
 
     /**
-     * Set manageUsers.
+     * Set manageUsers
      *
      * @param bool|null $manageUsers
-     *
      * @return Permission
      */
     public function setManageUsers($manageUsers = null)
     {
         $this->manageUsers = $manageUsers;
-
         return $this;
     }
 
     /**
-     * Get manageUsers.
+     * Get manageUsers
      *
      * @return bool|null
      */
@@ -84,21 +82,19 @@ class Permission
     }
 
     /**
-     * Set createFolders.
+     * Set createFolders
      *
      * @param bool|null $createFolders
-     *
      * @return Permission
      */
     public function setCreateFolders($createFolders = null)
     {
         $this->createFolders = $createFolders;
-
         return $this;
     }
 
     /**
-     * Get createFolders.
+     * Get createFolders
      *
      * @return bool|null
      */
@@ -108,21 +104,19 @@ class Permission
     }
 
     /**
-     * Set accessAllFolders.
+     * Set accessAllFolders
      *
      * @param bool|null $accessAllFolders
-     *
      * @return Permission
      */
     public function setAccessAllFolders($accessAllFolders = null)
     {
         $this->accessAllFolders = $accessAllFolders;
-
         return $this;
     }
 
     /**
-     * Get accessAllFolders.
+     * Get accessAllFolders
      *
      * @return bool|null
      */
@@ -132,21 +126,19 @@ class Permission
     }
 
     /**
-     * Set viewLogs.
+     * Set viewLogs
      *
      * @param bool|null $viewLogs
-     *
      * @return Permission
      */
     public function setViewLogs($viewLogs = null)
     {
         $this->viewLogs = $viewLogs;
-
         return $this;
     }
 
     /**
-     * Get viewLogs.
+     * Get viewLogs
      *
      * @return bool|null
      */
@@ -156,21 +148,19 @@ class Permission
     }
 
     /**
-     * Set user.
+     * Set user
      *
      * @param \User\Api\V1\Entity\User $user
-     *
      * @return Permission
      */
     public function setUser(\User\Api\V1\Entity\User $user)
     {
         $this->user = $user;
-
         return $this;
     }
 
     /**
-     * Get user.
+     * Get user
      *
      * @return \User\Api\V1\Entity\User
      */

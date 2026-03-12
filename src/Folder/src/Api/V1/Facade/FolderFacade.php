@@ -46,17 +46,17 @@ class FolderFacade extends AbstractFacade
      */
     public function create($data): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**
      *
-     * @param string $id
+     * @param int $id
      * @param array $filter
      */
     public function fetch($id, $filter): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**
@@ -65,27 +65,27 @@ class FolderFacade extends AbstractFacade
      */
     public function fetchAll($filter): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**
      *
-     * @param string $id
+     * @param int $id
      * @param array $data
      */
     public function update($id, $data): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**
      *
-     * @param type $id
-     * @param type $filter
+     * @param int $id
+     * @param array $filter
      */
     public function delete($id, $filter): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**

@@ -20,12 +20,14 @@ class NoEntityExistsFactory
      * Invoke method, create instance of NoEntityExists class
      *
      * @param ContainerInterface $container
+     * @param $requestedName
+     * @param ?array $options
      * @return NoEntityExists
      */
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
-        array $options = null
+        ?array $options
     ) {
         return new NoEntityExists(
             $container->get(EntityManagerInterface::class),

@@ -14,11 +14,11 @@ use Laminas\Hydrator\AbstractHydrator;
 use App\Service\DateConverter;
 use Laminas\I18n\Translator\Translator;
 
-/**
- * Description of LogHydrator
- */
 class LogHydrator extends AbstractHydrator
 {
+
+    private $translator;
+
     /**
      * Constructor
      *

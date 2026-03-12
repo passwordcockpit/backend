@@ -18,9 +18,6 @@ use User\Api\V1\Facade\PermissionFacade;
 use User\Api\V1\Facade\UserFacade;
 use Mezzio\ProblemDetails\ProblemDetailsResponseFactory;
 
-/**
- * Description of MovePasswordFactory
- */
 class MovePasswordFactory
 {
     /**

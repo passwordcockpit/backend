@@ -12,9 +12,6 @@ namespace Password\Api\V1\Factory\Middleware;
 use Psr\Container\ContainerInterface;
 use App\Middleware\ValidationMiddleware;
 
-/**
- * Description of PasswordValidationPatchMiddlewareFactory
- */
 class PasswordValidationUpdateMiddlewareFactory
 {
     /**

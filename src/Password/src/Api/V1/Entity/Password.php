@@ -168,7 +168,7 @@ class Password
     }
 
     /**
-     *
+     * Set complete password
      */
     function setCompletePassword()
     {
@@ -176,7 +176,7 @@ class Password
     }
 
     /**
-     * Get passwordId.
+     * Get passwordId
      *
      * @return int
      */
@@ -186,10 +186,9 @@ class Password
     }
 
     /**
-     * Set title.
+     * Set title
      *
      * @param string|null $title
-     *
      * @return Password
      */
     public function setTitle($title = null)
@@ -200,7 +199,7 @@ class Password
     }
 
     /**
-     * Get title.
+     * Get title
      *
      * @return string|null
      */
@@ -210,10 +209,9 @@ class Password
     }
 
     /**
-     * Set icon.
+     * Set icon
      *
      * @param string|null $icon
-     *
      * @return Password
      */
     public function setIcon($icon = null)
@@ -224,7 +222,7 @@ class Password
     }
 
     /**
-     * Get icon.
+     * Get icon
      *
      * @return string|null
      */
@@ -234,21 +232,19 @@ class Password
     }
 
     /**
-     * Set description.
+     * Set description
      *
      * @param string|null $description
-     *
      * @return Password
      */
     public function setDescription($description = null)
     {
         $this->description = $description;
-
         return $this;
     }
 
     /**
-     * Get description.
+     * Get description
      *
      * @return string|null
      */
@@ -258,21 +254,19 @@ class Password
     }
 
     /**
-     * Set username.
+     * Set username
      *
      * @param string|null $username
-     *
      * @return Password
      */
     public function setUsername($username = null)
     {
         $this->username = $username;
-
         return $this;
     }
 
     /**
-     * Get username.
+     * Get username
      *
      * @return string|null
      */
@@ -282,21 +276,19 @@ class Password
     }
 
     /**
-     * Set password.
+     * Set password
      *
      * @param string|null $password
-     *
      * @return Password
      */
     public function setPassword($password = null)
     {
         $this->password = $password;
-
         return $this;
     }
 
     /**
-     * Get password.
+     * Get password
      *
      * @return string|null
      */
@@ -306,21 +298,19 @@ class Password
     }
 
     /**
-     * Set url.
+     * Set url
      *
      * @param string|null $url
-     *
      * @return Password
      */
     public function setUrl($url = null)
     {
         $this->url = $url;
-
         return $this;
     }
 
     /**
-     * Get url.
+     * Get url
      *
      * @return string|null
      */
@@ -330,21 +320,19 @@ class Password
     }
 
     /**
-     * Set tags.
+     * Set tags
      *
      * @param string|null $tags
-     *
      * @return Password
      */
     public function setTags($tags = null)
     {
         $this->tags = $tags;
-
         return $this;
     }
 
     /**
-     * Get tags.
+     * Get tags
      *
      * @return string|null
      */
@@ -354,21 +342,19 @@ class Password
     }
 
     /**
-     * Set lastModificationDate.
+     * Set lastModificationDate
      *
      * @param \DateTime|null $lastModificationDate
-     *
      * @return Password
      */
     public function setLastModificationDate($lastModificationDate = null)
     {
         $this->lastModificationDate = $lastModificationDate;
-
         return $this;
     }
 
     /**
-     * Get lastModificationDate.
+     * Get lastModificationDate
      *
      * @return \DateTime|null
      */
@@ -378,13 +364,12 @@ class Password
     }
 
     /**
-     * Set folder.
+     * Set folder
      *
      * @param Folder|null $folder
-     *
      * @return Password
      */
-    public function setFolder(Folder $folder = null)
+    public function setFolder(?Folder $folder)
     {
         $this->folder = $folder;
 
@@ -392,7 +377,7 @@ class Password
     }
 
     /**
-     * Get folder.
+     * Get folder
      *
      * @return Folder|null
      */

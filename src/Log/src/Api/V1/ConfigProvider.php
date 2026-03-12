@@ -12,12 +12,8 @@ namespace Log\Api\V1;
 use Mezzio\Hal\Metadata\RouteBasedResourceMetadata;
 use Mezzio\Hal\Metadata\RouteBasedCollectionMetadata;
 use Log\Api\V1\Entity\Log;
-use Log\Api\V1\Hydrator\LogHydrator;
 use Log\Api\V1\Hydrator\LogHalHydrator;
 
-/**
- * Description of ConfigProvider
- */
 class ConfigProvider
 {
     /**
@@ -123,7 +119,7 @@ class ConfigProvider
                 'name' => 'api.v1.users.logs.list',
                 'path' => '/api/v1/users/:id/logs',
                 'options' => [
-                    'constraints' => ['id' => '\d+'] // controllo che id sia solo numerico
+                    'constraints' => ['id' => '\d+']
                 ],
                 'middleware' => [Action\ListUserLogAction::class],
                 'allowed_methods' => ['GET']
@@ -132,7 +128,7 @@ class ConfigProvider
                 'name' => 'api.v1.passwords.logs.list',
                 'path' => '/api/v1/passwords/:id/logs',
                 'options' => [
-                    'constraints' => ['id' => '\d+'] // controllo che id sia solo numerico
+                    'constraints' => ['id' => '\d+']
                 ],
                 'middleware' => [Action\ListPasswordLogAction::class],
                 'allowed_methods' => ['GET']
@@ -143,7 +139,7 @@ class ConfigProvider
                 'options' => [
                     'constraints' => [
                         'id' => '\d+'
-                    ] // controllo che id sia solo numerico
+                    ]
                 ],
                 'middleware' => [Action\GetLogAction::class],
                 'allowed_methods' => ['GET']
@@ -152,8 +148,7 @@ class ConfigProvider
     }
 
     /**
-     *
-     * Returns hydrator plugin configuration.
+     * Returns hydrator plugin configuration
      *
      * @return array
      */

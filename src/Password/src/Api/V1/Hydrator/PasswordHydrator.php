@@ -13,9 +13,6 @@ use Password\Api\V1\Entity\Password;
 use Laminas\Hydrator\AbstractHydrator;
 use App\Service\DateConverter;
 
-/**
- * Description of FolderHydrator
- */
 class PasswordHydrator extends AbstractHydrator
 {
     /**

@@ -9,9 +9,6 @@
 
 namespace Folder\Api\V1\Hydrator;
 
-/**
- * Description of FolderHalHydrator
- */
 use Folder\Api\V1\Entity\Folder;
 use Laminas\Hydrator\AbstractHydrator;
 
@@ -28,7 +25,7 @@ class FolderHalHydrator extends AbstractHydrator
         $data['folder_id'] = $folder->getFolderId();
         $data['parent_id'] = $folder->getParentId();
         $data['name'] = $folder->getName();
-        //switch from read to 1 and manage to 2 or null
+        // Switch from read to 1 and manage to 2 or null
         if ($folder->getAccess() == 1) {
             $data['access'] = 1;
         } elseif ($folder->getAccess() == 2) {

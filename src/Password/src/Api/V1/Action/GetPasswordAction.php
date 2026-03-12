@@ -74,7 +74,7 @@ class GetPasswordAction implements RequestHandlerInterface
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        // set the User for logging purpose
+        // Set the User for logging purpose
         $this->passwordFacade->setUserId(
             $request->getAttribute("token", false)['sub']
         );
@@ -86,7 +86,7 @@ class GetPasswordAction implements RequestHandlerInterface
             $request
         );
 
-        // file is currently an array, but a password should only have one file associated so let's just return $file[0].
+        // File is currently an array, but a password should only have one file associated so let's just return $file[0].
         if (isset($file[0])) {
             $fileId = $file[0]->getFileId();
             $fileName = $file[0]->getName();

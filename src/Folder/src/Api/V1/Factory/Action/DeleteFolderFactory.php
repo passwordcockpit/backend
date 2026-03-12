@@ -14,9 +14,6 @@ use Psr\Container\ContainerInterface;
 use Folder\Api\V1\Facade\FolderFacade;
 use Mezzio\Hal\ResourceGeneratorFactory;
 
-/**
- * Description of DeleteFolderAction
- */
 class DeleteFolderFactory
 {
     /**

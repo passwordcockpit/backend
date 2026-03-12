@@ -11,9 +11,6 @@ namespace Folder\Api\V1\Hydrator;
 
 use Laminas\Hydrator\AbstractHydrator;
 
-/**
- * Description of FolderUserHydrator
- */
 class FolderUserHydrator extends AbstractHydrator
 {
     /**

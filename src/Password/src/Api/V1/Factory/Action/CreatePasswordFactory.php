@@ -14,9 +14,6 @@ use Password\Api\V1\Facade\PasswordFacade;
 use Mezzio\Hal\ResourceGeneratorFactory;
 use Password\Api\V1\Action\CreatePasswordAction;
 
-/**
- * Description of CreatePasswordFactory
- */
 class CreatePasswordFactory
 {
     /**

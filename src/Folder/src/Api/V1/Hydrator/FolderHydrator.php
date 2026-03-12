@@ -9,9 +9,6 @@
 
 namespace Folder\Api\V1\Hydrator;
 
-/**
- * Description of FolderHydrator
- */
 use Folder\Api\V1\Entity\Folder;
 use Laminas\Hydrator\AbstractHydrator;
 

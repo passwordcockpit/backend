@@ -72,8 +72,8 @@ class AuthorizationMiddleware implements MiddlewareInterface
     /**
      * Returns passwordId from Request - check Attributes and Body
      *
-     * @param type $request
-     * @return type
+     * @param ServerRequestInterface $request
+     * @return int
      */
     private function getPasswordId($request)
     {
@@ -88,8 +88,8 @@ class AuthorizationMiddleware implements MiddlewareInterface
     /**
      * Returns userId from Request attributes
      *
-     * @param type $request
-     * @return type
+     * @param ServerRequestInterface $request
+     * @return int
      */
     private function getUserId($request)
     {
@@ -127,13 +127,13 @@ class AuthorizationMiddleware implements MiddlewareInterface
         ServerRequestInterface $request,
         RequestHandlerInterface $handler
     ): ResponseInterface {
-        //check if token exist
+        // Check if token exist
         $token = $request->getAttribute("token", false);
         if (!$token) {
             return $handler->handle($request);
         }
 
-        // check if route and matchedRoute exist
+        // Check if route and matchedRoute exist
         $route = $request->getAttribute(RouteResult::class);
         if (!$route) {
             return $handler->handle($request);
@@ -143,31 +143,23 @@ class AuthorizationMiddleware implements MiddlewareInterface
         }
 
         $routeName = $route->getMatchedRoute()->getName();
-        $path = $route->getMatchedRoute()->getPath();
         $method = $request->getMethod();
 
-        // get user making the request
+        // Get user making the request
         $user = $request->getAttribute('Authentication\User');
-        $userId = $user->getUserId();
 
-        // get the permission of the user
+        // Get the permission of the user
         $roles = $this->permissionFacade->getUserPermissionArray($user);
 
-        // values needed for the isGranted() function
-        $assertion = null;
-        $access = null;
-
-        //loop on the permission
+        // Loop on the permission
         foreach ($roles['roles'] as $role) {
-            $assertion = null;
-            $access = null;
 
-            // check if role exists in rbac configuration
+            // Check if role exists in rbac configuration
             $this->checkRole($role);
 
-            // user role
+            // User role
             if ($role == 'user' || $role == 'view_logs') {
-                // check if is granted
+                // Check if is granted
                 if (
                     $this->rbac->isGranted($role, $routeName) &&
                     $this->assertionPluginManager->assert(

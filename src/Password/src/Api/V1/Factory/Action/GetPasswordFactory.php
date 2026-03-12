@@ -15,9 +15,6 @@ use Password\Api\V1\Facade\PasswordFacade;
 use File\Api\V1\Facade\FileFacade;
 use Mezzio\Hal\ResourceGeneratorFactory;
 
-/**
- * Description of GetPasswordFactory
- */
 class GetPasswordFactory
 {
     /**

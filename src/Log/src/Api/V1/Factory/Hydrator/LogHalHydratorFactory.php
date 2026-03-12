@@ -13,9 +13,6 @@ use Psr\Container\ContainerInterface;
 use Log\Api\V1\Hydrator\LogHalHydrator;
 use Laminas\I18n\Translator\Translator;
 
-/**
- * Description of GetPasswordLogFactory
- */
 class LogHalHydratorFactory
 {
     /**

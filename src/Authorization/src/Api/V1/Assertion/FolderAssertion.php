@@ -96,7 +96,6 @@ class FolderAssertion implements AssertionInterface
                 );
             } catch (ProblemDetailsException) {
                 // if we catch a 404 NOT FOUND exception, we need to return 401 instead (since this is an assertion)
-                $userId = $this->user->getUserId();
                 $method = $this->request->getMethod();
 
                 throw new ProblemDetailsException(

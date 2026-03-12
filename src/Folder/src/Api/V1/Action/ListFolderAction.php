@@ -67,7 +67,7 @@ class ListFolderAction implements RequestHandlerInterface
         $queryParams = $request->getQueryParams();
 
         $queryParam = "";
-        // checks if there are params
+        // Check if there are params
         if (sizeof($queryParams) > 0 && isset($queryParams['q'])) {
             $queryParam = $queryParams['q'];
         }
@@ -75,7 +75,7 @@ class ListFolderAction implements RequestHandlerInterface
         $user = $request->getAttribute('Authentication\User');
         $roles = $this->permissionFacade->getUserPermissionArray($user);
         $accessAllFolders = in_array('access_all_folders', $roles['roles']);
-        // check 'access_all_folders' permission
+        // Check 'access_all_folders' permission
         if ($accessAllFolders) {
             $folders = $this->folderFacade->getAllByName($queryParam);
             $folders = $this->folderFacade->setAccessToFolders(
@@ -95,7 +95,7 @@ class ListFolderAction implements RequestHandlerInterface
                 $folders,
                 $user->getUserId()
             );
-            // order folders by name
+            // Order folders by name
             usort($folders, fn($a, $b) => strcasecmp((string) $a->getName(), (string) $b->getName()));
         }
         $foldersCollection = new FolderCollection(new ArrayAdapter($folders));

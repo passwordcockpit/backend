@@ -14,9 +14,6 @@ use Psr\Container\ContainerInterface;
 use Password\Api\V1\Facade\PasswordFacade;
 use Mezzio\Hal\ResourceGeneratorFactory;
 
-/**
- * Description of DeletePasswordFactory
- */
 class DeletePasswordFactory
 {
     /**

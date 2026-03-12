@@ -53,10 +53,10 @@ class ListUsernameAction implements RequestHandlerInterface
     
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $users = $this->userFacade->getAllUsernames(); // ottengo la lista users dalla userFacade
+        $users = $this->userFacade->getAllUsernames();
         $usersArrayAdapter = new \Laminas\Paginator\Adapter\ArrayAdapter($users);
         $usersCollection = new UserCollection($usersArrayAdapter);
-        $usersCollection->setDefaultItemCountPerPage(PHP_INT_MAX); // setto al Paginator la dimensione uguale al MAX INT di PHP
+        $usersCollection->setDefaultItemCountPerPage(PHP_INT_MAX);
         $resource = $this->halResourceGenerator->fromObject(
             $usersCollection,
             $request

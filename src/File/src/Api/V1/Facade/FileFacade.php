@@ -23,7 +23,7 @@ class FileFacade extends AbstractFacade
     /**
      * @param Translator $translator
      * @param EntityManager $entityManager
-     * @param type entityName
+     * @param string entityName
      * @param FileHydrator $fileHydrator
      * @param array $uploadConfig
      */
@@ -124,13 +124,13 @@ class FileFacade extends AbstractFacade
     }
 
     /**
-     * Delete the phisical file
+     * Delete the physical file
      *
      * @param File $file
      */
     private function deleteDiskFile($file)
     {
-        // delete fisical file
+        // Delete physical file
         $fileToDelete =
             $this->uploadConfig['upload_path'] .
             DIRECTORY_SEPARATOR .
@@ -177,7 +177,7 @@ class FileFacade extends AbstractFacade
 
     /**
      *
-     * @param string $id
+     * @param int $id
      * @param array $filter
      * @return File
      * @throws ProblemDetailsException
@@ -204,7 +204,7 @@ class FileFacade extends AbstractFacade
 
     /**
      *
-     * @param type $filter
+     * @param array $filter
      * @return File[]
      */
     public function fetchAll($filter = null)
@@ -220,7 +220,7 @@ class FileFacade extends AbstractFacade
 
     /**
      *
-     * @param string $id
+     * @param int $id
      * @param array $data
      * @return File
      * @throws ProblemDetailsException

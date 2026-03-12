@@ -17,9 +17,6 @@ use Log\Api\V1\Facade\LogFacade;
 use File\Api\V1\Facade\FileFacade;
 use Laminas\I18n\Translator\Translator;
 
-/**
- * Description of PasswordFacadeFactory
- */
 class PasswordFacadeFactory
 {
     /**

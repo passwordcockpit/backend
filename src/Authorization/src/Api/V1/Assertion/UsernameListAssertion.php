@@ -50,7 +50,6 @@ class UsernameListAssertion implements AssertionInterface
      * @param Rbac $rbac
      * @param RoleInterface $role
      * @param string $permission
-     *
      * @return bool
      */
     public function assert(
@@ -58,7 +57,7 @@ class UsernameListAssertion implements AssertionInterface
         RoleInterface $role,
         string $permission
     ): bool {
-        // return true only if user has a 'manage' somewhere
+        // Return true only if user has a 'manage' somewhere
         return $this->folderUserFacade->checkUserManage($this->user);
     }
 }

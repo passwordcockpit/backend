@@ -16,9 +16,6 @@ use Folder\Api\V1\Facade\FolderFacade;
 use Mezzio\Hal\ResourceGeneratorFactory;
 use Mezzio\Hal\HalResponseFactory;
 
-/**
- * Description of GetFolderFactory
- */
 class GetFolderFactory
 {
     /**

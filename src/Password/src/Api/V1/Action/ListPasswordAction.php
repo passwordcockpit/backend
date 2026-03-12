@@ -62,19 +62,19 @@ class ListPasswordAction implements RequestHandlerInterface
 
         $queryParam = "";
 
-        // checks if there are params
+        // Checks if there are params
         if (sizeof($queryParams) > 0 && isset($queryParams['q'])) {
             $queryParam = $queryParams['q'];
         }
 
         $user = $request->getAttribute('Authentication\User');
 
-        // getting user permissions
+        // Get user permissions
         $perms = $this->permissionFacade->getUserPermission($user->getUserId());
 
-        // have 'access_all_folder'
+        // Check 'access_all_folder'
         if ($perms->getAccessAllFolders()) {
-            // getting passwords, then setting the correct file to it
+            // Get passwords, then setting the correct file to it
             $passwords = $this->passwordFacade->getAllPasswordsbySearch(
                 $queryParam
             );
@@ -82,9 +82,9 @@ class ListPasswordAction implements RequestHandlerInterface
                 $passwords
             );
         } else {
-            //just a user without permissions
+            // Just a user without permissions
 
-            //getting passwords related to the user, then setting the correct file to it
+            // Get passwords related to the user, then setting the correct file to it
             $passwords = $this->passwordFacade->getPasswordsbySearch(
                 $queryParam,
                 $user->getUserId()
@@ -94,7 +94,7 @@ class ListPasswordAction implements RequestHandlerInterface
             );
         }
 
-        //decrypt passwords
+        // Decrypt passwords
         foreach ($passwords as $pass) {
             $decryptedPass = $this->passwordFacade->decrypt(
                 $pass->getPassword()
@@ -102,8 +102,7 @@ class ListPasswordAction implements RequestHandlerInterface
             $pass->setPassword($decryptedPass);
         }
 
-        // transforming passwords to collection,
-        // so we can create a HalResource
+        // Transform passwords to collection, so we can create a HalResource
         $passwordsArrayAdapter = new \Laminas\Paginator\Adapter\ArrayAdapter(
             $passwords
         );

@@ -15,9 +15,6 @@ use Mezzio\Hal\ResourceGeneratorFactory;
 use Password\Api\V1\Action\UpdatePasswordAction;
 use Mezzio\ProblemDetails\ProblemDetailsResponseFactory;
 
-/**
- * Description of UpdatePasswordFactory
- */
 class UpdatePasswordFactory
 {
     /**

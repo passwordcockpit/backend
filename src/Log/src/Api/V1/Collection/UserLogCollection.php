@@ -10,9 +10,7 @@
 namespace Log\Api\V1\Collection;
 
 use Laminas\Paginator\Paginator;
-/**
- * Description of LogCollection$
- */
+
 class UserLogCollection extends Paginator
 {
 }

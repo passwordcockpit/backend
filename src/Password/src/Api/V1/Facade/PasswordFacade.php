@@ -71,12 +71,12 @@ class PasswordFacade extends AbstractFacade
 
     /**
      *
-     * @param string $id
+     * @param int $id
      * @param array $filter
      */
     public function fetch($id, $filter): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**
@@ -85,17 +85,17 @@ class PasswordFacade extends AbstractFacade
      */
     public function fetchAll($filter): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**
      *
-     * @param type $id
-     * @param type $filter
+     * @param int $id
+     * @param array $filter
      */
     public function delete($id, $filter): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**
@@ -148,7 +148,7 @@ class PasswordFacade extends AbstractFacade
             if (isset($request->getUploadedFiles()['file'])) {
                 $file = $request->getUploadedFiles()['file'];
 
-                // handle physical file
+                // Handle physical file
                 $file = $this->fileFacade->handleFile(
                     $file,
                     $this->uploadConfig,
@@ -208,12 +208,12 @@ class PasswordFacade extends AbstractFacade
 
     /**
      *
-     * @param string $id
+     * @param int $id
      * @param array $data
      */
     public function update($id, $data): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**
@@ -250,7 +250,7 @@ class PasswordFacade extends AbstractFacade
                 $this->getUserId()
             );
 
-            //check if there is a file associated still.
+            // Check if there is a file associated still.
             $fileStill = $this->fileFacade->getFiles($id);
             if (isset($fileStill[0])) {
                 $password->setFileId($fileStill[0]->getFileId());
@@ -289,21 +289,21 @@ class PasswordFacade extends AbstractFacade
             ->getRepository(Password::class)
             ->find($id);
         if ($password) {
-            // delete logs
+            // Delete logs
             $logs = $this->logFacade->getPasswordLogFromPass($password);
             foreach ($logs as $log) {
                 $this->entityManager->remove($log);
             }
-            // delete files
+            // Delete files
             $files = $this->entityManager
                 ->getRepository(File::class)
                 ->findBy(['password' => $password]);
             foreach ($files as $file) {
-                //remove file
+                // Remove file
                 $this->fileFacade->delete($file->getFileId());
             }
 
-            // create a "deleted password nr#" Log.
+            // Create a "deleted password nr#" Log
             $user = $this->entityManager
                 ->getRepository(User::class)
                 ->find($userId);
@@ -382,7 +382,7 @@ class PasswordFacade extends AbstractFacade
      */
     public function getAllPasswordsbySearch($searchString)
     {
-        // this query builder checks all the fields below and return the passwords
+        // This query builder checks all the fields below and return the passwords
         $queryBuilder = $this->entityManager->createQueryBuilder();
 
         return $queryBuilder
@@ -406,7 +406,7 @@ class PasswordFacade extends AbstractFacade
      */
     public function getPasswordsbySearch($searchString, $userId)
     {
-        // this query builder checks all the fields below and return the passwords
+        // This query builder checks all the fields below and return the passwords
         $queryBuilder = $this->entityManager->createQueryBuilder();
 
         return $queryBuilder
@@ -446,7 +446,7 @@ class PasswordFacade extends AbstractFacade
     }
 
     /**
-     * Associate a password array with their files.
+     * Associate a password array with their files
      *
      * @param array of Password
      * @return array of Password
@@ -488,7 +488,7 @@ class PasswordFacade extends AbstractFacade
      */
     private function encrypt($password)
     {
-        $key = hash('sha256', $this->encriptionKey, true); // 32-byte key
+        $key = hash('sha256', $this->encriptionKey, true);
         $ivLength = openssl_cipher_iv_length('aes-256-cbc');
         $iv = random_bytes($ivLength);
         $ciphertext = openssl_encrypt($password, 'aes-256-cbc', $key, OPENSSL_RAW_DATA, $iv);

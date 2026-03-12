@@ -11,9 +11,6 @@ namespace Password;
 
 use Laminas\ConfigAggregator\ConfigAggregator;
 
-/**
- * Description of ConfigProvider
- */
 class ConfigProvider
 {
     /**

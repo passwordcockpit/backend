@@ -19,10 +19,6 @@ use Password\Api\V1\Facade\PasswordFacade;
 use File\Api\V1\Facade\FileFacade;
 
 /**
- * Description of ListPasswordFilesAction
- */
-
-/**
  * @OA\Get(
  *     path="/v1/passwords/{passwordId}/files",
  *     summary="Get files of specified password",

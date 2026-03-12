@@ -13,7 +13,6 @@ use Doctrine\ORM\EntityManager;
 use Laminas\I18n\Translator\Translator;
 use Authentication\Api\V1\Entity\LoginRequest;
 use App\Abstracts\AbstractFacade;
-use Exception;
 
 class LoginRequestFacade extends AbstractFacade
 {
@@ -53,22 +52,22 @@ class LoginRequestFacade extends AbstractFacade
 
     /**
      *
-     * @param type $id
-     * @param type $filter
+     * @param int $id
+     * @param array $filter
      */
     public function delete($id, $filter): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**
      *
-     * @param string $id
+     * @param int $id
      * @param array $filter
      */
     public function fetch($id, $filter): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**
@@ -77,17 +76,17 @@ class LoginRequestFacade extends AbstractFacade
      */
     public function fetchAll($filter): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**
      *
-     * @param string $id
+     * @param int $id
      * @param array $data
      */
     public function update($id, $data): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**

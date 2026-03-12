@@ -66,7 +66,7 @@ class Log
     private User $user;
 
     /**
-     * Get logId.
+     * Get logId
      *
      * @return int
      */
@@ -76,21 +76,19 @@ class Log
     }
 
     /**
-     * Set actionDate.
+     * Set actionDate
      *
      * @param \DateTime|null $actionDate
-     *
      * @return Log
      */
     public function setActionDate($actionDate = null)
     {
         $this->actionDate = $actionDate;
-
         return $this;
     }
 
     /**
-     * Get actionDate.
+     * Get actionDate
      *
      * @return \DateTime|null
      */
@@ -100,16 +98,14 @@ class Log
     }
 
     /**
-     * Set action.
+     * Set action
      *
      * @param string|null $action
-     *
      * @return Log
      */
     public function setAction($action = null)
     {
         $this->action = $action;
-
         return $this;
     }
 
@@ -124,20 +120,18 @@ class Log
     }
 
     /**
-     * Set password.
+     * Set password
      *
      * @param Password|null $password
-     *
      * @return Log
      */
-    public function setPassword(Password $password = null) {
+    public function setPassword(?Password $password) {
         $this->password = $password;
-
         return $this;
     }
 
     /**
-     * Get password.
+     * Get password
      *
      * @return Password|null
      */
@@ -147,21 +141,19 @@ class Log
     }
 
     /**
-     * Set user.
+     * Set user
      *
      * @param User|null $user
-     *
      * @return Log
      */
-    public function setUser(User $user = null)
+    public function setUser(?User $user)
     {
         $this->user = $user;
-
         return $this;
     }
 
     /**
-     * Get user.
+     * Get user
      *
      * @return User|null
      */

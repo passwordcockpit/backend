@@ -1,10 +1,6 @@
 <?php
 
 /**
- * Description of UserFacade
- *
- * Class with CRUD methods that interfaces User entity with DB
- *
  * @see https://github.com/passwordcockpit/backend for the canonical source repository
  * @copyright Copyright (c) 2018 Blackpoints AG (https://www.blackpoints.ch)
  * @license https://github.com/passwordcockpit/backend/blob/master/LICENSE.md BSD 3-Clause License
@@ -44,57 +40,53 @@ class PermissionFacade extends AbstractFacade
     }
 
     /**
-     *
      * @param array $data
      */
     public function create($data): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**
-     *
-     * @param string $id
+     * @param int $id
      * @param array $filter
      */
     public function fetch($id, $filter): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**
-     *
      * @param array $filter
      */
     public function fetchAll($filter): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**
-     *
-     * @param string $id
+     * @param int $id
      * @param array $data
      */
     public function update($id, $data): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**
-     *
-     * @param type $id
-     * @param type $filter
+     * @param int $id
+     * @param array $filter
      */
     public function delete($id, $filter): never
     {
-        throw new Exception("Method not implemented");
+        throw new \Exception("Method not implemented");
     }
 
     /**
      * Create user's permissions
      *
      * @param User $user
+     * @return bool
      */
     public function createUserPermission($user)
     {
@@ -108,7 +100,7 @@ class PermissionFacade extends AbstractFacade
      * Get user's permissions
      *
      * @param int $id
-     * @return Right
+     * @return Permission
      */
     public function getUserPermission($id)
     {
@@ -150,9 +142,7 @@ class PermissionFacade extends AbstractFacade
         // Everyone is now a 'user', so they can still access their information (only theirs!).
         array_push($permissions, "user");
 
-        /**
-         *  GET IDENTITY/TOKEN DATA PARAMS
-         */
+        // Get identity/token data params
         $data = [
             "roles" => $permissions
         ];

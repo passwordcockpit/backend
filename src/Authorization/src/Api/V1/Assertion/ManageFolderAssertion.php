@@ -112,12 +112,12 @@ class ManageFolderAssertion implements AssertionInterface
                 $folderId,
                 $this->user
             );
-            //access is now 'read' or 'manage' or null
-            // check if it's 'manage'
+            // Access is now 'read' or 'manage' or null
+            // Check if it's 'manage'
             if ($access == null || $access == 1) {
                 return false;
             }
-            //user got 'manage' on folder
+            // User got 'manage' on folder
             return true;
         } elseif ($permission != 'api.v1.folders.list') {
             return false;

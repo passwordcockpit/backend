@@ -74,10 +74,9 @@ class GetUserAction implements RequestHandlerInterface
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $user_id = $request->getAttribute('id'); // recupero l'id dalla Route
-        $user = $this->userFacade->get($user_id); // recupero lo user dalla user facade (che usa Doctrine per recuperare lo user dal DB)
+        $user_id = $request->getAttribute('id');
+        $user = $this->userFacade->get($user_id);
         if ($user) {
-            // ho trovato lo user
             $resource = $this->halResourceGenerator->fromObject(
                 $user,
                 $request

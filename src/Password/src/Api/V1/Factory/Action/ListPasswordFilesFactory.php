@@ -15,9 +15,6 @@ use File\Api\V1\Facade\FileFacade;
 use Mezzio\Hal\ResourceGeneratorFactory;
 use Password\Api\V1\Facade\PasswordFacade;
 
-/**
- * Description of ListPasswordFilesAction
- */
 class ListPasswordFilesFactory
 {
     /**

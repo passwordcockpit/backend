@@ -14,9 +14,6 @@ use Laminas\Hydrator\AbstractHydrator;
 use App\Service\DateConverter;
 use Laminas\I18n\Translator\Translator;
 
-/**
- * Description of LogHydrator
- */
 class LogHalHydrator extends AbstractHydrator
 {
     /**
@@ -62,7 +59,7 @@ class LogHalHydrator extends AbstractHydrator
     }
 
     /**
-     * Translate log action.
+     * Translate log action
      * 
      * @param string
      * @return string

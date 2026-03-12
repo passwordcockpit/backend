@@ -11,10 +11,6 @@ namespace Password\Api\V1\Collection;
 
 use Laminas\Paginator\Paginator;
 
-/**
- * Description of PasswordCollection
- */
 class PasswordCollection extends Paginator
 {
-    //put your code here
 }

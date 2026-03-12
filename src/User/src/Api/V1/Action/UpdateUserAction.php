@@ -88,7 +88,7 @@ class UpdateUserAction implements RequestHandlerInterface
         private readonly TokenUserFacade $tokenUserFacade
     ){}
 
-    // return a new token with the language changed
+    // Return a new token with the language changed
     // if language is changed, return updated token
     // if language is not changed, return normal token
     private function updateTokenSpecifics($request, $resource, $user)
@@ -112,10 +112,9 @@ class UpdateUserAction implements RequestHandlerInterface
             }
         }
 
-        //update token on tokenUser table
+        // Update token on tokenUser table
         $this->tokenUserFacade->updateTokenUser($tokenUser, $token, false);
-        // if user changed his password, token is deleted from tokenUser table forcing then a new login
-
+        // If user changed his password, token is deleted from tokenUser table forcing then a new login
         if (isset($specifics['actual_password'])) {
             $this->tokenUserFacade->deleteToken($tokenUser);
             if ($payLoad->data->change_password == true) {
@@ -125,7 +124,6 @@ class UpdateUserAction implements RequestHandlerInterface
             return $resource;
         }
 
-        // ship token
         $resource = $resource->withElement("token", $token);
         return $resource;
     }
@@ -147,7 +145,7 @@ class UpdateUserAction implements RequestHandlerInterface
             ->setRouteParams(['id' => $user->getUserId()]);
         $resource = $this->halResourceGenerator->fromObject($user, $request);
 
-        // if it's an admin that makes the changes, no need to updateTokenSpecifics.
+        // If it's an admin that makes the changes, no need to updateTokenSpecifics.
         $token = $request->getAttribute("token", false);
         $userCalling = $token['sub'];
         if ($userCalling == $userId) {

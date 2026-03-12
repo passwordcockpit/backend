@@ -41,7 +41,7 @@ class TokenUserFacade extends AbstractFacade
 
     /**
      *
-     * @param string $id
+     * @param int $id
      * @param array $filter
      */
     public function fetch($id, $filter): never
@@ -60,7 +60,7 @@ class TokenUserFacade extends AbstractFacade
 
     /**
      *
-     * @param string $id
+     * @param int $id
      * @param array $data
      */
     public function update($id, $data): never
@@ -70,8 +70,8 @@ class TokenUserFacade extends AbstractFacade
 
     /**
      *
-     * @param type $id
-     * @param type $filter
+     * @param int $id
+     * @param array $filter
      */
     public function delete($id, $filter): never
     {
@@ -82,9 +82,7 @@ class TokenUserFacade extends AbstractFacade
      * Return a tokenUser
      *
      * @param string $token
-     *
      * @return TokenUser|null
-     *
      */
     public function getByToken($token)
     {
@@ -96,12 +94,10 @@ class TokenUserFacade extends AbstractFacade
     }
 
     /**
-     * Return a tokenUser
+     * Return the user by the given id
      *
      * @param int $userId
-     *
      * @return TokenUser|null
-     *
      */
     public function getByUserId($userId)
     {
@@ -121,9 +117,7 @@ class TokenUserFacade extends AbstractFacade
      *
      * @param User $user
      * @param string $token
-     *
      * @return bool true
-     *
      */
     public function createTokenUser($user, $token)
     {
@@ -146,7 +140,6 @@ class TokenUserFacade extends AbstractFacade
      * @param TokenUser $tokenUser
      * @param string $token
      * @param bool $modifyDate
-     *
      */
     public function updateTokenUser($tokenUser, $token, $modifyDate = true)
     {
@@ -164,7 +157,6 @@ class TokenUserFacade extends AbstractFacade
      * Delete token from a TokenUser
      *
      * @param TokenUser $tokenUser
-     *
      */
     public function deleteToken($tokenUser)
     {

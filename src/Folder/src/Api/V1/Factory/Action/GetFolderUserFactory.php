@@ -17,9 +17,6 @@ use Mezzio\Hal\ResourceGeneratorFactory;
 use Folder\Api\V1\Action\GetFolderUserAction;
 use Laminas\I18n\Translator\Translator;
 
-/**
- * Description of GetFolderUserFactory
- */
 class GetFolderUserFactory
 {
     /**

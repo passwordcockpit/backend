@@ -48,10 +48,10 @@ class AuthenticationLogout implements RequestHandlerInterface
         $token = $request->getAttribute("token", false);
         $userId = $token['sub'];
 
-        // getting the user making the request
+        // Getting the user making the request
         $tokenUser = $this->tokenUserFacade->getByUserId($userId)[0];
 
-        // delete token from the tokenUser table
+        // Delete token from the tokenUser table
         $this->tokenUserFacade->deleteToken($tokenUser);
 
         return new JsonResponse(['message' => "Logout successful"]);

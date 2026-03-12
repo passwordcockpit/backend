@@ -15,9 +15,6 @@ use Mezzio\Hal\ResourceGeneratorFactory;
 use User\Api\V1\Action\UpdateUserAction;
 use Authentication\Api\V1\Facade\TokenUserFacade;
 
-/**
- * Description of UpdateUserFactory
- */
 class UpdateUserFactory
 {
     /**

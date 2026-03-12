@@ -53,12 +53,11 @@ class ManagePasswordAssertion implements AssertionInterface
      * Returns passwordId from Request - check Attributes and Body
      *
      * @param ServerRequestInterface $request
-     * @return type
+     * @return int
      */
     private function getPasswordId(ServerRequestInterface $request)
     {
         $passwordId = $request->getAttribute('id');
-
         return $passwordId;
     }
 

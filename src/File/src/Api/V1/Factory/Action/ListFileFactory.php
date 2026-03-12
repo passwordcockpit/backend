@@ -11,11 +11,6 @@ namespace File\Api\V1\Factory\Action;
 use Psr\Container\ContainerInterface;
 use File\Api\V1\Action\ListFileAction;
 
-/**
- * Description of ListFilesFactory
- *
- * @author Giona Guidotti <giona.guidotti@blackpoints.ch>
- */
 class ListFileFactory
 {
     /**

@@ -16,9 +16,6 @@ use Folder\Api\V1\Hydrator\FolderUserHydrator;
 use Mezzio\Hal\Metadata\RouteBasedResourceMetadata;
 use Mezzio\Hal\Metadata\RouteBasedCollectionMetadata;
 
-/**
- * Description of ConfigProvider
- */
 class ConfigProvider
 {
     /**
@@ -44,7 +41,6 @@ class ConfigProvider
      *
      * @return array
      */
-
     public function getDoctrine() : array
     {
         return [
@@ -180,7 +176,7 @@ class ConfigProvider
                 'name' => 'api.v1.folders.get',
                 'path' => '/api/v1/folders/:id',
                 'options' => [
-                    'constraints' => ['id' => '\d+'] // controllo che id sia solo numerico
+                    'constraints' => ['id' => '\d+']
                 ],
                 'middleware' => [Action\GetFolderAction::class],
                 'allowed_methods' => ['GET']
@@ -189,7 +185,7 @@ class ConfigProvider
                 'name' => 'api.v1.folders.create',
                 'path' => '/api/v1/folders',
                 'middleware' => [
-                    "FolderValidationMiddleware", // validator
+                    "FolderValidationMiddleware",
                     Action\CreateFolderAction::class
                 ],
                 'allowed_methods' => ['POST']
@@ -198,10 +194,10 @@ class ConfigProvider
                 'name' => 'api.v1.folders.update',
                 'path' => '/api/v1/folders/:id',
                 'options' => [
-                    'constraints' => ['id' => '\d+'] // controllo che id sia solo numerico
+                    'constraints' => ['id' => '\d+']
                 ],
                 'middleware' => [
-                    "FolderValidationMiddleware", // validator
+                    "FolderValidationMiddleware",
                     Action\UpdateFolderAction::class
                 ],
                 'allowed_methods' => ['PATCH', 'PUT']
@@ -233,7 +229,7 @@ class ConfigProvider
                     'constraints' => ['userId' => '\d+']
                 ],
                 'middleware' => [
-                    "FolderUserValidationMiddleware", // validator
+                    "FolderUserValidationMiddleware",
                     Action\AddFolderUserAction::class
                 ],
                 'allowed_methods' => ['POST']
@@ -246,7 +242,7 @@ class ConfigProvider
                     'constraints' => ['userId' => '\d+']
                 ],
                 'middleware' => [
-                    "FolderUserValidationMiddleware", // validator
+                    "FolderUserValidationMiddleware",
                     Action\UpdateFolderUserAction::class
                 ],
                 'allowed_methods' => ['PATCH', 'PUT']

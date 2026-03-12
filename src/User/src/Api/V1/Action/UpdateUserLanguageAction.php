@@ -23,9 +23,6 @@ use Authentication\Api\V1\Facade\TokenUserFacade;
 use Firebase\JWT\Key;
 
 /**
- *
- * @copyright 2018 Blackpoints SA
- *
  * @OA\Patch(
  *     path="/v1/users/{userId}/language",
  *     tags={"users"},
@@ -81,9 +78,9 @@ class UpdateUserLanguageAction implements RequestHandlerInterface
     ){}
 
     /**
-     * Return a new token with the language changed.
-     * if language is changed, return updated token
-     * if language is not changed, return normal token
+     * Return a new token with the language changed
+     * If language is changed, return updated token
+     * If language is not changed, return normal token
      * 
      * @param ServerRequestInterface $request
      * @return string
@@ -109,7 +106,7 @@ class UpdateUserLanguageAction implements RequestHandlerInterface
             }
         }
 
-        //update token on tokenUser table
+        // Update token on tokenUser table
         $this->tokenUserFacade->updateTokenUser($tokenUser, $token, false);
 
         return $token;
@@ -127,15 +124,15 @@ class UpdateUserLanguageAction implements RequestHandlerInterface
         $entityManager = $this->userFacade->getEntityManager();
         $payload = $request->getParsedBody();
 
-        // update user language
+        // Update user language
         $user->setLanguage($payload['language']);
         $entityManager->persist($user);
         $entityManager->flush();
 
-        // update token
+        // Update token
         $token = $this->updateTokenSpecifics($request);
 
-        // generate resource
+        // Generate resource
         $this->halResourceGenerator
             ->getMetadataMap()
             ->get(User::class)

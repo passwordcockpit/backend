@@ -90,7 +90,7 @@ class UpdateFileAction implements RequestHandlerInterface
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        // get password
+        // Get password
         $passId = $request->getAttribute('id');
         $password = $this->entityManager
             ->getRepository(Password::class)
@@ -102,7 +102,7 @@ class UpdateFileAction implements RequestHandlerInterface
             );
         }
 
-        // check if password already have a file
+        // Check if password already have a file
         $file = $this->entityManager
             ->getRepository(File::class)
             ->findBy(['password' => $password]);

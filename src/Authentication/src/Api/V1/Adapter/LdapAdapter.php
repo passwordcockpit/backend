@@ -53,11 +53,11 @@ class LdapAdapter implements AdapterInterface
         $ldap->setCredential($this->password);
         $result = $ldap->authenticate();
         if ($result->isValid()) {
-            // match LDAP user with DB user
+            // Match LDAP user with DB user
             $ldapUser = $ldap->getAccountObject();
             $user = $this->userFacade->getUserByUsername($ldapUser->{$this->ldapUserAttributesConfig['identifier']});
             if ($user && $user->getEnabled()) {
-                // update User in DB
+                // Update user in DB
                 $user->setName($ldapUser->{$this->ldapUserAttributesConfig['name']});
                 $user->setSurname($ldapUser->{$this->ldapUserAttributesConfig['surname']});
                 $user->setEmail($ldapUser->{$this->ldapUserAttributesConfig['mail']});

@@ -252,21 +252,19 @@ class User
     }
 
     /**
-     * Set surname.
+     * Set surname
      *
      * @param string|null $surname
-     *
      * @return User
      */
     public function setSurname($surname = null)
     {
         $this->surname = $surname;
-
         return $this;
     }
 
     /**
-     * Get surname.
+     * Get surname
      *
      * @return string|null
      */
@@ -276,21 +274,19 @@ class User
     }
 
     /**
-     * Set phone.
+     * Set phone
      *
      * @param string|null $phone
-     *
      * @return User
      */
     public function setPhone($phone = null)
     {
         $this->phone = $phone;
-
         return $this;
     }
 
     /**
-     * Get phone.
+     * Get phone
      *
      * @return string|null
      */
@@ -300,21 +296,19 @@ class User
     }
 
     /**
-     * Set email.
+     * Set email
      *
      * @param string|null $email
-     *
      * @return User
      */
     public function setEmail($email = null)
     {
         $this->email = $email;
-
         return $this;
     }
 
     /**
-     * Get email.
+     * Get email
      *
      * @return string|null
      */
@@ -324,21 +318,19 @@ class User
     }
 
     /**
-     * Set enabled.
+     * Set enabled
      *
      * @param bool $enabled
-     *
      * @return User
      */
     public function setEnabled($enabled)
     {
         $this->enabled = $enabled;
-
         return $this;
     }
 
     /**
-     * Get enabled.
+     * Get enabled
      *
      * @return bool
      */
@@ -348,24 +340,21 @@ class User
     }
 
     /**
-     * Add folder.
+     * Add folder
      *
      * @param \Folder\Api\V1\Entity\FolderUser $folder
-     *
      * @return User
      */
     public function addFolder(\Folder\Api\V1\Entity\FolderUser $folder)
     {
         $this->folder[] = $folder;
-
         return $this;
     }
 
     /**
-     * Remove folder.
+     * Remove folder
      *
      * @param \Folder\Api\V1\Entity\FolderUser $folder
-     *
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
     public function removeFolder(\Folder\Api\V1\Entity\FolderUser $folder)
@@ -374,7 +363,7 @@ class User
     }
 
     /**
-     * Get folder.
+     * Get folder
      *
      * @return \Doctrine\Common\Collections\Collection
      */

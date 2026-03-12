@@ -57,7 +57,7 @@ class File
     private Password $password;
 
     /**
-     * Get fileId.
+     * Get fileId
      *
      * @return int
      */
@@ -67,21 +67,31 @@ class File
     }
 
     /**
-     * Set name.
+     * Set fileId
+     *
+     * @param int|null $fileId
+     * @return File
+     */
+    public function setFileId($fileId = null)
+    {
+        $this->fileId = $fileId;
+        return $this;
+    }
+
+    /**
+     * Set name
      *
      * @param string|null $name
-     *
      * @return File
      */
     public function setName($name = null)
     {
         $this->name = $name;
-
         return $this;
     }
 
     /**
-     * Get name.
+     * Get name
      *
      * @return string|null
      */
@@ -91,10 +101,9 @@ class File
     }
 
     /**
-     * Set filename.
+     * Set filename
      *
      * @param string|null $filename
-     *
      * @return File
      */
     public function setFilename($filename = null)
@@ -105,7 +114,7 @@ class File
     }
 
     /**
-     * Get filename.
+     * Get filename
      *
      * @return string|null
      */
@@ -115,10 +124,9 @@ class File
     }
 
     /**
-     * Set extension.
+     * Set extension
      *
      * @param string|null $extension
-     *
      * @return File
      */
     public function setExtension($extension = null)
@@ -129,7 +137,7 @@ class File
     }
 
     /**
-     * Get extension.
+     * Get extension
      *
      * @return string|null
      */
@@ -139,10 +147,9 @@ class File
     }
 
     /**
-     * Set creationDate.
+     * Set creationDate
      *
      * @param \DateTime|null $creationDate
-     *
      * @return File
      */
     public function setCreationDate($creationDate = null)
@@ -153,7 +160,7 @@ class File
     }
 
     /**
-     * Get creationDate.
+     * Get creationDate
      *
      * @return \DateTime|null
      */
@@ -163,24 +170,21 @@ class File
     }
 
     /**
-     * Set password.
+     * Set password
      *
      * @param \Password\Api\V1\Entity\Password|null $password
-     *
      * @return File
      */
-    public function setPassword(
-        \Password\Api\V1\Entity\Password $password = null
-    ) {
+    public function setPassword(?Password $password) {
         $this->password = $password;
 
         return $this;
     }
 
     /**
-     * Get password.
+     * Get password
      *
-     * @return \Password\Api\V1\Entity\Password|null
+     * @return Password|null
      */
     public function getPassword()
     {

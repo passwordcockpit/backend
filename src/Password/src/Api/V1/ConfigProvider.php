@@ -14,9 +14,6 @@ use Mezzio\Hal\Metadata\RouteBasedResourceMetadata;
 use Mezzio\Hal\Metadata\RouteBasedCollectionMetadata;
 use Password\Api\V1\Hydrator\PasswordHydrator;
 
-/**
- * Description of ConfigProvider
- */
 class ConfigProvider
 {
     /**

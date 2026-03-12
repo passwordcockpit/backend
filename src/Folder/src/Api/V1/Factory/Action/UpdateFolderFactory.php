@@ -15,9 +15,6 @@ use Folder\Api\V1\Facade\FolderFacade;
 use Mezzio\Hal\ResourceGeneratorFactory;
 use Folder\Api\V1\Action\UpdateFolderAction;
 
-/**
- * Description of UpdateFolderFactory
- */
 class UpdateFolderFactory
 {
     /**
