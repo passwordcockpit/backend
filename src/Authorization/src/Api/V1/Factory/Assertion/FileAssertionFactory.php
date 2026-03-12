@@ -9,7 +9,7 @@
 
 namespace Authorization\Api\V1\Factory\Assertion;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Folder\Api\V1\Facade\FolderUserFacade;
 use Authorization\Api\V1\Assertion\FileAssertion;

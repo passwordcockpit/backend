@@ -8,7 +8,7 @@
 
 namespace File\Api\V1\Factory\Action;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Mezzio\Hal\ResourceGeneratorFactory;
 use File\Api\V1\Action\GetFileAction;
 use File\Api\V1\Facade\FileFacade;

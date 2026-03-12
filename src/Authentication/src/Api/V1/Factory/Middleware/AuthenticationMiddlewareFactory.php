@@ -8,7 +8,7 @@
 
 namespace Authentication\Api\V1\Factory\Middleware;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Authentication\Api\V1\Middleware\AuthenticationMiddleware;
 use User\Api\V1\Facade\UserFacade;
 use Authentication\Api\V1\Facade\TokenUserFacade;
@@ -17,7 +17,6 @@ use Laminas\I18n\Translator\Translator;
 class AuthenticationMiddlewareFactory
 {
     /**
-     *
      * Invoke method, create instance of AuthenticationMiddleware class
      *
      * @param ContainerInterface $container

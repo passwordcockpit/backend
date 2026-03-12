@@ -9,7 +9,7 @@
 
 namespace File\Api\V1\Factory\Facade;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use File\Api\V1\Facade\FileFacade;
 use File\Api\V1\Entity\File;

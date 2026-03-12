@@ -12,7 +12,7 @@
 
 namespace Authentication\Api\V1\Factory\Middleware;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use App\Middleware\ValidationMiddleware;
 
 class AuthenticationValidationMiddlewareFactory

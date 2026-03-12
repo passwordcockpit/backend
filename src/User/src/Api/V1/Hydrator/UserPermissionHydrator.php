@@ -11,16 +11,12 @@ namespace User\Api\V1\Hydrator;
 
 use Laminas\Hydrator\AbstractHydrator;
 
-/**
- * Description of UserPermissionHydrator
- */
 class UserPermissionHydrator extends AbstractHydrator
 {
     /**
      * Extract information from Permission object
      *
      * @param Permission
-     *
      * @return array
      *
      */

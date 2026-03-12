@@ -8,7 +8,7 @@
 
 namespace Authentication\Api\V1\Factory\Action;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Authentication\Api\V1\Action\AuthenticationCreateAction;
 use Authentication\Api\V1\Facade\TokenUserFacade;
 use Laminas\I18n\Translator\Translator;

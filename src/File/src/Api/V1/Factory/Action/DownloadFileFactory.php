@@ -9,7 +9,7 @@
 
 namespace File\Api\V1\Factory\Action;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use File\Api\V1\Action\DownloadFileAction;
 use File\Api\V1\Facade\FileFacade;
 use Laminas\I18n\Translator\Translator;

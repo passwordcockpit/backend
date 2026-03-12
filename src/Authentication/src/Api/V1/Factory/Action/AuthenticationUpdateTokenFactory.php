@@ -9,11 +9,8 @@
 
 namespace Authentication\Api\V1\Factory\Action;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Authentication\Api\V1\Action\AuthenticationUpdateToken;
-use Doctrine\ORM\EntityManagerInterface;
-use User\Api\V1\Facade\UserFacade;
-use User\Api\V1\Facade\PermissionFacade;
 use Mezzio\ProblemDetails\ProblemDetailsResponseFactory;
 use Authentication\Api\V1\Facade\TokenUserFacade;
 

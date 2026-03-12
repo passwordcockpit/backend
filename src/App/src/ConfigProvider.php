@@ -8,7 +8,10 @@
 
 namespace App;
 
-use Mezzio\Delegate;
+use Mezzio\Container\NotFoundHandlerFactory;
+use Mezzio\Handler\NotFoundHandler;
+use Mezzio\Router\LaminasRouter;
+use Mezzio\Router\RouterInterface;
 
 /**
  * The configuration provider for the App module
@@ -42,7 +45,7 @@ class ConfigProvider
     {
         return [
             'aliases' => [
-                'Mezzio\Delegate\DefaultDelegate' => Delegate\NotFoundDelegate::class
+                'Mezzio\Delegate\DefaultDelegate' => NotFoundHandler::class
             ],
             'invokable' => [
                 \Mezzio\Helper\ServerUrlHelper::class => \Mezzio\Helper\ServerUrlHelper::class,
@@ -55,12 +58,12 @@ class ConfigProvider
                 Middleware\ContentSecurityMiddleware::class => Factory\ContentSecurityFactory::class,
                 Middleware\OptionsMiddleware::class => Factory\OptionsMiddlewareFactory::class,
                 \Mezzio\Application::class => \Mezzio\Container\ApplicationFactory::class,
-                \Mezzio\Delegate\NotFoundDelegate::class => \Mezzio\Container\NotFoundDelegateFactory::class,
+                \Mezzio\Handler\NotFoundHandler::class => NotFoundHandlerFactory::class,                
                 \Mezzio\Helper\ServerUrlMiddleware::class => \Mezzio\Helper\ServerUrlMiddlewareFactory::class,
                 \Mezzio\Helper\UrlHelper::class => \Mezzio\Helper\UrlHelperFactory::class,
                 \Mezzio\Helper\UrlHelperMiddleware::class => \Mezzio\Helper\UrlHelperMiddlewareFactory::class,
                 \Laminas\Stratigility\Middleware\ErrorHandler::class => \Mezzio\Container\ErrorHandlerFactory::class,
-                \Laminas\Stratigility\Middleware\NotFoundHandler::class => \Mezzio\ProblemDetails\ProblemDetailsNotFoundHandlerFactory::class,
+                \Laminas\Stratigility\Handler\NotFoundHandler::class => \Mezzio\ProblemDetails\ProblemDetailsNotFoundHandlerFactory::class,
                 Middleware\CorsMiddleware::class => Factory\CorsMiddlewareFactory::class,
                 //Doctrine factory
                 \Doctrine\ORM\EntityManagerInterface::class => \Roave\PsrContainerDoctrine\EntityManagerFactory::class,

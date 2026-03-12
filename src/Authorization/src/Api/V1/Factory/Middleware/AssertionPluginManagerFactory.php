@@ -9,7 +9,7 @@
 
 namespace Authorization\Api\V1\Factory\Middleware;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Authorization\Api\V1\AssertionPluginManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Folder\Api\V1\Facade\FolderUserFacade;

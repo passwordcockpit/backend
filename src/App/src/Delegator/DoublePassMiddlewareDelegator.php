@@ -10,7 +10,7 @@ namespace App\Delegator;
 
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
-use function Laminas\Stratigility\doublePassMiddleware;
+use Laminas\Stratigility\Middleware\DoublePassMiddlewareDecorator;
 
 /*
  * Delegator to map to any services that continue to use the double-pass signature and it didn't support the new PSR-15 signature
@@ -22,7 +22,6 @@ use function Laminas\Stratigility\doublePassMiddleware;
  *       ],
  *  ]
  */
-
 class DoublePassMiddlewareDelegator
 {
     public function __invoke(
@@ -30,7 +29,7 @@ class DoublePassMiddlewareDelegator
         string $serviceName,
         callable $callback
     ) {
-        return doublePassMiddleware(
+        return new DoublePassMiddlewareDecorator(
             $callback(),
             $container->get(ResponseInterface::class)()
         );

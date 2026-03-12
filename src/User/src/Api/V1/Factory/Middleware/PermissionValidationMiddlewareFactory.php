@@ -9,12 +9,9 @@
 
 namespace User\Api\V1\Factory\Middleware;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use App\Middleware\ValidationMiddleware;
 
-/**
- * Description of PermissionValidationMiddlewareFactory
- */
 class PermissionValidationMiddlewareFactory
 {
     /**

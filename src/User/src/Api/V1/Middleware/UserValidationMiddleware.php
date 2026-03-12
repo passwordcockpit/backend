@@ -1,8 +1,6 @@
 <?php
 
 /**
- * UserValidationMiddleware
- *
  * @package App\Middleware
  * @see https://github.com/passwordcockpit/backend for the canonical source repository
  * @copyright Copyright (c) 2018 Blackpoints AG (https://www.blackpoints.ch)
@@ -41,7 +39,6 @@ class UserValidationMiddleware implements MiddlewareInterface
     ){}
 
     /**
-     *
      * @param ServerRequestInterface $request
      * @param RequestHandlerInterface $handler
      * @return ResponseInterface
@@ -53,7 +50,7 @@ class UserValidationMiddleware implements MiddlewareInterface
         $errors = [];
         $payload = $request->getParsedBody();
 
-        // zend filter for booolean value does not allow NULL to go through, even with value.
+        // Zend filter for booolean value does not allow NULL to go through, even with value.
         $enabled = false;
         if (!isset($payload['enabled']) && $this->update) {
             $enabled = true;
@@ -314,10 +311,12 @@ class UserValidationMiddleware implements MiddlewareInterface
             );
         }
 
-        $filteredParams = $inputFilter->getValues(); // only filtered values
-        $newPayload = array_merge($payload, $filteredParams); // merge of original payload with filteredParams
+        // Only filtered values
+        $filteredParams = $inputFilter->getValues();
+        // Merge of original payload with filteredParams
+        $newPayload = array_merge($payload, $filteredParams);
 
-        // putting back 'enabled' to null if it did not exist in the beginning.
+        // Putting back 'enabled' to null if it did not exist in the beginning.
         if ($enabled) {
             $newPayload['enabled'] = null;
         }

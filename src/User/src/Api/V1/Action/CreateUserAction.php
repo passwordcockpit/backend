@@ -12,6 +12,7 @@
 
 namespace User\Api\V1\Action;
 
+use App\Service\ProblemDetailsException;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;

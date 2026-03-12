@@ -11,6 +11,8 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Mezzio\Router\Exception\MissingDependencyException;
 use App\Middleware\OptionsMiddleware;
+use Mezzio\Router\Middleware\ImplicitOptionsMiddleware;
+
 /**
  * Create and return an ImplicitOptionsMiddleware instance.
  *

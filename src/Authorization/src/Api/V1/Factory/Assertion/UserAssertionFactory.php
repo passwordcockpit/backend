@@ -9,8 +9,7 @@
 
 namespace Authorization\Api\V1\Factory\Assertion;
 
-use Interop\Container\ContainerInterface;
-use Doctrine\ORM\EntityManagerInterface;
+use Psr\Container\ContainerInterface;
 use Folder\Api\V1\Facade\FolderUserFacade;
 use Authorization\Api\V1\Assertion\UserAssertion;
 use Laminas\I18n\Translator\Translator;

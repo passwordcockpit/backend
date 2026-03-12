@@ -9,7 +9,7 @@
 
 namespace Authorization\Api\V1\Factory\Assertion;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Authorization\Api\V1\Assertion\LogsAssertion;
 use Folder\Api\V1\Facade\FolderUserFacade;
 use User\Api\V1\Facade\PermissionFacade;
