@@ -12,8 +12,6 @@
 
 namespace Authorization\Api\V1;
 
-use Tuupola\Middleware\JwtAuthentication;
-
 /**
  * The configuration provider for the App module
  *

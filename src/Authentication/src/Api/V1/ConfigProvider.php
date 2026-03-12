@@ -12,7 +12,7 @@
 
 namespace Authentication\Api\V1;
 
-use Tuupola\Middleware\JwtAuthentication;
+use JimTools\JwtAuth\Middleware\JwtAuthentication;
 
 /**
  * The configuration provider for the App module

@@ -13,21 +13,21 @@ namespace App\Service;
 use Mezzio\Helper\ServerUrlMiddleware;
 use Mezzio\Helper\UrlHelperMiddleware;
 use App\Middleware\OptionsMiddleware;
-use Mezzio\Middleware\ImplicitHeadMiddleware;
 use Mezzio\Helper\BodyParams\BodyParamsMiddleware;
-use Laminas\Stratigility\Middleware\NotFoundHandler;
+use Laminas\Stratigility\Handler\NotFoundHandler;
 use Mezzio\ProblemDetails\ProblemDetailsMiddleware;
 use Psr\Container\ContainerInterface;
 use Authentication\Api\V1\Middleware\AuthenticationMiddleware;
 use Authorization\Api\V1\Middleware\AuthorizationMiddleware;
 use Mezzio\Router\Middleware\RouteMiddleware;
 use Mezzio\Router\Middleware\DispatchMiddleware;
-use Tuupola\Middleware\JwtAuthentication;
+use JimTools\JwtAuth\Middleware\JwtAuthentication;
 use App\Middleware\I18nMiddleware;
 use App\Middleware\CorsMiddleware;
 use App\Middleware\TokenArrayMiddleware;
 use App\Middleware\StrictTransportSecurityMiddleware;
 use App\Middleware\ContentSecurityMiddleware;
+use Mezzio\Router\Middleware\ImplicitOptionsMiddleware;
 
 class ApplicationDelegatorFactory
 {
@@ -42,13 +42,10 @@ class ApplicationDelegatorFactory
         $serviceName,
         callable $callback
     ) {
-        /** @var $app Application */
         $app = $callback();
 
-        /**
-         * Setup middleware pipeline:
-         */
-        $app->pipe(CorsMiddleware::class); //this can be removed in prod since client is same origin as the server (and NOT localhost:4200 -> 10.0.3.150:4344)
+        //Setup middleware pipeline:
+        $app->pipe(CorsMiddleware::class); // This can be removed in prod since client is same origin as the server (and NOT localhost:4200 -> 10.0.3.150:4344)
         // Middlewares that adds security headers to each request.
         $app->pipe(StrictTransportSecurityMiddleware::class);
         $app->pipe(ContentSecurityMiddleware::class);
@@ -59,20 +56,19 @@ class ApplicationDelegatorFactory
 
         $app->pipe(RouteMiddleware::class);
 
-        $app->pipe(ImplicitHeadMiddleware::class);
+        $app->pipe(ImplicitOptionsMiddleware::class);
         $app->pipe(OptionsMiddleware::class);
         $app->pipe(UrlHelperMiddleware::class);
 
         $app->pipe(JwtAuthentication::class);
+
         $app->pipe(TokenArrayMiddleware::class);
 
         $app->pipe(AuthenticationMiddleware::class);
-        // Translator
         $app->pipe(I18nMiddleware::class);
         $app->pipe(AuthorizationMiddleware::class);
 
         $app->pipe(DispatchMiddleware::class);
-
         $app->pipe(NotFoundHandler::class);
 
         \Mezzio\Container\ApplicationConfigInjectionDelegator::injectRoutesFromConfig(

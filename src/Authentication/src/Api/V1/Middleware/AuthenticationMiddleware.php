@@ -41,26 +41,16 @@ class AuthenticationMiddleware implements MiddlewareInterface
      *
      * @param ServerRequestInterface $request
      * @param int $userId
-     *
      * @return bool
      */
     public function isAllowedCall($request, $userId)
     {
-        if (
-            //update himself request
-            //get himself request
-            (($request->getMethod() == 'PUT' ||
-                $request->getMethod() == 'PATCH') &&
-                $request->getRequestTarget() == '/api/v1/users/' . $userId &&
-                isset($request->getParsedBody()['actual_password'])) ||
-            ($request->getMethod() == 'GET' &&
-                $request->getRequestTarget() == '/api/v1/users/' . $userId) ||
-            ($request->getMethod() == 'DELETE' &&
-                $request->getRequestTarget() == '/api/v1/token/logout')
-        ) {
-            return true;
-        }
-        return false;
+       return (
+            ($request->getMethod() == 'PUT' || $request->getMethod() == 'PATCH') &&
+            $request->getRequestTarget() == '/api/v1/users/' . $userId && isset($request->getParsedBody()['actual_password'])
+            ) ||
+            ($request->getMethod() == 'GET' && $request->getRequestTarget() == '/api/v1/users/' . $userId) ||
+            ($request->getMethod() == 'DELETE' && $request->getRequestTarget() == '/api/v1/token/logout');
     }
 
     /**
@@ -69,45 +59,30 @@ class AuthenticationMiddleware implements MiddlewareInterface
      * @param RequestHandlerInterface $handler
      * @return ResponseInterface
      */
-    public function process(
-        ServerRequestInterface $request,
-        RequestHandlerInterface $handler
-    ): ResponseInterface {
-        $token = $request->getAttribute("token", false);
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface {
+        $token = $request->getAttribute('token', false);
         if (!$token) {
             return $handler->handle($request);
         }
 
         $userId = $token['sub'];
-
         $user = $this->userFacade->get($userId);
-
         $tokenUser = $this->tokenUserFacade->getByUserId($userId)[0];
-        //Get token from header because it's encoded
-        $token1 = $request->getHeader("Authorization")[0];
-        // Remove Bearer
-        $tok = substr($token1, 7);
-        // check if the token on the tokenUser table matches the one sent.
-        if ($tokenUser == null || $tokenUser->getToken() != $tok) {
+
+        // Check if the token on the tokenUser table matches the one sent
+        $authHeader = $request->getHeaderLine('Authorization');
+        $tok = substr($authHeader, 7);
+        if (!$tokenUser || $tokenUser->getToken() != $tok) {
             throw new ProblemDetailsException(
                 401,
                 $this->translator->translate('Token is not valid'),
-                $this->translator->translate("Invalid token"),
+                $this->translator->translate('Invalid token'),
                 'https://httpstatus.es/401'
             );
         }
-        // check if user has still to change his password
-        $changePass = $user->getChangePassword();
 
-        // if user has still to change his password he cannot make request on endpoints
-        // other than the one to update himself.
-        if (
-            //it's not a valid request to change password
-            $changePass &&
-            !$this->isAllowedCall($request, $userId) &&
-            //it's not an ldap
-            $this->authAdapter::class != LdapAdapter::class
-        ) {
+        // If user has still to change his password he cannot make request on endpoints other than the one to update himself.
+        if ($user->getChangePassword() && !$this->isAllowedCall($request, $userId) && $this->authAdapter::class != LdapAdapter::class) {
             throw new ProblemDetailsException(
                 401,
                 sprintf(
@@ -121,9 +96,8 @@ class AuthenticationMiddleware implements MiddlewareInterface
             );
         }
 
-        //check if user is enabled
-        $access = $user->getEnabled();
-        if (!$access) {
+        // Check if user is enabled
+        if (!$user->getEnabled()) {
             throw new ProblemDetailsException(
                 401,
                 sprintf(

@@ -9,8 +9,12 @@
 namespace Authentication\Api\V1\Factory\Middleware;
 
 use Psr\Container\ContainerInterface;
-use Tuupola\Middleware\JwtAuthentication;
-use Laminas\Diactoros\Response\JsonResponse;
+use JimTools\JwtAuth\Middleware\JwtAuthentication;
+use JimTools\JwtAuth\Decoder\FirebaseDecoder;
+use JimTools\JwtAuth\Options;
+use JimTools\JwtAuth\Rules\RequestMethodRule;
+use JimTools\JwtAuth\Secret;
+use JimTools\JwtAuth\Rules\RequestPathRule;
 
 class JwtAuthenticationFactory
 {
@@ -23,33 +27,40 @@ class JwtAuthenticationFactory
     public function __invoke(ContainerInterface $container)
     {
         $config = $container->has('config') ? $container->get('config') : [];
-
         if (!isset($config['authentication']['secret_key'])) {
             throw new \Exception("Secret authentication key not found");
         }
+
         $secure = true;
         if (isset($config['authentication']['secure'])) {
             $secure = $config['authentication']['secure'];
         }
 
-        $options=[
-            "secure" => $secure,
-            "secret" => $config['authentication']['secret_key'],
-            "path" => ["/api", "/"],
-            "ignore" => ["/api/auth", "/api/v1/token/update"], //"/api/v1/"
-            "error" => function ($response, $arguments) {
-                $data["status"] = 401;
-                $data["title"] = "Unauthorized";
-                $data["type"] = "https://httpstatuses.com/401";
-                $data["detail"] = $arguments["message"];
-                return new JsonResponse($data);
-            }
-        ];
-
+        $relaxed = [];
         if(isset($config['authentication']['relaxed'])){
-            $options['relaxed']=$config['authentication']['relaxed'];
+            $relaxed = $config['authentication']['relaxed'];
         }
 
-        return new JwtAuthentication($options);
+        $decoder = new FirebaseDecoder(
+            new Secret(
+                $config['authentication']['secret_key'],
+                'HS256'
+            )
+        );
+
+        $options = new Options(
+            isSecure: $secure,
+            relaxed: $relaxed
+        );
+
+        $rules = [
+            new RequestMethodRule(),
+            new RequestPathRule(
+                paths: ["/api", "/"],
+                ignore: ["/api/auth", "/api/v1/token/update"]
+            ),
+        ];
+
+        return new JwtAuthentication($options, $decoder, $rules);
     }
 }

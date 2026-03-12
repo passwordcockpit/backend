@@ -16,7 +16,6 @@ use Laminas\Diactoros\Response\JsonResponse;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use App\Service\ProblemDetailsException;
-use Tuupola\Middleware\JwtAuthentication;
 use Mezzio\ProblemDetails\ProblemDetailsResponseFactory;
 use Authentication\Api\V1\Facade\TokenUserFacade;
 
@@ -55,15 +54,11 @@ class AuthenticationUpdateToken implements RequestHandlerInterface
     /**
      * Creates the updated JWT
      *
-     * @param JwtAuthentication $authy
      * @param JWT $token
      * @return JWT
      */
     private function updateToken($token)
     {
-        // Current time for token
-        $currentTime = new \DateTime();
-
         $future = new \DateTime("NOW");
         $expTime = $this->config['expiration_time'];
         $future->modify('+ ' . $expTime . ' minute');
@@ -104,7 +99,7 @@ class AuthenticationUpdateToken implements RequestHandlerInterface
             );
         }
 
-        // invalid token
+        // Invalid token
         if ($oldPayLoad === false) {
             $response = $this->problemDetailsFactory->createResponse(
                 $request,
@@ -114,13 +109,13 @@ class AuthenticationUpdateToken implements RequestHandlerInterface
             return $response;
         }
 
-        // check if the token was issued more than 'hard_timeout' minutes ago.
+        // Check if the token was issued more than 'hard_timeout' minutes ago.
         $hard_timeout = $this->config['hard_timeout'];
         $time_now = new \Datetime('NOW');
         $time_then = new \DateTime();
         $time_then->setTimestamp($oldPayLoad->iat);
         $interval = $time_now->diff($time_then);
-        // hard timeout
+        // Hard timeout
         if (intval($interval->format("%i")) >= $hard_timeout) {
             $response = $this->problemDetailsFactory->createResponse(
                 $request,
@@ -132,7 +127,7 @@ class AuthenticationUpdateToken implements RequestHandlerInterface
 
         $newToken = $this->updateToken($oldPayLoad);
 
-        // switch to newToken in the correct tokenUser table
+        // Switch to newToken in the correct tokenUser table
         $tokenUser = $this->tokenUserFacade->getByToken($token)[0];
         $this->tokenUserFacade->updateTokenUser($tokenUser, $newToken, false);
 
