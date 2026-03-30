@@ -31,11 +31,13 @@ class FolderUserValidationMiddlewareFactory
                         'name' => \Laminas\Validator\Digits::class
                     ],
                     [
-                        'name' => \Laminas\Validator\Between::class,
+                        'name'    => \Laminas\Validator\NumberComparison::class,
                         'options' => [
-                            'min' => 1,
-                            'max' => 2
-                        ]
+                            'min'          => 1,
+                            'max'          => 2,
+                            'inclusiveMin' => true,
+                            'inclusiveMax' => true,
+                        ],
                     ]
                 ]
             ]
