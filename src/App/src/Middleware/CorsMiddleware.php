@@ -33,16 +33,18 @@ class CorsMiddleware implements MiddlewareInterface
         ServerRequestInterface $request,
         RequestHandlerInterface $handler
     ): ResponseInterface {
+        if ($request->getMethod() === 'OPTIONS') {
+            return (new \Laminas\Diactoros\Response())
+                ->withHeader('Access-Control-Allow-Origin', $this->clientAddress['address'])
+                ->withHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type, Accept')
+                ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
+        }
+
         $response = $handler->handle($request);
+
         return $response
-            ->withAddedHeader(
-                'Access-Control-Allow-Origin',
-                $this->clientAddress['address']
-            )
-            ->withAddedHeader(
-                "Access-Control-Allow-Headers",
-                "Authorization, Content-Type, Accept"
-            );
-        //->withAddedHeader('Access-Control-Allow-Origin', 'http://localhost:4200')
+            ->withHeader('Access-Control-Allow-Origin', $this->clientAddress['address'])
+            ->withHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type, Accept')
+            ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
     }
 }
