@@ -11,49 +11,29 @@ namespace File\Api\V1\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Password\Api\V1\Entity\Password;
 
-/**
- * File
- *
- * @ORM\Table(name="file")
- * @ORM\Entity
- */
+#[ORM\Entity]
+#[ORM\Table(name: "file")]
 class File
 {
-    /**
-     *
-     * @ORM\Column(name="file_id", type="integer", precision=0, scale=0, nullable=false, unique=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(name: "file_id", type: "integer")]
     private int $fileId;
 
-    /**
-     * @ORM\Column(name="name", type="string", length=100, precision=0, scale=0, nullable=true, unique=false)
-     */
+    #[ORM\Column(name: "name", type: "string", length: 100, nullable: true)]
     private ?string $name = null;
 
-    /**
-     * @ORM\Column(name="filename", type="string", length=1000, precision=0, scale=0, nullable=true, unique=false)
-     */
+    #[ORM\Column(name: "filename", type: "string", length: 1000, nullable: true)]
     private ?string $filename = null;
 
-    /**
-     * @ORM\Column(name="extension", type="string", length=200, precision=0, scale=0, nullable=true, unique=false)
-     */
+    #[ORM\Column(name: "extension", type: "string", length: 200, nullable: true)]
     private ?string $extension = null;
 
-    /**
-     * @ORM\Column(name="creation_date", type="datetime", precision=0, scale=0, nullable=true, unique=false)
-     */
+    #[ORM\Column(name: "creation_date", type: "datetime", nullable: true)]
     private ?\DateTime $creationDate = null;
 
-    /**
-     *
-     * @ORM\ManyToOne(targetEntity="Password\Api\V1\Entity\Password")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="password_id", referencedColumnName="password_id", nullable=true)
-     * })
-     */
+    #[ORM\ManyToOne(targetEntity: Password::class)]
+    #[ORM\JoinColumn(name: "password_id", referencedColumnName: "password_id", nullable: true)]
     private Password $password;
 
     /**
@@ -172,7 +152,7 @@ class File
     /**
      * Set password
      *
-     * @param \Password\Api\V1\Entity\Password|null $password
+     * @param Password|null $password
      * @return File
      */
     public function setPassword(?Password $password) {

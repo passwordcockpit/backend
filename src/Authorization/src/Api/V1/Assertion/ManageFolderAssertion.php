@@ -14,6 +14,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Doctrine\ORM\EntityManager;
 use Laminas\I18n\Translator\Translator;
 use Folder\Api\V1\Facade\FolderUserFacade;
+use Laminas\Permissions\Rbac\Rbac;
 use Laminas\Permissions\Rbac\RoleInterface;
 use User\Api\V1\Entity\User;
 
@@ -96,7 +97,7 @@ class ManageFolderAssertion implements AssertionInterface
      * @return bool
      */
     public function assert(
-        \Laminas\Permissions\Rbac\Rbac $rbac,
+        Rbac $rbac,
         RoleInterface $role,
         string $permission
     ): bool {

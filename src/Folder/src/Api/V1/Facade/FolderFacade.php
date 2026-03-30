@@ -118,7 +118,7 @@ class FolderFacade extends AbstractFacade
             }
         }
         $this->entityManager->persist($folder);
-        // add access on the folder for user that create it
+        // Add access on the folder for user that create it
         $folderUser = new FolderUser();
         $folderUser->setAccess(2);
         $folderUser->setUser($user);
@@ -139,7 +139,7 @@ class FolderFacade extends AbstractFacade
     {
         $folder = $this->entityManager->getRepository(Folder::class)->find($id);
         if ($folder) {
-            // check if folder has password
+            // Check if folder has password
             $passwords = $this->entityManager
                 ->getRepository(Password::class)
                 ->findBy(['folder' => $folder]);
@@ -156,7 +156,7 @@ class FolderFacade extends AbstractFacade
                     'https://httpstatus.es/422'
                 );
             }
-            // check if folder has subfolder
+            // Check if folder has subfolder
             $subfolders = $this->entityManager
                 ->getRepository(Folder::class)
                 ->findBy(['parentId' => $folder->getFolderId()]);
@@ -276,7 +276,7 @@ class FolderFacade extends AbstractFacade
                 ->findBy(['folder' => $fold, 'user' => $user]);
 
             if ($folderUser) {
-                // since folder user is an array, we just need the first element
+                // Since folder user is an array, we just need the first element
                 $access = $folderUser[0]->getAccess();
             } else {
                 $access = null;

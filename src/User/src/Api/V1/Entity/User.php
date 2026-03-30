@@ -10,95 +10,91 @@ namespace User\Api\V1\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use OpenApi\Annotations as OA;
+use \Folder\Api\V1\Entity\FolderUser;
+use \Doctrine\Common\Collections\Collection;
 
 /**
- * User
- *
- * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="username_UNIQUE", columns={"username"})})
- * @ORM\Entity
  * @OA\Schema(description="User")
  */
+#[ORM\Entity]
+#[ORM\Table(
+    name: "user",
+    uniqueConstraints: [
+        new ORM\UniqueConstraint(
+            name: "username_UNIQUE",
+            columns: ["username"]
+        )
+    ]
+)]
 class User
 {
     /**
-     *
-     * @ORM\Column(name="user_id", type="integer", precision=0, scale=0, nullable=false, unique=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue
      * @OA\Property
      */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(name: "user_id", type: "integer")]
     private int $userId;
 
     /**
-     *
-     * @ORM\Column(name="username", type="string", length=45, precision=0, scale=0, nullable=false, unique=true)
      * @OA\Property(example="user")
      */
+    #[ORM\Column(name: "username", type: "string", length: 45, unique: true)]
     private string $username;
 
     /**
-     *
-     * @ORM\Column(name="password", type="string", length=200, precision=0, scale=0, nullable=true, unique=false)
      * @OA\Property(property="password", type="string", description="User's password")
      */
+    #[ORM\Column(name: "password", type: "string", length: 200, nullable: true)]
     private ?string $password = null;
 
     /**
-     *
-     * @ORM\Column(name="name", type="string", length=45, precision=0, scale=0, nullable=true, unique=false)
      * @OA\Property(property="name", type="string", description="User's name")
      */
+    #[ORM\Column(name: "name", type: "string", length: 45, nullable: true)]
     private ?string $name = null;
 
     /**
-     *
-     * @ORM\Column(name="surname", type="string", length=45, precision=0, scale=0, nullable=true, unique=false)
      * @OA\Property(property="surname", type="string", description="User's surname")
      */
+    #[ORM\Column(name: "surname", type: "string", length: 45, nullable: true)]
     private ?string $surname = null;
 
     /**
-     *
-     * @ORM\Column(name="language", type="string", length=2, precision=0, scale=0, nullable=false, unique=false)
      * @OA\Property(property="language", type="string", description="User's language", example="en")
      */
+    #[ORM\Column(name: "language", type: "string", length: 2)]
     private string $language;
 
     /**
-     *
-     * @ORM\Column(name="phone", type="string", length=45, precision=0, scale=0, nullable=true, unique=false)
      * @OA\Property(property="phone", type="string", description="User's phone number", example="+41 91 123 45 67")
      */
+    #[ORM\Column(name: "phone", type: "string", length: 45, nullable: true)]
     private ?string $phone = null;
 
     /**
-     *
-     * @ORM\Column(name="email", type="string", length=45, precision=0, scale=0, nullable=true, unique=true)
      * @OA\Property(property="email", type="string", description="User's email", example="user@domain.com")
      */
+    #[ORM\Column(name: "email", type: "string", length: 45, nullable: true, unique: true)]
     private ?string $email = null;
 
     /**
-     *
-     * @ORM\Column(name="enabled", type="boolean", precision=0, scale=0, nullable=false, unique=false)
      * @OA\Property(property="enabled", type="boolean", description="Whether a user is enabled (true) or not (false)")
      */
+     #[ORM\Column(name: "enabled", type: "boolean")]
     private bool $enabled;
 
     /**
-     *
-     * @ORM\Column(name="change_password", type="boolean", precision=0, scale=0, nullable=false, unique=false)
      * @OA\Property(property="change_password", type="boolean", description="Whether a user need to change his password (true) or not (false)")
      */
+    #[ORM\Column(name: "change_password", type: "boolean")]
     private bool $changePassword;
 
     /**
-     *
-     * @ORM\OneToMany(targetEntity="Folder\Api\V1\Entity\FolderUser", mappedBy="user")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="user_id", onDelete="CASCADE")
      * @OA\Property
      */
-    private \Doctrine\Common\Collections\Collection $folder;
+    #[ORM\OneToMany(targetEntity: FolderUser::class, mappedBy: "user")]
+    private Collection $folder;
 
     private $access;
 
@@ -145,7 +141,7 @@ class User
     }
 
     /**
-     * Getter for language
+     * Get language
      *
      * @return string
      */
@@ -155,7 +151,7 @@ class User
     }
 
     /**
-     * Setter for language
+     * Set language
      *
      * @param string $language
      */
@@ -165,7 +161,7 @@ class User
     }
 
     /**
-     * Get userId.
+     * Get userId
      *
      * @return int
      */
@@ -174,27 +170,31 @@ class User
         return $this->userId;
     }
 
+    /**
+     * Set userId
+     *
+     * @param int $userId
+     * @return void
+     */
     public function setUserId($userId)
     {
         $this->userId = $userId;
     }
 
     /**
-     * Set username.
+     * Set username
      *
      * @param string $username
-     *
      * @return User
      */
     public function setUsername($username)
     {
         $this->username = $username;
-
         return $this;
     }
 
     /**
-     * Get username.
+     * Get username
      *
      * @return string
      */
@@ -204,21 +204,19 @@ class User
     }
 
     /**
-     * Set password.
+     * Set password
      *
      * @param string|null $password
-     *
      * @return User
      */
     public function setPassword($password = null)
     {
         $this->password = $password;
-
         return $this;
     }
 
     /**
-     * Get password.
+     * Get password
      *
      * @return string|null
      */
@@ -228,21 +226,19 @@ class User
     }
 
     /**
-     * Set name.
+     * Set name
      *
      * @param string|null $name
-     *
      * @return User
      */
     public function setName($name = null)
     {
         $this->name = $name;
-
         return $this;
     }
 
     /**
-     * Get name.
+     * Get name
      *
      * @return string|null
      */
@@ -342,10 +338,10 @@ class User
     /**
      * Add folder
      *
-     * @param \Folder\Api\V1\Entity\FolderUser $folder
+     * @param FolderUser $folder
      * @return User
      */
-    public function addFolder(\Folder\Api\V1\Entity\FolderUser $folder)
+    public function addFolder(FolderUser $folder)
     {
         $this->folder[] = $folder;
         return $this;
@@ -354,10 +350,10 @@ class User
     /**
      * Remove folder
      *
-     * @param \Folder\Api\V1\Entity\FolderUser $folder
+     * @param FolderUser $folder
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeFolder(\Folder\Api\V1\Entity\FolderUser $folder)
+    public function removeFolder(FolderUser $folder)
     {
         return $this->folder->removeElement($folder);
     }
@@ -365,7 +361,7 @@ class User
     /**
      * Get folder
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getFolder()
     {

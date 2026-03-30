@@ -15,6 +15,7 @@ use App\Service\ProblemDetailsException;
 use Doctrine\ORM\EntityManager;
 use Laminas\I18n\Translator\Translator;
 use Folder\Api\V1\Facade\FolderUserFacade;
+use Laminas\Permissions\Rbac\Rbac;
 use Laminas\Permissions\Rbac\RoleInterface;
 
 class FolderAssertion implements AssertionInterface
@@ -83,7 +84,7 @@ class FolderAssertion implements AssertionInterface
      * @return bool
      */
     public function assert(
-        \Laminas\Permissions\Rbac\Rbac $rbac,
+        Rbac $rbac,
         RoleInterface $role,
         string $permission
     ): bool {
@@ -95,7 +96,7 @@ class FolderAssertion implements AssertionInterface
                     $this->user
                 );
             } catch (ProblemDetailsException) {
-                // if we catch a 404 NOT FOUND exception, we need to return 401 instead (since this is an assertion)
+                // If we catch a 404 NOT FOUND exception, we need to return 401 instead (since this is an assertion)
                 $method = $this->request->getMethod();
 
                 throw new ProblemDetailsException(

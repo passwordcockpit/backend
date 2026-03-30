@@ -13,48 +13,39 @@ use Doctrine\ORM\Mapping as ORM;
 use OpenApi\Annotations as OA;
 
 /**
- * Permission
- *
- * @ORM\Table(name="login_request")
- * @ORM\Entity
  * @OA\Schema(description="Login Requests table")
  */
+#[ORM\Entity]
+#[ORM\Table(name: "login_request")]
 class LoginRequest
 {
-    /**
-     *
-     * @ORM\Column(name="request_id", type="integer", precision=0, scale=0, nullable=false, unique=true)
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(name: "request_id", type: "integer")]
     private int $requestId;
 
     /**
-     *
-     * @ORM\Column(name="ip", type="string", length=100, precision=0, scale=0, nullable=true, unique=false)
      * @OA\Property(property="ip", type="string", description="ip making the request", example="256.240.20.111")
      */
+    #[ORM\Column(name: "ip", type: "string", length: 100, nullable: true)]
     private string $ip;
 
     /**
-     *
-     * @ORM\Column(name="attempt_date", type="datetime", precision=0, scale=0, nullable=true, unique=false)
      * @OA\Property(property="dateTime", type="datetime", description="Login request date", example="2019-01-22 18:18:18")
      */
+    #[ORM\Column(name: "attempt_date", type: "datetime", nullable: true)]
     private ?\DateTime $attemptDate = null;
 
     /**
-     *
-     * @ORM\Column(name="username", type="string", length=100, precision=0, scale=0, nullable=true, unique=false)
      * @OA\Property(property="username", type="string", description="username on which the request is made", example="admin")
      */
+    #[ORM\Column(name: "username", type: "string", length: 100, nullable: true)]
     private string $username;
 
     /**
      * Set ip
      *
      * @param string $ip
-     *
      * @return LoginRequest
      */
     public function setIp($ip)
@@ -65,7 +56,7 @@ class LoginRequest
     }
 
     /**
-     * Get Ip
+     * Get ip
      *
      * @return string
      */
@@ -74,6 +65,11 @@ class LoginRequest
         return $this->ip;
     }
 
+    /**
+     * Get requestId
+     *
+     * @return int
+     */
     public function getRequestId()
     {
         return $this->requestId;
@@ -83,7 +79,6 @@ class LoginRequest
      * Set username
      *
      * @param string $username
-     *
      * @return LoginRequest
      */
     public function setUsername($username = null)
@@ -107,7 +102,6 @@ class LoginRequest
      * Set attemptDate
      *
      * @param ?DateTime $attemptDate
-     *
      * @return LoginRequest
      */
     public function setAttemptDate($attemptDate = null)
@@ -119,8 +113,6 @@ class LoginRequest
 
     /**
      * Get attemptDate
-     *
-     * @param \Datetime $attemptDate
      *
      * @return \Datetime|null
      */

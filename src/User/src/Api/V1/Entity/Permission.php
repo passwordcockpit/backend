@@ -10,50 +10,44 @@ namespace User\Api\V1\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use OpenApi\Annotations as OA;
+use \User\Api\V1\Entity\User;
 
 /**
- * Permission
- *
- * @ORM\Table(name="permission")
- * @ORM\Entity
  * @OA\Schema(description="Permission")
  */
+#[ORM\Entity]
+#[ORM\Table(name: "permission")]
 class Permission
 {
     public function __construct(
         /**
-         *
-         * @ORM\Column(name="manage_users", type="boolean", precision=0, scale=0, nullable=true, unique=false)
          * @OA\Property(property="manage_users")
          */
+        #[ORM\Column(name: "manage_users", type: "boolean", nullable: true)]
         private bool $manageUsers,
+
         /**
-         *
-         * @ORM\Column(name="create_folders", type="boolean", precision=0, scale=0, nullable=true, unique=false)
          * @OA\Property(property="create_folders")
          */
+        #[ORM\Column(name: "create_folders", type: "boolean", nullable: true)]
         private bool $createFolders,
+
         /**
-         *
-         * @ORM\Column(name="access_all_folders", type="boolean", precision=0, scale=0, nullable=true, unique=false)
          * @OA\Property(property="access_all_folders")
          */
+        #[ORM\Column(name: "access_all_folders", type: "boolean", nullable: true)]
         private bool $accessAllFolders,
+
         /**
-         *
-         * @ORM\Column(name="view_logs", type="boolean", precision=0, scale=0, nullable=true, unique=false)
          * @OA\Property(property="view_logs")
          */
+        #[ORM\Column(name: "view_logs", type: "boolean", nullable: true)]
         private bool $viewLogs,
-        /**
-         *
-         * @ORM\Id
-         * @ORM\GeneratedValue(strategy="NONE")
-         * @ORM\OneToOne(targetEntity="User\Api\V1\Entity\User")
-         * @ORM\JoinColumns({
-         *   @ORM\JoinColumn(name="user_id", referencedColumnName="user_id", nullable=true)
-         * })
-         */
+
+        #[ORM\Id]
+        #[ORM\GeneratedValue(strategy: "NONE")]
+        #[ORM\OneToOne(targetEntity: User::class)]
+        #[ORM\JoinColumn(name: "user_id", referencedColumnName: "user_id")]
         private User $user
     )
     {
@@ -150,10 +144,10 @@ class Permission
     /**
      * Set user
      *
-     * @param \User\Api\V1\Entity\User $user
+     * @param User $user
      * @return Permission
      */
-    public function setUser(\User\Api\V1\Entity\User $user)
+    public function setUser(User $user)
     {
         $this->user = $user;
         return $this;
@@ -162,7 +156,7 @@ class Permission
     /**
      * Get user
      *
-     * @return \User\Api\V1\Entity\User
+     * @return User
      */
     public function getUser()
     {

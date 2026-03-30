@@ -13,95 +13,79 @@ use Folder\Api\V1\Entity\Folder;
 use OpenApi\Annotations as OA;
 
 /**
- * Password
- *
- * @ORM\Table(name="password")
- * @ORM\Entity
  * @OA\Schema(description="Password")
  */
+#[ORM\Entity]
+#[ORM\Table(name: "password")]
 class Password
 {
     /**
-     *
-     * @ORM\Column(name="password_id", type="integer", precision=0, scale=0, nullable=false, unique=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue
      * @OA\Property
      */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(name: "password_id", type: "integer")]
     private int $passwordId;
 
     /**
-     *
-     * @ORM\Column(name="title", type="string", length=100, precision=0, scale=0, nullable=false, unique=false)
      * @OA\Property(property="title", type="string", description="Password's title", example="title")
      */
+    #[ORM\Column(name: "title", type: "string", length: 100)]
     private string $title;
 
     /**
-     *
-     * @ORM\Column(name="icon", type="string", length=45, precision=0, scale=0, nullable=true, unique=false)
      * @OA\Property(property="icon", type="string", description="Password's icon", example="icon")
      */
+    #[ORM\Column(name: "icon", type: "string", length: 45, nullable: true)]
     private ?string $icon = null;
 
     /**
-     *
-     * @ORM\Column(name="description", type="string", length=4000, precision=0, scale=0, nullable=true, unique=false)
      * @OA\Property(property="description", type="string", description="Password's description", example="description")
      */
+    #[ORM\Column(name: "description", type: "string", length: 4000, nullable: true)]
     private ?string $description = null;
 
     /**
-     *
-     * @ORM\Column(name="username", type="string", length=100, precision=0, scale=0, nullable=true, unique=false)
      * @OA\Property(property="username", type="string", description="Password's username", example="username")
      */
+    #[ORM\Column(name: "username", type: "string", length: 100, nullable: true)]
     private ?string $username = null;
 
     /**
-     *
-     * @ORM\Column(name="password", type="string", length=1000, precision=0, scale=0, nullable=true, unique=false)
      * @OA\Property(property="password", type="string", description="Password's password", example="password")
      */
+    #[ORM\Column(name: "password", type: "string", length: 1000, nullable: true)]
     private ?string $password = null;
 
     /**
-     *
-     * @ORM\Column(name="url", type="string", length=100, precision=0, scale=0, nullable=true, unique=false)
      * @OA\Property(property="url", type="string", description="Password's url", example="http://www.blackpoints.ch")
      */
+    #[ORM\Column(name: "url", type: "string", length: 100, nullable: true)]
     private ?string $url = null;
 
     /**
-     *
-     * @ORM\Column(name="tags", type="string", length=400, precision=0, scale=0, nullable=true, unique=false)
      * @OA\Property(property="tags", type="string", description="Password's tags", example="tag1 tag2 tag3")
      */
+    #[ORM\Column(name: "tags", type: "string", length: 400, nullable: true)]
     private ?string $tags = null;
 
     /**
-     *
-     * @ORM\Column(name="last_modification_date", type="datetime", precision=0, scale=0, nullable=true, unique=false)
      * @OA\Property
      */
+    #[ORM\Column(name: "last_modification_date", type: "datetime", nullable: true)]
     private ?\DateTime $lastModificationDate = null;
 
     /**
-     *
-     * @ORM\ManyToOne(targetEntity="Folder\Api\V1\Entity\Folder", fetch="EAGER")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="folder_id", referencedColumnName="folder_id", nullable=true)
-     * })
-     *
      * @OA\Property(property="folder_id", example=4)
      */
+    #[ORM\ManyToOne(targetEntity: Folder::class, fetch: "EAGER")]
+    #[ORM\JoinColumn(name: "folder_id", referencedColumnName: "folder_id", nullable: true)]
     private Folder $folder;
 
     /**
-     *
-     * @ORM\Column(name="frontend_crypted", type="boolean", precision=0, scale=0, nullable=true, unique=false)
      * @OA\Property
      */
+    #[ORM\Column(name: "frontend_crypted", type: "boolean", nullable: true)]
     private bool $frontendCrypted;
 
     private bool $completePassword = true;

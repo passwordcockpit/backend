@@ -13,45 +13,26 @@ use OpenApi\Annotations as OA;
 use User\Api\V1\Entity\User;
 
 /**
- * FolderUser
- *
- * @ORM\Table(name="folder_user")
- * @ORM\Entity
  * @OA\Schema(description="FolderUser")
  */
+#[ORM\Entity]
+#[ORM\Table(name: "folder_user")]
 class FolderUser
 {
-    /**
-     *
-     * @ORM\Column(name="folder_user_id", type="integer", precision=0, scale=0, nullable=false, unique=true)
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(name: "folder_user_id", type: "integer")]
     private int $folderUserId;
 
-    /**
-     *
-     * @ORM\Column(name="access", type="smallint", precision=0, scale=0, nullable=true, unique=false)
-     * @OA\Property
-     */
+    #[ORM\Column(name: "access", type: "smallint", nullable: true)]
     private int $access;
 
-    /**
-     *
-     * @ORM\ManyToOne(targetEntity="Folder\Api\V1\Entity\Folder", inversedBy="user", fetch="EAGER")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="folder_id", referencedColumnName="folder_id", nullable=true)
-     * })
-     */
+    #[ORM\ManyToOne(targetEntity: Folder::class, inversedBy: "user", fetch: "EAGER")]
+    #[ORM\JoinColumn(name: "folder_id", referencedColumnName: "folder_id", nullable: true, onDelete: "CASCADE")]
     private Folder $folder;
 
-    /**
-     *
-     * @ORM\ManyToOne(targetEntity="User\Api\V1\Entity\User", inversedBy="folder", fetch="EAGER")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user_id", referencedColumnName="user_id", nullable=true)
-     * })
-     */
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "folder", fetch: "EAGER")]
+    #[ORM\JoinColumn(name: "user_id", referencedColumnName: "user_id", nullable: true, onDelete: "CASCADE")]
     private User $user;
 
     /**
@@ -102,6 +83,7 @@ class FolderUser
 
     /**
      * Get folder
+     * 
      * @return Folder|null
      */
     public function getFolder()

@@ -10,52 +10,57 @@ namespace Folder\Api\V1\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use OpenApi\Annotations as OA;
+use \Doctrine\Common\Collections\Collection;
+use \Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Folder
- *
- * @ORM\Table(name="folder")
- * @ORM\Entity
  * @OA\Schema(description="Folder")
  */
+#[ORM\Entity]
+#[ORM\Table(name: "folder")]
 class Folder
 {
-    /**
-     *
-     * @ORM\Column(name="folder_id", type="integer", precision=0, scale=0, nullable=false, unique=true)
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @OA\Property
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(name: "folder_id", type: "integer")]
     private int $folderId;
 
     /**
-     *
-     * @ORM\Column(name="name", type="string", length=45, precision=0, scale=0, nullable=false, unique=false)
      * @OA\Property(example="folderName")
      */
+    #[ORM\Column(name: "name", type: "string", length: 45)]
     private string $name;
 
     /**
-     *
-     * @ORM\Column(name="parent_id", type="integer", precision=0, scale=0, nullable=true, unique=false)
      * @OA\Property(property="parent_id", example=null)
      */
+    #[ORM\Column(name: "parent_id", type: "integer", nullable: true)]
     private ?int $parentId = null;
 
     /**
-     *
-     * @ORM\OneToMany(targetEntity="Folder\Api\V1\Entity\FolderUser", mappedBy="folder")
-     * @ORM\JoinColumn(name="folder_id", referencedColumnName="folder_id", onDelete="CASCADE")
      * @OA\Property
      */
-    private \Doctrine\Common\Collections\Collection $user;
+    #[ORM\OneToMany(mappedBy: "folder", targetEntity: FolderUser::class)]
+    private Collection $user;
 
     private $access;
+
+    /**
+     * Set access
+     * 
+     * @param int|null $access
+     * @return Folder
+     */
     public function setAccess($access = null)
     {
         $this->access = $access;
     }
+
+    /**
+     * Get access
+     *
+     * @return int|null
+     */
     public function getAccess()
     {
         return $this->access;
@@ -66,7 +71,7 @@ class Folder
      */
     public function __construct()
     {
-        $this->user = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->user = new ArrayCollection();
     }
 
     /**
@@ -165,7 +170,7 @@ class Folder
     /**
      * Get user
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getUser()
     {

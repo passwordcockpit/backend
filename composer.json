@@ -13,10 +13,10 @@
     },
     "require": {
         "php": "^8.4",
-        "doctrine/migrations": "^3.4",
-        "doctrine/orm": "^2.11",
+        "doctrine/migrations": "^3.9",
+        "doctrine/orm": "^3.6",
         "firebase/php-jwt": "^7.0",
-        "laminas/laminas-authentication": "^2.5",
+        "laminas/laminas-authentication": "^2.19",
         "laminas/laminas-component-installer": "^3.4.0",
         "laminas/laminas-config-aggregator": "^1.1.0",
         "laminas/laminas-hydrator": "^4.3",

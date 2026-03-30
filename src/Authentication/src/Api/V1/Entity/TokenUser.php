@@ -14,37 +14,28 @@ use OpenApi\Annotations as OA;
 use User\Api\V1\Entity\User;
 
 /**
- * Permission
- *
- * @ORM\Table(name="token_user")
- * @ORM\Entity
  * @OA\Schema(description="Token table")
  */
+#[ORM\Entity]
+#[ORM\Table(name: "token_user")]
 class TokenUser
 {
-    /**
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="User\Api\V1\Entity\User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user_id", referencedColumnName="user_id", nullable=true)
-     * })
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: "NONE")]
+    #[ORM\OneToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(name: "user_id", referencedColumnName: "user_id", nullable: true)]
     private User $user;
 
     /**
-     *
-     * @ORM\Column(name="token", type="string", length=500, precision=0, scale=0, nullable=true, unique=true)
      * @OA\Property(property="token", type="string", description="token value", example="ey.token")
      */
+    #[ORM\Column(name: "token", type: "string", length: 500, nullable: true, unique: true)]
     private ?string $token = null;
 
     /**
-     *
-     * @ORM\Column(name="last_login", type="datetime", precision=0, scale=0, nullable=true, unique=false)
      * @OA\Property(property="last_login", type="datetime", description="Last login date", example="title")
      */
+    #[ORM\Column(name: "last_login", type: "datetime", nullable: true)]
     private ?\DateTime $lastLogin = null;
 
     /**

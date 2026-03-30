@@ -97,14 +97,13 @@ class LogFacade extends AbstractFacade
                 ->findBy(['password' => $password]);
             return $logs;
         } else {
-            // check if it's a deleted password
+            // Check if it's a deleted password
             $log = $this->entityManager
                 ->getRepository(Log::class)
                 ->findBy(['action' => "Password " . $id . " deleted"]);
             if ($log) {
                 return $log;
             } else {
-                // else password did not even exist
                 throw new ProblemDetailsException(
                     404,
                     $this->translator->translate('Password not found'),
@@ -116,7 +115,7 @@ class LogFacade extends AbstractFacade
     }
 
     /**
-     * Same as above, but get password as parameter
+     * Returns logs for specified password
      *
      * @param Password $pass
      * @return array of Log
@@ -160,7 +159,8 @@ class LogFacade extends AbstractFacade
     }
 
     /**
-     *
+     * Get user log
+     * 
      * @param int $id
      * @return Log[]
      * @throws ProblemDetailsException
@@ -188,7 +188,6 @@ class LogFacade extends AbstractFacade
      * @param int $passwordId
      * @param string $action
      * @param int $userId
-     *
      * @return bool true
      */
     public function updateLog($passwordId, $action, $userId)
@@ -210,11 +209,10 @@ class LogFacade extends AbstractFacade
     }
 
     /**
-     * Create a log that shows who deleted a password.
+     * Create a log that shows who deleted a password
      *
      * @param Password $passwordId
      * @param User $user
-     *
      */
     public function createDeletedLog(Password $password, User $user)
     {

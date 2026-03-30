@@ -51,7 +51,7 @@ class ConfigProvider
                 ],
                 'file' => [
                     'class' =>
-                        \Doctrine\ORM\Mapping\Driver\AnnotationDriver::class,
+                        \Doctrine\ORM\Mapping\Driver\AttributeDriver::class,
                     'cache' => 'array',
                     'paths' => __DIR__ . '/Entity'
                 ]

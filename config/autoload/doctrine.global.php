@@ -12,7 +12,7 @@ return [
     'doctrine' => [
         'connection' => [
             'orm_default' => [
-                'driver_class' => \Doctrine\DBAL\Driver\PDOMySql\Driver::class,
+                'driver' => 'pdo_mysql',
                 'params' => [
                     'url' => '',
                     'driverOptions' => array(

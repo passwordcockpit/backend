@@ -79,25 +79,12 @@ class ConfigProvider
             'driver' => [
                 'orm_default' => [
                     'drivers' => [
-                        'Authentication\Api\V1\Entity' => 'loginrequest'
-                    ]
-                ],
-                'loginrequest' => [
-                    'class' =>
-                        \Doctrine\ORM\Mapping\Driver\AnnotationDriver::class,
-                    'cache' => 'array',
-                    'paths' => __DIR__ . '/Entity'
-                ]
-            ],
-            'driver' => [
-                'orm_default' => [
-                    'drivers' => [
                         'Authentication\Api\V1\Entity' => 'tokenuser'
                     ]
                 ],
                 'tokenuser' => [
                     'class' =>
-                        \Doctrine\ORM\Mapping\Driver\AnnotationDriver::class,
+                        \Doctrine\ORM\Mapping\Driver\AttributeDriver::class,
                     'cache' => 'array',
                     'paths' => __DIR__ . '/Entity'
                 ]

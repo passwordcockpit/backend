@@ -1,12 +1,20 @@
 <?php
 
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper;
-use Symfony\Component\Console\Helper\HelperSet;
+use Doctrine\ORM\Tools\Console\EntityManagerProvider;
 
 $container = require __DIR__ . '/container.php';
+
+/** @var EntityManagerInterface $em */
 $em = $container->get(EntityManagerInterface::class);
 
-return new HelperSet([
-    'em' => new EntityManagerHelper($em)
-]);
+return new class($em) implements EntityManagerProvider {
+    public function __construct(private EntityManagerInterface $em)
+    {
+    }
+
+    public function getDefaultEntityManager(): EntityManagerInterface
+    {
+        return $this->em;
+    }
+};

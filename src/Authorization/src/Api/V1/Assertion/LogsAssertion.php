@@ -19,6 +19,7 @@ use Laminas\Permissions\Rbac\RoleInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Password\Api\V1\Entity\Password;
 use Laminas\I18n\Translator\Translator;
+use Laminas\Permissions\Rbac\Rbac;
 use User\Api\V1\Entity\User;
 
 class LogsAssertion implements AssertionInterface
@@ -135,7 +136,6 @@ class LogsAssertion implements AssertionInterface
                 // Getting folderId of password
                 $folderId = $password->getFolder()->getFolderId();
                 // Need to check now that user has 'read' or 'manage' on folder.
-
                 $access = $this->folderUserFacade->checkUser(
                     $folderId,
                     $this->user
@@ -171,7 +171,7 @@ class LogsAssertion implements AssertionInterface
      * @return bool
      */
     public function assert(
-        \Laminas\Permissions\Rbac\Rbac $rbac,
+        Rbac $rbac,
         RoleInterface $role,
         string $permission
     ): bool {

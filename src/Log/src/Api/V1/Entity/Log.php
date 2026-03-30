@@ -14,55 +14,44 @@ use Password\Api\V1\Entity\Password;
 use User\Api\V1\Entity\User;
 
 /**
- * Log
- *
- * @ORM\Table(name="log")
- * @ORM\Entity
  * @OA\Schema(description="Log")
  */
+#[ORM\Entity]
+#[ORM\Table(name: "log")]
 class Log
 {
     /**
-     *
-     * @ORM\Column(name="log_id", type="integer", precision=0, scale=0, nullable=false, unique=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue
      * @OA\Property
      */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(name: "log_id", type: "integer")]
     private int $logId;
 
     /**
-     *
-     * @ORM\Column(name="action_date", type="datetime", precision=0, scale=0, nullable=true, unique=false)
      * @OA\Property
      */
+    #[ORM\Column(name: "action_date", type: "datetime", nullable: true)]
     private ?\DateTime $actionDate = null;
 
     /**
-     *
-     * @ORM\Column(name="action", type="string", length=4000, precision=0, scale=0, nullable=true, unique=false)
      * @OA\Property
      */
+    #[ORM\Column(name: "action", type: "string", length: 4000, nullable: true)]
     private ?string $action = null;
 
     /**
-     *
-     * @ORM\ManyToOne(targetEntity="Password\Api\V1\Entity\Password")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="password_id", referencedColumnName="password_id", nullable=true)
-     * })
      * @OA\Property
      */
+    #[ORM\ManyToOne(targetEntity: Password::class)]
+    #[ORM\JoinColumn(name: "password_id", referencedColumnName: "password_id", nullable: true)]
     private ?Password $password = null;
 
     /**
-     *
-     * @ORM\ManyToOne(targetEntity="User\Api\V1\Entity\User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user_id", referencedColumnName="user_id", nullable=true)
-     * })
      * @OA\Property
      */
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(name: "user_id", referencedColumnName: "user_id", nullable: true)]
     private User $user;
 
     /**
@@ -110,7 +99,7 @@ class Log
     }
 
     /**
-     * Get action.
+     * Get action
      *
      * @return string|null
      */
