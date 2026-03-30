@@ -56,7 +56,7 @@ class ListUsernameAction implements RequestHandlerInterface
         $users = $this->userFacade->getAllUsernames();
         $usersArrayAdapter = new \Laminas\Paginator\Adapter\ArrayAdapter($users);
         $usersCollection = new UserCollection($usersArrayAdapter);
-        $usersCollection->setDefaultItemCountPerPage(PHP_INT_MAX);
+        $usersCollection->setItemCountPerPage($usersCollection->getTotalItemCount());
         $resource = $this->halResourceGenerator->fromObject(
             $usersCollection,
             $request

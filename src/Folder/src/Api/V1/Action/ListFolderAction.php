@@ -99,7 +99,7 @@ class ListFolderAction implements RequestHandlerInterface
             usort($folders, fn($a, $b) => strcasecmp((string) $a->getName(), (string) $b->getName()));
         }
         $foldersCollection = new FolderCollection(new ArrayAdapter($folders));
-        $foldersCollection->setDefaultItemCountPerPage(PHP_INT_MAX);
+        $foldersCollection->setItemCountPerPage($foldersCollection->getTotalItemCount());
         $resource = $this->halResourceGenerator->fromObject(
             $foldersCollection,
             $request

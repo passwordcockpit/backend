@@ -76,7 +76,7 @@ class ListPasswordFilesAction implements RequestHandlerInterface
         $files = $this->fileFacade->getFiles($passwordId);
         $filesArrayAdapter = new \Laminas\Paginator\Adapter\ArrayAdapter($files);
         $filesCollection = new PasswordCollection($filesArrayAdapter);
-        $filesCollection->setDefaultItemCountPerPage(PHP_INT_MAX);
+        $filesCollection->setItemCountPerPage($filesCollection->getTotalItemCount());
         $resource = $this->halResourceGenerator->fromObject(
             $filesCollection,
             $request

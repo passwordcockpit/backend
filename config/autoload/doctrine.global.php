@@ -12,8 +12,8 @@ return [
     'doctrine' => [
         'connection' => [
             'orm_default' => [
-                'driver' => 'pdo_mysql',
                 'params' => [
+                    'driver' => 'pdo_mysql',
                     'url' => '',
                     'driverOptions' => array(
                         1002 => 'SET NAMES utf8'

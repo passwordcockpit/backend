@@ -60,7 +60,7 @@ class GetUserFoldersPermissionAction implements RequestHandlerInterface
 
         $usersArrayAdapter = new \Laminas\Paginator\Adapter\ArrayAdapter($folders);
         $folderUserCollection = new FolderUserCollection($usersArrayAdapter);
-        $folderUserCollection->setDefaultItemCountPerPage($this->paginatorConfig['small']);
+        $folderUserCollection->setItemCountPerPage($this->paginatorConfig['small']);
 
         $this->halResourceGenerator->fromObject($folderUserCollection, $request);
 

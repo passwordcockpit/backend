@@ -107,7 +107,7 @@ class ListPasswordAction implements RequestHandlerInterface
             $passwords
         );
         $passwordsCollection = new PasswordCollection($passwordsArrayAdapter);
-        $passwordsCollection->setDefaultItemCountPerPage(PHP_INT_MAX);
+        $passwordsCollection->setItemCountPerPage($passwordsCollection->getTotalItemCount());
 
         $resource = $this->halResourceGenerator->fromObject(
             $passwordsCollection,

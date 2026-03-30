@@ -79,7 +79,7 @@ class ListPasswordLogAction implements RequestHandlerInterface
             $a->getActionDate()->getTimestamp());
         $logsArrayAdapter = new \Laminas\Paginator\Adapter\ArrayAdapter($logs);
         $logsCollection = new PasswordLogCollection($logsArrayAdapter);
-        $logsCollection->setDefaultItemCountPerPage(
+        $logsCollection->setItemCountPerPage(
             $this->paginatorConfig['small']
         );
         $resource = $this->halResourceGenerator->fromObject(
