@@ -8,8 +8,10 @@
 
 namespace File\Api\V1\Action;
 
+use App\Service\ProblemDetailsException;
 use Psr\Http\Server\RequestHandlerInterface;
 use File\Api\V1\Facade\FileFacade;
+use Laminas\I18n\Translator\Translator;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Mezzio\Hal\ResourceGenerator;
@@ -51,10 +53,12 @@ class DeleteFileAction implements RequestHandlerInterface
      *
      * @param FileFacade $fileFacade
      * @param ResourceGenerator $halResourceGenerator
+     * @param Translator $translator
      */
     public function __construct(
         protected FileFacade $fileFacade,
-        protected ResourceGenerator $halResourceGenerator
+        protected ResourceGenerator $halResourceGenerator,
+        private readonly Translator $translator,
     ){}
 
     /**
@@ -68,6 +72,9 @@ class DeleteFileAction implements RequestHandlerInterface
         $result = $this->fileFacade->delete($request->getAttribute('id'));
         if ($result) {
             return new \Laminas\Diactoros\Response\EmptyResponse();
+        }
+        else {
+            throw new ProblemDetailsException(404, $this->translator->translate('Cannot delete file'));
         }
     }
 }

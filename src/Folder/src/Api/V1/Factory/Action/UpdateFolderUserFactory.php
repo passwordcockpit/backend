@@ -15,6 +15,7 @@ use User\Api\V1\Facade\UserFacade;
 use Mezzio\Hal\ResourceGeneratorFactory;
 use Folder\Api\V1\Action\UpdateFolderUserAction;
 use Folder\Api\V1\Facade\FolderUserFacade;
+use Laminas\I18n\Translator\Translator;
 
 class UpdateFolderUserFactory
 {
@@ -33,7 +34,8 @@ class UpdateFolderUserFactory
             $container->get(UserFacade::class),
             $container->get(FolderUserFacade::class),
             $halResourceGenerator($container),
-            $container->get(\Mezzio\Hal\HalResponseFactory::class)
+            $container->get(\Mezzio\Hal\HalResponseFactory::class),
+            $container->get(Translator::class),
         );
     }
 }

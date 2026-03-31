@@ -13,6 +13,7 @@
 
 namespace Folder\Api\V1\Action;
 
+use App\Service\ProblemDetailsException;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -22,6 +23,7 @@ use Mezzio\Hal\ResourceGenerator;
 use Folder\Api\V1\Entity\FolderUser;
 use Mezzio\Hal\HalResponseFactory;
 use Folder\Api\V1\Facade\FolderUserFacade;
+use Laminas\I18n\Translator\Translator;
 
 /**
  *
@@ -82,13 +84,15 @@ class AddFolderUserAction implements RequestHandlerInterface
      * @param FolderUserFacade $folderUserfacade
      * @param ResourceGenerator $halResourceGenerator
      * @param HalResponseFactory $halResponseFactory
+     * @param Translator $translator
      */
     public function __construct(
         protected FolderFacade $folderFacade,
         protected UserFacade $userFacade,
         protected FolderUserFacade $folderUserFacade,
         protected ResourceGenerator $halResourceGenerator,
-        protected HalResponseFactory $halResponseFactory
+        protected HalResponseFactory $halResponseFactory,
+        private readonly Translator $translator,
     ){}
 
     /**
@@ -127,6 +131,9 @@ class AddFolderUserAction implements RequestHandlerInterface
                 $request,
                 $resource
             );
+        }
+        else {
+            throw new ProblemDetailsException(404, $this->translator->translate('Cannot add permission to folder'));
         }
     }
 }

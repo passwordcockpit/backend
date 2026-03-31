@@ -12,6 +12,7 @@ use File\Api\V1\Facade\FileFacade;
 use Mezzio\Hal\ResourceGeneratorFactory;
 use Psr\Container\ContainerInterface;
 use File\Api\V1\Action\DeleteFileAction;
+use Laminas\I18n\Translator\Translator;
 
 class DeleteFileActionFactory
 {
@@ -26,7 +27,8 @@ class DeleteFileActionFactory
         $halResourceGenerator = new ResourceGeneratorFactory();
         return new DeleteFileAction(
             $container->get(FileFacade::class),
-            $halResourceGenerator($container)
+            $halResourceGenerator($container),
+            $container->get(Translator::class),
         );
     }
 }

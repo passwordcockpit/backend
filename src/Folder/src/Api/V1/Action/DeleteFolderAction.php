@@ -11,10 +11,12 @@
 
 namespace Folder\Api\V1\Action;
 
+use App\Service\ProblemDetailsException;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Folder\Api\V1\Facade\FolderFacade;
+use Laminas\I18n\Translator\Translator;
 use Mezzio\Hal\ResourceGenerator;
 
 /**
@@ -53,10 +55,12 @@ class DeleteFolderAction implements RequestHandlerInterface
      *
      * @param FolderFacade $folderFacade
      * @param ResourceGenerator $halResourceGenerator
+     * @param Translator $translator
      */
     public function __construct(
         protected FolderFacade $folderFacade,
-        protected ResourceGenerator $halResourceGenerator
+        protected ResourceGenerator $halResourceGenerator,
+        private readonly Translator $translator,
     ){}
 
     /**
@@ -72,6 +76,9 @@ class DeleteFolderAction implements RequestHandlerInterface
         );
         if ($result) {
             return new \Laminas\Diactoros\Response\EmptyResponse();
+        }
+        else {
+            throw new ProblemDetailsException(404, $this->translator->translate('Cannot delete folder'));
         }
     }
 }

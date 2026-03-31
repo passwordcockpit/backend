@@ -12,6 +12,7 @@ namespace Folder\Api\V1\Factory\Action;
 use Folder\Api\V1\Action\DeleteFolderAction;
 use Psr\Container\ContainerInterface;
 use Folder\Api\V1\Facade\FolderFacade;
+use Laminas\I18n\Translator\Translator;
 use Mezzio\Hal\ResourceGeneratorFactory;
 
 class DeleteFolderFactory
@@ -28,7 +29,8 @@ class DeleteFolderFactory
 
         return new DeleteFolderAction(
             $container->get(FolderFacade::class),
-            $halResourceGenerator($container)
+            $halResourceGenerator($container),
+            $container->get(Translator::class),
         );
     }
 }
