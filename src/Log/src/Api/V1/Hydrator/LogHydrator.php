@@ -17,16 +17,13 @@ use Laminas\I18n\Translator\Translator;
 class LogHydrator extends AbstractHydrator
 {
 
-    private $translator;
-
     /**
      * Constructor
      *
      * @param Translator $translator
      */
-    function __construct(Translator $translator)
+    function __construct(private readonly Translator $translator)
     {
-        $this->translator = $translator;
     }
     /**
      * Returns array based on Log's data
