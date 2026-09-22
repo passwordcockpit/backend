@@ -37,6 +37,7 @@ class UserFacade extends AbstractFacade
     /**
      * @param array $data
      */
+    #[\Override]
     public function create($data): never
     {
         throw new \Exception("Method not implemented");
@@ -46,6 +47,7 @@ class UserFacade extends AbstractFacade
      * @param int $id
      * @param array $filter
      */
+    #[\Override]
     public function fetch($id, $filter): never
     {
         throw new \Exception("Method not implemented");
@@ -54,6 +56,7 @@ class UserFacade extends AbstractFacade
     /**
      * @param array $filter
      */
+    #[\Override]
     public function fetchAll($filter): never
     {
         throw new \Exception("Method not implemented");
@@ -63,6 +66,7 @@ class UserFacade extends AbstractFacade
      * @param int $id
      * @param array $data
      */
+    #[\Override]
     public function update($id, $data): never
     {
         throw new \Exception("Method not implemented");
@@ -72,6 +76,7 @@ class UserFacade extends AbstractFacade
      * @param int $id
      * @param array $filter
      */
+    #[\Override]
     public function delete($id, $filter): never
     {
         throw new \Exception("Method not implemented");
@@ -90,7 +95,7 @@ class UserFacade extends AbstractFacade
         $user->setUsername($payload['username']);
 
         if(isset($payload['password'])){
-            $bcryptedPassword = password_hash($payload['password'], PASSWORD_BCRYPT);
+            $bcryptedPassword = password_hash((string) $payload['password'], PASSWORD_BCRYPT);
             $user->setPassword($bcryptedPassword);
         }
        
@@ -260,7 +265,7 @@ class UserFacade extends AbstractFacade
                     return $response;
                 }
 
-                $bcryptedPassword = password_hash($payload['password'], PASSWORD_BCRYPT);
+                $bcryptedPassword = password_hash((string) $payload['password'], PASSWORD_BCRYPT);
 
                 // Checking who is making the request
                 // if the user has 'manage_users', we do not need to check the actual password.
@@ -351,7 +356,7 @@ class UserFacade extends AbstractFacade
     {
         $check = false;
         $securePass = $user->getPassword();
-        $check = password_verify($password, $securePass);
+        $check = password_verify($password, (string) $securePass);
         return $check;
     }
 

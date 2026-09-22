@@ -75,6 +75,7 @@ class AuthenticationUpdateToken implements RequestHandlerInterface
      * @return ResponseInterface
      * @throws ProblemDetailsException
      */
+    #[\Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         if (!isset($request->getParsedBody()['token'])) {

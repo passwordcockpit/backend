@@ -83,6 +83,7 @@ class CreateUserAction implements RequestHandlerInterface
      * @return ResponseInterface
      * @throws ProblemDetailsException
      */
+    #[\Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         // create user

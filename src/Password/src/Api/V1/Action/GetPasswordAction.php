@@ -72,6 +72,7 @@ class GetPasswordAction implements RequestHandlerInterface
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
+    #[\Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         // Set the User for logging purpose

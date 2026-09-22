@@ -20,6 +20,7 @@ class UserHydrator extends AbstractHydrator
      * @param User $user
      * @return array
      */
+    #[\Override]
     public function extract($user): array
     {
         $data = [];
@@ -48,6 +49,7 @@ class UserHydrator extends AbstractHydrator
      * @param \User\Api\V1\Hydrator\UserEntity $user
      * @return \User\Api\V1\Hydrator\UserEntity
      */
+    #[\Override]
     public function hydrate(array $data, $user)
     {
         if (!$user instanceof User) {

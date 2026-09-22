@@ -37,6 +37,7 @@ class StrictTransportSecurityMiddleware implements MiddlewareInterface
      * @param RequestHandlerInterface $handler
      * @return ResponseInterface
      */
+    #[\Override]
     public function process(
         ServerRequestInterface $request,
         RequestHandlerInterface $handler

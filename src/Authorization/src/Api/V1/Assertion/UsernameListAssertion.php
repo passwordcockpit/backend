@@ -52,6 +52,7 @@ class UsernameListAssertion implements AssertionInterface
      * @param string $permission
      * @return bool
      */
+    #[\Override]
     public function assert(
         \Laminas\Permissions\Rbac\Rbac $rbac,
         RoleInterface $role,

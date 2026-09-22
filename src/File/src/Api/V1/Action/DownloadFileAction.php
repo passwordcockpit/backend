@@ -63,6 +63,7 @@ class DownloadFileAction implements RequestHandlerInterface
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
+    #[\Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $stream = null;

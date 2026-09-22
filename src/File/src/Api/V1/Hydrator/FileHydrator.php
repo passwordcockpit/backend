@@ -25,6 +25,7 @@ class FileHydrator extends \Laminas\Hydrator\AbstractHydrator
      *
      * @return array
      */
+    #[\Override]
     public function extract($object): array
     {
         $data = [];
@@ -48,6 +49,7 @@ class FileHydrator extends \Laminas\Hydrator\AbstractHydrator
      * @return File
      * @throws \Exception
      */
+    #[\Override]
     public function hydrate(array $data, $object)
     {
         if (!$object instanceof File) {

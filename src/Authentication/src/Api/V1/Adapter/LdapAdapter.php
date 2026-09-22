@@ -46,6 +46,7 @@ class LdapAdapter implements AdapterInterface
         $this->username = $username;
     }
 
+    #[\Override]
     public function authenticate()
     {
         $ldap = new Ldap($this->ldapConfig);

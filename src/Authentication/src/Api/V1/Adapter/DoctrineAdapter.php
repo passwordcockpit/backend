@@ -55,6 +55,7 @@ class DoctrineAdapter implements AdapterInterface
      *
      * @return Result
      */
+    #[\Override]
     public function authenticate()
     {
         $user = $this->entityManager

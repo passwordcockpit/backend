@@ -35,6 +35,7 @@ class OptionsMiddleware implements MiddlewareInterface
     /**
      * Handle an implicit OPTIONS request.
      */
+    #[\Override]
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler) : ResponseInterface
     {
         if ($request->getMethod() !== RequestMethod::METHOD_OPTIONS) {

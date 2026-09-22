@@ -36,6 +36,7 @@ class LogFacade extends AbstractFacade
      *
      * @param array $data
      */
+    #[\Override]
     public function create($data): never
     {
         throw new \Exception("Method not implemented");
@@ -46,6 +47,7 @@ class LogFacade extends AbstractFacade
      * @param int $id
      * @param array $filter
      */
+    #[\Override]
     public function fetch($id, $filter): never
     {
         throw new \Exception("Method not implemented");
@@ -55,6 +57,7 @@ class LogFacade extends AbstractFacade
      *
      * @param array $filter
      */
+    #[\Override]
     public function fetchAll($filter): never
     {
         throw new \Exception("Method not implemented");
@@ -65,6 +68,7 @@ class LogFacade extends AbstractFacade
      * @param int $id
      * @param array $data
      */
+    #[\Override]
     public function update($id, $data): never
     {
         throw new \Exception("Method not implemented");
@@ -75,6 +79,7 @@ class LogFacade extends AbstractFacade
      * @param int $id
      * @param array $filter
      */
+    #[\Override]
     public function delete($id, $filter): never
     {
         throw new \Exception("Method not implemented");

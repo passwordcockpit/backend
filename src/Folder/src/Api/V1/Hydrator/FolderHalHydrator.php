@@ -19,6 +19,7 @@ class FolderHalHydrator extends AbstractHydrator
      * @param Folder $folder
      * @return array
      */
+    #[\Override]
     public function extract($folder): array
     {
         $data = [];
@@ -42,6 +43,7 @@ class FolderHalHydrator extends AbstractHydrator
      * @param Folder $folder
      * @return Folder
      */
+    #[\Override]
     public function hydrate(array $data, $folder)
     {
     }

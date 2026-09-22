@@ -48,6 +48,7 @@ class PasswordStrength extends AbstractValidator
      *
      * @param string $value
      */
+    #[\Override]
     public function isValid($value)
     {
         $this->setValue($value);

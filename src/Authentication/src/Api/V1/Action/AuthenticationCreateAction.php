@@ -162,6 +162,7 @@ class AuthenticationCreateAction implements RequestHandlerInterface
      * @return ResponseInterface
      * @throws ProblemDetailsException
      */
+    #[\Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $payload = $request->getParsedBody();

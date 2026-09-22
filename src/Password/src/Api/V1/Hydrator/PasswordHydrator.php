@@ -21,6 +21,7 @@ class PasswordHydrator extends AbstractHydrator
      * @param Password $password
      * @return array
      */
+    #[\Override]
     public function extract($password): array
     {
         $data = [];
@@ -54,6 +55,7 @@ class PasswordHydrator extends AbstractHydrator
      * @return Password
      *
      */
+    #[\Override]
     public function hydrate(array $data, $password)
     {
         if (!$password instanceof Password) {

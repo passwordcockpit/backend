@@ -57,6 +57,7 @@ class ListUserAction implements RequestHandlerInterface
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
+    #[\Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $users = $this->userFacade->getAll();

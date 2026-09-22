@@ -66,6 +66,7 @@ class FileManageAssertion implements AssertionInterface
      *
      * @return bool
      */
+    #[\Override]
     public function assert(
         Rbac $rbac,
         RoleInterface $role,

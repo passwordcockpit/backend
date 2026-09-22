@@ -170,6 +170,7 @@ class LogsAssertion implements AssertionInterface
      * @param string $permission
      * @return bool
      */
+    #[\Override]
     public function assert(
         Rbac $rbac,
         RoleInterface $role,

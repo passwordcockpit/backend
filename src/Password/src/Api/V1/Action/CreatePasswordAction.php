@@ -78,6 +78,7 @@ class CreatePasswordAction implements RequestHandlerInterface
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
+    #[\Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $this->passwordFacade->setUserId(

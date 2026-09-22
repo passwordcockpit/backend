@@ -38,6 +38,7 @@ class StringParameterValidator implements MiddlewareInterface
      *
      * @throws ProblemDetailsException
      */
+    #[\Override]
     public function process(
         ServerRequestInterface $request,
         RequestHandlerInterface $handler

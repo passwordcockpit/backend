@@ -72,6 +72,7 @@ class GetUserAction implements RequestHandlerInterface
      * @return ResponseInterface
      * @throws ProblemDetailsException
      */
+    #[\Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $user_id = $request->getAttribute('id');

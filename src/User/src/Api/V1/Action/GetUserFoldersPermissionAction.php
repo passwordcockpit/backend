@@ -53,6 +53,7 @@ class GetUserFoldersPermissionAction implements RequestHandlerInterface
         protected array $paginatorConfig
     ){}
     
+    #[\Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $userId = $request->getAttribute('id');

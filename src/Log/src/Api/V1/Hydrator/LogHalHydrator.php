@@ -31,6 +31,7 @@ class LogHalHydrator extends AbstractHydrator
      * @param Log $log
      * @return array
      */
+    #[\Override]
     public function extract($log): array
     {
         $data = [];
@@ -54,6 +55,7 @@ class LogHalHydrator extends AbstractHydrator
         return $data;
     }
 
+    #[\Override]
     public function hydrate(array $data, $object)
     {
     }

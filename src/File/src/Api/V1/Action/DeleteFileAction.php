@@ -67,6 +67,7 @@ class DeleteFileAction implements RequestHandlerInterface
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
+    #[\Override]
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         $result = $this->fileFacade->delete($request->getAttribute('id'));

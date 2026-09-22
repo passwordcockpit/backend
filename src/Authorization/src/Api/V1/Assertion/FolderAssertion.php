@@ -83,6 +83,7 @@ class FolderAssertion implements AssertionInterface
      *
      * @return bool
      */
+    #[\Override]
     public function assert(
         Rbac $rbac,
         RoleInterface $role,

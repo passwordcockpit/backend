@@ -42,6 +42,7 @@ class FileFacade extends AbstractFacade
      * @return string
      * @throws ProblemDetailsException
      */
+    #[\Override]
     public function create($data)
     {
         try {
@@ -148,6 +149,7 @@ class FileFacade extends AbstractFacade
      * @return boolean
      * @throws ProblemDetailsException
      */
+    #[\Override]
     public function delete($id = null, $filter = null)
     {
         if ($id) {
@@ -182,6 +184,7 @@ class FileFacade extends AbstractFacade
      * @return File
      * @throws ProblemDetailsException
      */
+    #[\Override]
     public function fetch($id = null, $filter = null)
     {
         if ($id) {
@@ -207,6 +210,7 @@ class FileFacade extends AbstractFacade
      * @param array $filter
      * @return File[]
      */
+    #[\Override]
     public function fetchAll($filter = null)
     {
         if ($filter) {
@@ -225,6 +229,7 @@ class FileFacade extends AbstractFacade
      * @return File
      * @throws ProblemDetailsException
      */
+    #[\Override]
     public function update($id, $data)
     {
         $file = $this->getRepository()->find($id);

@@ -123,6 +123,7 @@ class AuthorizationMiddleware implements MiddlewareInterface
      * @return ResponseInterface
      * @throws ProblemDetailsException
      */
+    #[\Override]
     public function process(
         ServerRequestInterface $request,
         RequestHandlerInterface $handler

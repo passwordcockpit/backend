@@ -43,6 +43,7 @@ class AuthenticationLogout implements RequestHandlerInterface
      * @return ResponseInterface
      * @throws ProblemDetailsException
      */
+    #[\Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $token = $request->getAttribute("token", false);

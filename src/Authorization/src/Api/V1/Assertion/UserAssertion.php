@@ -70,6 +70,7 @@ class UserAssertion implements AssertionInterface
      *
      * @return bool
      */
+    #[\Override]
     public function assert(
         \Laminas\Permissions\Rbac\Rbac $rbac,
         RoleInterface $role,

@@ -59,6 +59,7 @@ class AuthenticationMiddleware implements MiddlewareInterface
      * @param RequestHandlerInterface $handler
      * @return ResponseInterface
      */
+    #[\Override]
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface {
         $token = $request->getAttribute('token', false);
         if (!$token) {

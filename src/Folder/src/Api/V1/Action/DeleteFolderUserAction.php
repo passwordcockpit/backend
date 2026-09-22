@@ -81,6 +81,7 @@ class DeleteFolderUserAction implements RequestHandlerInterface
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
+    #[\Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $folder = $this->folderFacade->get($request->getAttribute('folderId'));

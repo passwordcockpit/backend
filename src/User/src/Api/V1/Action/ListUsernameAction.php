@@ -51,6 +51,7 @@ class ListUsernameAction implements RequestHandlerInterface
         protected HalResponseFactory $halResponseFactory
     ){}
     
+    #[\Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $users = $this->userFacade->getAllUsernames();

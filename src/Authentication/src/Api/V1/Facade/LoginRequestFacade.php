@@ -39,6 +39,7 @@ class LoginRequestFacade extends AbstractFacade
      * @param array $data
      * @return LoginRequest
      */
+    #[\Override]
     public function create($data)
     {
         $loginRequest = $this->reflectionHydrator->hydrate(
@@ -55,6 +56,7 @@ class LoginRequestFacade extends AbstractFacade
      * @param int $id
      * @param array $filter
      */
+    #[\Override]
     public function delete($id, $filter): never
     {
         throw new \Exception("Method not implemented");
@@ -65,6 +67,7 @@ class LoginRequestFacade extends AbstractFacade
      * @param int $id
      * @param array $filter
      */
+    #[\Override]
     public function fetch($id, $filter): never
     {
         throw new \Exception("Method not implemented");
@@ -74,6 +77,7 @@ class LoginRequestFacade extends AbstractFacade
      *
      * @param array $filter
      */
+    #[\Override]
     public function fetchAll($filter): never
     {
         throw new \Exception("Method not implemented");
@@ -84,6 +88,7 @@ class LoginRequestFacade extends AbstractFacade
      * @param int $id
      * @param array $data
      */
+    #[\Override]
     public function update($id, $data): never
     {
         throw new \Exception("Method not implemented");

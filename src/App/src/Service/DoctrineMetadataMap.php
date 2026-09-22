@@ -23,12 +23,14 @@ class DoctrineMetadataMap extends \Mezzio\Hal\Metadata\MetadataMap
      *
      * @param string $class
      */
+    #[\Override]
     public function has(string $class) : bool
     {
         $class = \Doctrine\Common\Util\ClassUtils::getRealClass($class);
         return parent::has($class);
     }
 
+    #[\Override]
     public function get(
         string $class
     ) : \Mezzio\Hal\Metadata\AbstractMetadata {

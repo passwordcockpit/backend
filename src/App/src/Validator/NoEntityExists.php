@@ -46,6 +46,7 @@ class NoEntityExists extends AbstractValidator
      * @param string $value
      * @return bool true|false
      */
+    #[\Override]
     public function isValid($value)
     {
         $criteria = Criteria::create();

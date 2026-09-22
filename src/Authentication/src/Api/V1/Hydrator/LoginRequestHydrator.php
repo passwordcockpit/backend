@@ -19,6 +19,7 @@ class LoginRequestHydrator extends AbstractHydrator
      * @param LoginRequest $loginRequest
      * @return array
      */
+    #[\Override]
     public function extract($loginRequest): array
     {
         $data = [];
@@ -40,6 +41,7 @@ class LoginRequestHydrator extends AbstractHydrator
      * @param object $object
      * @throws \Exception
      */
+    #[\Override]
     public function hydrate(array $data, object $object)
     {
         throw new \Exception("Method not implemented");

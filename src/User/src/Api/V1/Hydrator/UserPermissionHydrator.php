@@ -20,6 +20,7 @@ class UserPermissionHydrator extends AbstractHydrator
      * @return array
      *
      */
+    #[\Override]
     public function extract($userPermission): array
     {
         $data = [];
@@ -31,6 +32,7 @@ class UserPermissionHydrator extends AbstractHydrator
         return $data;
     }
 
+    #[\Override]
     public function hydrate(array $data, $object): object
     {
     }

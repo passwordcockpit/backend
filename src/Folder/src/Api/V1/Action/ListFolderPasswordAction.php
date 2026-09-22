@@ -72,6 +72,7 @@ class ListFolderPasswordAction implements RequestHandlerInterface
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
+    #[\Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $folderId = $request->getAttribute('id');

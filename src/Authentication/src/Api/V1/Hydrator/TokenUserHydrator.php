@@ -19,6 +19,7 @@ class TokenUserHydrator extends AbstractHydrator
      * @param Tokenuser $tokenUser
      * @return array
      */
+    #[\Override]
     public function extract($tokenUser): array
     {
         $data = [];
@@ -39,6 +40,7 @@ class TokenUserHydrator extends AbstractHydrator
      * @param object $object
      * @throws \Exception
      */
+    #[\Override]
     public function hydrate(array $data, object $object)
     {
         throw new \Exception("Method not implemented");

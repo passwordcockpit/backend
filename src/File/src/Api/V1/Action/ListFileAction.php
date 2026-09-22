@@ -28,6 +28,7 @@ class ListFileAction implements RequestHandlerInterface
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
+    #[\Override]
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         return new \Laminas\Diactoros\Response\EmptyResponse();
