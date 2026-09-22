@@ -18,6 +18,7 @@ use Doctrine\ORM\EntityManager;
 class AssertionPluginManager extends AbstractPluginManager
 {
     protected $assertionsRegisteredByRoute;
+    #[\Override]
     protected $instanceOf = AssertionInterface::class;
 
     /**
