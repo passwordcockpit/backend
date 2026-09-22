@@ -12,7 +12,7 @@
         }
     },
     "require": {
-        "php": "^8.4",
+        "php": "^8.5",
         "doctrine/migrations": "^3.9",
         "doctrine/orm": "^3.6",
         "firebase/php-jwt": "^7.0",
@@ -23,7 +23,7 @@
         "laminas/laminas-i18n": "^2.32",
         "laminas/laminas-i18n-resources": "^2.13",
         "laminas/laminas-inputfilter": "^2.35",
-        "laminas/laminas-ldap": "^2.19",
+        "laminas/laminas-ldap": "^2.20",
         "laminas/laminas-paginator": "^2.22",
         "laminas/laminas-permissions-rbac": "^3.8",
         "laminas/laminas-servicemanager": "^3.24",
@@ -34,7 +34,7 @@
         "mezzio/mezzio-laminasrouter": "^3.12",
         "mezzio/mezzio-problem-details": "^1.19",
         "mezzio/mezzio-router": "^3.20",
-        "roave/psr-container-doctrine": "^5.0",
+        "roave/psr-container-doctrine": "^6.2",
         "symfony/cache": "^7.4",
         "tuupola/cors-middleware": "^1.5",
         "jimtools/jwt-auth": "^3.0",
