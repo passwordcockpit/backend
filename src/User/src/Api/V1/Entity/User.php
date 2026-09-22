@@ -100,12 +100,12 @@ class User
 
     private bool $completeUser = true;
 
-    function getCompleteUser()
+    public function getCompleteUser()
     {
         return $this->completeUser;
     }
 
-    function setCompleteUser()
+    public function setCompleteUser()
     {
         $this->completeUser = false;
     }
@@ -145,7 +145,7 @@ class User
      *
      * @return string
      */
-    function getLanguage()
+    public function getLanguage()
     {
         return $this->language;
     }
@@ -155,7 +155,7 @@ class User
      *
      * @param string $language
      */
-    function setLanguage($language)
+    public function setLanguage($language)
     {
         $this->language = $language;
     }
@@ -373,7 +373,7 @@ class User
      *
      * @return bool
      */
-    function getChangePassword()
+    public function getChangePassword()
     {
         return $this->changePassword;
     }
@@ -383,7 +383,7 @@ class User
      *
      * @param bool $value
      */
-    function setChangePassword($value)
+    public function setChangePassword($value)
     {
         $this->changePassword = $value;
     }

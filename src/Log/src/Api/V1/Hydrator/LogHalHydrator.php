@@ -21,7 +21,7 @@ class LogHalHydrator extends AbstractHydrator
      *
      * @param Translator $translator
      */
-    function __construct(private readonly Translator $translator)
+    public function __construct(private readonly Translator $translator)
     {
     }
 

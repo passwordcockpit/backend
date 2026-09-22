@@ -97,7 +97,7 @@ class Password
     /**
      * @return bool
      */
-    function getfrontendCrypted()
+    public function getfrontendCrypted()
     {
         return $this->frontendCrypted;
     }
@@ -105,7 +105,7 @@ class Password
     /**
      * @param bool $frontendCrypted
      */
-    function setfrontendCrypted($frontendCrypted)
+    public function setfrontendCrypted($frontendCrypted)
     {
         $this->frontendCrypted = $frontendCrypted;
     }
@@ -113,7 +113,7 @@ class Password
     /**
      * @return int
      */
-    function getFileId()
+    public function getFileId()
     {
         return $this->fileId;
     }
@@ -121,7 +121,7 @@ class Password
     /**
      * @return string
      */
-    function getFileName()
+    public function getFileName()
     {
         return $this->fileName;
     }
@@ -129,7 +129,7 @@ class Password
     /**
      * @param int $fileId
      */
-    function setFileId($fileId)
+    public function setFileId($fileId)
     {
         $this->fileId = $fileId;
     }
@@ -137,7 +137,7 @@ class Password
     /**
      * @param string $fileName
      */
-    function setFileName($fileName)
+    public function setFileName($fileName)
     {
         $this->fileName = $fileName;
     }
@@ -146,7 +146,7 @@ class Password
      *
      * @return boolean
      */
-    function getCompletePassword()
+    public function getCompletePassword()
     {
         return $this->completePassword;
     }
@@ -154,7 +154,7 @@ class Password
     /**
      * Set complete password
      */
-    function setCompletePassword()
+    public function setCompletePassword()
     {
         $this->completePassword = false;
     }
