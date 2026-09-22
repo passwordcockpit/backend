@@ -63,7 +63,7 @@ class DoctrineAdapter implements AdapterInterface
             ->findOneBy(['username' => $this->username]);
         if ($user) {
             $securePass = $user->getPassword();
-            if (password_verify($this->password, $securePass)) {
+            if (password_verify((string) $this->password, $securePass)) {
                 // Check if user is enabled
                 if (!$user->getEnabled()) {
                     $result = new Result(-2, $user, []);

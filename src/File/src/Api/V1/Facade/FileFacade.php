@@ -97,7 +97,7 @@ class FileFacade extends AbstractFacade
             $file->moveTo($tempPath);
 
             // Encrypt file
-            $key = hash('sha256', $encriptionKey, true);
+            $key = hash('sha256', (string) $encriptionKey, true);
             $encryptedData = file_get_contents($tempPath);
             $ivLength = openssl_cipher_iv_length('aes-256-cbc');
             $iv = random_bytes($ivLength);
