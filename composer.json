@@ -28,27 +28,27 @@
         "laminas/laminas-permissions-rbac": "^3.8",
         "laminas/laminas-servicemanager": "^3.24",
         "laminas/laminas-stratigility": "^4.3",
-        "mezzio/mezzio": "3.27",
+        "mezzio/mezzio": "^3.28.1",
         "mezzio/mezzio-hal": "^2.13",
         "mezzio/mezzio-helpers": "^5.20",
         "mezzio/mezzio-laminasrouter": "^3.12",
         "mezzio/mezzio-problem-details": "^1.19",
-        "mezzio/mezzio-router": "^3.20",
+        "mezzio/mezzio-router": "^4.2",
         "roave/psr-container-doctrine": "^6.2",
-        "symfony/cache": "^7.4",
+        "symfony/cache": "^8.1.7",
         "tuupola/cors-middleware": "^1.5",
         "jimtools/jwt-auth": "^3.0",
-        "zircote/swagger-php": "^4.2"
+        "zircote/swagger-php": "^6.1"
     },
     "require-dev": {
-        "codeception/codeception": "^4.1",
-        "codeception/module-phpbrowser": "^2.0",
-        "codeception/module-rest": "^2.0",
+        "codeception/codeception": "^5.3.5",
+        "codeception/module-phpbrowser": "^4.1.0",
+        "codeception/module-rest": "^3.4",
         "laminas/laminas-development-mode": "^3.15",
-        "phpunit/phpunit": "^9.5",
-        "rector/rector": "^1.2",
+        "phpunit/phpunit": "^12.5",
+        "rector/rector": "^2.6",
         "roave/security-advisories": "dev-master",
-        "squizlabs/php_codesniffer": "^3.4.0"
+        "squizlabs/php_codesniffer": "^4.0"
     },
     "autoload": {
         "psr-4": {
