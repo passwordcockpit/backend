@@ -76,6 +76,12 @@ class Password
     private ?\DateTime $lastModificationDate = null;
 
     /**
+     * @OA\Property
+     */
+    #[ORM\Column(name: "last_password_modification_date", type: "datetime", nullable: true)]
+    private ?\DateTime $lastPasswordModificationDate = null;
+
+    /**
      * @OA\Property(property="folder_id", example=4)
      */
     #[ORM\ManyToOne(targetEntity: Folder::class, fetch: "EAGER")]
@@ -345,6 +351,28 @@ class Password
     public function getLastModificationDate()
     {
         return $this->lastModificationDate;
+    }
+
+    /**
+     * Set lastModificationDate
+     *
+     * @param \DateTime|null $lastModificationDate
+     * @return Password
+     */
+    public function setLastPasswordModificationDate($lastPasswordModificationDate = null)
+    {
+        $this->lastPasswordModificationDate = $lastPasswordModificationDate;
+        return $this;
+    }
+
+    /**
+     * Get lastModificationDate
+     *
+     * @return \DateTime|null
+     */
+    public function getLastPasswordModificationDate()
+    {
+        return $this->lastPasswordModificationDate;
     }
 
     /**

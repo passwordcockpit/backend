@@ -1,20 +1,17 @@
 <?php
 
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Tools\Console\EntityManagerProvider;
+use Doctrine\Migrations\DependencyFactory;
+use Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager;
+use Doctrine\Migrations\Configuration\Migration\ConfigurationArray;
 
 $container = require __DIR__ . '/container.php';
+$migrationsConfig = require __DIR__ . '/../migrations.php';
 
 /** @var EntityManagerInterface $em */
 $em = $container->get(EntityManagerInterface::class);
 
-return new class($em) implements EntityManagerProvider {
-    public function __construct(private EntityManagerInterface $em)
-    {
-    }
-
-    public function getDefaultEntityManager(): EntityManagerInterface
-    {
-        return $this->em;
-    }
-};
+return DependencyFactory::fromEntityManager(
+    new ConfigurationArray($migrationsConfig),
+    new ExistingEntityManager($em)
+);

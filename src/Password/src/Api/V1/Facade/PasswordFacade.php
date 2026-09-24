@@ -140,6 +140,7 @@ class PasswordFacade extends AbstractFacade
                 );
             }
             $password->setLastModificationDate(new \DateTime());
+            $password->setLastPasswordModificationDate(new \DateTime());
             $this->entityManager->persist($password);
             $this->entityManager->flush();
             $this->logFacade->updateLog(
@@ -244,6 +245,7 @@ class PasswordFacade extends AbstractFacade
                 );
             }
             $password->setLastModificationDate(new \DateTime());
+            $password->setLastPasswordModificationDate(new \DateTime());
             $this->entityManager->persist($password);
             $this->entityManager->flush();
             $password = $this->entityManager

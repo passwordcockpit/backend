@@ -42,6 +42,12 @@ class PasswordHydrator extends AbstractHydrator
                 $password->getLastModificationDate(),
                 'outputDateTime'
             );
+            $data['last_password_modification_date'] = $password->getLastPasswordModificationDate()
+                ? DateConverter::formatDateTime(
+                    $password->getLastPasswordModificationDate(),
+                    'outputDateTime'
+                )
+                : null;
         }
         return $data;
     }
