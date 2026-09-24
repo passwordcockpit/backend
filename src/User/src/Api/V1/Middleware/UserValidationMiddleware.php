@@ -285,7 +285,7 @@ class UserValidationMiddleware implements MiddlewareInterface
                     [
                         'name' => \Laminas\Validator\Callback::class,
                         'options' => [
-                            'callback' => is_bool(...)
+                            'callback' => static fn ($value) => is_bool($value)
                         ]
                     ]
                 ]
