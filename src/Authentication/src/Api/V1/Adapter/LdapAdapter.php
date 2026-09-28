@@ -56,14 +56,15 @@ class LdapAdapter implements AdapterInterface
         if ($result->isValid()) {
             // Match LDAP user with DB user
             $ldapUser = $ldap->getAccountObject();
-            $user = $this->userFacade->getUserByUsername($ldapUser->{$this->ldapUserAttributesConfig['identifier']});
+            // lowercase LDAP account object properties
+            $user = $this->userFacade->getUserByUsername($ldapUser->{strtolower($this->ldapUserAttributesConfig['identifier'])});
             if ($user && $user->getEnabled()) {
                 // Update user in DB
-                $user->setName($ldapUser->{$this->ldapUserAttributesConfig['name']});
-                $user->setSurname($ldapUser->{$this->ldapUserAttributesConfig['surname']});
-                $user->setEmail($ldapUser->{$this->ldapUserAttributesConfig['mail']});
+                $user->setName($ldapUser->{strtolower($this->ldapUserAttributesConfig['name'])});
+                $user->setSurname($ldapUser->{strtolower($this->ldapUserAttributesConfig['surname'])});
+                $user->setEmail($ldapUser->{strtolower($this->ldapUserAttributesConfig['mail'])});
                 if($this->ldapUserAttributesConfig['phone']){
-                    $user->setPhone($ldapUser->{$this->ldapUserAttributesConfig['phone']});
+                    $user->setPhone($ldapUser->{strtolower($this->ldapUserAttributesConfig['phone'])} ?? null);
                 }else{
                     $user->setPhone();
                 }
