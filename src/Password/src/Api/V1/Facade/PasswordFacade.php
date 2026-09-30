@@ -23,6 +23,7 @@ use User\Api\V1\Entity\User;
 use Log\Api\V1\Facade\LogFacade;
 use File\Api\V1\Entity\File;
 use App\Abstracts\AbstractFacade;
+use App\Service\Crypt;
 
 class PasswordFacade extends AbstractFacade
 {
@@ -478,13 +479,11 @@ class PasswordFacade extends AbstractFacade
      */
     public function decrypt($encrypted)
     {
-        $key = hash('sha256', $this->encriptionKey, true);
-        $decoded = base64_decode($encrypted, true);
-        $ivLength = openssl_cipher_iv_length('aes-256-cbc');
-        $iv = substr($decoded, 0, $ivLength);
-        $ciphertext = substr($decoded, $ivLength);
-        
-        return openssl_decrypt($ciphertext, 'aes-256-cbc', $key, OPENSSL_RAW_DATA, $iv);
+        if ($encrypted) {
+            $encrypted = Crypt::decrypt($encrypted, $this->encriptionKey);
+        }
+
+        return $encrypted;
     }
 
     /**
@@ -495,11 +494,6 @@ class PasswordFacade extends AbstractFacade
      */
     private function encrypt($password)
     {
-        $key = hash('sha256', $this->encriptionKey, true);
-        $ivLength = openssl_cipher_iv_length('aes-256-cbc');
-        $iv = random_bytes($ivLength);
-        $ciphertext = openssl_encrypt($password, 'aes-256-cbc', $key, OPENSSL_RAW_DATA, $iv);
-
-        return base64_encode($iv . $ciphertext);
+        return Crypt::encrypt($password, $this->encriptionKey);
     }
 }
