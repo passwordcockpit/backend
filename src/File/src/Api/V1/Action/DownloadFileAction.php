@@ -13,6 +13,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use File\Api\V1\Facade\FileFacade;
+use App\Service\Crypt;
 use App\Service\ProblemDetailsException;
 use Laminas\I18n\Translator\Translator;
 use Laminas\Diactoros\Stream;
@@ -87,14 +88,8 @@ class DownloadFileAction implements RequestHandlerInterface
         }
 
         // Decrypt file
-        $key = hash('sha256', $this->encriptionKey, true);
         $tempDestinationPath='tmp/'.md5($file->getFilename() . time() . random_int(0, mt_getrandmax()));
-        $encryptedData = file_get_contents($path);
-        $decoded = base64_decode($encryptedData, true);
-        $ivLength = openssl_cipher_iv_length('aes-256-cbc');
-        $iv = substr($decoded, 0, $ivLength);
-        $ciphertext = substr($decoded, $ivLength);
-        $decryptedData = openssl_decrypt($ciphertext, 'aes-256-cbc', $key, OPENSSL_RAW_DATA, $iv);
+        $decryptedData = Crypt::decryptFile(file_get_contents($path), $this->encriptionKey);
 
         if (file_put_contents($tempDestinationPath, $decryptedData)) {
             $stream = new Stream(

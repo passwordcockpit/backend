@@ -12,6 +12,7 @@ namespace File\Api\V1\Facade;
 use Exception;
 use App\Abstracts\AbstractFacade;
 use File\Api\V1\Entity\File;
+use App\Service\Crypt;
 use App\Service\ProblemDetailsException;
 use Doctrine\ORM\EntityManager;
 use File\Api\V1\Hydrator\FileHydrator;
@@ -97,13 +98,8 @@ class FileFacade extends AbstractFacade
             $file->moveTo($tempPath);
 
             // Encrypt file
-            $key = hash('sha256', (string) $encriptionKey, true);
-            $encryptedData = file_get_contents($tempPath);
-            $ivLength = openssl_cipher_iv_length('aes-256-cbc');
-            $iv = random_bytes($ivLength);
-            $ciphertext = openssl_encrypt($encryptedData, 'aes-256-cbc', $key, OPENSSL_RAW_DATA, $iv);
-            $encoded = base64_encode($iv . $ciphertext);
-            if (file_put_contents($destinationPath, $encoded) === false) {
+            $encrypted = Crypt::encryptFile(file_get_contents($tempPath), $encriptionKey);
+            if (file_put_contents($destinationPath, $encrypted) === false) {
                 // Remove non encrypted file
                 unlink($tempPath);
             }
