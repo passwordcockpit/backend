@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 php:8.4-apache-bookworm
+FROM --platform=linux/amd64 php:8.5-apache-bookworm
 
 # passwordcockpit variables
 ENV PASSWORDCOCKPIT_DATABASE_USERNAME root
@@ -21,42 +21,19 @@ ENV PASSWORDCOCKPIT_LDAP_ACCOUNTFILTERFORMAT (&(memberOf=cn=groups,cn=users,dc=d
 ENV PASSWORDCOCKPIT_LDAP_BINDREQUIRESDN 'true'
 # true or false
 
-# install php extensions
-RUN set -ex; \
-    \
-    savedAptMark="$(apt-mark showmanual)"; \
-    \
-    apt-get update; \
-    # opcache
-    docker-php-ext-install opcache; \
-    # mod_rewrite extension
-    a2enmod rewrite; \
-    # zip
-    apt-get install -y libzip-dev; \
-    docker-php-ext-install zip; \
-    # intl
-    apt-get install -y --no-install-recommends libicu-dev; \
-    docker-php-ext-install intl; \
-    # ldap
-    apt-get install -y libldap2-dev; \
-    docker-php-ext-install ldap;\
-    # pdo_mysql
-    docker-php-ext-install pdo_mysql; \
-    # install composer
-    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer; \
-    # reset apt-mark's "manual" list so that "purge --auto-remove" will remove all build dependencies
-    apt-mark auto '.*' > /dev/null; \
-    apt-mark manual $savedAptMark; \
-    ldd "$(php -r 'echo ini_get("extension_dir");')"/*.so \
-    | awk '/=>/ { print $3 }' \
-    | sort -u \
-    | xargs -r dpkg-query -S \
-    | cut -d: -f1 \
-    | sort -u \
-    | xargs -rt apt-mark manual; \
-    \
-    apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
-    rm -rf /var/lib/apt/lists/*
+# PHP CONFIGURATION
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+
+RUN chmod +x /usr/local/bin/install-php-extensions && \
+    mv /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini && \
+    a2enmod rewrite && \
+    install-php-extensions \
+    opcache \
+    zip \
+    intl \
+    ldap \
+    pdo_mysql \
+    @composer
 
 RUN set -ex; \
     apt-get update; \
@@ -67,11 +44,11 @@ RUN set -ex; \
 
 # clone the source of the backend
 RUN set -ex; \
-mkdir /usr/src/passwordcockpit; \
-cd /usr/src/passwordcockpit; \
-git clone -v https://github.com/passwordcockpit/backend.git /usr/src/passwordcockpit; \
-git checkout 1.4.0.dev; \
-git pull origin 1.4.0.dev
+    mkdir /usr/src/passwordcockpit; \
+    cd /usr/src/passwordcockpit; \
+    git clone -v https://github.com/passwordcockpit/backend.git /usr/src/passwordcockpit; \
+    git checkout 1.5.0-dev; \
+    git pull origin 1.5.0-dev
 
 WORKDIR /usr/src/passwordcockpit
 
@@ -81,9 +58,9 @@ RUN composer install
 # generate swagger documentation
 # create constants.local.php
 RUN { \
-	echo "<?php"; \
+    echo "<?php"; \
     echo "define('SWAGGER_API_HOST', 'PASSWORDCOCKPIT_BASEHOST');"; \
-} > config/constants.local.php
+    } > config/constants.local.php
 ENV COMPOSER_ALLOW_SUPERUSER 1 
 RUN composer swagger
 
@@ -100,10 +77,6 @@ RUN rm -rf /etc/localtime \
 # Hide Apache Version and Linux OS From HTTP Headers
 RUN sed -ri -e 's!ServerTokens OS!ServerTokens Prod!g' /etc/apache2/conf-enabled/security.conf
 RUN sed -ri -e 's!ServerSignature On!ServerSignature Off!g' /etc/apache2/conf-enabled/security.conf
-
-# PHP configurations
-# set development configuration
-RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
 
 # global PHP configuration changes
 RUN sed -i \
