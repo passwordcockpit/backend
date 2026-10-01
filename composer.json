@@ -95,7 +95,7 @@
             "@test-clear"
         ],
         "swagger": [
-            "./vendor/bin/openapi -o ./swagger/swagger.json -e vendor src/ -l"
+            "./vendor/bin/openapi -o ./swagger/swagger.json -e vendor src/"
         ]
     }
 }
