@@ -48,7 +48,7 @@ else
 
     while [ "$try" -lt "$max_retries" ]
     do
-        connection=$(vendor/bin/doctrine dbal:run-sql "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '${PASSWORDCOCKPIT_DATABASE_DATABASE}'")
+        connection=$(bin/doctrine dbal:run-sql "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '${PASSWORDCOCKPIT_DATABASE_DATABASE}'")
         # schema_name is unset or set to the empty string so connecting problem
         if [ -z "${connection}" ]; then
             echo -e "\e[31mRetrying connection...\e[0m"
@@ -62,14 +62,14 @@ else
             echo -e "\e[32mConnection ok\e[0m"
             echo -e "\e[32mSchema already exist\e[0m"
             # Tables exists
-            number_of_tables=$(vendor/bin/doctrine dbal:run-sql "SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '${PASSWORDCOCKPIT_DATABASE_DATABASE}'" | tr -d -c 0-9)
+            number_of_tables=$(bin/doctrine dbal:run-sql "SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '${PASSWORDCOCKPIT_DATABASE_DATABASE}'" | tr -d -c 0-9)
             if [ "$number_of_tables" == "0" ]; then
                 # Create the tables and popolate it
-                vendor/bin/doctrine orm:schema-tool:create
-                vendor/bin/doctrine orm:generate-proxies
+                bin/doctrine orm:schema-tool:create
+                bin/doctrine orm:generate-proxies
                 echo -e "\e[32mDatabase created\e[0m"
                 sql=$(cat database/create-tests-environment.sql | sed '/^--/d')
-                vendor/bin/doctrine dbal:run-sql "$sql"
+                bin/doctrine dbal:run-sql "$sql"
                 echo -e "\e[32mTest data installed\e[0m"
             else
                 # Update scripts
