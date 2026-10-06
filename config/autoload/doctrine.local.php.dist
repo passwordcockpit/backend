@@ -5,7 +5,7 @@ return [
             'orm_default' => [
                 'params' => [
                     'url' =>
-                        'mysql://'.getenv('PASSWORDCOCKPIT_DATABASE_USERNAME').':'.getenv('PASSWORDCOCKPIT_DATABASE_PASSWORD').'@'.getenv('PASSWORDCOCKPIT_DATABASE_HOSTNAME').'/'.getenv('PASSWORDCOCKPIT_DATABASE_DATABASE')
+                        'pdo-mysql://'.getenv('PASSWORDCOCKPIT_DATABASE_USERNAME').':'.getenv('PASSWORDCOCKPIT_DATABASE_PASSWORD').'@'.getenv('PASSWORDCOCKPIT_DATABASE_HOSTNAME').'/'.getenv('PASSWORDCOCKPIT_DATABASE_DATABASE')
                 ]
             ]
         ]
