@@ -87,7 +87,8 @@ class MovePasswordAction implements RequestHandlerInterface
 
         $body = $request->getParsedBody();
 
-        if (!isset($body["passwordId"]) ||
+        if (
+            !isset($body["passwordId"]) ||
             !isset($body["originalFolder"]) ||
             !isset($body["destinationFolder"])
         ) {
@@ -104,7 +105,19 @@ class MovePasswordAction implements RequestHandlerInterface
 
         $permission = $this->permissionFacade->getUserPermission($userId);
 
-        if ($folderAccess == 2 || $permission->getAccessAllFolders()) {
+        $sourceFolderId = $this->passwordFacade->getPasswordFolderId(
+            $body["passwordId"]
+        );
+
+        $sourceFolderAccess = $sourceFolderId === null
+            ? null
+            : $this->folderUserFacade->checkUser($sourceFolderId, $this->userFacade->get($userId));
+
+        if (
+            $sourceFolderId !== null &&
+            ($folderAccess == 2 || $permission->getAccessAllFolders()) &&
+            ($sourceFolderAccess == 2 || $permission->getAccessAllFolders())
+        ) {
             $password = $this->passwordFacade->movePassword(
                 $body["passwordId"],
                 $body["destinationFolder"]

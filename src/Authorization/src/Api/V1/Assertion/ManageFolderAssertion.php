@@ -105,7 +105,7 @@ class ManageFolderAssertion implements AssertionInterface
         if ($permission == 'api.v1.folders.create') {
             $folderId = $this->getParentId($this->request);
         } elseif ($permission == 'api.v1.passwords.move') {
-            $folderId = $this->request->getParsedBody()['originalFolder'];
+            $folderId = $this->request->getParsedBody()['originalFolder'] ?? null;
         } else {
             $folderId = $this->getFolderId($this->request);
         }

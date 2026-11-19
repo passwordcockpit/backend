@@ -213,6 +213,25 @@ class PasswordFacade extends AbstractFacade
     }
 
     /**
+     * Returns the id of the folder the password is stored in
+     *
+     * @param int $passwordId
+     * @return int|null
+     */
+    public function getPasswordFolderId($passwordId)
+    {
+        $password = $this->entityManager
+            ->getRepository(Password::class)
+            ->find($passwordId);
+
+        if (!$password || !$password->getFolder()) {
+            return null;
+        }
+
+        return $password->getFolder()->getFolderId();
+    }
+
+    /**
      *
      * @param int $id
      * @param array $data
